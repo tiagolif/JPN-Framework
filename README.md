@@ -2,394 +2,440 @@
 
 **Jornada · Precisão · Narrativa**
 
-Framework aberto para estruturar instruções, contexto e critérios de qualidade em interações com modelos de linguagem, agentes de IA e fluxos com RAG.
+[![JPN SDK CI](https://github.com/tiagolif/JPN-Framework/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagolif/JPN-Framework/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-0.3.0--draft-orange.svg)](CHANGELOG.md)
+[![TypeScript](https://img.shields.io/badge/TypeScript-reference%20SDK-3178C6.svg)](docs/SDK.md)
+
+Framework aberto de **engenharia de contexto e prompts** para transformar solicitações ambíguas em estados estruturados, verificáveis e reutilizáveis por modelos de linguagem, agentes de IA, automações e pipelines RAG.
 
 Criado por **Tiago Cunha de Souza**.
 
-> **Status:** versão conceitual em evolução. O JPN é uma metodologia de engenharia de contexto e prompts; não é um modelo de IA, não substitui avaliação humana e não reivindica validação neurocientífica.
+> **Status:** `0.3.0-draft`. O JPN possui especificação, JSON Schema e uma implementação de referência em TypeScript. Continua experimental e não reivindica validação científica nem superioridade universal sobre outras técnicas de prompting/context engineering.
 
 ---
 
-## Visão geral
+## O que é o JPN?
 
-O **JPN Framework** organiza uma solicitação em três dimensões complementares:
+O JPN organiza uma tarefa em três dimensões complementares:
 
-1. **J — Jornada:** de onde o problema vem e em qual contexto ele existe.
-2. **P — Precisão:** o que precisa ser feito, sob quais restrições e como verificar se ficou correto.
-3. **N — Narrativa:** qual estado final se deseja alcançar e como a resposta deve conduzir a esse resultado.
+- **J — Jornada:** contexto, histórico, estado atual, recursos, restrições e incertezas.
+- **P — Precisão:** objetivo operacional, escopo, entradas, saídas, critérios de aceitação, riscos e validação.
+- **N — Narrativa:** estado final desejado, sequência de entrega, continuidade e próxima ação.
 
-A proposta é reduzir ambiguidades sem exigir que o usuário escreva prompts longos ou domine terminologia técnica. O framework pode ser aplicado manualmente, embutido em um system prompt, usado por um agente orquestrador ou combinado com RAG.
+A proposta é reduzir o **gap entre intenção humana e especificação executável** sem exigir que o usuário escreva prompts extensos ou conheça terminologia técnica.
 
 ```mermaid
 flowchart LR
-    A[Entrada do usuário] --> J[Jornada\nContexto e histórico]
-    J --> P[Precisão\nObjetivo, restrições e validação]
-    P --> N[Narrativa\nEstado final e forma de entrega]
-    N --> E[Execução]
-    E --> V[Verificação]
-    V -->|aprovado| O[Saída]
-    V -->|ajustes| P
+    U[Entrada do usuário] --> J[Jornada]
+    J --> P[Precisão]
+    P --> N[Narrativa]
+    N --> V[Validação JPN]
+    V --> R{Pronto?}
+    R -->|não| G[Lacunas / ajustes]
+    G --> J
+    R -->|sim| C[Compilador de prompt]
+    C --> A[LLM / agente / workflow]
+    A --> Q[Verificação de saída]
 ```
 
 ---
 
-## Problema que o JPN tenta resolver
+## Por que isso existe?
 
-Solicitações reais raramente chegam como especificações perfeitas. Elas podem conter:
+Solicitações reais raramente chegam como especificações completas. Elas podem conter:
 
-- contexto distribuído em várias mensagens;
-- termos informais ou incompletos;
+- contexto espalhado em várias mensagens;
+- termos informais;
+- decisões tomadas anteriormente;
 - objetivos implícitos;
-- restrições que só aparecem durante a execução;
-- conflito entre “o que foi pedido” e “o que realmente resolve o problema”;
+- restrições descobertas durante a execução;
+- fatos misturados com suposições;
 - critérios de sucesso não declarados.
 
-O JPN trata esse cenário como um problema de **engenharia de contexto**. A IA deve organizar o pedido sem inventar fatos, distinguir inferência de evidência e transformar intenção em uma especificação executável.
+O JPN trata isso como um problema de **engenharia de contexto**.
+
+Em vez de apenas “melhorar um prompt”, a metodologia procura construir um estado que possa ser:
+
+1. inspecionado;
+2. validado;
+3. versionado;
+4. reutilizado;
+5. compilado para diferentes agentes ou modelos;
+6. comparado com critérios de aceitação.
 
 ---
 
-# 1. J — Jornada
+# J — Jornada
 
-A **Jornada** descreve o contexto operacional do problema.
+A Jornada representa **de onde a tarefa vem**.
 
-Ela responde principalmente:
+Ela captura:
 
-- Quem está solicitando?
-- Qual problema está tentando resolver?
-- O que aconteceu antes?
-- O que já foi tentado?
-- Quais decisões já foram tomadas?
-- Quais recursos estão disponíveis?
-- Quais restrições são conhecidas?
-- O que ainda é incerto?
+- contexto;
+- objetivo de negócio;
+- estado atual;
+- histórico relevante;
+- tentativas anteriores;
+- recursos disponíveis;
+- restrições conhecidas;
+- incertezas;
+- itens de contexto com estado de confiança.
 
-### Estrutura recomendada
+Exemplo:
 
-```yaml
-jornada:
-  contexto: ""
-  objetivo_de_negocio: ""
-  estado_atual: ""
-  historico_relevante: []
-  tentativas_anteriores: []
-  recursos_disponiveis: []
-  restricoes_conhecidas: []
-  incertezas: []
+```json
+{
+  "jornada": {
+    "contexto": "Equipe recebe leads pelo WhatsApp.",
+    "objetivo_de_negocio": "Reduzir perda de oportunidades.",
+    "estado_atual": "Follow-up manual e contexto fragmentado.",
+    "incertezas": ["SLA ainda não definido."],
+    "itens_de_contexto": [
+      {
+        "value": "Handoff humano é obrigatório em casos sensíveis.",
+        "confidence_state": "confirmed",
+        "source": "requisito"
+      }
+    ]
+  }
+}
 ```
 
-### Regra fundamental
+### Estados de confiança
 
-A Jornada **não autoriza a IA a inventar contexto**. Quando uma informação não está disponível, ela deve ser marcada como hipótese, incerteza ou pergunta pendente.
+O JPN diferencia informação conhecida de informação inferida:
+
+| Estado | Significado |
+|---|---|
+| `confirmed` | informação confirmada por fonte confiável |
+| `inferred` | conclusão razoável, mas ainda não confirmada |
+| `unknown` | informação necessária ainda ausente |
+| `conflicting` | fontes ou informações entram em conflito |
+
+A regra principal é simples: **inferência não deve ser promovida silenciosamente a fato**.
 
 ---
 
-# 2. P — Precisão
+# P — Precisão
 
-A **Precisão** transforma contexto em especificação.
+Precisão transforma intenção em **contrato operacional**.
 
-Ela define:
+Ela descreve:
 
-- objetivo operacional;
-- escopo;
-- requisitos funcionais;
-- requisitos não funcionais;
+- objetivo;
+- escopo positivo e negativo;
+- entradas;
+- saídas;
 - restrições;
-- entradas e saídas;
-- formato de resposta;
 - critérios de aceitação;
 - riscos;
-- forma de validação.
+- estratégia de validação.
 
-### Estrutura recomendada
+Exemplo:
 
-```yaml
-precisao:
-  objetivo: ""
-  escopo:
-    inclui: []
-    nao_inclui: []
-  entradas: []
-  saidas: []
-  restricoes: []
-  criterios_de_aceitacao: []
-  riscos: []
-  validacao: []
+```json
+{
+  "precisao": {
+    "objetivo": "Qualificar leads e registrar contexto no CRM.",
+    "escopo": {
+      "inclui": ["qualificação", "registro no CRM"],
+      "nao_inclui": ["decisão automática de crédito"]
+    },
+    "saidas": ["lead qualificado", "resumo de contexto"],
+    "criterios_de_aceitacao": [
+      "Toda inferência deve ser identificada como inferência."
+    ],
+    "riscos": ["alucinação de dados comerciais"],
+    "validacao": ["executar cenários normais e conflitantes"]
+  }
+}
 ```
 
-### Critérios de aceitação
-
-Sempre que possível, o JPN recomenda converter adjetivos vagos em critérios verificáveis.
-
-**Fraco:**
-
-> Faça um CRM profissional.
-
-**Melhor:**
-
-> O CRM deve permitir cadastrar leads, movimentá-los entre etapas, registrar interações, pesquisar contatos e preservar isolamento de dados entre empresas.
-
-### QA orientado a risco
-
-Antes de concluir uma tarefa, a camada de Precisão deve verificar:
-
-1. requisitos atendidos;
-2. regressões possíveis;
-3. dados ausentes;
-4. riscos de segurança;
-5. compatibilidade com o ambiente existente;
-6. critérios de aceitação.
+O objetivo é substituir termos vagos como “faça profissional” por condições que possam ser verificadas.
 
 ---
 
-# 3. N — Narrativa
+# N — Narrativa
 
-No JPN, **Narrativa** não significa contar uma história. Ela representa o **encadeamento entre intenção, execução e estado final desejado**.
+Narrativa define **para onde a execução deve levar**.
 
-Perguntas principais:
+No JPN, Narrativa não significa escrever uma história. Ela descreve:
 
-- Como deve ser a experiência final?
-- Em qual ordem a solução deve ser apresentada ou executada?
-- Qual decisão o usuário precisa conseguir tomar depois?
-- Qual é a próxima ação útil?
-- Como manter continuidade sem perder o contexto anterior?
+- estado final desejado;
+- ordem de entrega;
+- formato da resposta;
+- nível de detalhe;
+- próxima ação;
+- continuidade.
 
-### Estrutura recomendada
+Exemplo:
 
-```yaml
-narrativa:
-  estado_final_desejado: ""
-  sequencia_de_entrega: []
-  formato_da_resposta: ""
-  nivel_de_detalhe: ""
-  proxima_acao: ""
-  continuidade: []
+```json
+{
+  "narrativa": {
+    "estado_final_desejado": "Lead qualificado com contexto preservado.",
+    "sequencia_de_entrega": [
+      "capturar contexto",
+      "qualificar",
+      "validar",
+      "entregar ao responsável"
+    ],
+    "proxima_acao": "Executar piloto controlado."
+  }
+}
 ```
 
-### Exemplo
-
-Pedido inicial:
-
-> “Arruma meu CRM porque o atendimento está confuso.”
-
-**Jornada** identifica o CRM existente, usuários, canais, fluxo atual e problemas observados.
-
-**Precisão** converte isso em itens verificáveis: pipeline, histórico de conversa, permissões, SLA, integração e critérios de teste.
-
-**Narrativa** organiza a execução em uma sequência segura: diagnosticar → corrigir dados → validar fluxo → testar → documentar → indicar próxima melhoria.
-
 ---
 
-# Ciclo operacional JPN
+# Implementação de referência — TypeScript SDK
 
-Uma implementação completa pode seguir cinco estágios:
+A partir da versão `0.3.0-draft`, o JPN deixa de ser somente uma especificação textual e passa a incluir um SDK executável.
 
-## 1. Intake
-Receber a solicitação original sem reescrevê-la prematuramente.
+### Recursos atuais
 
-## 2. Normalização
-Separar fatos, hipóteses, contexto, restrições e lacunas.
+- tipos TypeScript para o estado JPN;
+- validação runtime usando JSON Schema 2020-12;
+- erros de validação estruturados;
+- compilador de estado JPN para prompt operacional;
+- preservação opcional de estados de confiança no prompt;
+- avaliação heurística de prontidão;
+- testes automatizados;
+- CI com GitHub Actions.
 
-## 3. Planejamento
-Converter a solicitação em tarefas e critérios de aceitação.
-
-## 4. Execução
-Realizar a tarefa respeitando escopo, ferramentas e restrições.
-
-## 5. Verificação
-Comparar a saída com os critérios definidos em **Precisão** antes da entrega.
-
----
-
-# Prompt-base JPN
+### Estrutura
 
 ```text
-Use o Framework JPN para estruturar esta tarefa.
-
-J — JORNADA
-1. Identifique o contexto confirmado.
-2. Separe fatos de hipóteses.
-3. Recupere decisões anteriores relevantes.
-4. Liste restrições, recursos e lacunas de informação.
-
-P — PRECISÃO
-1. Defina o objetivo operacional.
-2. Delimite o escopo.
-3. Converta requisitos vagos em critérios verificáveis.
-4. Identifique riscos e dependências.
-5. Defina como a solução será validada.
-
-N — NARRATIVA
-1. Defina o estado final desejado.
-2. Organize a execução na ordem mais útil e segura.
-3. Entregue no formato adequado ao usuário.
-4. Termine com a próxima ação relevante, quando houver.
-
-Regras:
-- Não invente fatos ausentes.
-- Sinalize incertezas.
-- Prefira evidência a suposição.
-- Preserve decisões já confirmadas.
-- Verifique a saída antes de concluir.
+JPN-Framework/
+├── src/
+│   ├── index.ts
+│   ├── prompt.ts
+│   ├── readiness.ts
+│   ├── types.ts
+│   └── validator.ts
+├── schemas/
+│   └── jpn.schema.json
+├── tests/
+│   └── sdk.test.ts
+├── examples/
+│   └── crm-state.json
+├── templates/
+├── docs/
+│   ├── SDK.md
+│   ├── SPECIFICATION.md
+│   ├── JPN-RAG.md
+│   ├── EVALUATION.md
+│   └── ROADMAP.md
+└── .github/workflows/ci.yml
 ```
 
 ---
 
-# JPN para agentes de IA
+## Executar o SDK
 
-Em sistemas agentivos, JPN pode funcionar como uma camada de orquestração:
+Requer Node.js 20+.
+
+```bash
+git clone https://github.com/tiagolif/JPN-Framework.git
+cd JPN-Framework
+npm install
+npm test
+npm run build
+```
+
+### Validar um estado
+
+```ts
+import { validateJpnState } from "./src/index.js";
+
+const result = validateJpnState(input);
+
+if (!result.valid) {
+  console.error(result.errors);
+}
+```
+
+### Gerar um prompt
+
+```ts
+import { buildJpnPrompt } from "./src/index.js";
+
+const prompt = buildJpnPrompt(state, {
+  includeConfidence: true,
+  preamble: "Você é um agente de operações comerciais."
+});
+```
+
+### Avaliar prontidão
+
+```ts
+import { assessJpnReadiness } from "./src/index.js";
+
+const assessment = assessJpnReadiness(state);
+
+if (!assessment.ready) {
+  console.log(assessment.gaps);
+}
+```
+
+Documentação completa: **[docs/SDK.md](docs/SDK.md)**.
+
+---
+
+# JSON Schema
+
+O contrato machine-readable está em:
+
+[`schemas/jpn.schema.json`](schemas/jpn.schema.json)
+
+Ele utiliza JSON Schema Draft 2020-12 e define, entre outros pontos:
+
+- campos obrigatórios;
+- campos permitidos;
+- tipos;
+- estados de confiança;
+- estruturas de Jornada, Precisão e Narrativa.
+
+Isso permite usar JPN fora do SDK TypeScript em qualquer linguagem que suporte JSON Schema.
+
+---
+
+# JPN em agentes de IA
+
+Uma arquitetura agentiva pode usar as três camadas assim:
 
 | Camada | Responsabilidade |
 |---|---|
-| Jornada | memória, contexto, estado e intenção |
-| Precisão | plano, ferramentas, restrições, testes e políticas |
+| Jornada | memória, contexto, estado, evidência e incerteza |
+| Precisão | plano, ferramentas, escopo, políticas, riscos e testes |
 | Narrativa | sequência, entrega, continuidade e handoff |
 
-Um agente não precisa expor essas etapas ao usuário. Elas podem existir internamente como estado estruturado.
+O usuário não precisa enxergar essas etapas. Elas podem existir como estado interno do orquestrador.
 
 ---
 
 # JPN-RAG
 
-**JPN-RAG** aplica os mesmos princípios a sistemas de Retrieval-Augmented Generation.
-
-Fluxo proposto:
+JPN-RAG aplica a metodologia a sistemas de Retrieval-Augmented Generation.
 
 ```mermaid
 flowchart LR
-    Q[Pergunta] --> J[Jornada\nContexto da consulta]
-    J --> R[Retrieval\nBusca de evidências]
-    R --> P[Precisão\nFiltragem e critérios]
-    P --> C[Context Assembly]
-    C --> N[Narrativa\nSíntese orientada ao objetivo]
-    N --> G[Resposta fundamentada]
+    Q[Pergunta] --> J[Jornada]
+    J --> R[Retrieval]
+    R --> E[Evidências]
+    E --> P[Precisão]
+    P --> N[Narrativa]
+    N --> O[Resposta]
+    O --> V[Verificação / fontes]
 ```
 
-Princípios:
+A ideia é impedir que recuperação de documentos seja tratada como simples “colar contexto no prompt”. Evidência recuperada precisa ter função dentro da tarefa, limites e rastreabilidade.
 
-- recuperar informação relevante antes de responder;
-- separar conteúdo recuperado de inferências;
-- preservar origem/proveniência quando disponível;
-- evitar preencher lacunas com fatos inventados;
-- avaliar suficiência das evidências;
-- adaptar a resposta ao objetivo do usuário, sem alterar o sentido da fonte.
-
-A especificação detalhada está em [`docs/JPN-RAG.md`](docs/JPN-RAG.md).
+Veja **[docs/JPN-RAG.md](docs/JPN-RAG.md)**.
 
 ---
 
-# Casos de uso
+# Avaliação
 
-O JPN pode ser aplicado em:
+O projeto inclui um protocolo inicial para comparar tarefas executadas **com e sem JPN**.
 
-- agentes de atendimento;
-- copilotos internos;
-- CRM com IA;
-- desenvolvimento assistido por IA;
-- análise documental;
-- automação de processos;
-- geração de conteúdo com requisitos complexos;
-- sistemas RAG;
-- fluxos multiagente;
-- suporte técnico.
+Métricas propostas incluem:
 
----
+- aderência ao objetivo;
+- cumprimento de restrições;
+- taxa de alucinação factual;
+- completude;
+- necessidade de retrabalho;
+- consistência de formato;
+- rastreabilidade das decisões.
 
-# Exemplo rápido
+Esse protocolo não é uma prova de superioridade do JPN. Ele existe justamente para que futuras afirmações possam ser testadas em vez de presumidas.
 
-### Entrada
-
-> Preciso criar um agente de atendimento para uma loja de móveis.
-
-### JPN resumido
-
-```yaml
-jornada:
-  contexto: "Atendimento comercial de uma loja de móveis"
-  estado_atual: "Atendimento humano"
-  incertezas:
-    - "canais que serão integrados"
-    - "fonte oficial de preços e estoque"
-
-precisao:
-  objetivo: "Qualificar clientes e apoiar vendedores sem fornecer informação comercial não validada"
-  criterios_de_aceitacao:
-    - "registrar lead"
-    - "identificar intenção"
-    - "preservar histórico"
-    - "encaminhar para humano quando necessário"
-    - "não inventar preço ou estoque"
-
-narrativa:
-  estado_final_desejado: "Cliente atendido e vendedor recebendo um lead contextualizado"
-  sequencia_de_entrega:
-    - "receber mensagem"
-    - "identificar intenção"
-    - "consultar conhecimento permitido"
-    - "qualificar"
-    - "registrar CRM"
-    - "realizar handoff quando necessário"
-```
+Veja **[docs/EVALUATION.md](docs/EVALUATION.md)**.
 
 ---
 
-# Princípios de design
+# Exemplo completo
 
-1. **Intenção não é evidência.** Entender o objetivo do usuário não permite inventar fatos.
-2. **Contexto deve ser rastreável.** Decisões importantes precisam ter origem identificável.
-3. **Restrições são parte da solução.** Uma resposta que ignora limites técnicos ou de negócio não está correta.
-4. **Qualidade precisa ser verificável.** Sempre que possível, defina critérios de aceitação.
-5. **Continuidade importa.** Uma boa resposta considera o estado anterior e prepara a próxima ação.
-6. **Menos ritual, mais utilidade.** O framework deve reduzir carga cognitiva, não criar burocracia.
-7. **Humano no controle.** Em decisões de alto impacto, a IA deve apoiar — não substituir — a responsabilidade humana.
+Um estado JPN estruturado para atendimento comercial e CRM está disponível em:
+
+**[examples/crm-state.json](examples/crm-state.json)**
+
+Há também um estudo explicativo em Markdown dentro da pasta `examples/`.
 
 ---
 
-# Estrutura do repositório
+# Documentação
 
-```text
-JPN-Framework/
-├── README.md
-├── LICENSE
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── docs/
-│   ├── SPECIFICATION.md
-│   ├── JPN-RAG.md
-│   └── ROADMAP.md
-├── examples/
-│   └── customer-support.md
-└── templates/
-    └── JPN_TEMPLATE.md
-```
+| Documento | Conteúdo |
+|---|---|
+| [SDK](docs/SDK.md) | API e implementação TypeScript |
+| [Specification](docs/SPECIFICATION.md) | contrato conceitual do framework |
+| [JPN-RAG](docs/JPN-RAG.md) | extensão para retrieval e conhecimento |
+| [Evaluation](docs/EVALUATION.md) | protocolo de benchmark e comparação |
+| [Roadmap](docs/ROADMAP.md) | próximos marcos |
+| [Contributing](CONTRIBUTING.md) | como contribuir |
+| [Changelog](CHANGELOG.md) | histórico de versões |
 
 ---
 
-# Versão
+# Princípios do projeto
 
-A documentação passa a adotar versionamento semântico para mudanças conceituais relevantes.
-
-**Versão atual da especificação:** `0.2.0-draft`
-
-O sufixo `draft` indica que o framework ainda está em evolução e precisa de testes comparativos e validação empírica mais ampla.
-
----
-
-# Autoria e licença
-
-JPN Framework foi idealizado e desenvolvido por **Tiago Cunha de Souza**.
-
-O conteúdo deste repositório é disponibilizado sob a licença **MIT**, conforme o arquivo [`LICENSE`](LICENSE).
-
-A licença MIT permite uso, modificação e distribuição, preservando o aviso de copyright e a licença original.
+1. **Contexto não é licença para inventar.**
+2. **Fato, inferência, desconhecido e conflito são estados diferentes.**
+3. **Escopo negativo é tão importante quanto escopo positivo.**
+4. **Critérios de aceitação devem existir antes da conclusão.**
+5. **O estado final importa mais do que uma resposta linguisticamente bonita.**
+6. **Prompts são artefatos versionáveis, não magia.**
+7. **Frameworks devem ser avaliáveis e falsificáveis.**
+8. **O núcleo não deve depender de um único provedor de IA.**
 
 ---
 
-# Como contribuir
+# Limitações
 
-Sugestões, exemplos, testes comparativos e melhorias de documentação são bem-vindos. Consulte [`CONTRIBUTING.md`](CONTRIBUTING.md).
+O JPN não:
+
+- elimina alucinações de modelos de linguagem;
+- substitui testes de software;
+- substitui revisão humana em decisões críticas;
+- garante respostas melhores em toda tarefa;
+- interpreta emoções ou estados psicológicos;
+- possui validação neurocientífica;
+- é um modelo de IA por si só.
+
+O SDK atual também está em estado `draft`; a API pode mudar antes da versão `1.0.0`.
 
 ---
 
-## English summary
+# Roadmap resumido
 
-**JPN (Journey, Precision, Narrative)** is an open framework for structuring context, requirements, validation criteria and desired outcomes in LLM prompts, AI agents and RAG workflows. It is designed as a practical context-engineering methodology, not as a claim of neuroscientific modeling.
+Próximos objetivos técnicos:
+
+- geração automática dos tipos TypeScript a partir do JSON Schema;
+- parser de intake para criar rascunhos JPN a partir de entradas brutas;
+- adapters opcionais para provedores de LLM;
+- benchmark automatizado;
+- migração/versionamento de estados JPN;
+- pacote npm quando a API estiver suficientemente estável;
+- mais estudos de caso reproduzíveis.
+
+Veja **[docs/ROADMAP.md](docs/ROADMAP.md)**.
+
+---
+
+# Licença
+
+MIT License. Veja [`LICENSE`](LICENSE).
+
+A licença permite uso, modificação e distribuição conforme seus termos, preservando o aviso de copyright.
+
+---
+
+## Autor
+
+**Tiago Cunha de Souza**
+
+Criador do JPN Framework — Jornada, Precisão e Narrativa.
+
+> O objetivo do JPN é transformar intenção em contexto estruturado, contexto em especificação verificável e especificação em execução orientada a resultado.

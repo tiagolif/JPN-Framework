@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
-import Ajv2020, { type ErrorObject } from "ajv/dist/2020.js";
+import type { ErrorObject } from "ajv";
+import { Ajv2020 } from "ajv/dist/2020.js";
 
 import type { JpnState, ValidationIssue, ValidationResult } from "./types.js";
 
@@ -50,7 +51,7 @@ export function validateJpnState(input: unknown): ValidationResult<JpnState> {
   if (valid) {
     return {
       valid: true,
-      data: input,
+      data: input as JpnState,
       errors: [],
     };
   }

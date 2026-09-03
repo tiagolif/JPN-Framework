@@ -1,0 +1,102 @@
+{
+  "version": "0.2.0-draft",
+  "jornada": {
+    "contexto": "Atendimento comercial de uma empresa que recebe leads por mensageria.",
+    "objetivo_de_negocio": "Reduzir perda de leads e melhorar continuidade entre IA e vendedor humano.",
+    "estado_atual": "Atendimento parcialmente manual com registro em CRM.",
+    "historico_relevante": [
+      "A empresa já utiliza CRM.",
+      "O atendimento precisa preservar o histórico do cliente."
+    ],
+    "tentativas_anteriores": [],
+    "recursos_disponiveis": [
+      "CRM",
+      "base de conhecimento",
+      "canal de mensageria"
+    ],
+    "restricoes_conhecidas": [
+      "Não inventar preço.",
+      "Não inventar disponibilidade de estoque.",
+      "Permitir handoff para atendimento humano."
+    ],
+    "incertezas": [
+      "Fonte oficial de preço vigente ainda não definida."
+    ],
+    "itens_de_contexto": [
+      {
+        "value": "O CRM é a fonte de estado do lead.",
+        "confidence_state": "confirmed",
+        "source": "system_design"
+      },
+      {
+        "value": "O SLA ideal pode ser inferior a cinco minutos.",
+        "confidence_state": "inferred",
+        "source": null
+      }
+    ]
+  },
+  "precisao": {
+    "objetivo": "Qualificar o lead e registrar contexto suficiente para continuidade humana.",
+    "escopo": {
+      "inclui": [
+        "Identificar intenção.",
+        "Responder usando conhecimento autorizado.",
+        "Registrar contexto no CRM.",
+        "Executar handoff quando necessário."
+      ],
+      "nao_inclui": [
+        "Aprovação financeira.",
+        "Criação de condições comerciais não autorizadas."
+      ]
+    },
+    "entradas": [
+      "Mensagem do cliente.",
+      "Contexto permitido do CRM.",
+      "Conhecimento recuperado de fontes autorizadas."
+    ],
+    "saidas": [
+      "Resposta ao cliente.",
+      "Atualização do CRM.",
+      "Handoff quando aplicável."
+    ],
+    "restricoes": [
+      "Fatos comerciais devem vir de fonte autorizada."
+    ],
+    "criterios_de_aceitacao": [
+      "Lead identificado ou criado.",
+      "Intenção registrada.",
+      "Nenhum preço é inventado.",
+      "Handoff preserva o contexto relevante."
+    ],
+    "riscos": [
+      "Alucinação factual.",
+      "Duplicação de lead.",
+      "Perda de contexto no handoff."
+    ],
+    "validacao": [
+      "Testar lead novo.",
+      "Testar cliente existente.",
+      "Testar ausência de evidência.",
+      "Testar pedido explícito de atendente humano."
+    ]
+  },
+  "narrativa": {
+    "estado_final_desejado": "Cliente recebe atendimento confiável e o vendedor recebe um lead contextualizado quando sua participação é necessária.",
+    "sequencia_de_entrega": [
+      "Receber mensagem.",
+      "Identificar cliente e intenção.",
+      "Consultar conhecimento permitido.",
+      "Responder ou solicitar dado necessário.",
+      "Atualizar CRM.",
+      "Continuar automação ou realizar handoff."
+    ],
+    "formato_da_resposta": "Conversa curta, objetiva e adequada ao canal.",
+    "nivel_de_detalhe": "Adaptativo ao contexto do cliente.",
+    "proxima_acao": "Manter acompanhamento do lead ou entregar ao vendedor.",
+    "continuidade": [
+      "Preservar intenção.",
+      "Preservar última ação.",
+      "Preservar pendências relevantes."
+    ]
+  }
+}

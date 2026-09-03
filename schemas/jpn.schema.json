@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tiagolif/JPN-Framework/schemas/jpn.schema.json",
+  "title": "JPN Framework State",
+  "description": "Machine-readable representation of Journey (Jornada), Precision (Precisão), and Narrative (Narrativa) state.",
+  "type": "object",
+  "required": ["version", "jornada", "precisao", "narrativa"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "JPN specification version used by this state.",
+      "examples": ["0.2.0-draft"]
+    },
+    "jornada": {
+      "$ref": "#/$defs/jornada"
+    },
+    "precisao": {
+      "$ref": "#/$defs/precisao"
+    },
+    "narrativa": {
+      "$ref": "#/$defs/narrativa"
+    }
+  },
+  "$defs": {
+    "confidenceState": {
+      "type": "string",
+      "enum": ["confirmed", "inferred", "unknown", "conflicting"]
+    },
+    "contextItem": {
+      "type": "object",
+      "required": ["value", "confidence_state"],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence_state": {
+          "$ref": "#/$defs/confidenceState"
+        },
+        "source": {
+          "type": ["string", "null"],
+          "description": "Optional provenance identifier, such as user_message, document id, tool result, or system state."
+        }
+      }
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "jornada": {
+      "type": "object",
+      "required": ["contexto", "estado_atual"],
+      "additionalProperties": false,
+      "properties": {
+        "contexto": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objetivo_de_negocio": {
+          "type": ["string", "null"]
+        },
+        "estado_atual": {
+          "type": "string",
+          "minLength": 1
+        },
+        "historico_relevante": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "tentativas_anteriores": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "recursos_disponiveis": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "restricoes_conhecidas": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "incertezas": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "itens_de_contexto": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/contextItem"
+          }
+        }
+      }
+    },
+    "precisao": {
+      "type": "object",
+      "required": ["objetivo", "escopo", "saidas"],
+      "additionalProperties": false,
+      "properties": {
+        "objetivo": {
+          "type": "string",
+          "minLength": 1
+        },
+        "escopo": {
+          "type": "object",
+          "required": ["inclui", "nao_inclui"],
+          "additionalProperties": false,
+          "properties": {
+            "inclui": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "nao_inclui": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "entradas": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "saidas": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "restricoes": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "criterios_de_aceitacao": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "riscos": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "validacao": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "narrativa": {
+      "type": "object",
+      "required": ["estado_final_desejado"],
+      "additionalProperties": false,
+      "properties": {
+        "estado_final_desejado": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sequencia_de_entrega": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "formato_da_resposta": {
+          "type": ["string", "null"]
+        },
+        "nivel_de_detalhe": {
+          "type": ["string", "null"]
+        },
+        "proxima_acao": {
+          "type": ["string", "null"]
+        },
+        "continuidade": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    }
+  }
+}

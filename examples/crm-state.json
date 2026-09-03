@@ -1,0 +1,102 @@
+{
+  "version": "0.3.0-draft",
+  "jornada": {
+    "contexto": "Uma operação comercial recebe leads por WhatsApp e precisa organizar atendimento, qualificação e continuidade dentro de um CRM.",
+    "objetivo_de_negocio": "Reduzir perda de leads e tornar o acompanhamento comercial previsível.",
+    "estado_atual": "O atendimento depende de ações manuais e o contexto pode se perder entre conversas e responsáveis.",
+    "historico_relevante": [
+      "O negócio já utiliza CRM e canais digitais de atendimento.",
+      "Há interesse em automação e agentes de IA com handoff humano."
+    ],
+    "recursos_disponiveis": [
+      "CRM",
+      "WhatsApp",
+      "Banco de dados",
+      "Modelo de linguagem"
+    ],
+    "restricoes_conhecidas": [
+      "A IA não deve inventar preço, estoque ou políticas comerciais.",
+      "Ações sensíveis precisam ser auditáveis."
+    ],
+    "incertezas": [
+      "Quais etapas do funil devem disparar automações específicas?"
+    ],
+    "itens_de_contexto": [
+      {
+        "value": "O atendimento precisa permitir handoff para humano.",
+        "confidence_state": "confirmed",
+        "source": "requisito_de_negocio"
+      },
+      {
+        "value": "O SLA ideal ainda não foi definido.",
+        "confidence_state": "unknown",
+        "source": "levantamento_inicial"
+      }
+    ]
+  },
+  "precisao": {
+    "objetivo": "Definir um fluxo de atendimento assistido por IA que qualifique leads, preserve contexto e entregue casos adequados ao vendedor humano.",
+    "escopo": {
+      "inclui": [
+        "captura de contexto",
+        "qualificação de leads",
+        "registro no CRM",
+        "handoff humano",
+        "validação do fluxo"
+      ],
+      "nao_inclui": [
+        "disparo de campanhas em massa",
+        "decisão automática sobre crédito",
+        "alteração de preços"
+      ]
+    },
+    "entradas": [
+      "mensagens do cliente",
+      "dados permitidos do CRM",
+      "base de conhecimento aprovada"
+    ],
+    "saidas": [
+      "lead qualificado",
+      "resumo de contexto",
+      "próxima ação comercial sugerida",
+      "registro auditável"
+    ],
+    "restricoes": [
+      "Não inventar dados ausentes.",
+      "Respeitar permissões e isolamento de dados."
+    ],
+    "criterios_de_aceitacao": [
+      "Toda informação inferida deve ser distinguida de informação confirmada.",
+      "O vendedor deve receber contexto suficiente no handoff.",
+      "Nenhuma ação fora do escopo pode ser executada silenciosamente."
+    ],
+    "riscos": [
+      "alucinação de informação comercial",
+      "perda de contexto",
+      "automação executada no tenant incorreto"
+    ],
+    "validacao": [
+      "testar cenários normais, incompletos e conflitantes",
+      "comparar a saída com os critérios de aceitação"
+    ]
+  },
+  "narrativa": {
+    "estado_final_desejado": "O lead é atendido com contexto preservado, qualificado de forma consistente e encaminhado ao humano quando necessário.",
+    "sequencia_de_entrega": [
+      "capturar contexto",
+      "classificar confiança das informações",
+      "qualificar",
+      "registrar",
+      "validar",
+      "executar handoff quando necessário"
+    ],
+    "formato_da_resposta": "Resumo operacional curto seguido da próxima ação.",
+    "nivel_de_detalhe": "Objetivo e auditável.",
+    "proxima_acao": "Executar piloto controlado com conversas de teste.",
+    "continuidade": [
+      "registrar falhas observadas",
+      "atualizar critérios de aceitação",
+      "versionar mudanças no fluxo"
+    ]
+  }
+}

@@ -4,7 +4,9 @@ import {
   assessJpnReadiness,
   assertJpnState,
   buildJpnPrompt,
+  isSupportedJpnVersion,
   JpnValidationError,
+  SUPPORTED_JPN_VERSIONS,
   validateJpnState,
   type JpnState,
 } from "../src/index.js";
@@ -54,6 +56,31 @@ describe("JPN SDK", () => {
     }
   });
 
+  it("declares the supported framework version", () => {
+    expect(SUPPORTED_JPN_VERSIONS).toContain("0.3.0-draft");
+    expect(isSupportedJpnVersion("0.3.0-draft")).toBe(true);
+    expect(isSupportedJpnVersion("0.4.0-draft")).toBe(false);
+  });
+
+  it("rejects an unknown JPN version instead of coercing it", () => {
+    const unknownVersion = {
+      ...validState,
+      version: "0.4.0-draft",
+    };
+
+    const result = validateJpnState(unknownVersion);
+
+    expect(result.valid).toBe(false);
+    if (!result.valid) {
+      expect(result.errors).toEqual([
+        expect.objectContaining({
+          path: "/version",
+          keyword: "unsupportedVersion",
+        }),
+      ]);
+    }
+  });
+
   it("rejects fields outside the schema", () => {
     const invalid = {
       ...validState,
@@ -75,6 +102,26 @@ describe("JPN SDK", () => {
     };
 
     expect(() => assertJpnState(invalid)).toThrow(JpnValidationError);
+  });
+
+  it("throws a structured validation error for unsupported versions", () => {
+    const unknownVersion = {
+      ...validState,
+      version: "0.4.0-draft",
+    };
+
+    try {
+      assertJpnState(unknownVersion);
+      throw new Error("expected assertJpnState to throw");
+    } catch (error) {
+      expect(error).toBeInstanceOf(JpnValidationError);
+      expect((error as JpnValidationError).issues[0]).toEqual(
+        expect.objectContaining({
+          path: "/version",
+          keyword: "unsupportedVersion",
+        }),
+      );
+    }
   });
 
   it("builds an execution prompt with J, P and N", () => {

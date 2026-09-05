@@ -1,0 +1,35 @@
+{
+  "version": "0.3.0-draft",
+  "jornada": {
+    "contexto": "Usuário relata que uma aplicação fecha ao abrir determinado arquivo.",
+    "objetivo_de_negocio": "Resolver incidentes com menos retrabalho.",
+    "estado_atual": "A causa ainda é desconhecida e não há logs anexados.",
+    "historico_relevante": [],
+    "tentativas_anteriores": [],
+    "recursos_disponiveis": [],
+    "restricoes_conhecidas": [],
+    "incertezas": ["versão do sistema", "tipo de arquivo", "mensagem de erro"],
+    "itens_de_contexto": []
+  },
+  "precisao": {
+    "objetivo": "Conduzir triagem segura antes de sugerir correção.",
+    "escopo": {
+      "inclui": ["coletar sintomas", "separar fatos de hipóteses", "solicitar evidências mínimas", "sugerir testes reversíveis"],
+      "nao_inclui": ["afirmar causa sem evidência", "recomendar ações destrutivas"]
+    },
+    "entradas": [],
+    "saidas": ["diagnóstico preliminar", "perguntas de triagem", "passos seguros de teste"],
+    "restricoes": [],
+    "criterios_de_aceitacao": ["Hipóteses são apresentadas como hipóteses.", "Passos de teste são reversíveis."],
+    "riscos": ["perda de dados", "diagnóstico prematuro"],
+    "validacao": ["reavaliar após novos logs/evidências"]
+  },
+  "narrativa": {
+    "estado_final_desejado": "Suporte possui evidências suficientes para avançar sem diagnóstico prematuro.",
+    "sequencia_de_entrega": [],
+    "formato_da_resposta": "Checklist de triagem",
+    "nivel_de_detalhe": "Detalhado",
+    "proxima_acao": "Coletar as três evidências mínimas antes de avançar.",
+    "continuidade": []
+  }
+}

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="JPN Prompt Builder - Jornada, Precisão e Narrativa para transformar intenção em instrução clara para IA." />
+  <title>JPN Prompt Builder</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav"><div class="brand">JPN <span>Framework</span></div><a href="#builder" class="btn ghost">Testar Builder</a></header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">JORNADA · PRECISÃO · NARRATIVA</div>
+      <h1>Pare de tentar adivinhar o prompt certo.</h1>
+      <p>Explique o que você quer. O JPN organiza contexto, objetivo, restrições, critérios e formato de entrega antes de gerar a instrução final.</p>
+      <div class="actions"><a class="btn primary" href="#builder">Experimentar grátis</a><a class="btn ghost" href="#metodo">Conhecer o método</a></div>
+      <p class="micro">Sem API obrigatória na demonstração. Sem promessas de resposta perfeita.</p>
+    </section>
+
+    <section class="proof-grid">
+      <article><strong>J</strong><h3>Jornada</h3><p>Contexto, histórico, estado atual, recursos, restrições e incertezas.</p></article>
+      <article><strong>P</strong><h3>Precisão</h3><p>Objetivo operacional, escopo, saídas, riscos, critérios de aceitação e validação.</p></article>
+      <article><strong>N</strong><h3>Narrativa</h3><p>Estado final desejado, sequência de entrega, formato, detalhe e próxima ação.</p></article>
+    </section>
+
+    <section id="builder" class="builder-wrap">
+      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples. A demo cria um rascunho JPN local, preserva a entrada como contexto confirmado e mostra o que ainda precisa ser revisado.</p></div>
+      <div class="builder-grid">
+        <div class="panel">
+          <label>Sua ideia</label>
+          <textarea id="idea" placeholder="Ex.: Quero criar uma campanha de 7 dias para minha loja no Instagram."></textarea>
+          <label>Resultado principal</label>
+          <select id="type"><option>Plano / estratégia</option><option>Texto / conteúdo</option><option>Análise</option><option>Atendimento / vendas</option><option>Automação / processo</option><option>Produto digital / código</option></select>
+          <label>O que a IA não pode fazer?</label>
+          <input id="restrictions" placeholder="Ex.: não inventar preços, dados ou depoimentos" />
+          <button class="btn primary wide" id="generate">Criar rascunho JPN</button>
+          <div class="demo-note">A demo não usa LLM e não tenta adivinhar campos ausentes. Defaults operacionais e campos não confirmados ficam explícitos para revisão.</div>
+        </div>
+        <div class="panel output-panel">
+          <div class="score-row"><div><span class="score-label">Prontidão</span><strong id="score">0%</strong></div><span id="status" class="status">Aguardando entrada</span></div>
+          <div id="gaps" class="demo-note" aria-live="polite"></div>
+          <pre id="output">Seu prompt JPN aparecerá aqui.</pre>
+          <div class="output-actions"><button class="btn ghost" id="copy">Copiar</button><button class="btn ghost" id="download">Baixar .txt</button><button class="btn ghost" id="downloadJson">Exportar rascunho JSON</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="metodo" class="content-section">
+      <div class="section-head"><span>O PRODUTO</span><h2>Mais que uma biblioteca de prompts</h2></div>
+      <div class="cards">
+        <article><h3>Método JPN</h3><p>Guia prático para estruturar intenção, contexto e critérios antes da execução.</p></article>
+        <article><h3>Prompt Pack</h3><p>Aplicações para vendas, WhatsApp, marketing, gestão, produtividade e IA.</p></article>
+        <article><h3>JPN Business</h3><p>Uso direto no pequeno negócio: atendimento, campanhas, follow-up e processos.</p></article>
+        <article><h3>JPN Pro Kit</h3><p>Builder + método + biblioteca + materiais de implementação e exemplos.</p></article>
+      </div>
+    </section>
+
+    <section class="offer">
+      <div><span class="eyebrow">OFERTA DE VALIDAÇÃO</span><h2>JPN Pro Kit</h2><p>Faixa inicial sugerida para teste de mercado: <strong>R$ 59 a R$ 79</strong>. O preço final deve ser decidido com dados reais de conversão.</p></div>
+      <a class="btn disabled" aria-disabled="true">Checkout será conectado depois</a>
+    </section>
+
+    <section class="faq content-section"><div class="section-head"><span>FAQ</span><h2>Perguntas importantes</h2></div>
+      <details><summary>Funciona só no ChatGPT?</summary><p>Não. O núcleo do JPN é independente de provedor e pode orientar prompts para diferentes modelos e agentes.</p></details>
+      <details><summary>O JPN garante respostas perfeitas?</summary><p>Não. O framework organiza a especificação e reduz ambiguidades, mas modelos de IA continuam sujeitos a erros.</p></details>
+      <details><summary>Preciso saber programar?</summary><p>Não para usar o método, os packs ou o Builder. O SDK técnico é uma camada separada.</p></details>
+      <details><summary>O framework é cientificamente validado?</summary><p>Não reivindicamos validação científica nem superioridade universal. O projeto inclui uma proposta de avaliação justamente para testar resultados em vez de presumir.</p></details>
+    </section>
+  </main>
+  <footer>JPN Framework - Jornada · Precisão · Narrativa · Criado por Tiago Cunha de Souza</footer>
+  <script src="app.js"></script>
+</body>
+</html>

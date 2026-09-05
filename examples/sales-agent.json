@@ -1,0 +1,35 @@
+{
+  "version": "0.3.0-draft",
+  "jornada": {
+    "contexto": "Agente auxilia vendedores a qualificar leads recebidos por WhatsApp.",
+    "objetivo_de_negocio": "Reduzir perda de oportunidades mantendo atendimento humano em casos sensíveis.",
+    "estado_atual": "Preço e estoque podem mudar e não devem ser inventados.",
+    "historico_relevante": [],
+    "tentativas_anteriores": [],
+    "recursos_disponiveis": [],
+    "restricoes_conhecidas": ["Handoff humano em casos sensíveis."],
+    "incertezas": ["SLA de follow-up ainda não definido."],
+    "itens_de_contexto": [{"value":"Preço vigente deve ser confirmado por fonte autorizada.","confidence_state":"confirmed","source":"regra comercial"}]
+  },
+  "precisao": {
+    "objetivo": "Qualificar o lead e preparar a próxima ação comercial.",
+    "escopo": {
+      "inclui": ["resumir necessidade", "identificar estágio", "propor próxima pergunta ou mensagem", "registrar lacunas"],
+      "nao_inclui": ["decidir crédito", "inventar preço ou estoque", "pressionar cliente com falsa urgência"]
+    },
+    "entradas": [],
+    "saidas": ["resumo do lead", "classificação", "mensagem sugerida", "próxima ação"],
+    "restricoes": [],
+    "criterios_de_aceitacao": ["Toda inferência é rotulada.", "Mensagem sugerida é curta e humana."],
+    "riscos": ["alucinação comercial", "contato excessivo"],
+    "validacao": ["testar lead quente, morno, frio e conversa ambígua"]
+  },
+  "narrativa": {
+    "estado_final_desejado": "Lead qualificado com contexto preservado e ação comercial clara.",
+    "sequencia_de_entrega": [],
+    "formato_da_resposta": "Resumo estruturado + mensagem",
+    "nivel_de_detalhe": "Objetivo",
+    "proxima_acao": "Registrar no CRM e executar a próxima ação aprovada.",
+    "continuidade": []
+  }
+}

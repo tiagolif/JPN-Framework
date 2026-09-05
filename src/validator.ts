@@ -7,6 +7,10 @@ import type { JpnState, ValidationIssue, ValidationResult } from "./types.js";
 const schemaUrl = new URL("../schemas/jpn.schema.json", import.meta.url);
 const schema = JSON.parse(readFileSync(schemaUrl, "utf8")) as object;
 
+export const SUPPORTED_JPN_VERSIONS = ["0.3.0-draft"] as const;
+
+const supportedJpnVersions = new Set<string>(SUPPORTED_JPN_VERSIONS);
+
 const ajv = new Ajv2020({
   allErrors: true,
   strict: false,
@@ -31,6 +35,18 @@ function toIssue(error: ErrorObject): ValidationIssue {
   };
 }
 
+function unsupportedVersionIssue(version: string): ValidationIssue {
+  return {
+    path: "/version",
+    keyword: "unsupportedVersion",
+    message: `unsupported JPN version '${version}'; supported versions: ${SUPPORTED_JPN_VERSIONS.join(", ")}`,
+  };
+}
+
+export function isSupportedJpnVersion(version: string): boolean {
+  return supportedJpnVersions.has(version);
+}
+
 export class JpnValidationError extends Error {
   readonly issues: ValidationIssue[];
 
@@ -48,17 +64,26 @@ export class JpnValidationError extends Error {
 export function validateJpnState(input: unknown): ValidationResult<JpnState> {
   const valid = validateSchema(input);
 
-  if (valid) {
+  if (!valid) {
     return {
-      valid: true,
-      data: input as JpnState,
-      errors: [],
+      valid: false,
+      errors: (validateSchema.errors ?? []).map(toIssue),
+    };
+  }
+
+  const state = input as JpnState;
+
+  if (!isSupportedJpnVersion(state.version)) {
+    return {
+      valid: false,
+      errors: [unsupportedVersionIssue(state.version)],
     };
   }
 
   return {
-    valid: false,
-    errors: (validateSchema.errors ?? []).map(toIssue),
+    valid: true,
+    data: state,
+    errors: [],
   };
 }
 

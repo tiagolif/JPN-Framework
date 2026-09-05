@@ -19,7 +19,12 @@ if (failures.length) {
   process.exit(1);
 }
 
-for (const expectedExport of ["validateJpnState", "buildJpnPrompt", "assessJpnReadiness"]) {
+for (const expectedExport of [
+  "validateJpnState",
+  "buildJpnPrompt",
+  "assessJpnReadiness",
+  "createJpnDraftFromText",
+]) {
   if (!bundle.includes(expectedExport)) {
     console.error(`Browser bundle is missing expected export: ${expectedExport}`);
     process.exit(1);

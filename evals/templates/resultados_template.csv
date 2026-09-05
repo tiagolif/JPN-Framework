@@ -1,0 +1,1 @@
+task_id,condition,run,model,date,requirements_met_weight,requirements_total_weight,RCR,unsupported_claims,factual_claims,UCR,rework_turns,format_compliance,latency_ms,input_tokens,output_tokens,notes

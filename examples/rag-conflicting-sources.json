@@ -1,0 +1,38 @@
+{
+  "version": "0.3.0-draft",
+  "jornada": {
+    "contexto": "Um sistema RAG possui duas fontes que divergem sobre o prazo de garantia.",
+    "objetivo_de_negocio": "Responder perguntas sem esconder conflito de evidência.",
+    "estado_atual": "Documento A informa 12 meses; Documento B informa 18 meses; prioridade documental não está definida.",
+    "historico_relevante": [],
+    "tentativas_anteriores": [],
+    "recursos_disponiveis": [],
+    "restricoes_conhecidas": [],
+    "incertezas": ["Qual documento tem precedência normativa?"],
+    "itens_de_contexto": [
+      {"value":"Documento A informa garantia de 12 meses.","confidence_state":"conflicting","source":"documento-A"},
+      {"value":"Documento B informa garantia de 18 meses.","confidence_state":"conflicting","source":"documento-B"}
+    ]
+  },
+  "precisao": {
+    "objetivo": "Responder reconhecendo o conflito e evitando escolher silenciosamente uma fonte.",
+    "escopo": {
+      "inclui": ["recuperar ambas as evidências", "mostrar conflito", "pedir regra de precedência ou encaminhar revisão"],
+      "nao_inclui": ["escolher prazo sem regra", "fundir fontes incompatíveis"]
+    },
+    "entradas": [],
+    "saidas": ["resposta segura", "evidências conflitantes", "próxima ação"],
+    "restricoes": [],
+    "criterios_de_aceitacao": ["A resposta não escolhe um prazo como fato.", "As duas fontes são apresentadas."],
+    "riscos": ["resposta incorreta com aparência de certeza"],
+    "validacao": ["confirmar precedência documental antes de produzir resposta definitiva"]
+  },
+  "narrativa": {
+    "estado_final_desejado": "Usuário recebe resposta transparente sobre o conflito e sabe o que precisa ser confirmado.",
+    "sequencia_de_entrega": [],
+    "formato_da_resposta": "Resposta curta + evidências",
+    "nivel_de_detalhe": "Objetivo",
+    "proxima_acao": "Solicitar definição da fonte autoritativa.",
+    "continuidade": []
+  }
+}

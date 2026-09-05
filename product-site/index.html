@@ -25,7 +25,7 @@
     </section>
 
     <section id="builder" class="builder-wrap">
-      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples. A versão demo estrutura um prompt operacional localmente no navegador.</p></div>
+      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples. A demo cria um rascunho JPN local, preserva a entrada como contexto confirmado e mostra o que ainda precisa ser revisado.</p></div>
       <div class="builder-grid">
         <div class="panel">
           <label>Sua ideia</label>
@@ -34,13 +34,14 @@
           <select id="type"><option>Plano / estratégia</option><option>Texto / conteúdo</option><option>Análise</option><option>Atendimento / vendas</option><option>Automação / processo</option><option>Produto digital / código</option></select>
           <label>O que a IA não pode fazer?</label>
           <input id="restrictions" placeholder="Ex.: não inventar preços, dados ou depoimentos" />
-          <button class="btn primary wide" id="generate">Gerar estrutura JPN</button>
-          <div class="demo-note">A demo não interpreta semanticamente como um LLM. Ela aplica uma estrutura determinística do método para mostrar a lógica do produto.</div>
+          <button class="btn primary wide" id="generate">Criar rascunho JPN</button>
+          <div class="demo-note">A demo não usa LLM e não tenta adivinhar campos ausentes. Defaults operacionais e campos não confirmados ficam explícitos para revisão.</div>
         </div>
         <div class="panel output-panel">
           <div class="score-row"><div><span class="score-label">Prontidão</span><strong id="score">0%</strong></div><span id="status" class="status">Aguardando entrada</span></div>
+          <div id="gaps" class="demo-note" aria-live="polite"></div>
           <pre id="output">Seu prompt JPN aparecerá aqui.</pre>
-          <div class="output-actions"><button class="btn ghost" id="copy">Copiar</button><button class="btn ghost" id="download">Baixar .txt</button></div>
+          <div class="output-actions"><button class="btn ghost" id="copy">Copiar</button><button class="btn ghost" id="download">Baixar .txt</button><button class="btn ghost" id="downloadJson">Exportar rascunho JSON</button></div>
         </div>
       </div>
     </section>

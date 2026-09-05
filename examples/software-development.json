@@ -1,0 +1,35 @@
+{
+  "version": "0.3.0-draft",
+  "jornada": {
+    "contexto": "Uma API de pedidos retorna erro 500 quando `customer.notes` é null.",
+    "objetivo_de_negocio": "Restabelecer o fluxo sem quebrar consumidores existentes.",
+    "estado_atual": "A API está em produção e `null` é permitido pelo contrato atual.",
+    "historico_relevante": [],
+    "tentativas_anteriores": [],
+    "recursos_disponiveis": ["código-fonte", "testes existentes"],
+    "restricoes_conhecidas": ["Compatibilidade retroativa é obrigatória."],
+    "incertezas": [],
+    "itens_de_contexto": []
+  },
+  "precisao": {
+    "objetivo": "Corrigir o bug preservando a API pública.",
+    "escopo": {
+      "inclui": ["identificar a causa", "propor patch mínimo", "adicionar teste de regressão"],
+      "nao_inclui": ["alterar contrato público", "migrar banco de dados sem necessidade"]
+    },
+    "entradas": [],
+    "saidas": ["patch sugerido", "teste de regressão", "explicação do impacto"],
+    "restricoes": [],
+    "criterios_de_aceitacao": ["O caso com null deixa de gerar 500.", "Clientes existentes continuam compatíveis."],
+    "riscos": ["corrigir apenas o sintoma", "introduzir quebra de contrato"],
+    "validacao": ["executar teste de regressão", "executar suíte existente"]
+  },
+  "narrativa": {
+    "estado_final_desejado": "O erro deixa de ocorrer sem quebra de compatibilidade.",
+    "sequencia_de_entrega": [],
+    "formato_da_resposta": "Patch + explicação",
+    "nivel_de_detalhe": "Detalhado",
+    "proxima_acao": "Aplicar o patch em branch de teste.",
+    "continuidade": []
+  }
+}

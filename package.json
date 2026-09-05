@@ -22,9 +22,10 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && npm run build:browser",
+    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site",
     "build:browser": "esbuild src/index.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=dist/browser/index.js && node scripts/check-browser-build.mjs && node scripts/check-browser-parity.mjs",
     "check:browser:parity": "node scripts/check-browser-parity.mjs",
+    "check:product-site": "node scripts/check-product-site-sdk.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

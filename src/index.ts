@@ -1,3 +1,5 @@
+export { createJpnDraftFromText } from "./draft.js";
+export type { JpnDraftHints, JpnDraftResult } from "./draft.js";
 export { assessJpnReadiness } from "./readiness.js";
 export { buildJpnPrompt } from "./prompt.js";
 export {

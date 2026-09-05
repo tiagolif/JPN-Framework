@@ -1,11 +1,8 @@
-import { readFileSync } from "node:fs";
 import type { ErrorObject } from "ajv";
 import { Ajv2020 } from "ajv/dist/2020.js";
+import schema from "../schemas/jpn.schema.json" with { type: "json" };
 
 import type { JpnState, ValidationIssue, ValidationResult } from "./types.js";
-
-const schemaUrl = new URL("../schemas/jpn.schema.json", import.meta.url);
-const schema = JSON.parse(readFileSync(schemaUrl, "utf8")) as object;
 
 const ajv = new Ajv2020({
   allErrors: true,

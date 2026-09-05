@@ -10,6 +10,9 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./browser": {
+      "import": "./dist/browser/index.js"
     }
   },
   "files": [
@@ -19,7 +22,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && npm run build:browser",
+    "build:browser": "esbuild src/index.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=dist/browser/index.js && node scripts/check-browser-build.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -29,6 +33,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
+    "esbuild": "^0.25.9",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },

@@ -10,6 +10,9 @@ Especificação formal de Jornada, Precisão e Narrativa, incluindo campos, regr
 ### [`JPN-RAG.md`](JPN-RAG.md)
 Extensão do framework para sistemas de Retrieval-Augmented Generation, com foco em recuperação, proveniência, suficiência de evidência e síntese fundamentada.
 
+### [`HANDOFF.md`](HANDOFF.md)
+Contrato draft para transferência de contexto entre agentes, preservando estados de confiança, incertezas, conflitos, escopo e próxima ação sem transportar cadeia de pensamento.
+
 ### [`EVALUATION.md`](EVALUATION.md)
 Protocolo inicial para comparar JPN com um baseline e medir cumprimento de requisitos, retrabalho, groundedness, consistência, latência e custo.
 
@@ -36,7 +39,8 @@ Para conhecer o projeto:
 2. `SPECIFICATION.md`;
 3. exemplo de atendimento;
 4. `JPN-RAG.md`;
-5. `EVALUATION.md`.
+5. `HANDOFF.md`;
+6. `EVALUATION.md`.
 
 Para implementar:
 
@@ -44,4 +48,5 @@ Para implementar:
 2. `JPN_TEMPLATE.md`;
 3. `jpn.schema.json`;
 4. políticas específicas do domínio;
-5. testes e evals.
+5. `HANDOFF.md` quando houver mais de um agente;
+6. testes e evals.

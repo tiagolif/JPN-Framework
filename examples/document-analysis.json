@@ -1,0 +1,35 @@
+{
+  "version": "0.3.0-draft",
+  "jornada": {
+    "contexto": "É necessário resumir um contrato comercial e separar obrigações, prazos e riscos.",
+    "objetivo_de_negocio": "Ajudar a revisão humana do documento.",
+    "estado_atual": "O contrato será fornecido integralmente; não há autorização para aconselhamento jurídico definitivo.",
+    "historico_relevante": [],
+    "tentativas_anteriores": [],
+    "recursos_disponiveis": [],
+    "restricoes_conhecidas": ["Não apresentar conclusão jurídica como fato."],
+    "incertezas": [],
+    "itens_de_contexto": []
+  },
+  "precisao": {
+    "objetivo": "Produzir um resumo rastreável do documento.",
+    "escopo": {
+      "inclui": ["identificar obrigações", "identificar prazos", "sinalizar cláusulas de risco", "citar locais de origem"],
+      "nao_inclui": ["inventar interpretação ausente", "substituir parecer jurídico"]
+    },
+    "entradas": [],
+    "saidas": ["resumo executivo", "tabela de obrigações e prazos", "lista de pontos para revisão humana"],
+    "restricoes": [],
+    "criterios_de_aceitacao": ["Cada afirmação relevante aponta para sua origem.", "Dúvidas são marcadas como dúvidas."],
+    "riscos": ["perder exceções", "descontextualizar cláusulas"],
+    "validacao": ["conferir cada item contra o documento-fonte"]
+  },
+  "narrativa": {
+    "estado_final_desejado": "A revisão humana recebe um mapa fiel e rastreável do contrato.",
+    "sequencia_de_entrega": [],
+    "formato_da_resposta": "Resumo + tabela",
+    "nivel_de_detalhe": "Detalhado",
+    "proxima_acao": "Submeter pontos críticos a revisão humana.",
+    "continuidade": []
+  }
+}

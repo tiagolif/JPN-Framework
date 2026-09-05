@@ -2,6 +2,8 @@
 
 Este roadmap organiza a evolução do JPN sem transformar propostas futuras em funcionalidades ou resultados já comprovados.
 
+> **Sincronizado com `0.3.0-draft`:** a especificação, o JSON Schema e o SDK TypeScript de referência já existem. Itens de avaliação e ampliação de exemplos continuam em desenvolvimento.
+
 ## Fase 1 — Fundação documental
 
 - [x] Definir Jornada, Precisão e Narrativa.
@@ -39,25 +41,27 @@ Resultados, positivos ou negativos, deverão ser documentados.
 
 ## Fase 4 — Esquema estruturado
 
-- [ ] JSON Schema oficial para estado JPN.
-- [ ] exemplos de validação de schema;
-- [ ] formato para provenance/evidence;
-- [ ] contrato de handoff entre agentes;
-- [ ] política de compatibilidade entre versões.
+- [x] JSON Schema oficial para estado JPN.
+- [ ] exemplos dedicados de validação de schema.
+- [ ] formato para provenance/evidence.
+- [ ] contrato de handoff entre agentes.
+- [ ] política formal de compatibilidade entre versões.
 
 ## Fase 5 — SDK de referência
 
-Possível implementação futura, caso exista benefício demonstrável:
+A implementação TypeScript de referência foi iniciada em `0.3.0-draft` e atualmente inclui:
 
-```text
-jpn/
-├── parser
-├── state
-├── validator
-├── rag
-├── adapters
-└── evals
-```
+- [x] tipos TypeScript para o estado JPN;
+- [x] validação runtime baseada no JSON Schema 2020-12;
+- [x] erros estruturados de validação;
+- [x] compilador de estado JPN para prompt operacional;
+- [x] preservação opcional de estados de confiança no prompt;
+- [x] avaliação heurística de prontidão;
+- [x] testes automatizados;
+- [x] CI com GitHub Actions;
+- [ ] parser/construtor de estado a partir de entrada bruta;
+- [ ] adaptadores específicos, mantendo o núcleo agnóstico de fornecedor;
+- [ ] módulo de evals reproduzíveis integrado ao SDK.
 
 O SDK deverá permanecer agnóstico de fornecedor sempre que possível.
 

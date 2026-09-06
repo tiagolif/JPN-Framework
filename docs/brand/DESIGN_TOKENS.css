@@ -1,0 +1,16 @@
+:root {
+  --jpn-bg-950: #06121c;
+  --jpn-bg-900: #0b1f33;
+  --jpn-surface-800: #0e2639;
+  --jpn-surface-700: #102a3c;
+  --jpn-line-600: #21455e;
+  --jpn-text-050: #f5f9fc;
+  --jpn-text-300: #a7bdcc;
+  --jpn-accent-500: #2ec4b6;
+  --jpn-accent-300: #86e2d9;
+  --jpn-accent-200: #9af0e7;
+  --jpn-radius-sm: 11px;
+  --jpn-radius-md: 12px;
+  --jpn-radius-lg: 18px;
+  --jpn-font-sans: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}

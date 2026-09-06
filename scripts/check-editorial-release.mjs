@@ -44,10 +44,12 @@ requireMatch(gestao, /reconstru/i, 'Manual da Gestão Fácil deve identificar a 
 requireMatch(gestao, /não substitui/i, 'Manual da Gestão Fácil deve preservar seus limites de uso.');
 requireMatch(proKitCover, /EM PREPARA(?:Ç|C)ÃO/i, 'Capa do Pro Kit deve permanecer EM PREPARAÇÃO.');
 
+// Detecta apenas formulações afirmativas. Frases de limite como
+// “não elimina alucinações” e “não garante respostas corretas” são permitidas.
 const forbiddenClaims = [
-  /elimina(?:r|ção)?\s+(?:as\s+)?alucinações/i,
-  /garante\s+respostas?\s+corret/i,
-  /garante\s+resultados?/i,
+  /(?<!não )elimina(?:r|ção)?\s+(?:as\s+)?alucinações/i,
+  /(?<!não )garante\s+respostas?\s+corret/i,
+  /(?<!não )garante\s+resultados?/i,
   /roi\s+garant/i,
   /aumenta\s+vendas\s+garant/i,
   /100%\s+(?:corret|precis|eficaz)/i,

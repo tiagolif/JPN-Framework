@@ -49,10 +49,10 @@
       "status": "pending-release-decision"
     },
     {
-      "path": "05_GESTAO_FACIL/JPN_Gestao_Facil_v1.xlsx",
-      "source": null,
+      "path": "05_GESTAO_FACIL/JPN_Gestao_Facil_v0.1_reconstruida.xlsx",
+      "source": "deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx",
       "sha256": null,
-      "status": "pending-binary-versioning"
+      "status": "binary-versioned-local-qa-passed"
     },
     {
       "path": "05_GESTAO_FACIL/MANUAL_GESTAO_FACIL_v1.pdf",
@@ -63,8 +63,9 @@
   ],
   "notes": [
     "Este arquivo é um template e não deve ser distribuído como manifesto final.",
-    "Hashes devem ser calculados somente sobre os artefatos finais congelados.",
-    "A fonte editorial do manual da Gestão Fácil já está versionada; o XLSX reconstruído ainda precisa ser versionado como binário final.",
+    "Hashes do manifesto devem ser calculados somente sobre os artefatos finais congelados.",
+    "O XLSX reconstruído v0.1 está versionado e passou GF-QA-01 a GF-QA-09; GF-QA-10 de compatibilidade cruzada continua pendente.",
+    "A fonte editorial do manual da Gestão Fácil está versionada; o PDF final continua pendente.",
     "Itens sem fonte confirmada não podem ser apresentados como incluídos na entrega."
   ]
 }

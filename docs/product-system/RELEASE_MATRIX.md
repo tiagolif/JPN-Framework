@@ -9,7 +9,7 @@ Esta matriz é um controle interno. Não define preço, não ativa checkout e n�
 | Método JPN | draft editorial consolidado | terminologia do framework | revisão cruzada com Prompt Pack/Business + revisão final | usar `docs/products/metodo-jpn/METODO_JPN_v1.md` como fonte canônica desta etapa |
 | Prompt Builder | integração técnica em draft | SDK browser + parser + paridade | cadeia de PRs ainda não consolidada | manter integração no SDK oficial e validar build |
 | Prompt Pack | draft editorial consolidado — 18 cartões | contrato de templates + Método consolidado | revisão cruzada com JPN Business + QA editorial de amostra | usar `docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md` e `PROMPT_INDEX.json` como fontes canônicas desta etapa |
-| JPN Business | conteúdo existente, revisão final pendente | contrato de playbooks + Método/Prompt Pack consolidados | escopo comercial precisa ficar consistente | normalizar casos e limites de uso e separar playbook de prompt isolado |
+| JPN Business | draft editorial consolidado — 12 playbooks | contrato de playbooks + Método/Prompt Pack consolidados | QA fictício + revisão cruzada final | usar `docs/products/jpn-business/JPN_BUSINESS_v1.md` e `BUSINESS_INDEX.json` como fontes canônicas desta etapa |
 | JPN Pro Kit | estrutura de entrega criada | versões finais dos componentes | componentes ainda em fechamento | substituir placeholders por releases aprovados |
 | JPN Gestão Fácil | v1 funcional criada | manual e testes de uso | exemplos e release notes finais | executar revisão de experiência e empacotar versão candidata |
 | Materiais comerciais | rascunhos existentes | claims validados | benchmark ainda não executado | limitar copy a funcionalidades e benefícios não quantitativos |
@@ -37,6 +37,14 @@ Esta matriz é um controle interno. Não define preço, não ativa checkout e n�
 - prompts de processo longo que pertencem ao Business foram separados;
 - amostra passou por QA editorial com entradas fictícias;
 - índice estruturado corresponde ao conteúdo humano.
+
+### JPN Business adicional
+- cada playbook segue o contrato de processo em `CONTENT_CONTRACTS.md`;
+- processo está separado de prompt isolado;
+- pontos de decisão e continuidade estão explícitos;
+- vínculos com Prompt Pack foram revisados;
+- casos fictícios cobrem comercial, atendimento, marketing, operações, gestão e conhecimento;
+- nenhum playbook automatiza decisão regulada ou ultrapassa autorização necessária.
 
 ### Prompt Builder
 - CI verde;

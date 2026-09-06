@@ -40,9 +40,9 @@
     },
     {
       "id": "prompt-builder-release-decision",
-      "label": "Decisão de release e instruções de acesso do Prompt Builder",
-      "status": "pending-release-decision",
-      "evidence": "docs/products/pro-kit/MANIFEST.template.json",
+      "label": "Modo de entrega e instruções de acesso do Prompt Builder",
+      "status": "passed",
+      "evidence": "docs/products/prompt-builder/OFFLINE_DELIVERY_v1.md",
       "blocking": true
     },
     {
@@ -63,6 +63,7 @@
   "guardrails": [
     "Nenhum gate autoriza publicação, anúncio, checkout ou gasto.",
     "Nenhum gate autoriza aceite legal, criação de conta externa ou uso de dados financeiros reais.",
-    "Status passed só deve ser usado com evidência versionada ou execução reproduzível registrada."
+    "Status passed só deve ser usado com evidência versionada ou execução reproduzível registrada.",
+    "O gate do Prompt Builder aprova a decisão de entrega offline, não o congelamento final do bundle."
   ]
 }

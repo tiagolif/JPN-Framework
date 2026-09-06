@@ -1,0 +1,21 @@
+JPN Prompt Builder — acesso offline v1
+
+Modo de entrega: bundle local servido por HTTP.
+Estado: interno; não publicado.
+
+COMO USAR
+1. Mantenha a estrutura do bundle sem mover individualmente os arquivos.
+2. Inicie um servidor HTTP local na raiz do bundle.
+   Exemplo, quando Python já estiver instalado:
+   python -m http.server 8000
+3. Abra no navegador:
+   http://localhost:8000/product-site/
+
+POR QUE NÃO ABRIR DIRETAMENTE O HTML
+O Prompt Builder usa módulos ES e importa o bundle oficial em /dist/browser/index.js. Navegadores podem bloquear esse carregamento quando o arquivo é aberto por file://.
+
+LIMITES
+- Esta instrução não declara nem cria URL pública.
+- Nenhum checkout, login, API paga ou conta externa é necessário para o modo offline.
+- Nenhuma credencial deve ser adicionada ao bundle.
+- Uma hospedagem futura, se existir, é uma decisão separada e não é requisito desta entrega interna.

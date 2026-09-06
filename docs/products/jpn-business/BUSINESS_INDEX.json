@@ -6,14 +6,14 @@
     {"id":"JB-01","name":"Entrada e triagem de novo lead","category":"comercial","prompt_pack_links":["PP-06","PP-07"]},
     {"id":"JB-02","name":"Follow-up comercial responsável","category":"comercial","prompt_pack_links":["PP-06"]},
     {"id":"JB-03","name":"Qualificação sem inventar necessidade","category":"comercial","prompt_pack_links":["PP-07"]},
-    {"id":"JB-04","name":"Preparação de proposta sem definir condição não autorizada","category":"comercial","prompt_pack_links":["PP-03"]},
+    {"id":"JB-04","name":"Preparação de proposta sem definir condição não autorizada","category":"comercial","prompt_pack_links":["PP-03","PP-09"]},
     {"id":"JB-05","name":"Atendimento e resolução de solicitação","category":"atendimento","prompt_pack_links":["PP-07"]},
     {"id":"JB-06","name":"Escalonamento e handoff interno","category":"operacoes","prompt_pack_links":["PP-18"]},
     {"id":"JB-07","name":"Planejamento de conteúdo comercial","category":"marketing","prompt_pack_links":["PP-08","PP-09"]},
     {"id":"JB-08","name":"Planejamento de campanha sem publicação automática","category":"marketing","prompt_pack_links":["PP-08","PP-09"]},
-    {"id":"JB-09","name":"Criação e manutenção de SOP","category":"operacoes","prompt_pack_links":["PP-10"]},
-    {"id":"JB-10","name":"Reunião com decisão e plano de ação","category":"gestao","prompt_pack_links":["PP-11","PP-17"]},
+    {"id":"JB-09","name":"Criação e manutenção de SOP","category":"operacoes","prompt_pack_links":["PP-11"]},
+    {"id":"JB-10","name":"Reunião com decisão e plano de ação","category":"gestao","prompt_pack_links":["PP-10","PP-17"]},
     {"id":"JB-11","name":"Base de conhecimento operacional","category":"conhecimento","prompt_pack_links":["PP-16"]},
-    {"id":"JB-12","name":"Revisão semanal operacional","category":"gestao","prompt_pack_links":["PP-04","PP-11"]}
+    {"id":"JB-12","name":"Revisão semanal operacional","category":"gestao","prompt_pack_links":["PP-04","PP-10","PP-17"]}
   ]
 }

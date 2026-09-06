@@ -1,6 +1,6 @@
 # JPN Framework — Especificação
 
-**Versão:** 0.2.0-draft  
+**Versão:** 0.3.0-draft  
 **Autor:** Tiago Cunha de Souza
 
 ## 1. Objetivo

@@ -6,10 +6,10 @@ Esta matriz é um controle interno. Não define preço, não ativa checkout e n�
 
 | Produto | Estado | Dependência principal | Bloqueio atual | Próxima ação segura |
 |---|---|---|---|---|
-| Método JPN | conteúdo existente, revisão final pendente | terminologia do framework | auditoria editorial consolidada | revisar uma única versão completa e aplicar contrato editorial |
+| Método JPN | draft editorial consolidado | terminologia do framework | revisão cruzada com Prompt Pack/Business + revisão final | usar `docs/products/metodo-jpn/METODO_JPN_v1.md` como fonte canônica desta etapa |
 | Prompt Builder | integração técnica em draft | SDK browser + parser + paridade | cadeia de PRs ainda não consolidada | manter integração no SDK oficial e validar build |
-| Prompt Pack | conteúdo existente, revisão final pendente | contrato de templates | duplicações/variações possíveis | normalizar cada prompt pelo cartão padrão |
-| JPN Business | conteúdo existente, revisão final pendente | contrato de playbooks | escopo comercial precisa ficar consistente | normalizar casos e limites de uso |
+| Prompt Pack | conteúdo existente, revisão final pendente | contrato de templates + Método consolidado | duplicações/variações possíveis | normalizar cada prompt pelo cartão padrão e vocabulário do Método |
+| JPN Business | conteúdo existente, revisão final pendente | contrato de playbooks + Método consolidado | escopo comercial precisa ficar consistente | normalizar casos e limites de uso |
 | JPN Pro Kit | estrutura de entrega criada | versões finais dos componentes | componentes ainda em fechamento | substituir placeholders por releases aprovados |
 | JPN Gestão Fácil | v1 funcional criada | manual e testes de uso | exemplos e release notes finais | executar revisão de experiência e empacotar versão candidata |
 | Materiais comerciais | rascunhos existentes | claims validados | benchmark ainda não executado | limitar copy a funcionalidades e benefícios não quantitativos |

@@ -2,11 +2,11 @@
 
 Status: `draft QA`
 
-## Escopo desta rodada
+## Escopo
 
 A edição foi criada como workbook novo, sem importar dados financeiros, comerciais ou pessoais reais.
 
-## Verificações executadas
+## Verificações executadas na geração inicial
 
 ### Estrutura
 - workbook criado com abas Dashboard, Clientes, Vendas, Tarefas, Estoque, Financeiro, Listas e Leia-me;
@@ -21,7 +21,7 @@ A edição foi criada como workbook novo, sem importar dados financeiros, comerc
 - Dashboard: contagem de clientes, qualificados, vendas abertas/ganhas, tarefas pendentes e itens para repor;
 - Dashboard: saldo = soma de Entradas − soma de Saídas.
 
-### Correção realizada nesta rodada
+### Correção realizada
 
 A primeira fórmula de `Clientes cadastrados` contava linhas pré-formatadas vazias como preenchidas. Foi substituída por uma contagem que exige pelo menos um caractere no campo Nome/Empresa. Depois da correção, um workbook vazio apresenta `0` clientes cadastrados.
 
@@ -34,19 +34,35 @@ Foi executada busca por:
 - `#NAME?`
 - `#N/A`
 
-Resultado desta rodada: nenhum erro encontrado nas fórmulas inspecionadas.
+Resultado da geração inicial: nenhum erro encontrado nas fórmulas inspecionadas.
 
-## Casos fictícios ainda necessários antes de release-candidate
+## Casos reproduzíveis
 
-1. cadastrar um cliente e avançá-lo de Novo para Qualificado;
-2. criar uma venda e validar cálculo de valor total;
-3. alterar a venda para Ganha e confirmar atualização do Dashboard;
-4. criar tarefa em andamento e depois concluí-la;
-5. cadastrar item abaixo do estoque mínimo e confirmar sinalização `REPOR`;
-6. inserir Entrada e Saída fictícias e confirmar saldo;
-7. confirmar que linhas vazias não alteram KPIs;
-8. abrir uma cópia em ambientes compatíveis para verificar apresentação e fórmulas.
+Os testes funcionais agora estão especificados em `QA_CASES_v0.1.md`, com IDs `GF-QA-01` a `GF-QA-10`. O roteiro cobre:
+- estado inicial vazio;
+- cliente e qualificação;
+- venda e cálculo de total;
+- tarefa pendente/concluída;
+- estoque e reposição;
+- entradas, saídas e saldo registrado;
+- campos incompletos;
+- validações de listas;
+- integridade após edição comum;
+- compatibilidade Excel, LibreOffice Calc e Google Sheets.
+
+A existência do roteiro não equivale à aprovação. Os casos devem ser executados novamente no XLSX final congelado.
+
+## Artefatos de QA vinculados
+
+- `REBUILD_v0.1.md`: especificação da reconstrução;
+- `QA_CASES_v0.1.md`: casos reproduzíveis;
+- `MANUAL_v0.1.md`: comportamento esperado para o usuário.
 
 ## Critério de promoção
 
-A edição só deve avançar de `draft controlado` para `release-candidate` depois que todos os casos acima passarem e o arquivo binário final estiver congelado e versionado junto do manual correspondente.
+A edição só deve avançar de `draft controlado` para `release-candidate` depois que:
+1. `GF-QA-01` a `GF-QA-09` passarem no binário final;
+2. a compatibilidade mínima de `GF-QA-10` estiver registrada;
+3. o arquivo binário final estiver congelado e versionado;
+4. o manual corresponder à mesma versão do workbook;
+5. o manifesto do Pro Kit apontar para os artefatos reais, sem hashes inventados.

@@ -1,0 +1,69 @@
+{
+  "product": "JPN Pro Kit",
+  "commercial_version": "v1",
+  "framework_base": "0.3.0-draft",
+  "status": "release-candidate-internal",
+  "generated_at": null,
+  "source_commit": null,
+  "files": [
+    {
+      "path": "00_LEIA_PRIMEIRO/LEIA_PRIMEIRO.pdf",
+      "source": "docs/products/pro-kit/LEIA_PRIMEIRO.md",
+      "sha256": null,
+      "status": "pending-final-artifact"
+    },
+    {
+      "path": "01_METODO_JPN/METODO_JPN_v1.pdf",
+      "source": "docs/products/metodo-jpn/METODO_JPN_v1.md",
+      "sha256": null,
+      "status": "pending-final-artifact"
+    },
+    {
+      "path": "02_PROMPT_PACK/JPN_PROMPT_PACK_v1.pdf",
+      "source": "docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md",
+      "sha256": null,
+      "status": "pending-final-artifact"
+    },
+    {
+      "path": "02_PROMPT_PACK/PROMPT_INDEX.json",
+      "source": "docs/products/prompt-pack/PROMPT_INDEX.json",
+      "sha256": null,
+      "status": "source-present"
+    },
+    {
+      "path": "03_JPN_BUSINESS/JPN_BUSINESS_v1.pdf",
+      "source": "docs/products/jpn-business/JPN_BUSINESS_v1.md",
+      "sha256": null,
+      "status": "pending-final-artifact"
+    },
+    {
+      "path": "03_JPN_BUSINESS/BUSINESS_INDEX.json",
+      "source": "docs/products/jpn-business/BUSINESS_INDEX.json",
+      "sha256": null,
+      "status": "source-present"
+    },
+    {
+      "path": "04_PROMPT_BUILDER/instrucoes_de_acesso.txt",
+      "source": "product-site/",
+      "sha256": null,
+      "status": "pending-release-decision"
+    },
+    {
+      "path": "05_GESTAO_FACIL/JPN_Gestao_Facil_v1.xlsx",
+      "source": null,
+      "sha256": null,
+      "status": "pending-import-and-versioning"
+    },
+    {
+      "path": "05_GESTAO_FACIL/MANUAL_GESTAO_FACIL_v1.pdf",
+      "source": null,
+      "sha256": null,
+      "status": "pending-import-and-versioning"
+    }
+  ],
+  "notes": [
+    "Este arquivo é um template e não deve ser distribuído como manifesto final.",
+    "Hashes devem ser calculados somente sobre os artefatos finais congelados.",
+    "Itens sem fonte confirmada não podem ser apresentados como incluídos na entrega."
+  ]
+}

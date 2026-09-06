@@ -11,6 +11,9 @@ const requiredSources = [
   'docs/products/prompt-pack/PROMPT_INDEX.json',
   'docs/products/jpn-business/JPN_BUSINESS_v1.md',
   'docs/products/jpn-business/BUSINESS_INDEX.json',
+  'docs/products/gestao-facil/MANUAL_v0.1.md',
+  'docs/products/gestao-facil/QA_EXECUTION_v0.1.md',
+  'deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx',
   'product-site/app.js'
 ];
 
@@ -32,9 +35,23 @@ if (new Set(paths).size !== paths.length) {
   throw new Error('MANIFEST.template.json contém caminhos duplicados');
 }
 
-const gestao = manifest.files.filter((item) => item.path.includes('05_GESTAO_FACIL/'));
-if (gestao.length < 2 || gestao.some((item) => item.status !== 'pending-import-and-versioning' || item.source !== null)) {
-  throw new Error('Gestão Fácil deve permanecer explicitamente pendente até seus artefatos serem rastreados');
+const gestaoXlsx = manifest.files.find((item) => item.path.endsWith('JPN_Gestao_Facil_v0.1_reconstruida.xlsx'));
+if (!gestaoXlsx) {
+  throw new Error('Manifesto não referencia o XLSX reconstruído da Gestão Fácil');
+}
+if (gestaoXlsx.status !== 'binary-versioned-local-qa-passed') {
+  throw new Error(`Status inesperado do XLSX da Gestão Fácil: ${gestaoXlsx.status}`);
+}
+if (gestaoXlsx.source !== 'deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx') {
+  throw new Error('Fonte do XLSX da Gestão Fácil diverge do binário versionado');
+}
+
+const gestaoManual = manifest.files.find((item) => item.path.includes('05_GESTAO_FACIL/') && item.path.endsWith('.pdf'));
+if (!gestaoManual) {
+  throw new Error('Manifesto não referencia o manual final planejado da Gestão Fácil');
+}
+if (gestaoManual.source !== 'docs/products/gestao-facil/MANUAL_v0.1.md' || gestaoManual.status !== 'pending-final-artifact') {
+  throw new Error('Manual da Gestão Fácil deve apontar para a fonte v0.1 e permanecer pendente de artefato final');
 }
 
 if (manifest.files.some((item) => item.sha256 !== null)) {
@@ -61,4 +78,4 @@ for (const pattern of forbiddenClaims) {
   }
 }
 
-console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto)`);
+console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; Gestão Fácil versionada com QA local)`);

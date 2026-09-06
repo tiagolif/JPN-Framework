@@ -12,7 +12,7 @@ O JPN Pro Kit organiza, em uma única experiência de entrega, os produtos e fer
 2. **JPN Prompt Pack** — fornece cartões reutilizáveis para tarefas delimitadas.
 3. **JPN Business** — fornece playbooks para processos recorrentes de negócio.
 4. **JPN Prompt Builder** — ferramenta web para transformar uma solicitação em rascunho JPN revisável, validar o estado e compilar o prompt.
-5. **JPN Gestão Fácil** — planilha de gestão para pequenas empresas. O artefato já foi produzido em trabalho anterior, mas ainda não está versionado neste repositório; portanto não é incluído silenciosamente neste candidato.
+5. **JPN Gestão Fácil** — planilha operacional para pequenas empresas. A edição reconstruída v0.1 está versionada no repositório e passou pelo QA funcional local GF-QA-01 a GF-QA-09. Compatibilidade cruzada e artefato final do manual ainda estão pendentes.
 
 ## Ordem recomendada de uso
 
@@ -31,6 +31,10 @@ Use o JPN Business. Cada playbook inclui responsáveis, decisões, restrições,
 ### Para estruturar uma solicitação própria
 
 Use o Prompt Builder. O fluxo-base é local e deve depender do SDK browser oficial; campos não confirmados continuam visíveis como lacunas.
+
+### Para organizar a rotina operacional
+
+Use a Gestão Fácil para clientes, vendas, tarefas, estoque e registros financeiros operacionais simples. Ela não substitui ERP, contabilidade, sistema fiscal, jurídico ou bancário.
 
 ## Regra de confiança
 
@@ -55,9 +59,12 @@ O JPN não garante respostas corretas, não elimina alucinações, não garante 
 - Business: `docs/products/jpn-business/JPN_BUSINESS_v1.md`
 - Índice Business: `docs/products/jpn-business/BUSINESS_INDEX.json`
 - Prompt Builder: `product-site/`
+- Gestão Fácil XLSX: `deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx`
+- Gestão Fácil manual: `docs/products/gestao-facil/MANUAL_v0.1.md`
+- Gestão Fácil QA: `docs/products/gestao-facil/QA_EXECUTION_v0.1.md`
 - Contratos editoriais: `docs/product-system/CONTENT_CONTRACTS.md`
 - Auditoria cruzada: `docs/product-system/CROSS_PRODUCT_AUDIT_v1.md`
 
 ## Antes de um release final
 
-O pacote ainda precisa passar pelos gates registrados em `RELEASE_CHECKLIST.md`. Em especial: CI verde da cadeia técnica, revisão ortográfica/visual final, importação e versionamento da Gestão Fácil, congelamento do manifesto com hashes reais dos artefatos finais e autorização explícita antes de qualquer publicação externa.
+O pacote ainda precisa passar pelos gates registrados em `RELEASE_CHECKLIST.md`. Em especial: CI verde da cadeia técnica, revisão ortográfica/visual final, GF-QA-10 da Gestão Fácil, geração e inspeção dos PDFs finais, congelamento do manifesto com hashes reais dos artefatos finais e autorização explícita antes de qualquer publicação externa.

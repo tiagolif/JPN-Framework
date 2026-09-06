@@ -2,7 +2,7 @@
 
 Base: JPN Framework `0.3.0-draft`.
 
-Este mapa distingue **fonte canônica**, **formato de entrega futuro** e **status real**. Ele não copia drafts para uma pasta de venda e não apresenta item ausente como concluído.
+Este mapa distingue **fonte canônica**, **formato de entrega futuro** e **status real**. Ele não apresenta rascunhos ou artefatos pendentes como concluídos.
 
 | Componente | Fonte canônica atual | Entrega planejada | Status no candidato |
 |---|---|---|---|
@@ -12,7 +12,8 @@ Este mapa distingue **fonte canônica**, **formato de entrega futuro** e **statu
 | JPN Business | `docs/products/jpn-business/JPN_BUSINESS_v1.md` | PDF + Markdown fonte | presente como draft consolidado, 12 playbooks |
 | Índice Business | `docs/products/jpn-business/BUSINESS_INDEX.json` | JSON | presente |
 | Prompt Builder | `product-site/` | aplicação web estática | integração SDK em cadeia de PRs; não publicada |
-| JPN Gestão Fácil | fora do repositório nesta etapa | XLSX + manual | **pendente de importação/versionamento** |
+| JPN Gestão Fácil | `deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx` | XLSX | binário versionado; GF-QA-01 a GF-QA-09 aprovados localmente; compatibilidade cruzada pendente |
+| Manual Gestão Fácil | `docs/products/gestao-facil/MANUAL_v0.1.md` | PDF | fonte editorial versionada; artefato PDF final pendente |
 | Guia inicial | `docs/products/pro-kit/LEIA_PRIMEIRO.md` | PDF/TXT/Markdown | presente |
 | Checklist de release | `docs/products/pro-kit/RELEASE_CHECKLIST.md` | Markdown interno | presente |
 | Manifesto | `docs/products/pro-kit/MANIFEST.template.json` | JSON final com hashes | template presente; congelamento pendente |
@@ -36,7 +37,7 @@ JPN_Pro_Kit_v1/
 ├── 04_PROMPT_BUILDER/
 │   └── instrucoes_de_acesso.txt
 ├── 05_GESTAO_FACIL/
-│   ├── JPN_Gestao_Facil_v1.xlsx
+│   ├── JPN_Gestao_Facil_v0.1_reconstruida.xlsx
 │   └── MANUAL_GESTAO_FACIL_v1.pdf
 ├── 90_DOCUMENTACAO/
 │   ├── RELEASE_NOTES_v1.pdf
@@ -44,7 +45,11 @@ JPN_Pro_Kit_v1/
 └── 99_FONTES_EDITAVEIS/  (somente se decidido para a oferta)
 ```
 
-Essa árvore é uma especificação de empacotamento, não uma afirmação de que todos os binários já existem.
+Essa árvore é uma especificação de empacotamento, não uma afirmação de que todos os binários já estão finalizados.
+
+## Estado específico da Gestão Fácil
+
+A edição reconstruída v0.1 está rastreada no repositório. Os testes funcionais GF-QA-01 a GF-QA-09 foram registrados em `docs/products/gestao-facil/QA_EXECUTION_v0.1.md`. O gate GF-QA-10 continua pendente porque requer validar o mesmo binário em Microsoft Excel, LibreOffice Calc e Google Sheets. O manual final em PDF também continua pendente.
 
 ## Política de inclusão
 

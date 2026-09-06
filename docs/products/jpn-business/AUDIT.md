@@ -45,11 +45,25 @@ Exemplos:
 
 Nenhum playbook promete aumento de vendas, produtividade, redução de custo ou eliminação de erro. O produto se limita a explicar comportamento observável: estruturar processos, tornar entradas/restrições/decisões explícitas e registrar continuidade.
 
-## QA ainda necessário antes de release-candidate
+## QA fictício executado
 
-- executar pelo menos 1 caso fictício ponta a ponta em cada categoria: comercial, atendimento, marketing, operações, gestão e conhecimento;
+Foi criada a bateria `QA_CASES_v1.md` cobrindo seis categorias:
+
+- comercial;
+- atendimento;
+- marketing;
+- operações;
+- gestão;
+- conhecimento.
+
+Resultado editorial: 6/6 casos atendem aos critérios definidos sem exigir fatos inventados, ultrapassar autoridade ou remover incerteza relevante.
+
+Este resultado é QA de coerência editorial, não benchmark de desempenho de IA e não sustenta claim quantitativo de superioridade.
+
+## Pendências antes de release-candidate
+
 - revisar ortografia e uniformidade de pontuação;
-- verificar todos os links do índice contra a versão final do Prompt Pack;
+- validar mecanicamente todos os links do índice contra a versão final do Prompt Pack;
 - revisar consistência entre Método, Prompt Pack e Business em uma única passada;
 - preparar diagramação e arquivo de entrega final;
 - decidir se alguns playbooks receberão modelos de registro anexos na versão comercial.
@@ -58,8 +72,7 @@ Nenhum playbook promete aumento de vendas, produtividade, redução de custo ou 
 
 O JPN Business pode avançar para `release-candidate` quando:
 
-- os playbooks tiverem passado por QA com casos fictícios;
 - nenhuma divergência terminológica for encontrada na revisão cruzada;
-- o índice estruturado corresponder ao conteúdo humano;
+- o índice estruturado corresponder ao conteúdo humano e ao índice final do Prompt Pack;
 - versão, base do framework e limites estiverem presentes no artefato diagramado;
 - o pacote não contiver dados reais, credenciais ou claims não comprovados.

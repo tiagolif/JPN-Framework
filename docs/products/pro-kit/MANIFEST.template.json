@@ -44,9 +44,9 @@
     },
     {
       "path": "04_PROMPT_BUILDER/instrucoes_de_acesso.txt",
-      "source": "product-site/",
+      "source": "docs/products/prompt-builder/INSTRUCOES_DE_ACESSO.txt",
       "sha256": null,
-      "status": "pending-release-decision"
+      "status": "offline-delivery-defined"
     },
     {
       "path": "05_GESTAO_FACIL/JPN_Gestao_Facil_v0.1_reconstruida.xlsx",
@@ -66,6 +66,7 @@
     "Hashes do manifesto devem ser calculados somente sobre os artefatos finais congelados.",
     "O XLSX reconstruído v0.1 está versionado e passou GF-QA-01 a GF-QA-09; GF-QA-10 de compatibilidade cruzada continua pendente.",
     "A fonte editorial do manual da Gestão Fácil está versionada; o PDF final continua pendente.",
+    "O Prompt Builder v1 possui modo de entrega offline definido; o bundle final ainda deve ser executado, revisado e congelado antes da entrega.",
     "Itens sem fonte confirmada não podem ser apresentados como incluídos na entrega."
   ]
 }

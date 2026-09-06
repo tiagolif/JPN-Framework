@@ -36,6 +36,7 @@
     "report:release-readiness": "node scripts/report-release-readiness.mjs",
     "build:visual-review": "node scripts/build-visual-review-gallery.mjs",
     "build:editorial-print": "node scripts/build-editorial-print-staging.mjs",
+    "export:editorial-pdfs": "node scripts/export-editorial-pdf-candidates.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

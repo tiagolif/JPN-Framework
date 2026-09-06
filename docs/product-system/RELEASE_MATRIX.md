@@ -8,8 +8,8 @@ Esta matriz é um controle interno. Não define preço, não ativa checkout e n�
 |---|---|---|---|---|
 | Método JPN | draft editorial consolidado | terminologia do framework | revisão cruzada com Prompt Pack/Business + revisão final | usar `docs/products/metodo-jpn/METODO_JPN_v1.md` como fonte canônica desta etapa |
 | Prompt Builder | integração técnica em draft | SDK browser + parser + paridade | cadeia de PRs ainda não consolidada | manter integração no SDK oficial e validar build |
-| Prompt Pack | conteúdo existente, revisão final pendente | contrato de templates + Método consolidado | duplicações/variações possíveis | normalizar cada prompt pelo cartão padrão e vocabulário do Método |
-| JPN Business | conteúdo existente, revisão final pendente | contrato de playbooks + Método consolidado | escopo comercial precisa ficar consistente | normalizar casos e limites de uso |
+| Prompt Pack | draft editorial consolidado — 18 cartões | contrato de templates + Método consolidado | revisão cruzada com JPN Business + QA editorial de amostra | usar `docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md` e `PROMPT_INDEX.json` como fontes canônicas desta etapa |
+| JPN Business | conteúdo existente, revisão final pendente | contrato de playbooks + Método/Prompt Pack consolidados | escopo comercial precisa ficar consistente | normalizar casos e limites de uso e separar playbook de prompt isolado |
 | JPN Pro Kit | estrutura de entrega criada | versões finais dos componentes | componentes ainda em fechamento | substituir placeholders por releases aprovados |
 | JPN Gestão Fácil | v1 funcional criada | manual e testes de uso | exemplos e release notes finais | executar revisão de experiência e empacotar versão candidata |
 | Materiais comerciais | rascunhos existentes | claims validados | benchmark ainda não executado | limitar copy a funcionalidades e benefícios não quantitativos |
@@ -30,6 +30,13 @@ Esta matriz é um controle interno. Não define preço, não ativa checkout e n�
 - exemplos neutros;
 - versão-base declarada;
 - instruções de uso completas.
+
+### Prompt Pack adicional
+- cada cartão segue `CONTENT_CONTRACTS.md`;
+- duplicações semânticas foram revisadas;
+- prompts de processo longo que pertencem ao Business foram separados;
+- amostra passou por QA editorial com entradas fictícias;
+- índice estruturado corresponde ao conteúdo humano.
 
 ### Prompt Builder
 - CI verde;
@@ -63,7 +70,8 @@ Permanecem fora da execução autônoma:
 2. auditar Método JPN;
 3. normalizar Prompt Pack;
 4. normalizar JPN Business;
-5. congelar Gestão Fácil como release candidate;
-6. montar Pro Kit release candidate;
-7. executar evals e revisar claims;
-8. só então preparar publicação externa, mediante autorização.
+5. executar revisão cruzada Método + Prompt Pack + Business;
+6. congelar Gestão Fácil como release candidate;
+7. montar Pro Kit release candidate;
+8. executar evals e revisar claims;
+9. só então preparar publicação externa, mediante autorização.

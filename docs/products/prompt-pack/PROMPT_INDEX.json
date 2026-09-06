@@ -1,0 +1,25 @@
+{
+  "product": "JPN Prompt Pack",
+  "product_version": "v1-draft",
+  "framework_base": "0.3.0-draft",
+  "templates": [
+    {"id":"PP-01","name":"Pedido vago → plano executável","category":"estruturação","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-02","name":"Pesquisa verificável","category":"pesquisa","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-03","name":"Comparador de alternativas","category":"decisão","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-04","name":"Resumo com continuidade","category":"documentação","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-05","name":"Reescrita controlada","category":"comunicação","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-06","name":"Follow-up responsável","category":"vendas","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-07","name":"Atendimento → diagnóstico e próximo passo","category":"suporte","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-08","name":"Conteúdo social sem invenção comercial","category":"marketing","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-09","name":"Oferta sem condições inventadas","category":"vendas","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-10","name":"Ata operacional JPN","category":"operações","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-11","name":"Notas → SOP","category":"operações","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-12","name":"Análise de dados com escopo explícito","category":"dados","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-13","name":"Debug estruturado","category":"tecnologia","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-14","name":"Feature → plano de implementação","category":"tecnologia","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-15","name":"Code review orientado a risco","category":"tecnologia","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-16","name":"Conhecimento operacional reutilizável","category":"documentação","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-17","name":"Decisão com trade-offs explícitos","category":"decisão","primary_jpn":["jornada","precisao","narrativa"]},
+    {"id":"PP-18","name":"Handoff JPN","category":"continuidade","primary_jpn":["jornada","precisao","narrativa"]}
+  ]
+}

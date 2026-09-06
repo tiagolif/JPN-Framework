@@ -7,6 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'dist', 'prompt-builder-offline');
 const site = path.join(root, 'product-site');
 const browserBundle = path.join(root, 'dist', 'browser', 'index.js');
+const accessInstructions = path.join(root, 'docs', 'products', 'prompt-builder', 'INSTRUCOES_DE_ACESSO.txt');
 
 const requiredSiteFiles = ['index.html', 'app.js', 'styles.css'];
 
@@ -22,24 +23,11 @@ for (const file of requiredSiteFiles) {
   await readFile(path.join(site, file));
 }
 await readFile(browserBundle);
+await readFile(accessInstructions);
 
 await cp(site, path.join(out, 'product-site'), { recursive: true });
 await cp(browserBundle, path.join(out, 'dist', 'browser', 'index.js'));
-
-const instructions = `JPN Prompt Builder — entrega offline interna\n\n` +
-  `Estado: staging local; não publicado.\n\n` +
-  `Como usar:\n` +
-  `1. Mantenha esta pasta com a estrutura original.\n` +
-  `2. Inicie um servidor HTTP local na raiz desta pasta.\n` +
-  `   Exemplo com Python instalado: python -m http.server 8000\n` +
-  `3. Abra http://localhost:8000/product-site/ no navegador.\n\n` +
-  `Por que HTTP local: o Builder importa o bundle oficial em /dist/browser/index.js; abrir o HTML diretamente por file:// pode bloquear módulos ES.\n\n` +
-  `Limites:\n` +
-  `- nenhuma URL pública é criada por este staging;\n` +
-  `- nenhum checkout, login, API paga ou conta externa é necessário;\n` +
-  `- esta instrução não é credencial nem promessa de hospedagem futura.\n`;
-
-await writeFile(path.join(out, 'INSTRUCOES_DE_ACESSO.txt'), instructions, 'utf8');
+await cp(accessInstructions, path.join(out, 'INSTRUCOES_DE_ACESSO.txt'));
 
 const files = [
   'product-site/index.html',

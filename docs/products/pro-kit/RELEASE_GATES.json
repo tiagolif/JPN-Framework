@@ -7,7 +7,7 @@
       "id": "editorial-sources",
       "label": "Fontes editoriais canônicas",
       "status": "passed",
-      "evidence": "docs/products/pro-kit/EDITORIAL_RELEASE_GATE_v1.md",
+      "evidence": "docs/product-system/EDITORIAL_RELEASE_GATE_v1.md",
       "blocking": true
     },
     {
@@ -28,7 +28,7 @@
       "id": "visual-render-review",
       "label": "Renderização e inspeção visual final dos SVGs",
       "status": "pending-render-review",
-      "evidence": "docs/brand/VISUAL_QA_v1.md",
+      "evidence": "docs/brand/VISUAL_REVIEW_EXECUTION_v1.md",
       "blocking": true
     },
     {

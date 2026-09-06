@@ -22,7 +22,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site && npm run check:product-consistency && npm run check:pro-kit && npm run check:visual-assets && npm run check:editorial-release && npm run report:release-readiness",
+    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site && npm run check:product-consistency && npm run check:pro-kit && npm run check:visual-assets && npm run check:editorial-release && npm run report:release-readiness && npm run build:visual-review",
     "build:browser": "esbuild src/index.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=dist/browser/index.js && node scripts/check-browser-build.mjs && node scripts/check-browser-parity.mjs",
     "check:browser:parity": "node scripts/check-browser-parity.mjs",
     "check:product-site": "node scripts/check-product-site-sdk.mjs",
@@ -32,6 +32,7 @@
     "check:editorial-release": "node scripts/check-editorial-release.mjs",
     "stage:pro-kit": "node scripts/stage-pro-kit.mjs",
     "report:release-readiness": "node scripts/report-release-readiness.mjs",
+    "build:visual-review": "node scripts/build-visual-review-gallery.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

@@ -1,0 +1,68 @@
+{
+  "product": "JPN Pro Kit",
+  "version": "v1",
+  "status": "internal-release-readiness",
+  "gates": [
+    {
+      "id": "editorial-sources",
+      "label": "Fontes editoriais canônicas",
+      "status": "passed",
+      "evidence": "docs/products/pro-kit/EDITORIAL_RELEASE_GATE_v1.md",
+      "blocking": true
+    },
+    {
+      "id": "gestao-facil-binary",
+      "label": "Gestão Fácil XLSX versionado e QA local",
+      "status": "passed",
+      "evidence": "deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx",
+      "blocking": true
+    },
+    {
+      "id": "gestao-facil-cross-compat",
+      "label": "Gestão Fácil GF-QA-10 em Excel, LibreOffice e Google Sheets",
+      "status": "pending-external-runtime",
+      "evidence": "docs/products/gestao-facil/QA_EXECUTION_v0.1.md",
+      "blocking": true
+    },
+    {
+      "id": "visual-render-review",
+      "label": "Renderização e inspeção visual final dos SVGs",
+      "status": "pending-render-review",
+      "evidence": "docs/brand/VISUAL_QA_v1.md",
+      "blocking": true
+    },
+    {
+      "id": "final-pdfs",
+      "label": "PDFs finais revisados do Método, Prompt Pack, Business, Manual e Leia Primeiro",
+      "status": "pending-final-artifacts",
+      "evidence": "docs/products/pro-kit/MANIFEST.template.json",
+      "blocking": true
+    },
+    {
+      "id": "prompt-builder-release-decision",
+      "label": "Decisão de release e instruções de acesso do Prompt Builder",
+      "status": "pending-release-decision",
+      "evidence": "docs/products/pro-kit/MANIFEST.template.json",
+      "blocking": true
+    },
+    {
+      "id": "final-hashes",
+      "label": "Hashes SHA-256 dos artefatos congelados",
+      "status": "pending-freeze",
+      "evidence": "docs/products/pro-kit/MANIFEST.template.json",
+      "blocking": true
+    },
+    {
+      "id": "current-head-ci",
+      "label": "CI verde no head final candidato a release",
+      "status": "pending-final-head",
+      "evidence": ".github/workflows/ci.yml",
+      "blocking": true
+    }
+  ],
+  "guardrails": [
+    "Nenhum gate autoriza publicação, anúncio, checkout ou gasto.",
+    "Nenhum gate autoriza aceite legal, criação de conta externa ou uso de dados financeiros reais.",
+    "Status passed só deve ser usado com evidência versionada ou execução reproduzível registrada."
+  ]
+}

@@ -52,18 +52,19 @@
       "path": "05_GESTAO_FACIL/JPN_Gestao_Facil_v1.xlsx",
       "source": null,
       "sha256": null,
-      "status": "pending-import-and-versioning"
+      "status": "pending-binary-versioning"
     },
     {
       "path": "05_GESTAO_FACIL/MANUAL_GESTAO_FACIL_v1.pdf",
-      "source": null,
+      "source": "docs/products/gestao-facil/MANUAL_v0.1.md",
       "sha256": null,
-      "status": "pending-import-and-versioning"
+      "status": "pending-final-artifact"
     }
   ],
   "notes": [
     "Este arquivo é um template e não deve ser distribuído como manifesto final.",
     "Hashes devem ser calculados somente sobre os artefatos finais congelados.",
+    "A fonte editorial do manual da Gestão Fácil já está versionada; o XLSX reconstruído ainda precisa ser versionado como binário final.",
     "Itens sem fonte confirmada não podem ser apresentados como incluídos na entrega."
   ]
 }

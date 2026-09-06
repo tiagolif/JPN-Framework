@@ -30,6 +30,7 @@
     "check:pro-kit": "node scripts/check-pro-kit-release.mjs",
     "check:visual-assets": "node scripts/check-visual-assets.mjs",
     "check:editorial-release": "node scripts/check-editorial-release.mjs",
+    "stage:pro-kit": "node scripts/stage-pro-kit.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

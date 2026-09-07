@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "framework": {
+    "canonical_name": "JPN Framework",
+    "canonical_expansion": "Jornada, Precisão e Narrativa",
+    "pillars": ["Jornada", "Precisão", "Narrativa"]
+  },
+  "products": [
+    {"id":"metodo-jpn","canonical_name":"Método JPN","kind":"method"},
+    {"id":"jpn-prompt-pack","canonical_name":"JPN Prompt Pack","kind":"prompt-library"},
+    {"id":"jpn-business","canonical_name":"JPN Business","kind":"business-playbooks"},
+    {"id":"jpn-prompt-builder","canonical_name":"JPN Prompt Builder","kind":"local-tool"},
+    {"id":"jpn-pro-kit","canonical_name":"JPN Pro Kit","kind":"bundle"},
+    {"id":"jpn-gestao-facil","canonical_name":"JPN Gestão Fácil","kind":"spreadsheet"}
+  ],
+  "preferred_terms": {
+    "prompt": "prompt",
+    "playbook": "playbook",
+    "preset": "preset",
+    "project": "projeto",
+    "workspace": "projeto local",
+    "readiness": "prontidão",
+    "blind_review": "revisão humana cega",
+    "evidence": "evidência",
+    "local_storage": "armazenamento local no navegador"
+  },
+  "discouraged_claims": [
+    "garante resultado",
+    "garantia de resultado",
+    "elimina alucinações",
+    "zera alucinações",
+    "sem erros",
+    "100% preciso",
+    "aumenta vendas garantidamente",
+    "garante roi",
+    "roi garantido",
+    "substitui especialistas",
+    "substitui revisão humana"
+  ],
+  "required_positioning": [
+    "O JPN estrutura contexto, critérios e formato de resposta.",
+    "O uso do JPN não garante correção factual nem resultado comercial.",
+    "Conteúdo gerado por IA deve ser revisado conforme o risco e o contexto de uso."
+  ]
+}

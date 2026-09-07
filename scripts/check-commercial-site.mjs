@@ -53,8 +53,9 @@ const forbiddenPatterns = [
   [/<script\b[^>]*src=/i, 'script externo'],
   [/https?:\/\//i, 'URL externa'],
   [/R\$\s*\d/i, 'preço em reais'],
-  [/\bcheckout\b(?!(?:[^<]{0,80})(?:sem|não))/i, 'checkout possivelmente transacional'],
   [/comprar agora/i, 'CTA de compra'],
+  [/finalizar compra/i, 'CTA de checkout'],
+  [/ir para (?:o )?checkout/i, 'CTA de checkout'],
   [/garant[iaeo]\w*\s+(?:de\s+)?(?:resultado|retorno|vendas|lucro)/i, 'claim de garantia'],
 ];
 

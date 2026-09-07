@@ -33,12 +33,17 @@
           <label for="workspaceName">Nome do projeto</label>
           <input id="workspaceName" maxlength="120" placeholder="Ex.: Campanha setembro — versão 2" />
           <div class="output-actions">
-            <button class="btn ghost" id="saveWorkspace">Salvar snapshot</button>
+            <button class="btn ghost" id="saveWorkspace">Salvar novo snapshot</button>
+            <button class="btn ghost" id="updateWorkspace">Atualizar carregado</button>
+            <button class="btn ghost" id="duplicateWorkspace">Duplicar</button>
+            <button class="btn ghost" id="deleteWorkspace">Excluir</button>
+          </div>
+          <div class="output-actions">
             <button class="btn ghost" id="exportWorkspaces">Exportar projetos</button>
             <button class="btn ghost" id="importWorkspaces">Importar projetos</button>
             <input id="workspaceFile" type="file" accept="application/json,.json" hidden />
           </div>
-          <p class="field-help">Projetos guardam localmente campos, prompt e rascunho atual para continuidade. Não há conta, nuvem ou sincronização automática.</p>
+          <p class="field-help">Projetos guardam localmente campos, prompt e rascunho atual para continuidade. Atualizar mantém o mesmo projeto; duplicar cria uma nova cópia independente. Não há conta, nuvem ou sincronização automática.</p>
 
           <label for="preset">Começar por um preset</label>
           <select id="preset"><option value="">Sem preset — começar do zero</option></select>

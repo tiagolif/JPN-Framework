@@ -2,7 +2,7 @@
 
 Base: JPN Framework `0.3.0-draft`.
 
-Status auditado: `draft editorial consolidado`.
+Status auditado: `draft editorial consolidado com gate cruzado automatizado`.
 
 ## Objetivo da auditoria
 
@@ -18,7 +18,8 @@ Verificar se o JPN Business se comporta como produto de processos e não como um
 - limites contra promessas, urgência, preços, condições e políticas inventadas;
 - bloqueio explícito de publicação/gasto no playbook de campanha;
 - limites claros para temas jurídicos, fiscais, contábeis, bancários e outros processos regulados;
-- relação definida com a planilha JPN Gestão Fácil sem apresentá-la como ERP.
+- relação definida com a planilha JPN Gestão Fácil sem apresentá-la como ERP;
+- gate mecânico para impedir referências `JB-* → PP-*` quebradas e divergência de `framework_base`.
 
 ## Revisão cruzada com o Prompt Pack
 
@@ -33,6 +34,22 @@ Exemplos:
 - `PP-11 Notas → SOP` ajuda a redigir o documento; `JB-09` define como criar, testar, versionar e manter o procedimento.
 - `PP-18 Handoff JPN` ajuda a produzir a transferência; `JB-06` define o processo e seus gates de autoridade.
 - `PP-16 Conhecimento operacional reutilizável` ajuda a estruturar conhecimento; `JB-11` define inventário, provenance, conflitos e revisão.
+
+## Gate cruzado automatizado
+
+O comando `npm run check:jpn-business-links` valida mecanicamente:
+
+- unicidade e formato dos IDs `JB-*` e `PP-*`;
+- existência dos prompts referenciados pelo Business;
+- presença dos IDs nos documentos humanos correspondentes;
+- nomes e categorias obrigatórios;
+- vínculo mínimo de cada playbook com o Prompt Pack;
+- igualdade de `framework_base` entre os dois produtos;
+- estrutura esperada da versão atual: 12 playbooks e 18 prompts.
+
+O contrato está documentado em `CROSS_PRODUCT_CONSISTENCY_v1.md` e o gate foi integrado ao `npm run build`.
+
+Isso encerra a pendência de validação mecânica dos links entre os índices. A aprovação final continua condicionada ao CI do head e à revisão editorial/visual do candidato a release.
 
 ## Duplicações deliberadamente evitadas
 
@@ -63,10 +80,10 @@ Este resultado é QA de coerência editorial, não benchmark de desempenho de IA
 ## Pendências antes de release-candidate
 
 - revisar ortografia e uniformidade de pontuação;
-- validar mecanicamente todos os links do índice contra a versão final do Prompt Pack;
 - revisar consistência entre Método, Prompt Pack e Business em uma única passada;
 - preparar diagramação e arquivo de entrega final;
-- decidir se alguns playbooks receberão modelos de registro anexos na versão comercial.
+- decidir se alguns playbooks receberão modelos de registro anexos na versão comercial;
+- obter CI verde no head que contém o gate cruzado.
 
 ## Definition of Done da próxima etapa
 
@@ -75,4 +92,5 @@ O JPN Business pode avançar para `release-candidate` quando:
 - nenhuma divergência terminológica for encontrada na revisão cruzada;
 - o índice estruturado corresponder ao conteúdo humano e ao índice final do Prompt Pack;
 - versão, base do framework e limites estiverem presentes no artefato diagramado;
-- o pacote não contiver dados reais, credenciais ou claims não comprovados.
+- o pacote não contiver dados reais, credenciais ou claims não comprovados;
+- o gate cruzado estiver verde no CI do candidato.

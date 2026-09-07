@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "products": [
+    {
+      "id": "metodo-jpn",
+      "canonical_name": "Método JPN",
+      "documentation_root": "docs/products/metodo-jpn",
+      "primary_artifact": "editorial",
+      "audience": "profissionais e equipes que precisam estruturar instruções para IA",
+      "role": "fundamento metodológico do ecossistema",
+      "release_dependencies": ["revisao-editorial-humana", "pdf-final"]
+    },
+    {
+      "id": "jpn-prompt-pack",
+      "canonical_name": "JPN Prompt Pack",
+      "documentation_root": "docs/products/prompt-pack",
+      "primary_artifact": "prompt-library",
+      "audience": "usuários que querem pontos de partida reutilizáveis",
+      "role": "biblioteca aplicada de prompts alinhados ao Método JPN",
+      "release_dependencies": ["revisao-editorial-humana", "pdf-final"]
+    },
+    {
+      "id": "jpn-business",
+      "canonical_name": "JPN Business",
+      "documentation_root": "docs/products/jpn-business",
+      "primary_artifact": "business-playbooks",
+      "audience": "pequenas empresas e equipes comerciais/operacionais",
+      "role": "playbooks de aplicação empresarial conectados ao Prompt Pack",
+      "release_dependencies": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"]
+    },
+    {
+      "id": "jpn-prompt-builder",
+      "canonical_name": "JPN Prompt Builder",
+      "documentation_root": "docs/products/prompt-builder",
+      "primary_artifact": "local-web-tool",
+      "audience": "usuários que querem montar e reutilizar prompts de forma guiada",
+      "role": "ferramenta local para estruturar, revisar e salvar trabalhos JPN",
+      "release_dependencies": ["ci-final", "pacote-offline-final"]
+    },
+    {
+      "id": "jpn-pro-kit",
+      "canonical_name": "JPN Pro Kit",
+      "documentation_root": "docs/products/pro-kit",
+      "primary_artifact": "bundle",
+      "audience": "usuários que querem o conjunto integrado de materiais JPN",
+      "role": "pacote de entrega que reúne os componentes comerciais do ecossistema",
+      "release_dependencies": ["artefatos-congelados", "hashes-finais", "ci-final"]
+    },
+    {
+      "id": "jpn-gestao-facil",
+      "canonical_name": "JPN Gestão Fácil",
+      "documentation_root": "docs/products/gestao-facil",
+      "primary_artifact": "spreadsheet",
+      "audience": "pequenas empresas que precisam organizar gestão operacional",
+      "role": "planilha de gestão prática complementar ao ecossistema JPN",
+      "release_dependencies": ["gf-qa-10", "arquivo-final-validado"]
+    }
+  ],
+  "cross_product_rules": [
+    "Todo produto deve existir no contrato terminológico central.",
+    "Todo documentation_root deve existir no repositório.",
+    "IDs e nomes canônicos devem ser únicos.",
+    "Dependências de release registram trabalho pendente e não autorização de publicação.",
+    "O catálogo não declara eficácia, desempenho comercial ou prontidão final de release."
+  ]
+}

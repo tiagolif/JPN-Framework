@@ -22,7 +22,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site && npm run check:prompt-builder-presets && npm run check:prompt-builder-custom-presets && npm run check:prompt-builder-workspaces && npm run check:prompt-builder-recovery && npm run check:product-consistency && npm run check:jpn-business-links && npm run check:core-editorial-hygiene && npm run check:core-terminology && npm run check:product-portfolio && npm run check:pro-kit && npm run check:visual-assets && npm run check:visual-bounds && npm run check:editorial-release && npm run check:commercial-copy && npm run check:gestao-facil-model && npm run report:release-readiness && npm run build:visual-review && npm run build:editorial-print && npm run stage:prompt-builder",
+    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site && npm run check:prompt-builder-presets && npm run check:prompt-builder-custom-presets && npm run check:prompt-builder-workspaces && npm run check:prompt-builder-recovery && npm run check:product-consistency && npm run check:jpn-business-links && npm run check:core-editorial-hygiene && npm run check:core-terminology && npm run check:product-portfolio && npm run check:product-release-status && npm run check:pro-kit && npm run check:visual-assets && npm run check:visual-bounds && npm run check:editorial-release && npm run check:commercial-copy && npm run check:gestao-facil-model && npm run report:release-readiness && npm run build:visual-review && npm run build:editorial-print && npm run stage:prompt-builder",
     "build:browser": "esbuild src/index.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=dist/browser/index.js && node scripts/check-browser-build.mjs && node scripts/check-browser-parity.mjs",
     "check:browser:parity": "node scripts/check-browser-parity.mjs",
     "check:product-site": "node scripts/check-product-site-sdk.mjs",
@@ -35,6 +35,7 @@
     "check:core-editorial-hygiene": "node scripts/check-core-editorial-hygiene.mjs",
     "check:core-terminology": "node scripts/check-core-terminology.mjs",
     "check:product-portfolio": "node scripts/check-product-portfolio.mjs",
+    "check:product-release-status": "node scripts/check-product-release-status.mjs",
     "check:pro-kit": "node scripts/check-pro-kit-release.mjs",
     "check:visual-assets": "node scripts/check-visual-assets.mjs",
     "check:visual-bounds": "node scripts/check-visual-bounds.mjs",

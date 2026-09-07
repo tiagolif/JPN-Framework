@@ -41,6 +41,7 @@
     "export:editorial-pdfs": "node scripts/export-editorial-pdf-candidates.mjs",
     "review:editorial-pdfs": "node scripts/build-editorial-pdf-review-gallery.mjs",
     "eval:score": "node scripts/score-evals.mjs",
+    "eval:blind": "node scripts/build-blind-eval-packet.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

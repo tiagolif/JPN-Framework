@@ -44,6 +44,10 @@
             <input id="workspaceFile" type="file" accept="application/json,.json" hidden />
           </div>
           <p class="field-help">Projetos guardam localmente campos, prompt e rascunho atual para continuidade. Atualizar mantém o mesmo projeto; duplicar cria uma nova cópia independente. Não há conta, nuvem ou sincronização automática.</p>
+          <div class="demo-note" aria-live="polite">
+            <strong>Recuperação automática local:</strong> <span id="recoveryStatus">preparando proteção do rascunho…</span>
+            <div class="output-actions"><button class="btn ghost" id="clearRecovery">Limpar recuperação</button></div>
+          </div>
 
           <label for="preset">Começar por um preset</label>
           <select id="preset"><option value="">Sem preset — começar do zero</option></select>
@@ -99,10 +103,12 @@
       <details><summary>Preciso saber programar?</summary><p>Não para usar o método, os packs, os playbooks ou a planilha. O SDK técnico é uma camada opcional.</p></details>
       <details><summary>O Builder inventa o que eu não informar?</summary><p>A proposta atual é conservadora: lacunas permanecem visíveis para revisão em vez de serem silenciosamente tratadas como fatos.</p></details>
       <details><summary>Onde ficam meus presets e projetos pessoais?</summary><p>No navegador em que você os salvou. O Builder permite exportar e importar arquivos JSON para backup ou transferência manual, sem sincronização em servidor.</p></details>
+      <details><summary>O que acontece se eu fechar a página antes de salvar um projeto?</summary><p>O Builder mantém um rascunho de recuperação somente neste navegador. Ao voltar, ele restaura os campos disponíveis para revisão; você pode limpar essa recuperação sem apagar projetos ou presets salvos.</p></details>
       <details><summary>O framework já provou superioridade universal?</summary><p>Não. O projeto inclui infraestrutura de avaliação para testar resultados de forma reproduzível antes de fazer claims quantitativos.</p></details>
     </section>
   </main>
   <footer>JPN Framework — Jornada · Precisão · Narrativa · Criado por Tiago Cunha de Souza</footer>
   <script type="module" src="app.js"></script>
+  <script type="module" src="recovery-app.js"></script>
 </body>
 </html>

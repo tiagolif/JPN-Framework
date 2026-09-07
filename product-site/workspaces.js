@@ -33,6 +33,33 @@ export function createWorkspace(input) {
   return normalizeWorkspace({ ...input, createdAt: nowIso(), updatedAt: nowIso() });
 }
 
+export function updateWorkspace(existing, input) {
+  if (!existing?.id) return null;
+  return normalizeWorkspace({
+    ...existing,
+    ...input,
+    id: existing.id,
+    createdAt: existing.createdAt || nowIso(),
+    updatedAt: nowIso(),
+  });
+}
+
+export function duplicateWorkspace(existing, name) {
+  if (!existing) return null;
+  return createWorkspace({
+    ...existing,
+    id: undefined,
+    name: clip(name, 120) || `${existing.name} — cópia`,
+    createdAt: undefined,
+    updatedAt: undefined,
+  });
+}
+
+export function removeWorkspace(items, id) {
+  const targetId = clip(id, 160);
+  return (Array.isArray(items) ? items : []).filter((item) => item?.id !== targetId);
+}
+
 export function loadWorkspaces(storage = globalThis.localStorage) {
   if (!storage) return [];
   try {

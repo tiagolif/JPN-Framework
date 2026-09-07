@@ -25,9 +25,7 @@ Comando:
 npm run check:jpn-business-links
 ```
 
-Implementação:
-
-`script/check-jpn-business-links.mjs` não existe; a implementação canônica é `scripts/check-jpn-business-links.mjs`.
+Implementação canônica: `scripts/check-jpn-business-links.mjs`.
 
 O gate falha quando encontra qualquer uma destas condições:
 

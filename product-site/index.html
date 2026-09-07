@@ -25,9 +25,21 @@
     </section>
 
     <section id="builder" class="builder-wrap">
-      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples, carregue um preset guiado ou reutilize presets pessoais salvos localmente. A demo usa o SDK oficial do framework para criar um rascunho JPN, validar o estado, medir prontidão e compilar o prompt.</p></div>
+      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples, carregue um preset guiado ou reutilize presets e projetos salvos localmente. A demo usa o SDK oficial do framework para criar um rascunho JPN, validar o estado, medir prontidão e compilar o prompt.</p></div>
       <div class="builder-grid">
         <div class="panel">
+          <label for="workspace">Continuar um projeto local</label>
+          <select id="workspace"><option value="">Nenhum projeto carregado</option></select>
+          <label for="workspaceName">Nome do projeto</label>
+          <input id="workspaceName" maxlength="120" placeholder="Ex.: Campanha setembro — versão 2" />
+          <div class="output-actions">
+            <button class="btn ghost" id="saveWorkspace">Salvar snapshot</button>
+            <button class="btn ghost" id="exportWorkspaces">Exportar projetos</button>
+            <button class="btn ghost" id="importWorkspaces">Importar projetos</button>
+            <input id="workspaceFile" type="file" accept="application/json,.json" hidden />
+          </div>
+          <p class="field-help">Projetos guardam localmente campos, prompt e rascunho atual para continuidade. Não há conta, nuvem ou sincronização automática.</p>
+
           <label for="preset">Começar por um preset</label>
           <select id="preset"><option value="">Sem preset — começar do zero</option></select>
           <p class="field-help">Presets só preenchem um ponto de partida editável. Eles não executam IA nem adicionam fatos sobre o seu caso.</p>
@@ -81,7 +93,7 @@
       <details><summary>O JPN garante respostas perfeitas?</summary><p>Não. O framework organiza a especificação e torna ambiguidades mais visíveis, mas modelos de IA continuam sujeitos a erros.</p></details>
       <details><summary>Preciso saber programar?</summary><p>Não para usar o método, os packs, os playbooks ou a planilha. O SDK técnico é uma camada opcional.</p></details>
       <details><summary>O Builder inventa o que eu não informar?</summary><p>A proposta atual é conservadora: lacunas permanecem visíveis para revisão em vez de serem silenciosamente tratadas como fatos.</p></details>
-      <details><summary>Onde ficam meus presets pessoais?</summary><p>No navegador em que você os salvou. O Builder permite exportar e importar um arquivo JSON para backup ou transferência manual, sem sincronização em servidor.</p></details>
+      <details><summary>Onde ficam meus presets e projetos pessoais?</summary><p>No navegador em que você os salvou. O Builder permite exportar e importar arquivos JSON para backup ou transferência manual, sem sincronização em servidor.</p></details>
       <details><summary>O framework já provou superioridade universal?</summary><p>Não. O projeto inclui infraestrutura de avaliação para testar resultados de forma reproduzível antes de fazer claims quantitativos.</p></details>
     </section>
   </main>

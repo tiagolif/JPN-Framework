@@ -5,10 +5,34 @@ Superfície estática **interna e não publicada** para revisar a composição c
 ## Escopo
 
 - uma landing de portfólio em `index.html`;
+- seis páginas individuais em `products/`;
 - identidade visual alinhada aos tokens canônicos em `docs/brand/DESIGN_TOKENS.css`;
 - conteúdo derivado de `docs/commercial/PRODUCT_PAGE_COPY_PACK_v1.md`;
 - seis produtos canônicos: Método JPN, JPN Prompt Builder, JPN Prompt Pack, JPN Business, JPN Gestão Fácil e JPN Pro Kit;
 - Pro Kit explicitamente marcado como `EM PREPARAÇÃO`.
+
+## Páginas individuais
+
+- `products/metodo-jpn.html`;
+- `products/jpn-prompt-builder.html`;
+- `products/jpn-prompt-pack.html`;
+- `products/jpn-business.html`;
+- `products/jpn-gestao-facil.html`;
+- `products/jpn-pro-kit.html`.
+
+Cada página possui hero, explicação de funcionamento/estrutura, entregáveis ou recursos, limites, FAQ, retorno relativo ao portfólio e `meta robots` em `noindex,nofollow`.
+
+## Preflight
+
+Execute:
+
+```bash
+npm run check:commercial-site
+```
+
+O gate valida landing e páginas individuais, nomes e IDs canônicos, os três pilares JPN, stylesheet compartilhado, retorno relativo ao portfólio, estado `EM PREPARAÇÃO` do Pro Kit e ausência de coleta de dados, URL externa, preço em reais, CTA transacional ou claim explícito de garantia.
+
+O comando também faz parte de `npm run build`.
 
 ## Guardrails
 

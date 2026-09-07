@@ -7,8 +7,8 @@
 - Produtos canônicos: **6**
 - Dependências registradas: **14**
 - Aprovadas com evidência: **0**
-- Em andamento: **0**
-- Pendentes: **14**
+- Em andamento: **1**
+- Pendentes: **13**
 - Bloqueadas: **0**
 - Não aplicáveis: **0**
 - Prontidão agregada por dependências aplicáveis: **0%**
@@ -20,7 +20,7 @@
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | Método JPN | 2 | 0 | 0 | 2 | 0 | 0% | Não |
 | JPN Prompt Pack | 2 | 0 | 0 | 2 | 0 | 0% | Não |
-| JPN Business | 3 | 0 | 0 | 3 | 0 | 0% | Não |
+| JPN Business | 3 | 0 | 1 | 2 | 0 | 0% | Não |
 | JPN Prompt Builder | 2 | 0 | 0 | 2 | 0 | 0% | Não |
 | JPN Pro Kit | 3 | 0 | 0 | 3 | 0 | 0% | Não |
 | JPN Gestão Fácil | 2 | 0 | 0 | 2 | 0 | 0% | Não |
@@ -38,7 +38,7 @@
 ## JPN Business
 
 - **revisao-editorial-humana** — Pendente. Requer revisão humana do texto e dos playbooks.
-- **diagramacao-final** — Pendente. A composição editorial final ainda não foi congelada.
+- **diagramacao-final** — Em andamento. Direção de composição e critérios de congelamento foram formalizados; o arquivo diagramado completo e o QA visual ainda faltam. Evidência: `docs/products/jpn-business/COMPOSITION_SPEC_v1.md`.
 - **pdf-final** — Pendente. Depende da diagramação e da inspeção do PDF final.
 
 ## JPN Prompt Builder

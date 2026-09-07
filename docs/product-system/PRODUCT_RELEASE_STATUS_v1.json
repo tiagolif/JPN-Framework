@@ -21,7 +21,7 @@
       "id": "jpn-business",
       "dependencies": [
         {"id": "revisao-editorial-humana", "status": "pending", "evidence": null, "note": "Requer revisão humana do texto e dos playbooks."},
-        {"id": "diagramacao-final", "status": "pending", "evidence": null, "note": "A composição editorial final ainda não foi congelada."},
+        {"id": "diagramacao-final", "status": "in-progress", "evidence": "docs/products/jpn-business/COMPOSITION_SPEC_v1.md", "note": "Direção de composição e critérios de congelamento foram formalizados; o arquivo diagramado completo e o QA visual ainda faltam."},
         {"id": "pdf-final", "status": "pending", "evidence": null, "note": "Depende da diagramação e da inspeção do PDF final."}
       ]
     },

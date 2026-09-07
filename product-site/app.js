@@ -14,10 +14,13 @@ import {
 } from "./custom-presets.js";
 import {
   createWorkspace,
+  duplicateWorkspace,
   exportWorkspaces,
   importWorkspaces,
   loadWorkspaces,
+  removeWorkspace,
   saveWorkspaces,
+  updateWorkspace,
 } from "./workspaces.js";
 
 const $ = (id) => document.getElementById(id);
@@ -29,6 +32,7 @@ const clean = (value) => {
 let lastDraft = null;
 let customPresets = loadCustomPresets();
 let workspaces = loadWorkspaces();
+let activeWorkspaceId = "";
 
 function setNotice(message, kind = "warn") {
   $("status").textContent = message;
@@ -71,6 +75,7 @@ function renderWorkspaceOptions(selectedId = "") {
     select.appendChild(option);
   }
   select.value = selectedId;
+  activeWorkspaceId = selectedId && workspaces.some((item) => item.id === selectedId) ? selectedId : "";
 }
 
 function getAnyPreset(id) {
@@ -90,6 +95,7 @@ function applyPreset(id) {
 function loadWorkspace(id) {
   const workspace = workspaces.find((item) => item.id === id);
   if (!workspace) return;
+  activeWorkspaceId = workspace.id;
   $("idea").value = workspace.idea;
   $("type").value = workspace.type || $("type").options[0].value;
   $("restrictions").value = workspace.restrictions;
@@ -99,6 +105,18 @@ function loadWorkspace(id) {
   $("score").textContent = workspace.readinessScore == null ? "—" : `${workspace.readinessScore}%`;
   setNotice("Projeto local carregado — revise antes de continuar", "good");
   $("gaps").textContent = "Projetos são snapshots locais. Gere novamente se você alterar os campos ou quiser recalcular a prontidão.";
+}
+
+function currentWorkspaceInput() {
+  return {
+    name: $("workspaceName").value,
+    idea: $("idea").value,
+    type: $("type").value,
+    restrictions: $("restrictions").value,
+    prompt: $("output").textContent,
+    draft: lastDraft,
+    readinessScore: Number.parseInt($("score").textContent, 10),
+  };
 }
 
 function downloadBlob(content, type, filename) {
@@ -162,19 +180,12 @@ $("preset").addEventListener("change", (event) => {
 
 $("workspace").addEventListener("change", (event) => {
   const id = event.target.value;
+  activeWorkspaceId = id;
   if (id) loadWorkspace(id);
 });
 
 $("saveWorkspace").addEventListener("click", () => {
-  const workspace = createWorkspace({
-    name: $("workspaceName").value,
-    idea: $("idea").value,
-    type: $("type").value,
-    restrictions: $("restrictions").value,
-    prompt: $("output").textContent,
-    draft: lastDraft,
-    readinessScore: Number.parseInt($("score").textContent, 10),
-  });
+  const workspace = createWorkspace(currentWorkspaceInput());
   if (!workspace) {
     setNotice("Informe um nome e uma ideia antes de salvar o projeto");
     return;
@@ -182,8 +193,70 @@ $("saveWorkspace").addEventListener("click", () => {
   try {
     workspaces = saveWorkspaces([workspace, ...workspaces]);
     renderWorkspaceOptions(workspace.id);
-    setNotice("Projeto salvo somente neste navegador", "good");
-    $("gaps").textContent = "O projeto guarda um snapshot dos campos, prompt e rascunho atual. Exporte o backup JSON para transferência manual.";
+    setNotice("Novo projeto salvo somente neste navegador", "good");
+    $("gaps").textContent = "O projeto guarda um snapshot independente. Exporte o backup JSON para transferência manual.";
+  } catch {
+    setNotice("O navegador bloqueou o armazenamento local");
+  }
+});
+
+$("updateWorkspace").addEventListener("click", () => {
+  const existing = workspaces.find((item) => item.id === activeWorkspaceId);
+  if (!existing) {
+    setNotice("Carregue um projeto antes de atualizar");
+    return;
+  }
+  const updated = updateWorkspace(existing, currentWorkspaceInput());
+  if (!updated) {
+    setNotice("O projeto precisa manter nome e ideia");
+    return;
+  }
+  try {
+    workspaces = saveWorkspaces([updated, ...removeWorkspace(workspaces, existing.id)]);
+    renderWorkspaceOptions(updated.id);
+    setNotice("Projeto carregado atualizado localmente", "good");
+    $("gaps").textContent = "A atualização preserva o mesmo identificador e a data de criação, registrando um novo updatedAt.";
+  } catch {
+    setNotice("O navegador bloqueou o armazenamento local");
+  }
+});
+
+$("duplicateWorkspace").addEventListener("click", () => {
+  const existing = workspaces.find((item) => item.id === activeWorkspaceId);
+  if (!existing) {
+    setNotice("Carregue um projeto antes de duplicar");
+    return;
+  }
+  const copy = duplicateWorkspace(existing);
+  if (!copy) return;
+  try {
+    workspaces = saveWorkspaces([copy, ...workspaces]);
+    renderWorkspaceOptions(copy.id);
+    loadWorkspace(copy.id);
+    setNotice("Cópia independente criada localmente", "good");
+    $("gaps").textContent = "A duplicação cria outro identificador para permitir versões paralelas sem sobrescrever o original.";
+  } catch {
+    setNotice("O navegador bloqueou o armazenamento local");
+  }
+});
+
+$("deleteWorkspace").addEventListener("click", () => {
+  const existing = workspaces.find((item) => item.id === activeWorkspaceId);
+  if (!existing) {
+    setNotice("Carregue um projeto antes de excluir");
+    return;
+  }
+  const confirmation = globalThis.confirm?.(`Excluir o projeto local “${existing.name}”? Esta ação não pode ser desfeita sem um backup exportado.`);
+  if (confirmation !== true) {
+    setNotice("Exclusão cancelada");
+    return;
+  }
+  try {
+    workspaces = saveWorkspaces(removeWorkspace(workspaces, existing.id));
+    renderWorkspaceOptions();
+    activeWorkspaceId = "";
+    setNotice("Projeto local excluído", "good");
+    $("gaps").textContent = "A exclusão remove somente o snapshot armazenado neste navegador; backups JSON exportados não são alterados.";
   } catch {
     setNotice("O navegador bloqueou o armazenamento local");
   }

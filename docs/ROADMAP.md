@@ -13,13 +13,15 @@ Este roadmap organiza a evolução do JPN sem transformar propostas futuras em f
 
 ## Fase 2 — Biblioteca de exemplos
 
-- [ ] Desenvolvimento de software.
-- [ ] Análise de documentos.
-- [ ] Agente de vendas.
-- [ ] Suporte técnico.
-- [ ] Automação de backoffice.
-- [ ] Multiagentes.
-- [ ] RAG com fontes conflitantes.
+- [x] Desenvolvimento de software.
+- [x] Análise de documentos.
+- [x] Agente de vendas.
+- [x] Suporte técnico.
+- [x] Automação de backoffice.
+- [x] Multiagentes.
+- [x] RAG com fontes conflitantes.
+
+A biblioteca versionada em `examples/` cobre os sete domínios acima e mantém também exemplos estruturados de estado JPN. A conclusão desta fase significa cobertura documental; não significa eficácia comparativa comprovada.
 
 ## Fase 3 — Avaliação
 

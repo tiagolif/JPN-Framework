@@ -25,12 +25,12 @@
     </section>
 
     <section id="builder" class="builder-wrap">
-      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples ou carregue um preset guiado. A demo usa o SDK oficial do framework para criar um rascunho JPN, validar o estado, medir prontidão e compilar o prompt.</p></div>
+      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples, carregue um preset guiado ou reutilize presets pessoais salvos localmente. A demo usa o SDK oficial do framework para criar um rascunho JPN, validar o estado, medir prontidão e compilar o prompt.</p></div>
       <div class="builder-grid">
         <div class="panel">
-          <label for="preset">Começar por um exemplo guiado</label>
+          <label for="preset">Começar por um preset</label>
           <select id="preset"><option value="">Sem preset — começar do zero</option></select>
-          <p class="field-help">O preset só preenche um ponto de partida editável. Ele não executa IA nem adiciona fatos sobre o seu caso.</p>
+          <p class="field-help">Presets só preenchem um ponto de partida editável. Eles não executam IA nem adicionam fatos sobre o seu caso.</p>
           <label>Sua ideia</label>
           <textarea id="idea" placeholder="Ex.: Quero criar uma campanha de 7 dias para minha loja no Instagram."></textarea>
           <label>Resultado principal</label>
@@ -39,6 +39,16 @@
           <input id="restrictions" placeholder="Ex.: não inventar preços, dados ou depoimentos" />
           <button class="btn primary wide" id="generate">Criar rascunho JPN</button>
           <div class="demo-note">Campos ausentes continuam explícitos para revisão. A demo não usa um modelo de IA para preencher informações que você não forneceu.</div>
+
+          <label for="presetName">Salvar esta configuração como preset local</label>
+          <input id="presetName" maxlength="120" placeholder="Ex.: Meu roteiro de análise" />
+          <div class="output-actions">
+            <button class="btn ghost" id="savePreset">Salvar neste navegador</button>
+            <button class="btn ghost" id="exportPresets">Exportar presets</button>
+            <button class="btn ghost" id="importPresets">Importar presets</button>
+            <input id="presetFile" type="file" accept="application/json,.json" hidden />
+          </div>
+          <p class="field-help">Presets pessoais ficam somente no armazenamento local do navegador. A exportação JSON serve como backup ou transferência manual; nenhum dado é enviado para servidor.</p>
         </div>
         <div class="panel output-panel">
           <div class="score-row"><div><span class="score-label">Prontidão</span><strong id="score">0%</strong></div><span id="status" class="status">Aguardando entrada</span></div>
@@ -71,6 +81,7 @@
       <details><summary>O JPN garante respostas perfeitas?</summary><p>Não. O framework organiza a especificação e torna ambiguidades mais visíveis, mas modelos de IA continuam sujeitos a erros.</p></details>
       <details><summary>Preciso saber programar?</summary><p>Não para usar o método, os packs, os playbooks ou a planilha. O SDK técnico é uma camada opcional.</p></details>
       <details><summary>O Builder inventa o que eu não informar?</summary><p>A proposta atual é conservadora: lacunas permanecem visíveis para revisão em vez de serem silenciosamente tratadas como fatos.</p></details>
+      <details><summary>Onde ficam meus presets pessoais?</summary><p>No navegador em que você os salvou. O Builder permite exportar e importar um arquivo JSON para backup ou transferência manual, sem sincronização em servidor.</p></details>
       <details><summary>O framework já provou superioridade universal?</summary><p>Não. O projeto inclui infraestrutura de avaliação para testar resultados de forma reproduzível antes de fazer claims quantitativos.</p></details>
     </section>
   </main>

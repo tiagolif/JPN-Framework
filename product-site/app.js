@@ -5,6 +5,13 @@ import {
   validateJpnState,
 } from "../dist/browser/index.js";
 import { BUILDER_PRESETS, getBuilderPreset } from "./presets.js";
+import {
+  createCustomPreset,
+  exportCustomPresets,
+  importCustomPresets,
+  loadCustomPresets,
+  saveCustomPresets,
+} from "./custom-presets.js";
 
 const $ = (id) => document.getElementById(id);
 const clean = (value) => {
@@ -13,26 +20,63 @@ const clean = (value) => {
 };
 
 let lastDraft = null;
+let customPresets = loadCustomPresets();
 
-function populatePresets() {
+function setNotice(message, kind = "warn") {
+  $("status").textContent = message;
+  $("status").className = `status ${kind}`;
+}
+
+function renderPresetOptions(selectedId = "") {
   const select = $("preset");
+  select.innerHTML = '<option value="">Sem preset — começar do zero</option>';
+
+  const guidedGroup = document.createElement("optgroup");
+  guidedGroup.label = "Presets guiados JPN";
   for (const preset of BUILDER_PRESETS) {
     const option = document.createElement("option");
     option.value = preset.id;
     option.textContent = preset.label;
-    select.appendChild(option);
+    guidedGroup.appendChild(option);
   }
+  select.appendChild(guidedGroup);
+
+  if (customPresets.length) {
+    const customGroup = document.createElement("optgroup");
+    customGroup.label = "Meus presets locais";
+    for (const preset of customPresets) {
+      const option = document.createElement("option");
+      option.value = preset.id;
+      option.textContent = preset.label;
+      customGroup.appendChild(option);
+    }
+    select.appendChild(customGroup);
+  }
+
+  select.value = selectedId;
+}
+
+function getAnyPreset(id) {
+  return getBuilderPreset(id) ?? customPresets.find((preset) => preset.id === id) ?? null;
 }
 
 function applyPreset(id) {
-  const preset = getBuilderPreset(id);
+  const preset = getAnyPreset(id);
   if (!preset) return;
   $("idea").value = preset.idea;
   $("type").value = preset.type;
   $("restrictions").value = preset.restrictions;
-  $("status").textContent = "Preset carregado — revise antes de gerar";
-  $("status").className = "status warn";
+  setNotice("Preset carregado — revise antes de gerar");
   $("gaps").textContent = "O conteúdo é um ponto de partida editável; confirme contexto, critérios e restrições do seu caso.";
+}
+
+function downloadBlob(content, type, filename) {
+  const a = document.createElement("a");
+  const url = URL.createObjectURL(new Blob([content], { type }));
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 function build() {
@@ -41,8 +85,7 @@ function build() {
   const restriction = clean($("restrictions").value);
 
   if (!idea) {
-    $("status").textContent = "Escreva sua ideia";
-    $("status").className = "status warn";
+    setNotice("Escreva sua ideia");
     $("score").textContent = "0%";
     $("gaps").textContent = "";
     return;
@@ -82,18 +125,70 @@ function build() {
   } catch (error) {
     lastDraft = null;
     $("score").textContent = "0%";
-    $("status").textContent = "Falha de validação";
-    $("status").className = "status warn";
+    setNotice("Falha de validação");
     $("gaps").textContent = error instanceof Error ? error.message : String(error);
     $("output").textContent = "Não foi possível gerar um estado JPN válido.";
   }
 }
 
-populatePresets();
+renderPresetOptions();
 
 $("preset").addEventListener("change", (event) => {
   const id = event.target.value;
   if (id) applyPreset(id);
+});
+
+$("savePreset").addEventListener("click", () => {
+  const preset = createCustomPreset({
+    label: $("presetName").value,
+    type: $("type").value,
+    idea: $("idea").value,
+    restrictions: $("restrictions").value,
+  });
+
+  if (!preset) {
+    setNotice("Informe um nome e uma ideia antes de salvar o preset");
+    return;
+  }
+
+  try {
+    customPresets = saveCustomPresets([preset, ...customPresets]);
+    renderPresetOptions(preset.id);
+    $("presetName").value = "";
+    setNotice("Preset salvo somente neste navegador", "good");
+    $("gaps").textContent = "O preset foi armazenado localmente. Exporte um backup JSON se quiser levá-lo para outro navegador ou dispositivo.";
+  } catch {
+    setNotice("O navegador bloqueou o armazenamento local");
+  }
+});
+
+$("exportPresets").addEventListener("click", () => {
+  if (!customPresets.length) {
+    setNotice("Nenhum preset local para exportar");
+    return;
+  }
+  downloadBlob(exportCustomPresets(customPresets), "application/json;charset=utf-8", "jpn-presets-locais.json");
+});
+
+$("importPresets").addEventListener("click", () => $("presetFile").click());
+
+$("presetFile").addEventListener("change", async (event) => {
+  const [file] = event.target.files ?? [];
+  event.target.value = "";
+  if (!file) return;
+
+  try {
+    const imported = importCustomPresets(await file.text());
+    const merged = [...imported, ...customPresets];
+    const unique = Array.from(new Map(merged.map((preset) => [preset.id, preset])).values());
+    customPresets = saveCustomPresets(unique);
+    renderPresetOptions();
+    setNotice(`${imported.length} preset(s) importado(s) localmente`, "good");
+    $("gaps").textContent = "Revise presets importados antes de usá-los; o Builder não executa automaticamente o conteúdo do arquivo.";
+  } catch (error) {
+    setNotice("Não foi possível importar os presets");
+    $("gaps").textContent = error instanceof Error ? error.message : String(error);
+  }
 });
 
 $("generate").addEventListener("click", build);
@@ -111,22 +206,10 @@ $("copy").addEventListener("click", async () => {
 $("download").addEventListener("click", () => {
   const text = $("output").textContent;
   if (!text || text.startsWith("Seu prompt") || text.startsWith("Não foi possível")) return;
-  const a = document.createElement("a");
-  const url = URL.createObjectURL(new Blob([text], { type: "text/plain;charset=utf-8" }));
-  a.href = url;
-  a.download = "prompt-jpn.txt";
-  a.click();
-  URL.revokeObjectURL(url);
+  downloadBlob(text, "text/plain;charset=utf-8", "prompt-jpn.txt");
 });
 
 $("downloadJson").addEventListener("click", () => {
   if (!lastDraft) return;
-  const a = document.createElement("a");
-  const url = URL.createObjectURL(
-    new Blob([JSON.stringify(lastDraft, null, 2)], { type: "application/json" }),
-  );
-  a.href = url;
-  a.download = "rascunho-jpn.json";
-  a.click();
-  URL.revokeObjectURL(url);
+  downloadBlob(JSON.stringify(lastDraft, null, 2), "application/json", "rascunho-jpn.json");
 });

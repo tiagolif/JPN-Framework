@@ -25,9 +25,12 @@
     </section>
 
     <section id="builder" class="builder-wrap">
-      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples. A demo usa o SDK oficial do framework para criar um rascunho JPN, validar o estado, medir prontidão e compilar o prompt.</p></div>
+      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples ou carregue um preset guiado. A demo usa o SDK oficial do framework para criar um rascunho JPN, validar o estado, medir prontidão e compilar o prompt.</p></div>
       <div class="builder-grid">
         <div class="panel">
+          <label for="preset">Começar por um exemplo guiado</label>
+          <select id="preset"><option value="">Sem preset — começar do zero</option></select>
+          <p class="field-help">O preset só preenche um ponto de partida editável. Ele não executa IA nem adiciona fatos sobre o seu caso.</p>
           <label>Sua ideia</label>
           <textarea id="idea" placeholder="Ex.: Quero criar uma campanha de 7 dias para minha loja no Instagram."></textarea>
           <label>Resultado principal</label>

@@ -22,7 +22,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site && npm run check:prompt-builder-presets && npm run check:prompt-builder-custom-presets && npm run check:prompt-builder-workspaces && npm run check:prompt-builder-recovery && npm run check:product-consistency && npm run check:jpn-business-links && npm run check:core-editorial-hygiene && npm run check:core-terminology && npm run check:product-portfolio && npm run check:product-release-status && npm run check:product-readiness-report && npm run check:pro-kit && npm run check:visual-assets && npm run check:visual-bounds && npm run check:editorial-release && npm run check:commercial-copy && npm run check:gestao-facil-model && npm run report:release-readiness && npm run build:visual-review && npm run build:editorial-print && npm run stage:prompt-builder",
+    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site && npm run check:prompt-builder-presets && npm run check:prompt-builder-custom-presets && npm run check:prompt-builder-workspaces && npm run check:prompt-builder-recovery && npm run check:product-consistency && npm run check:jpn-business-links && npm run check:jpn-business-print-candidate && npm run check:core-editorial-hygiene && npm run check:core-terminology && npm run check:product-portfolio && npm run check:product-release-status && npm run check:product-readiness-report && npm run check:pro-kit && npm run check:visual-assets && npm run check:visual-bounds && npm run check:editorial-release && npm run check:commercial-copy && npm run check:gestao-facil-model && npm run report:release-readiness && npm run build:visual-review && npm run build:editorial-print && npm run build:jpn-business-print-candidate && npm run stage:prompt-builder",
     "build:browser": "esbuild src/index.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=dist/browser/index.js && node scripts/check-browser-build.mjs && node scripts/check-browser-parity.mjs",
     "check:browser:parity": "node scripts/check-browser-parity.mjs",
     "check:product-site": "node scripts/check-product-site-sdk.mjs",
@@ -32,6 +32,7 @@
     "check:prompt-builder-recovery": "node scripts/check-prompt-builder-recovery.mjs",
     "check:product-consistency": "node scripts/check-product-consistency.mjs",
     "check:jpn-business-links": "node scripts/check-jpn-business-links.mjs",
+    "check:jpn-business-print-candidate": "node scripts/build-jpn-business-print-candidate.mjs --check",
     "check:core-editorial-hygiene": "node scripts/check-core-editorial-hygiene.mjs",
     "check:core-terminology": "node scripts/check-core-terminology.mjs",
     "check:product-portfolio": "node scripts/check-product-portfolio.mjs",
@@ -49,6 +50,7 @@
     "report:product-readiness": "node scripts/report-product-readiness.mjs",
     "build:visual-review": "node scripts/build-visual-review-gallery.mjs",
     "build:editorial-print": "node scripts/build-editorial-print-staging.mjs",
+    "build:jpn-business-print-candidate": "node scripts/build-jpn-business-print-candidate.mjs",
     "export:editorial-pdfs": "node scripts/export-editorial-pdf-candidates.mjs",
     "review:editorial-pdfs": "node scripts/build-editorial-pdf-review-gallery.mjs",
     "eval:score": "node scripts/score-evals.mjs",

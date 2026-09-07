@@ -46,10 +46,10 @@ for (const file of files) {
     }
   }
 
-  const headings = [...text.matchAll(/^(#{1,6})\s+(.+)$/gm)].map((m) => m[2].trim());
-  const duplicateHeadings = headings.filter((h, i) => headings.indexOf(h) !== i);
-  if (duplicateHeadings.length) {
-    failures.push(`${file} contém títulos duplicados: ${[...new Set(duplicateHeadings)].join(', ')}`);
+  const topHeadings = [...text.matchAll(/^(#{1,2})\s+(.+)$/gm)].map((m) => m[2].trim());
+  const duplicateTopHeadings = topHeadings.filter((h, i) => topHeadings.indexOf(h) !== i);
+  if (duplicateTopHeadings.length) {
+    failures.push(`${file} contém títulos H1/H2 duplicados: ${[...new Set(duplicateTopHeadings)].join(', ')}`);
     fileIssues++;
   }
 

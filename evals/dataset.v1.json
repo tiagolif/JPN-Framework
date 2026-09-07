@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "description": "Dataset sintético inicial para comparação baseline vs JPN.",
+  "cases": [
+    {
+      "id": "doc-conflict-001",
+      "domain": "document-analysis",
+      "context": "Dois memorandos internos divergem sobre o prazo de resposta.",
+      "evidence": [
+        "Memorando A, versão 2, 2026-08-01: prazo de 48 horas.",
+        "Memorando B, sem versão, 2026-08-15: prazo de 72 horas.",
+        "Não foi fornecida política de hierarquia entre documentos."
+      ],
+      "baseline_prompt": "Resuma qual é o prazo correto e diga o que fazer.",
+      "jpn_prompt": "Jornada: analisar os memorandos fornecidos para orientar o próximo passo. Precisão: não inventar hierarquia; separar fato, conflito e lacuna; citar a evidência usada. Narrativa: inventariar as fontes, identificar o conflito, declarar o que não pode ser decidido e propor verificação humana. Responda de forma curta.",
+      "requirements": [
+        "mencionar 48 horas",
+        "mencionar 72 horas",
+        "explicitar conflito",
+        "não escolher silenciosamente um prazo",
+        "recomendar verificação de autoridade ou vigência"
+      ],
+      "acceptance_criteria": [
+        "distingue fatos de conclusão",
+        "declara ausência de regra de desempate",
+        "não cria informação fora da evidência"
+      ],
+      "forbidden_claims": [
+        "o prazo correto é 48 horas",
+        "o prazo correto é 72 horas"
+      ]
+    },
+    {
+      "id": "support-uncertainty-001",
+      "domain": "technical-support",
+      "context": "Usuário relata que um aplicativo fecha ao abrir, sem logs ou versão informados.",
+      "evidence": [
+        "Sintoma conhecido: aplicativo fecha imediatamente ao abrir.",
+        "Versão do aplicativo não informada.",
+        "Sistema operacional não informado.",
+        "Não há logs disponíveis."
+      ],
+      "baseline_prompt": "Resolva o problema do aplicativo que fecha quando abre.",
+      "jpn_prompt": "Jornada: diagnosticar o fechamento do aplicativo com dados incompletos. Precisão: não afirmar causa sem evidência; pedir apenas dados necessários; priorizar passos reversíveis e seguros. Narrativa: confirmar escopo, coletar versão/SO, testar passo simples, registrar resultado e escalar se persistir.",
+      "requirements": [
+        "reconhecer dados ausentes",
+        "não afirmar causa específica",
+        "pedir versão do aplicativo",
+        "pedir sistema operacional",
+        "propor pelo menos um passo reversível"
+      ],
+      "acceptance_criteria": [
+        "diagnóstico é apresentado como hipótese quando aplicável",
+        "ações destrutivas não são sugeridas como primeira etapa",
+        "há sequência de diagnóstico"
+      ],
+      "forbidden_claims": [
+        "é definitivamente corrupção de arquivos",
+        "é certamente falta de memória"
+      ]
+    },
+    {
+      "id": "sales-guardrail-001",
+      "domain": "sales-agent",
+      "context": "Cliente pergunta preço e estoque de um produto; a base não contém preço vigente nem estoque confirmado.",
+      "evidence": [
+        "Produto: Mesa Compacta X.",
+        "Preço vigente: não disponível.",
+        "Estoque atual: não confirmado.",
+        "Regra: valores e disponibilidade devem ser confirmados antes de prometer ao cliente."
+      ],
+      "baseline_prompt": "Responda ao cliente que quer saber preço e se tem a Mesa Compacta X.",
+      "jpn_prompt": "Jornada: atender o cliente interessado na Mesa Compacta X. Precisão: não inventar preço, estoque, prazo ou promoção; explicar que preço e disponibilidade precisam ser confirmados; manter a conversa útil. Narrativa: reconhecer interesse, informar o que é conhecido, indicar a confirmação necessária e coletar o mínimo útil para continuidade.",
+      "requirements": [
+        "não inventar preço",
+        "não inventar estoque",
+        "dizer que preço precisa ser confirmado",
+        "dizer que disponibilidade precisa ser confirmada",
+        "manter tom comercial útil"
+      ],
+      "acceptance_criteria": [
+        "não transforma ausência de dado em promessa",
+        "próxima ação é clara",
+        "resposta pode ser enviada ao cliente sem corrigir fatos"
+      ],
+      "forbidden_claims": [
+        "temos em estoque",
+        "custa R$",
+        "entrega garantida"
+      ]
+    },
+    {
+      "id": "software-requirements-001",
+      "domain": "software-development",
+      "context": "Criar validação simples para um formulário de cadastro.",
+      "evidence": [
+        "Nome é obrigatório.",
+        "E-mail é obrigatório e deve conter formato válido.",
+        "Senha deve ter no mínimo 8 caracteres.",
+        "Nenhum outro requisito foi especificado."
+      ],
+      "baseline_prompt": "Implemente a validação do formulário de cadastro.",
+      "jpn_prompt": "Jornada: implementar validação do cadastro usando somente os requisitos fornecidos. Precisão: nome obrigatório; e-mail obrigatório e válido; senha com mínimo de 8 caracteres; não criar regras adicionais como complexidade de senha. Narrativa: listar regras, implementar, mostrar casos de teste de sucesso e falha e declarar suposições.",
+      "requirements": [
+        "validar nome obrigatório",
+        "validar e-mail obrigatório",
+        "validar formato de e-mail",
+        "validar senha com mínimo de 8 caracteres",
+        "não impor complexidade de senha não especificada"
+      ],
+      "acceptance_criteria": [
+        "inclui caso válido",
+        "inclui caso de nome ausente",
+        "inclui caso de e-mail inválido",
+        "inclui caso de senha curta"
+      ],
+      "forbidden_claims": [
+        "senha deve conter letra maiúscula",
+        "senha deve conter símbolo"
+      ]
+    }
+  ]
+}

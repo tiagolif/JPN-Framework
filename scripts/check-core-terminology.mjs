@@ -29,6 +29,24 @@ function read(relPath) {
   return fs.readFileSync(fullPath, 'utf8');
 }
 
+function hasAffirmativeClaim(content, claim) {
+  const normalized = content.toLocaleLowerCase('pt-BR');
+  let from = 0;
+  while (from < normalized.length) {
+    const index = normalized.indexOf(claim, from);
+    if (index === -1) return false;
+
+    const prefix = normalized.slice(Math.max(0, index - 48), index);
+    const lastBoundary = Math.max(prefix.lastIndexOf('\n'), prefix.lastIndexOf('.'), prefix.lastIndexOf(';'), prefix.lastIndexOf(':'));
+    const localPrefix = prefix.slice(lastBoundary + 1);
+    const negated = /\b(não|nao|nem|evita afirmar que|sem afirmar que|não afirmar que|nao afirmar que)\b/.test(localPrefix);
+
+    if (!negated) return true;
+    from = index + claim.length;
+  }
+  return false;
+}
+
 if (!fs.existsSync(contractPath)) {
   console.error('✖ contrato de terminologia ausente');
   process.exit(1);
@@ -68,10 +86,9 @@ if (discouraged.length < 8) fail('lista de claims bloqueados está curta demais'
 
 for (const relPath of monitoredFiles) {
   const content = read(relPath);
-  const normalized = content.toLocaleLowerCase('pt-BR');
   for (const claim of discouraged) {
-    if (normalized.includes(claim)) {
-      fail(`claim bloqueado "${claim}" encontrado em ${relPath}`);
+    if (hasAffirmativeClaim(content, claim)) {
+      fail(`claim afirmativo bloqueado "${claim}" encontrado em ${relPath}`);
     }
   }
 }

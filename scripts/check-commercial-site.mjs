@@ -91,9 +91,7 @@ for (const { id, name, file } of products) {
   if (!productHtml.includes(name)) fail(`${name}: nome canônico ausente da página individual`);
   if (!productHtml.includes('href="../styles.css"')) fail(`${name}: stylesheet compartilhado ausente`);
   if (!productHtml.includes('href="../index.html')) fail(`${name}: retorno relativo ao portfólio ausente`);
-  if (!productHtml.includes('Jornada') || !productHtml.includes('Precisão') || !productHtml.includes('Narrativa')) {
-    fail(`${name}: pilares JPN incompletos`);
-  }
+  if (!productHtml.includes('<footer>')) fail(`${name}: rodapé de identidade/status ausente`);
   verifySafety(productHtml, name);
 }
 

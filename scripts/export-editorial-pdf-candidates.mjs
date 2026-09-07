@@ -8,6 +8,7 @@ import { pathToFileURL } from 'node:url';
 const root = resolve(process.cwd());
 const stagingRoot = join(root, 'dist', 'editorial-print-staging');
 const outputRoot = join(root, 'dist', 'editorial-pdf-candidates');
+const businessCandidateManifestPath = join(stagingRoot, 'jpn-business', 'candidate-manifest.json');
 
 const products = [
   { id: 'metodo-jpn', file: 'Metodo_JPN_v1.pdf' },
@@ -63,13 +64,35 @@ function runOrThrow(command, args, timeout = 90000) {
   return result;
 }
 
-async function ensureStaging() {
+async function prepareStaging() {
   const manifest = join(stagingRoot, 'manifest.json');
   try {
     await access(manifest, constants.R_OK);
   } catch {
     runOrThrow(process.execPath, ['scripts/build-editorial-print-staging.mjs']);
   }
+
+  // O JPN Business possui uma composição candidata específica sobre o staging
+  // genérico. O exportador deve reconstruí-la sempre para que a execução
+  // standalone de `export:editorial-pdfs` não exporte acidentalmente o HTML
+  // genérico e perca a hierarquia dos playbooks e os vínculos PP-*.
+  runOrThrow(process.execPath, ['scripts/build-jpn-business-print-candidate.mjs']);
+
+  const businessCandidateManifest = JSON.parse(await readFile(businessCandidateManifestPath, 'utf8'));
+  if (businessCandidateManifest.product !== 'JPN Business') {
+    throw new Error('Manifesto do candidato JPN Business possui produto inesperado.');
+  }
+  if (businessCandidateManifest.visual_qa !== 'pending') {
+    throw new Error('O exportador espera visual_qa=pending antes da revisão visual real.');
+  }
+  if (businessCandidateManifest.pdf_export !== 'pending') {
+    throw new Error('O manifesto do candidato JPN Business já declara um estado de PDF não esperado.');
+  }
+  if (businessCandidateManifest.publication_authorized !== false) {
+    throw new Error('O candidato JPN Business não pode estar marcado como autorizado para publicação.');
+  }
+
+  return businessCandidateManifest;
 }
 
 function exportWithWeasyPrint(command, htmlPath, pdfPath) {
@@ -116,7 +139,7 @@ async function inspectPdf(pdfPath) {
   };
 }
 
-await ensureStaging();
+const businessCandidateManifest = await prepareStaging();
 await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputRoot, { recursive: true });
 
@@ -144,8 +167,45 @@ for (const product of products) {
     output: `dist/editorial-pdf-candidates/${product.file}`,
     ...inspection,
     status: 'pdf-candidate-generated-visual-review-pending',
+    ...(product.id === 'jpn-business'
+      ? {
+          candidateComposition: {
+            version: businessCandidateManifest.version,
+            sourceSha256: businessCandidateManifest.source_sha256,
+            indexSha256: businessCandidateManifest.index_sha256,
+            playbookCount: businessCandidateManifest.playbooks?.length ?? null,
+          },
+        }
+      : {}),
   });
 }
+
+const businessPdf = exported.find((item) => item.id === 'jpn-business');
+if (!businessPdf) throw new Error('PDF candidato do JPN Business não foi exportado.');
+
+await writeFile(
+  businessCandidateManifestPath,
+  JSON.stringify(
+    {
+      ...businessCandidateManifest,
+      status: 'pdf-candidate-generated-visual-qa-pending',
+      pdf_export: 'candidate-generated',
+      pdf_candidate: {
+        output: businessPdf.output,
+        sha256: businessPdf.sha256,
+        bytes: businessPdf.bytes,
+        pages: businessPdf.pages,
+        pageSize: businessPdf.pageSize,
+        engine: engineVersion,
+      },
+      visual_qa: 'pending',
+      publication_authorized: false,
+    },
+    null,
+    2,
+  ) + '\n',
+  'utf8',
+);
 
 const manifest = {
   generatedAt: new Date().toISOString(),

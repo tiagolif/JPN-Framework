@@ -4,6 +4,7 @@ import {
   buildJpnPrompt,
   validateJpnState,
 } from "../dist/browser/index.js";
+import { BUILDER_PRESETS, getBuilderPreset } from "./presets.js";
 
 const $ = (id) => document.getElementById(id);
 const clean = (value) => {
@@ -12,6 +13,27 @@ const clean = (value) => {
 };
 
 let lastDraft = null;
+
+function populatePresets() {
+  const select = $("preset");
+  for (const preset of BUILDER_PRESETS) {
+    const option = document.createElement("option");
+    option.value = preset.id;
+    option.textContent = preset.label;
+    select.appendChild(option);
+  }
+}
+
+function applyPreset(id) {
+  const preset = getBuilderPreset(id);
+  if (!preset) return;
+  $("idea").value = preset.idea;
+  $("type").value = preset.type;
+  $("restrictions").value = preset.restrictions;
+  $("status").textContent = "Preset carregado — revise antes de gerar";
+  $("status").className = "status warn";
+  $("gaps").textContent = "O conteúdo é um ponto de partida editável; confirme contexto, critérios e restrições do seu caso.";
+}
 
 function build() {
   const idea = clean($("idea").value);
@@ -66,6 +88,13 @@ function build() {
     $("output").textContent = "Não foi possível gerar um estado JPN válido.";
   }
 }
+
+populatePresets();
+
+$("preset").addEventListener("change", (event) => {
+  const id = event.target.value;
+  if (id) applyPreset(id);
+});
 
 $("generate").addEventListener("click", build);
 

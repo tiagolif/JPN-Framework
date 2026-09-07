@@ -27,17 +27,24 @@ A biblioteca versionada em `examples/` cobre os sete domínios acima e mantém t
 
 Objetivo: medir se a estrutura melhora resultados em tarefas definidas.
 
+Infraestrutura preparada:
+
+- [x] protocolo baseline vs. JPN;
+- [x] dataset sintético inicial e auditável;
+- [x] contrato versionado para registrar respostas e avaliações;
+- [x] scorer local sem dependência de fornecedor.
+
 Experimentos propostos:
 
-- [ ] comparar prompt simples vs. JPN;
-- [ ] medir cumprimento de requisitos;
-- [ ] medir retrabalho;
-- [ ] medir alucinações factuais;
-- [ ] medir cobertura de critérios de aceitação;
+- [ ] executar comparação prompt simples vs. JPN;
+- [ ] medir cumprimento de requisitos em rodada real;
+- [ ] medir retrabalho em rodada real;
+- [ ] medir alucinações factuais em rodada real;
+- [ ] medir cobertura de critérios de aceitação em rodada real;
 - [ ] avaliação humana cega de utilidade;
 - [ ] comparar diferentes modelos e fornecedores.
 
-Resultados, positivos ou negativos, deverão ser documentados.
+Resultados, positivos ou negativos, deverão ser documentados. A existência do protocolo não deve ser apresentada como prova de eficácia.
 
 ## Fase 4 — Esquema estruturado
 
@@ -65,11 +72,11 @@ O SDK deverá permanecer agnóstico de fornecedor sempre que possível.
 
 ## Fase 6 — Evals públicos
 
-- [ ] dataset pequeno e auditável;
-- [ ] scripts reproduzíveis;
-- [ ] baseline sem JPN;
+- [x] dataset pequeno e auditável (candidato inicial; ainda não publicado como benchmark);
+- [x] script de scoring reproduzível;
+- [x] baseline sem JPN definido no protocolo;
 - [ ] resultados por modelo;
-- [ ] relatório de limitações.
+- [ ] relatório de limitações baseado em rodada executada.
 
 ## Critério para versão 1.0
 

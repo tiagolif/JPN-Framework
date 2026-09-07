@@ -40,6 +40,7 @@
     "build:editorial-print": "node scripts/build-editorial-print-staging.mjs",
     "export:editorial-pdfs": "node scripts/export-editorial-pdf-candidates.mjs",
     "review:editorial-pdfs": "node scripts/build-editorial-pdf-review-gallery.mjs",
+    "eval:score": "node scripts/score-evals.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

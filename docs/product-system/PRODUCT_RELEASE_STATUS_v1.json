@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "portfolio_contract": "docs/product-system/PRODUCT_PORTFOLIO_v1.json",
+  "allowed_statuses": ["pending", "in-progress", "passed", "blocked", "not-applicable"],
+  "products": [
+    {
+      "id": "metodo-jpn",
+      "dependencies": [
+        {"id": "revisao-editorial-humana", "status": "pending", "evidence": null, "note": "Requer leitura editorial humana completa do candidato final."},
+        {"id": "pdf-final", "status": "pending", "evidence": null, "note": "Depende de exportação e revisão página a página do PDF final."}
+      ]
+    },
+    {
+      "id": "jpn-prompt-pack",
+      "dependencies": [
+        {"id": "revisao-editorial-humana", "status": "pending", "evidence": null, "note": "Requer leitura editorial humana completa do candidato final."},
+        {"id": "pdf-final", "status": "pending", "evidence": null, "note": "Depende de exportação e revisão página a página do PDF final."}
+      ]
+    },
+    {
+      "id": "jpn-business",
+      "dependencies": [
+        {"id": "revisao-editorial-humana", "status": "pending", "evidence": null, "note": "Requer revisão humana do texto e dos playbooks."},
+        {"id": "diagramacao-final", "status": "pending", "evidence": null, "note": "A composição editorial final ainda não foi congelada."},
+        {"id": "pdf-final", "status": "pending", "evidence": null, "note": "Depende da diagramação e da inspeção do PDF final."}
+      ]
+    },
+    {
+      "id": "jpn-prompt-builder",
+      "dependencies": [
+        {"id": "ci-final", "status": "pending", "evidence": null, "note": "O head atual ainda precisa de CI verde no candidato de release."},
+        {"id": "pacote-offline-final", "status": "pending", "evidence": null, "note": "O pacote offline final ainda precisa ser congelado e validado."}
+      ]
+    },
+    {
+      "id": "jpn-pro-kit",
+      "dependencies": [
+        {"id": "artefatos-congelados", "status": "pending", "evidence": null, "note": "Os artefatos comerciais ainda não foram congelados como release final."},
+        {"id": "hashes-finais", "status": "pending", "evidence": null, "note": "Hashes finais devem ser gerados somente após congelamento dos binários."},
+        {"id": "ci-final", "status": "pending", "evidence": null, "note": "O candidato final ainda precisa de CI verde."}
+      ]
+    },
+    {
+      "id": "jpn-gestao-facil",
+      "dependencies": [
+        {"id": "gf-qa-10", "status": "pending", "evidence": null, "note": "Exige validar o mesmo XLSX em Excel, LibreOffice Calc e Google Sheets."},
+        {"id": "arquivo-final-validado", "status": "pending", "evidence": null, "note": "Só pode ser aprovado após GF-QA-10 e congelamento do arquivo final."}
+      ]
+    }
+  ],
+  "guardrails": [
+    "Status passed exige evidência verificável no repositório ou referência de CI quando aplicável.",
+    "Status de dependência não autoriza publicação, venda, anúncio ou checkout.",
+    "Nenhum bloqueio deve ser marcado como concluído por inferência ou por ausência de erro mecânico.",
+    "Revisões humanas, visuais e de compatibilidade permanecem humanas quando explicitamente definidas como tal."
+  ]
+}

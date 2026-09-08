@@ -33,15 +33,23 @@ Após os casos GF-QA-01 a GF-QA-09, a varredura não encontrou ocorrências de:
 - `#NAME?`
 - `#N/A`
 
+## Proteção da evidência
+
+A identidade do arquivo testado passa a ser verificada por `npm run check:gestao-facil-binary`.
+
+O gate compara o SHA-256 real do XLSX com o hash acima, confirma a assinatura OOXML/ZIP e verifica que GF-QA-01..09 continuam registrados como `PASS` enquanto GF-QA-10 permanece `PENDENTE`. Se o binário mudar, a evidência local deixa de ser automaticamente aplicável e os casos funcionais devem ser repetidos antes de atualizar o hash.
+
+Contrato do gate: `docs/products/gestao-facil/BINARY_INTEGRITY_GATE_v0.1.md`.
+
 ## Estado de release
 
-Esta evidência promove o XLSX de `pendente de versionamento` para `binário versionado com QA funcional local`.
+Esta evidência promove o XLSX de `pendente de versionamento` para `binário versionado com QA funcional local e identidade protegida por hash`.
 
 Ainda **não** autoriza release externo. Permanecem obrigatórios:
 
 1. GF-QA-10 de compatibilidade cruzada;
 2. inspeção visual em pelo menos um aplicativo de planilha de desktop;
 3. congelamento do manual correspondente;
-4. hashes finais somente quando o pacote completo for congelado.
+4. hashes finais do pacote somente quando o conjunto completo for congelado.
 
 Nenhum dado financeiro real, credencial, conta externa, gasto, anúncio ou aceite legal foi usado neste QA.

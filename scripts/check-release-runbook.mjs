@@ -6,6 +6,7 @@ const runbookPath = 'docs/product-system/RELEASE_RUNBOOK_v1.md';
 const packagePath = 'package.json';
 const statusPath = 'docs/product-system/PRODUCT_RELEASE_STATUS_v1.json';
 const planPath = 'docs/product-system/RELEASE_EXECUTION_PLAN_v1.json';
+const editorialPdfCheckerPath = 'scripts/check-editorial-pdf-review.mjs';
 
 const readText = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const readJson = (p) => JSON.parse(readText(p));
@@ -21,6 +22,8 @@ const plan = readJson(planPath);
 assert(runbook.includes('Status: **interno / não autoriza publicação**'), 'status interno/sem publicação ausente.');
 assert(runbook.includes('Freeze vem antes dos hashes finais'), 'regra freeze → hashes finais ausente.');
 assert(runbook.includes('CI precisa estar associado ao SHA que será congelado'), 'regra de CI/SHA ausente.');
+assert(fs.existsSync(path.join(root, editorialPdfCheckerPath)), 'verificador editorial PDF obrigatório ausente.');
+assert(runbook.includes(`node ${editorialPdfCheckerPath}`), 'runbook não referencia diretamente o verificador editorial PDF existente.');
 
 for (const heading of [
   '## Fase 0 — Consistência local',
@@ -42,7 +45,6 @@ const commands = [
   'check:editorial-print-staging',
   'export:editorial-pdfs',
   'review:editorial-pdfs',
-  'check:editorial-pdf-review',
   'check:prompt-builder-staging',
   'stage:prompt-builder',
   'check:pro-kit',
@@ -95,4 +97,4 @@ for (const forbidden of [
 
 assert(plan.publication_authorized === false, 'plano de execução não pode autorizar publicação.');
 
-console.log(`Release runbook OK: ${commands.length} comandos verificados, ${dependencies.length} dependências formais preservadas.`);
+console.log(`Release runbook OK: ${commands.length} comandos npm + gate PDF direto, ${dependencies.length} dependências formais preservadas.`);

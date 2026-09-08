@@ -43,7 +43,28 @@ Esses itens precisam seguir `EDITORIAL_RELEASE_GATE_v1.md`: gerar, renderizar, i
 
 ## Prompt Builder
 
-`04_PROMPT_BUILDER/instrucoes_de_acesso.txt` continua `pending-release-decision`. O staging não inventa URL pública, credencial, conta, checkout ou instrução de acesso antes de uma decisão explícita de release.
+A decisão de entrega offline do Prompt Builder já está registrada como `passed` em `RELEASE_GATES.json`, com evidência em `docs/products/prompt-builder/OFFLINE_DELIVERY_v1.md`.
+
+Isso aprova **o modo de entrega**, não o bundle final. `04_PROMPT_BUILDER/instrucoes_de_acesso.txt` pode ser tratado no manifesto como `offline-delivery-defined`, mas o pacote offline ainda precisa ser executado, revisado e congelado antes de qualquer artefato final receber hash de release.
+
+O staging não inventa URL pública, credencial, conta, checkout ou instrução de acesso externa.
+
+## Contrato do manifesto
+
+Antes do congelamento, execute:
+
+```bash
+npm run check:pro-kit-manifest
+```
+
+Esse preflight exige que `MANIFEST.template.json`:
+
+- mantenha somente as nove entradas canônicas de entrega;
+- aponte para fontes locais existentes;
+- mantenha `sha256: null` enquanto for template;
+- não promova PDFs pendentes para artefatos finais;
+- preserve o estado local da Gestão Fácil até GF-QA-10;
+- mantenha os gates externos/finais pendentes até existir evidência real.
 
 ## Critério de congelamento
 

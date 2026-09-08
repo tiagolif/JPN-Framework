@@ -8,6 +8,9 @@ const statusPath = 'docs/product-system/PRODUCT_RELEASE_STATUS_v1.json';
 const planPath = 'docs/product-system/RELEASE_EXECUTION_PLAN_v1.json';
 const editorialPdfCheckerPath = 'scripts/check-editorial-pdf-review.mjs';
 const editorialPdfCommand = 'check:editorial-pdf-review';
+const releaseQueueScript = 'scripts/report-release-action-queue.mjs';
+const releaseQueueReportCommand = 'report:release-action-queue';
+const releaseQueueCheckCommand = 'check:release-action-queue';
 
 const readText = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const readJson = (p) => JSON.parse(readText(p));
@@ -30,6 +33,20 @@ assert(
 );
 assert(runbook.includes(`npm run ${editorialPdfCommand}`), `runbook não referencia npm run ${editorialPdfCommand}.`);
 
+assert(fs.existsSync(path.join(root, releaseQueueScript)), 'script da fila operacional de release ausente.');
+assert(
+  pkg.scripts?.[releaseQueueReportCommand] === `node ${releaseQueueScript}`,
+  `alias npm ${releaseQueueReportCommand} deve apontar exatamente para ${releaseQueueScript}.`,
+);
+assert(
+  pkg.scripts?.[releaseQueueCheckCommand] === `node ${releaseQueueScript} --check`,
+  `alias npm ${releaseQueueCheckCommand} deve apontar para ${releaseQueueScript} --check.`,
+);
+assert(
+  pkg.scripts?.build?.includes(`npm run ${releaseQueueCheckCommand}`),
+  `build deve executar npm run ${releaseQueueCheckCommand}.`,
+);
+
 for (const heading of [
   '## Fase 0 — Consistência local',
   '## Fase 1 — Candidatos editoriais',
@@ -39,7 +56,7 @@ for (const heading of [
   '## Fase 5 — JPN Pro Kit',
   '## Fase 6 — Freeze e hashes finais',
   '## Fase 7 — CI do SHA definitivo',
-  '## Fase 8 — Atualização de status',
+  '## Fase 8 — Atualização de status e fila',
 ]) {
   assert(runbook.includes(heading), `fase obrigatória ausente: ${heading}`);
 }
@@ -59,6 +76,8 @@ const commands = [
   'check:pro-kit-staging',
   'check:product-release-status',
   'check:release-execution-plan',
+  releaseQueueReportCommand,
+  releaseQueueCheckCommand,
   'check:product-readiness-report',
   'report:release-readiness',
 ];
@@ -86,6 +105,7 @@ for (const requiredText of [
   'servidor HTTP local',
   'mesmo XLSX candidato',
   'mesmo bundle candidato',
+  'reports/product-readiness/RELEASE_ACTION_QUEUE.md',
 ]) {
   assert(runbook.includes(requiredText), `evidência/ambiente obrigatório ausente: ${requiredText}`);
 }
@@ -103,4 +123,4 @@ for (const forbidden of [
 
 assert(plan.publication_authorized === false, 'plano de execução não pode autorizar publicação.');
 
-console.log(`Release runbook OK: ${commands.length} comandos npm, incluindo gate PDF por alias estável, ${dependencies.length} dependências formais preservadas.`);
+console.log(`Release runbook OK: ${commands.length} comandos npm, gate PDF e fila operacional protegidos por aliases estáveis; ${dependencies.length} dependências formais preservadas.`);

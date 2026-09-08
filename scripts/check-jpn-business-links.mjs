@@ -1,4 +1,6 @@
+import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 
 const businessIndexPath = new URL('../docs/products/jpn-business/BUSINESS_INDEX.json', import.meta.url);
 const businessDocPath = new URL('../docs/products/jpn-business/JPN_BUSINESS_v1.md', import.meta.url);
@@ -86,3 +88,6 @@ const linkedPromptIds = new Set(businessItems.flatMap((item) => item.prompt_pack
 console.log(
   `JPN Business ↔ Prompt Pack: consistente (${businessItems.length} playbooks, ${promptItems.length} prompts, ${linkCount} vínculos, ${linkedPromptIds.size} prompts referenciados).`,
 );
+
+const quickReferenceCheck = fileURLToPath(new URL('./check-jpn-business-quick-reference.mjs', import.meta.url));
+execFileSync(process.execPath, [quickReferenceCheck], { stdio: 'inherit' });

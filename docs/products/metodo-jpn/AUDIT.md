@@ -1,7 +1,7 @@
 # Auditoria Editorial — Método JPN v1
 
 **Base:** JPN Framework `0.3.0-draft`  
-**Status da auditoria:** primeira consolidação concluída; revisão final ainda pendente.
+**Status da auditoria:** consolidação estrutural e revisão cruzada concluídas; revisão final ainda pendente.
 
 ## Objetivo
 
@@ -58,6 +58,23 @@ A especificação em `docs/SPECIFICATION.md` ainda declarava `0.2.0-draft`, enqu
 
 Essa mudança é editorial de alinhamento de versão; não altera o schema nem a API.
 
+## Revisão cruzada — Método ↔ Prompt Pack ↔ Business
+
+A compatibilidade estrutural deixa de ser apenas uma pendência manual e passa a ter evidência versionada em `scripts/check-metodo-cross-product.mjs`.
+
+O gate exige simultaneamente:
+
+- a mesma base `0.3.0-draft` no Método, Prompt Pack e JPN Business;
+- as três dimensões Jornada, Precisão e Narrativa no Método;
+- os quatro estados de confiança canônicos;
+- as quatro opções da política de lacunas;
+- referência explícita aos cinco produtos complementares;
+- exatamente 18 templates no Prompt Pack, todos classificados com `jornada`, `precisao` e `narrativa`;
+- exatamente 12 playbooks no JPN Business;
+- ao menos um vínculo `PP-*` em cada playbook e inexistência de referência a prompt ausente.
+
+Esse teste comprova consistência estrutural entre os documentos canônicos atuais. Ele não substitui revisão ortográfica, prova visual, exportação final nem validação humana de qualidade editorial.
+
 ## Definition of Done — estado atual
 
 | Critério | Estado |
@@ -70,18 +87,17 @@ Essa mudança é editorial de alinhamento de versão; não altera o schema nem a
 | Claims auditados | concluído para este draft |
 | Instruções de uso | concluído |
 | Relação com outros produtos | concluído |
+| Teste cruzado com Prompt Pack/Business | concluído |
 | Revisão ortográfica final | pendente |
 | Revisão visual/diagramação | pendente |
 | PDF/DOCX final | pendente |
-| Teste cruzado com Prompt Pack/Business | pendente |
 
 ## Próximas ações seguras
 
-1. usar este Método consolidado como fonte editorial para auditar o Prompt Pack;
-2. normalizar cada prompt pelo contrato de conteúdo;
-3. depois auditar JPN Business usando os mesmos conceitos;
-4. somente após a revisão cruzada, promover o Método para `release-candidate`;
-5. gerar formatos finais apenas quando o conteúdo estiver congelado.
+1. executar revisão ortográfica fina sobre o conteúdo já consolidado;
+2. manter o gate cruzado no build para impedir regressões entre Método, Prompt Pack e Business;
+3. revisar o candidato visual/impresso antes de qualquer promoção de status;
+4. somente depois congelar o conteúdo e gerar os formatos finais de entrega.
 
 ## Arquivo canônico desta etapa
 

@@ -37,7 +37,7 @@ npm run build:editorial-print
 npm run check:editorial-print-staging
 npm run export:editorial-pdfs
 npm run review:editorial-pdfs
-npm run check:editorial-pdf-review
+node scripts/check-editorial-pdf-review.mjs
 ```
 
 Documentos canônicos cobertos pela revisão PDF:
@@ -50,7 +50,7 @@ Documentos canônicos cobertos pela revisão PDF:
 
 Critério de parada: ausência de motor de PDF/renderização, hash divergente, página faltante, preview extra ou falha de integridade.
 
-O comando `check:editorial-pdf-review` confirma correspondência técnica PDF → manifesto → páginas renderizadas → galeria. Ele **não aprova visualmente** clipping, margens, tipografia, acentos, links, legibilidade ou paginação.
+O verificador `scripts/check-editorial-pdf-review.mjs` confirma correspondência técnica PDF → manifesto → páginas renderizadas → galeria. Ele **não aprova visualmente** clipping, margens, tipografia, acentos, links, legibilidade ou paginação. Enquanto não houver um alias npm oficial para esse gate, o runbook chama o script diretamente para não documentar um comando inexistente.
 
 ## Fase 2 — Inspeção editorial e visual
 
@@ -81,7 +81,7 @@ npm run stage:prompt-builder
 
 Depois, executar QA real em navegador/dispositivo sobre o mesmo bundle candidato. Conferir abertura por servidor HTTP local, criação e edição de prompts, presets, workspaces, recuperação, persistência e comportamento offline planejado.
 
-Critério de parada: erro funcional, divergência entre fonte e staging, falha de navegador/dispositivo ou ausência de evidência vinculada ao candidato.
+Critério de parada: erro funcional, divergência entre fonte e staging, falha de navegador/dispositivo ou ausência de evidência vinculada ao mesmo bundle candidato.
 
 Não marcar `pacote-offline-final` como `passed` apenas porque o staging foi gerado.
 

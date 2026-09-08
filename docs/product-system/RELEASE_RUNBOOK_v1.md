@@ -37,7 +37,7 @@ npm run build:editorial-print
 npm run check:editorial-print-staging
 npm run export:editorial-pdfs
 npm run review:editorial-pdfs
-node scripts/check-editorial-pdf-review.mjs
+npm run check:editorial-pdf-review
 ```
 
 Documentos canônicos cobertos pela revisão PDF:
@@ -50,7 +50,7 @@ Documentos canônicos cobertos pela revisão PDF:
 
 Critério de parada: ausência de motor de PDF/renderização, hash divergente, página faltante, preview extra ou falha de integridade.
 
-O verificador `scripts/check-editorial-pdf-review.mjs` confirma correspondência técnica PDF → manifesto → páginas renderizadas → galeria. Ele **não aprova visualmente** clipping, margens, tipografia, acentos, links, legibilidade ou paginação. Enquanto não houver um alias npm oficial para esse gate, o runbook chama o script diretamente para não documentar um comando inexistente.
+O comando `npm run check:editorial-pdf-review` aponta para `scripts/check-editorial-pdf-review.mjs` e confirma correspondência técnica PDF → manifesto → páginas renderizadas → galeria. O alias npm é parte do contrato operacional para evitar divergência entre documentação e execução. Esse gate **não aprova visualmente** clipping, margens, tipografia, acentos, links, legibilidade ou paginação.
 
 ## Fase 2 — Inspeção editorial e visual
 

@@ -2,11 +2,11 @@
 
 **Base:** JPN Framework `0.3.0-draft`  
 **Artefato auditado:** `JPN_PROMPT_PACK_v1.md`  
-**Estado:** draft editorial consolidado
+**Estado:** draft editorial consolidado com revisão cruzada estrutural e QA fictício de amostra
 
 ## Escopo desta rodada
 
-A normalização foi feita contra o contrato de conteúdo de `docs/product-system/CONTENT_CONTRACTS.md` e o vocabulário do `Método JPN v1`.
+A normalização foi feita contra o contrato de conteúdo de `docs/product-system/CONTENT_CONTRACTS.md`, o vocabulário do `Método JPN v1` e a arquitetura já consolidada do `JPN Business v1`.
 
 Foram consolidados **18 cartões de prompt**, cobrindo:
 
@@ -86,7 +86,7 @@ O pack não contém promessa de:
 
 ### 5. Dados e exemplos
 
-Os templates usam placeholders neutros. Não foram incluídos dados pessoais, credenciais, dados financeiros reais ou condições comerciais reais.
+Os templates usam placeholders neutros. O QA de amostra usa apenas cenários sintéticos e não contém dados pessoais, credenciais, dados financeiros reais ou condições comerciais reais.
 
 **Resultado:** atendido.
 
@@ -103,25 +103,64 @@ A consolidação separou prompts que poderiam parecer semelhantes pelo **resulta
 
 **Resultado:** nenhuma duplicação óbvia bloqueadora identificada nesta rodada.
 
+## Revisão cruzada com o JPN Business
+
+A separação funcional está consolidada assim:
+
+- **Prompt Pack** = execução delimitada de uma tarefa;
+- **JPN Business** = processo recorrente que contém tarefas, decisões, responsáveis, validação e continuidade.
+
+O gate `npm run check:jpn-business-links` verifica mecanicamente:
+
+- unicidade e formato dos IDs `JB-*` e `PP-*`;
+- existência dos prompts referenciados pelo Business;
+- presença dos IDs nos documentos humanos correspondentes;
+- nomes e categorias obrigatórios;
+- vínculo mínimo de cada playbook com o Prompt Pack;
+- igualdade de `framework_base`;
+- estrutura esperada da versão atual: 12 playbooks e 18 prompts.
+
+Essa revisão encerra a antiga pendência de validação cruzada estrutural entre Prompt Pack e Business. Ela não substitui revisão ortográfica, visual ou CI do candidato.
+
+## QA editorial fictício de amostra
+
+Foi criado `QA_CASES_v1.md` com seis cenários sintéticos:
+
+- `PP-01` — estruturação;
+- `PP-02` — pesquisa;
+- `PP-06` — vendas responsáveis;
+- `PP-07` — suporte;
+- `PP-12` — dados;
+- `PP-18` — continuidade.
+
+Resultado editorial registrado: **6/6 PASS** nos critérios definidos para preservação de fatos, restrições, lacunas, limites e continuidade.
+
+O comando `npm run check:prompt-pack-qa` valida a existência da evidência, os vínculos com o índice canônico, os seis resultados registrados, disclaimers contra benchmark/claims e a permanência explícita dos bloqueios finais.
+
+Esse QA é uma simulação editorial estática, não benchmark de desempenho de modelo e não sustenta claim quantitativo de superioridade.
+
 ## Pendências antes de release-candidate
 
 - [ ] revisão ortográfica e de consistência fina;
-- [ ] revisão cruzada contra o JPN Business consolidado;
-- [ ] verificar se algum cartão deve migrar do Prompt Pack para Business por representar processo longo demais;
-- [ ] testar uma amostra de prompts com entradas fictícias e registrar resultado como QA editorial, sem claim de superioridade;
-- [ ] definir ordem visual/categorias da versão diagramada;
-- [ ] gerar PDF/DOCX final somente depois da revisão cruzada;
-- [ ] congelar versão e checksums quando o artefato for promovido a release-candidate.
+- [x] revisão cruzada estrutural contra o JPN Business consolidado;
+- [x] verificar separação de escopo Prompt Pack × Business na arquitetura atual;
+- [x] testar uma amostra editorial com entradas fictícias e registrar evidência;
+- [ ] revisar ordem visual/categorias no candidato diagramado;
+- [ ] executar revisão visual/PDF;
+- [ ] obter CI verde no head candidato;
+- [ ] congelar versão e checksums somente após aprovação final do candidato.
 
 ## Definition of Done desta etapa
 
-Este draft pode ser considerado **editorialmente consolidado** quando:
+Este draft está **editorialmente consolidado** para a fase atual porque:
 
 - cada prompt segue o cartão oficial;
 - o vocabulário coincide com o Método JPN;
 - não há claims indevidos;
 - lacunas e incertezas não são tratadas como fatos;
 - o escopo de cada template é distinguível;
-- o documento declara sua versão-base.
+- o documento declara sua versão-base;
+- a ligação com o JPN Business é mecanicamente verificável;
+- existe QA editorial fictício de amostra registrado.
 
-Esses critérios estão atendidos para a fase de draft. A promoção de status continua bloqueada pela revisão cruzada com JPN Business e pela QA editorial de amostra.
+A promoção para `release-candidate` continua bloqueada por revisão fina, revisão visual/PDF, CI do head e freeze final.

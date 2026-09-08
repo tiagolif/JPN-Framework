@@ -32,6 +32,7 @@ Execute:
 npm run check:commercial-site
 npm run check:commercial-navigation
 npm run check:commercial-accessibility
+npm run check:commercial-contrast
 ```
 
 `check:commercial-site` valida landing e páginas individuais, nomes e IDs canônicos, os três pilares JPN, stylesheet compartilhado, retorno relativo ao portfólio, estado `EM PREPARAÇÃO` do Pro Kit e ausência de coleta de dados, URL externa, preço em reais, CTA transacional ou claim explícito de garantia.
@@ -40,11 +41,13 @@ npm run check:commercial-accessibility
 
 `check:commercial-accessibility` valida os sete HTMLs quanto a idioma, viewport, `noindex,nofollow`, título, hierarquia mínima com um único `h1`, landmarks principais, nomes acessíveis de links, `alt` em imagens quando existirem, pares `details/summary`, zoom permitido e ausência de `javascript:`. O gate também exige estado `:focus-visible` no CSS e fallback para `prefers-reduced-motion`.
 
-Os três comandos fazem parte de `npm run build`.
+`check:commercial-contrast` calcula contraste WCAG a partir dos tokens hex canônicos realmente usados na superfície. O gate cobre pares de texto principal, texto secundário, destaque, botão e foco contra os fundos/superfícies declarados; usa 4,5:1 para texto normal e 3:1 para foco não textual. Ele não substitui inspeção de transparências, gradientes, estados futuros ou conteúdo visual que venha a ser introduzido depois.
+
+Os quatro comandos fazem parte de `npm run build`.
 
 ## Acessibilidade incorporada nesta fase
 
-A superfície comercial usa foco de teclado explícito em links e elementos `summary`, mantém zoom do navegador disponível, não depende de animação para compreensão e inclui redução de movimento para o `scroll-behavior`. Esses controles são preflight estrutural; eles **não substituem teste manual com teclado, leitor de tela, contraste calculado e inspeção em navegadores reais**.
+A superfície comercial usa foco de teclado explícito em links e elementos `summary`, mantém zoom do navegador disponível, não depende de animação para compreensão e inclui redução de movimento para o `scroll-behavior`. O contraste dos pares canônicos passa a ter um gate calculado para impedir regressões nos tokens. Esses controles ainda **não substituem teste manual com teclado, leitor de tela e inspeção em navegadores reais**.
 
 ## Guardrails
 
@@ -55,12 +58,13 @@ A existência destes arquivos **não autoriza publicação, anúncio, venda, col
 ## Revisão necessária antes de qualquer publicação futura
 
 1. QA visual em desktop e mobile;
-2. teste manual de teclado, foco, contraste e leitura assistiva;
-3. revisão editorial humana da copy;
-4. conferência dos claims contra os guardrails vigentes;
-5. decisão explícita de quais produtos estão liberados para apresentação pública;
-6. inclusão de links/CTAs reais somente depois de autorização específica;
-7. revisão final de metadados e acessibilidade no ambiente que vier a ser publicado.
+2. teste manual de teclado, foco e leitura assistiva;
+3. revisão do contraste efetivamente renderizado em transparências, gradientes e quaisquer novos componentes visuais;
+4. revisão editorial humana da copy;
+5. conferência dos claims contra os guardrails vigentes;
+6. decisão explícita de quais produtos estão liberados para apresentação pública;
+7. inclusão de links/CTAs reais somente depois de autorização específica;
+8. revisão final de metadados e acessibilidade no ambiente que vier a ser publicado.
 
 ## Relação com o Prompt Builder
 

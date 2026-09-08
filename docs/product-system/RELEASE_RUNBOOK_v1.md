@@ -16,7 +16,7 @@ Este runbook transforma o estado formal de release em uma sequência operacional
 
 ## Fase 0 — Consistência local
 
-Objetivo: garantir que contratos, produtos, páginas e gates conhecidos continuam coerentes antes de gerar candidatos.
+Objetivo: garantir que contratos, produtos, páginas, fila operacional e gates conhecidos continuam coerentes antes de gerar candidatos.
 
 Comando principal:
 
@@ -24,7 +24,9 @@ Comando principal:
 npm run build
 ```
 
-Critério de parada: qualquer erro interrompe o fluxo. Não avançar para freeze enquanto o build estiver vermelho.
+O build inclui `npm run check:release-action-queue`, que confirma que o snapshot versionado em `reports/product-readiness/RELEASE_ACTION_QUEUE.md` ainda corresponde ao portfólio, ao status formal e ao plano de execução. Esse gate não executa as ações da fila nem promove qualquer dependência.
+
+Critério de parada: qualquer erro interrompe o fluxo. Não avançar para freeze enquanto o build estiver vermelho ou a fila registrada estiver desatualizada.
 
 Evidência mínima: saída do build sem falhas no mesmo estado de código que será usado para produzir candidatos.
 
@@ -149,7 +151,7 @@ Evidência mínima:
 
 Sem CI verde no SHA definitivo, dependências `ci-final` continuam pendentes.
 
-## Fase 8 — Atualização de status
+## Fase 8 — Atualização de status e fila
 
 Somente depois da evidência real, atualizar `PRODUCT_RELEASE_STATUS_v1.json` de forma granular. Cada `passed` deve apontar para evidência verificável correspondente.
 
@@ -158,9 +160,13 @@ Depois da alteração de status:
 ```bash
 npm run check:product-release-status
 npm run check:release-execution-plan
+npm run report:release-action-queue
+npm run check:release-action-queue
 npm run check:product-readiness-report
 npm run report:release-readiness
 ```
+
+`report:release-action-queue` regenera o snapshot operacional a partir das fontes canônicas; `check:release-action-queue` garante que o arquivo versionado é exatamente o resultado esperado para aquele estado. Regenerar a fila não aprova nenhuma dependência e não substitui a evidência declarada no plano.
 
 Não promover em bloco por inferência. Uma dependência aprovada não aprova automaticamente as demais.
 

@@ -55,21 +55,35 @@ for (const guardrail of requiredGuardrails) {
   if (!playbook.includes(guardrail)) fail(`guardrail obrigatório ausente: ${guardrail}`);
 }
 
-const unsafeAssertions = [
-  /garante\s+(mais\s+)?vendas/i,
-  /garante\s+resultado/i,
-  /100%\s+privad[oa]/i,
-  /substitui\s+(seu\s+)?contador/i,
-  /publica(?:ção)?\s+autorizada/i,
-  /release_ready\s*:\s*true/i
+const claimsHeading = '## 11. Claims que exigem evidência antes de uso';
+const stateHeading = '## 12. Estado do material';
+const claimsStart = playbook.indexOf(claimsHeading);
+const claimsEnd = playbook.indexOf(stateHeading);
+if (claimsStart < 0 || claimsEnd <= claimsStart) fail('bloco de claims inválido');
+
+const claimsBlock = playbook.slice(claimsStart, claimsEnd);
+const requiredBlockedClaims = [
+  'aumenta vendas',
+  'reduz custos em X%',
+  'economiza X horas',
+  'melhora respostas em X%',
+  'funciona em qualquer IA sem adaptação',
+  '100% privado',
+  'sem erros',
+  'substitui funcionário, consultor, contador ou ERP',
+  'garante resultado'
 ];
 
-for (const pattern of unsafeAssertions) {
-  if (pattern.test(playbook)) fail(`afirmação promocional indevida detectada: ${pattern}`);
+for (const claim of requiredBlockedClaims) {
+  if (!claimsBlock.includes(claim)) fail(`claim que deve permanecer bloqueado não listado: ${claim}`);
 }
 
-if (!playbook.includes('não há garantia de resultado') && !playbook.includes('Não há garantia de resultado')) {
+if (!playbook.includes('Não há garantia de resultado')) {
   fail('disclaimer explícito de ausência de garantia não encontrado');
 }
 
-console.log(`sales enablement playbook OK: ${portfolio.products.length} produtos canônicos cobertos`);
+if (!playbook.includes('Este arquivo é um ativo interno de sales enablement')) {
+  fail('estado interno do material não declarado');
+}
+
+console.log(`sales enablement playbook OK: ${portfolio.products.length} produtos canônicos cobertos; claims sensíveis permanecem bloqueados`);

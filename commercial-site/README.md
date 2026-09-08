@@ -31,13 +31,20 @@ Execute:
 ```bash
 npm run check:commercial-site
 npm run check:commercial-navigation
+npm run check:commercial-accessibility
 ```
 
 `check:commercial-site` valida landing e páginas individuais, nomes e IDs canônicos, os três pilares JPN, stylesheet compartilhado, retorno relativo ao portfólio, estado `EM PREPARAÇÃO` do Pro Kit e ausência de coleta de dados, URL externa, preço em reais, CTA transacional ou claim explícito de garantia.
 
 `check:commercial-navigation` percorre todos os arquivos HTML da superfície, valida destinos relativos e fragmentos, rejeita protocolos externos e exige que cada card canônico da landing leve à página individual correspondente.
 
-Os dois comandos fazem parte de `npm run build`.
+`check:commercial-accessibility` valida os sete HTMLs quanto a idioma, viewport, `noindex,nofollow`, título, hierarquia mínima com um único `h1`, landmarks principais, nomes acessíveis de links, `alt` em imagens quando existirem, pares `details/summary`, zoom permitido e ausência de `javascript:`. O gate também exige estado `:focus-visible` no CSS e fallback para `prefers-reduced-motion`.
+
+Os três comandos fazem parte de `npm run build`.
+
+## Acessibilidade incorporada nesta fase
+
+A superfície comercial usa foco de teclado explícito em links e elementos `summary`, mantém zoom do navegador disponível, não depende de animação para compreensão e inclui redução de movimento para o `scroll-behavior`. Esses controles são preflight estrutural; eles **não substituem teste manual com teclado, leitor de tela, contraste calculado e inspeção em navegadores reais**.
 
 ## Guardrails
 
@@ -48,11 +55,12 @@ A existência destes arquivos **não autoriza publicação, anúncio, venda, col
 ## Revisão necessária antes de qualquer publicação futura
 
 1. QA visual em desktop e mobile;
-2. revisão editorial humana da copy;
-3. conferência dos claims contra os guardrails vigentes;
-4. decisão explícita de quais produtos estão liberados para apresentação pública;
-5. inclusão de links/CTAs reais somente depois de autorização específica;
-6. revisão de acessibilidade e metadados finais.
+2. teste manual de teclado, foco, contraste e leitura assistiva;
+3. revisão editorial humana da copy;
+4. conferência dos claims contra os guardrails vigentes;
+5. decisão explícita de quais produtos estão liberados para apresentação pública;
+6. inclusão de links/CTAs reais somente depois de autorização específica;
+7. revisão final de metadados e acessibilidade no ambiente que vier a ser publicado.
 
 ## Relação com o Prompt Builder
 

@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const playbookPath = path.join(root, 'docs/commercial/SALES_ENABLEMENT_PLAYBOOK_v1.md');
+const recordPath = path.join(root, 'docs/commercial/SALES_CONVERSATION_RECORD_v1.md');
 const portfolioPath = path.join(root, 'docs/product-system/PRODUCT_PORTFOLIO_v1.json');
 
 function fail(message) {
@@ -10,10 +11,16 @@ function fail(message) {
   process.exit(1);
 }
 
-if (!fs.existsSync(playbookPath)) fail('playbook ausente');
-if (!fs.existsSync(portfolioPath)) fail('portfólio canônico ausente');
+for (const [label, file] of [
+  ['playbook', playbookPath],
+  ['registro de conversa', recordPath],
+  ['portfólio canônico', portfolioPath],
+]) {
+  if (!fs.existsSync(file)) fail(`${label} ausente`);
+}
 
 const playbook = fs.readFileSync(playbookPath, 'utf8');
+const record = fs.readFileSync(recordPath, 'utf8');
 const portfolio = JSON.parse(fs.readFileSync(portfolioPath, 'utf8'));
 
 if (!Array.isArray(portfolio.products) || portfolio.products.length !== 6) {
@@ -23,6 +30,9 @@ if (!Array.isArray(portfolio.products) || portfolio.products.length !== 6) {
 for (const product of portfolio.products) {
   if (!product.canonical_name || !playbook.includes(product.canonical_name)) {
     fail(`produto canônico não representado no playbook: ${product.id}`);
+  }
+  if (!record.includes(product.canonical_name)) {
+    fail(`produto canônico não representado no registro de conversa: ${product.id}`);
   }
 }
 
@@ -81,9 +91,34 @@ for (const claim of requiredBlockedClaims) {
 if (!playbook.includes('Não há garantia de resultado')) {
   fail('disclaimer explícito de ausência de garantia não encontrado');
 }
-
 if (!playbook.includes('Este arquivo é um ativo interno de sales enablement')) {
   fail('estado interno do material não declarado');
 }
 
-console.log(`sales enablement playbook OK: ${portfolio.products.length} produtos canônicos cobertos; claims sensíveis permanecem bloqueados`);
+const requiredRecordSections = [
+  '## 1. Contexto confirmado',
+  '## 2. Classificação da necessidade',
+  '## 3. Produto indicado',
+  '## 4. Fatos, lacunas e hipóteses',
+  '## 5. Claims e condições',
+  '## 6. Demonstração ou material usado',
+  '## 7. Próximo passo',
+  '## 8. Estado comercial',
+];
+for (const section of requiredRecordSections) {
+  if (!record.includes(section)) fail(`seção obrigatória ausente no registro: ${section}`);
+}
+
+for (const marker of [
+  'Publicação autorizada por este registro: **não**',
+  'Venda autorizada por este registro: **não**',
+  'Não usar credenciais, dados financeiros reais ou informação sensível em demonstrações internas.',
+  'O Pro Kit não deve ser indicado automaticamente quando um produto individual resolve a necessidade.',
+  'não completar lacunas por suposição',
+]) {
+  if (!record.toLowerCase().includes(marker.toLowerCase())) {
+    fail(`guardrail ausente no registro de conversa: ${marker}`);
+  }
+}
+
+console.log(`sales enablement OK: ${portfolio.products.length} produtos canônicos cobertos no playbook e no registro; claims sensíveis permanecem bloqueados`);

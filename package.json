@@ -22,7 +22,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site && npm run check:prompt-builder-presets && npm run check:prompt-builder-custom-presets && npm run check:prompt-builder-workspaces && npm run check:prompt-builder-recovery && npm run check:product-consistency && npm run check:jpn-business-links && npm run check:jpn-business-print-candidate && npm run check:core-editorial-hygiene && npm run check:core-terminology && npm run check:product-portfolio && npm run check:product-release-status && npm run check:product-readiness-report && npm run check:pro-kit && npm run check:visual-assets && npm run check:visual-bounds && npm run check:editorial-release && npm run check:commercial-copy && npm run check:commercial-site && npm run check:commercial-navigation && npm run check:commercial-accessibility && npm run check:commercial-contrast && npm run check:gestao-facil-model && npm run report:release-readiness && npm run build:visual-review && npm run build:editorial-print && npm run build:jpn-business-print-candidate && npm run stage:prompt-builder",
+    "build": "tsc -p tsconfig.json && npm run build:browser && npm run check:product-site && npm run check:prompt-builder-presets && npm run check:prompt-builder-custom-presets && npm run check:prompt-builder-workspaces && npm run check:prompt-builder-recovery && npm run check:product-consistency && npm run check:jpn-business-links && npm run check:jpn-business-print-candidate && npm run check:core-editorial-hygiene && npm run check:core-terminology && npm run check:product-portfolio && npm run check:product-release-status && npm run check:product-readiness-report && npm run check:pro-kit && npm run check:visual-assets && npm run check:visual-bounds && npm run check:editorial-release && npm run check:commercial-copy && npm run check:commercial-site && npm run check:commercial-navigation && npm run check:commercial-accessibility && npm run check:commercial-contrast && npm run check:gestao-facil-model && npm run check:gestao-facil-binary && npm run report:release-readiness && npm run build:visual-review && npm run build:editorial-print && npm run build:jpn-business-print-candidate && npm run stage:prompt-builder",
     "build:browser": "esbuild src/index.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=dist/browser/index.js && node scripts/check-browser-build.mjs && node scripts/check-browser-parity.mjs",
     "check:browser:parity": "node scripts/check-browser-parity.mjs",
     "check:product-site": "node scripts/check-product-site-sdk.mjs",
@@ -48,6 +48,7 @@
     "check:commercial-accessibility": "node scripts/check-commercial-accessibility.mjs",
     "check:commercial-contrast": "node scripts/check-commercial-contrast.mjs",
     "check:gestao-facil-model": "node scripts/check-gestao-facil-model.mjs",
+    "check:gestao-facil-binary": "node scripts/check-gestao-facil-binary.mjs",
     "stage:pro-kit": "node scripts/stage-pro-kit.mjs",
     "stage:prompt-builder": "node scripts/stage-prompt-builder-offline.mjs",
     "report:release-readiness": "node scripts/report-release-readiness.mjs",

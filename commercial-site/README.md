@@ -22,17 +22,22 @@ Superfície estática **interna e não publicada** para revisar a composição c
 
 Cada página possui hero, explicação de funcionamento/estrutura, entregáveis ou recursos, limites, FAQ, retorno relativo ao portfólio e `meta robots` em `noindex,nofollow`.
 
+Os cards da landing apontam diretamente para essas seis páginas. A navegação continua totalmente relativa e local: nenhum link comercial externo é necessário nesta fase.
+
 ## Preflight
 
 Execute:
 
 ```bash
 npm run check:commercial-site
+npm run check:commercial-navigation
 ```
 
-O gate valida landing e páginas individuais, nomes e IDs canônicos, os três pilares JPN, stylesheet compartilhado, retorno relativo ao portfólio, estado `EM PREPARAÇÃO` do Pro Kit e ausência de coleta de dados, URL externa, preço em reais, CTA transacional ou claim explícito de garantia.
+`check:commercial-site` valida landing e páginas individuais, nomes e IDs canônicos, os três pilares JPN, stylesheet compartilhado, retorno relativo ao portfólio, estado `EM PREPARAÇÃO` do Pro Kit e ausência de coleta de dados, URL externa, preço em reais, CTA transacional ou claim explícito de garantia.
 
-O comando também faz parte de `npm run build`.
+`check:commercial-navigation` percorre todos os arquivos HTML da superfície, valida destinos relativos e fragmentos, rejeita protocolos externos e exige que cada card canônico da landing leve à página individual correspondente.
+
+Os dois comandos fazem parte de `npm run build`.
 
 ## Guardrails
 

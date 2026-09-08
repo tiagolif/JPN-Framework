@@ -31,14 +31,30 @@ Arquivos sob revisão:
 | CS-QA-08 | composição desktop sem overflow, sobreposição ou corte | navegador real | pendente |
 | CS-QA-09 | composição mobile em largura estreita | navegador real | pendente |
 | CS-QA-10 | navegação integral por teclado e ordem de foco | teste manual | pendente |
-| CS-QA-11 | contraste calculado dos pares de cor efetivamente usados | ferramenta/inspeção manual | pendente |
+| CS-QA-11 | contraste dos pares canônicos de tokens | `check:commercial-contrast` | automatizado parcialmente |
 | CS-QA-12 | leitura assistiva de landmarks, links, headings e FAQ | leitor de tela | pendente |
 | CS-QA-13 | revisão editorial humana de copy e microcopy | revisão humana | pendente |
 | CS-QA-14 | decisão explícita de liberação pública por produto | autorização do responsável | bloqueado até decisão futura |
 
+## Contraste calculado
+
+`check:commercial-contrast` calcula luminância relativa e razão de contraste para pares canônicos extraídos diretamente de `commercial-site/styles.css`. O gate cobre:
+
+- texto principal contra fundo, fundo secundário e as duas superfícies;
+- texto secundário contra fundo e superfícies;
+- destaque claro contra fundo e superfícies;
+- texto escuro sobre o botão de destaque;
+- cor de foco contra fundo e superfícies.
+
+Os pares de texto normal devem atingir pelo menos **4,5:1**. Os pares de foco não textual devem atingir pelo menos **3:1**. O gate falha quando um token ausente ou uma alteração de cor derruba qualquer par abaixo do mínimo correspondente.
+
+O estado de CS-QA-11 é `automatizado parcialmente` porque o cálculo prova os pares de tokens definidos, mas não inspeciona o resultado composto de transparências, gradientes, imagens, sobreposições ou novos estados visuais que venham a ser introduzidos. Esses casos continuam exigindo inspeção do render final.
+
 ## Interpretação
 
 `automatizado` significa que existe um gate versionado que deve passar quando executado no ambiente de build. Não significa que o critério foi validado em todos os navegadores ou tecnologias assistivas.
+
+`automatizado parcialmente` significa que uma parte objetiva do critério possui gate reproduzível, enquanto a parte dependente de renderização final permanece pendente.
 
 `pendente` significa que a estrutura necessária foi preparada, mas ainda falta evidência real de inspeção.
 
@@ -53,10 +69,10 @@ Quando houver ambiente de navegador disponível, registrar pelo menos:
 3. página inicial e as seis páginas individuais;
 4. estado normal e foco de teclado nos principais links;
 5. FAQ aberto em pelo menos uma página;
-6. observações de overflow, recorte, contraste ou quebra de hierarquia;
+6. observações de overflow, recorte, contraste composto ou quebra de hierarquia;
 7. correções realizadas e nova inspeção após cada falha.
 
-A evidência deve identificar versão/commit revisado. Screenshots podem complementar a revisão, mas não substituem teclado, contraste e leitura assistiva.
+A evidência deve identificar versão/commit revisado. Screenshots podem complementar a revisão, mas não substituem teclado, contraste composto e leitura assistiva.
 
 ## Guardrail de publicação
 

@@ -7,6 +7,7 @@ const packagePath = 'package.json';
 const statusPath = 'docs/product-system/PRODUCT_RELEASE_STATUS_v1.json';
 const planPath = 'docs/product-system/RELEASE_EXECUTION_PLAN_v1.json';
 const editorialPdfCheckerPath = 'scripts/check-editorial-pdf-review.mjs';
+const editorialPdfCommand = 'check:editorial-pdf-review';
 
 const readText = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const readJson = (p) => JSON.parse(readText(p));
@@ -23,7 +24,11 @@ assert(runbook.includes('Status: **interno / não autoriza publicação**'), 'st
 assert(runbook.includes('Freeze vem antes dos hashes finais'), 'regra freeze → hashes finais ausente.');
 assert(runbook.includes('CI precisa estar associado ao SHA que será congelado'), 'regra de CI/SHA ausente.');
 assert(fs.existsSync(path.join(root, editorialPdfCheckerPath)), 'verificador editorial PDF obrigatório ausente.');
-assert(runbook.includes(`node ${editorialPdfCheckerPath}`), 'runbook não referencia diretamente o verificador editorial PDF existente.');
+assert(
+  pkg.scripts?.[editorialPdfCommand] === `node ${editorialPdfCheckerPath}`,
+  `alias npm ${editorialPdfCommand} deve apontar exatamente para ${editorialPdfCheckerPath}.`,
+);
+assert(runbook.includes(`npm run ${editorialPdfCommand}`), `runbook não referencia npm run ${editorialPdfCommand}.`);
 
 for (const heading of [
   '## Fase 0 — Consistência local',
@@ -45,6 +50,7 @@ const commands = [
   'check:editorial-print-staging',
   'export:editorial-pdfs',
   'review:editorial-pdfs',
+  editorialPdfCommand,
   'check:prompt-builder-staging',
   'stage:prompt-builder',
   'check:pro-kit',
@@ -97,4 +103,4 @@ for (const forbidden of [
 
 assert(plan.publication_authorized === false, 'plano de execução não pode autorizar publicação.');
 
-console.log(`Release runbook OK: ${commands.length} comandos npm + gate PDF direto, ${dependencies.length} dependências formais preservadas.`);
+console.log(`Release runbook OK: ${commands.length} comandos npm, incluindo gate PDF por alias estável, ${dependencies.length} dependências formais preservadas.`);

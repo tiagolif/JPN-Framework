@@ -52,6 +52,7 @@
     "check:visual-review-gallery": "node scripts/check-visual-review-gallery.mjs",
     "check:editorial-release": "node scripts/check-editorial-release.mjs",
     "check:editorial-print-staging": "node scripts/check-editorial-print-staging.mjs",
+    "check:editorial-pdf-review": "node scripts/check-editorial-pdf-review.mjs",
     "check:commercial-copy": "node scripts/check-commercial-copy.mjs",
     "check:commercial-product-facts": "node scripts/check-commercial-product-facts.mjs",
     "check:sales-enablement-playbook": "node scripts/check-sales-enablement-playbook.mjs",

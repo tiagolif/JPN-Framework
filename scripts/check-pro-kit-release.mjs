@@ -6,6 +6,7 @@ const requiredSources = [
   'docs/products/pro-kit/RELEASE_CHECKLIST.md',
   'docs/products/pro-kit/MANIFEST.template.json',
   'docs/products/pro-kit/RELEASE_NOTES_v1.md',
+  'docs/products/pro-kit/READINESS_MATRIX_v1.md',
   'docs/products/metodo-jpn/METODO_JPN_v1.md',
   'docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md',
   'docs/products/prompt-pack/PROMPT_INDEX.json',
@@ -61,7 +62,8 @@ if (manifest.files.some((item) => item.sha256 !== null)) {
 const textFiles = [
   'docs/products/pro-kit/LEIA_PRIMEIRO.md',
   'docs/products/pro-kit/DELIVERY_MAP.md',
-  'docs/products/pro-kit/RELEASE_NOTES_v1.md'
+  'docs/products/pro-kit/RELEASE_NOTES_v1.md',
+  'docs/products/pro-kit/READINESS_MATRIX_v1.md'
 ];
 const commercialText = textFiles.map((path) => readFileSync(path, 'utf8')).join('\n').toLowerCase();
 const forbiddenClaims = [
@@ -78,4 +80,9 @@ for (const pattern of forbiddenClaims) {
   }
 }
 
-console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; Gestão Fácil versionada com QA local)`);
+await import('./check-pro-kit-readiness-matrix.mjs');
+if (process.exitCode) {
+  throw new Error('Matriz operacional de prontidão do Pro Kit falhou no gate.');
+}
+
+console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; Gestão Fácil versionada com QA local; matriz operacional validada)`);

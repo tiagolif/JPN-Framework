@@ -5,6 +5,7 @@ import { join, resolve } from 'node:path';
 const root = resolve(process.cwd());
 const sourcePath = join(root, 'docs/products/jpn-business/JPN_BUSINESS_v1.md');
 const indexPath = join(root, 'docs/products/jpn-business/BUSINESS_INDEX.json');
+const quickReferencePath = join(root, 'docs/products/jpn-business/JPN_BUSINESS_QUICK_REFERENCE_v1.md');
 const htmlPath = join(root, 'dist/editorial-print-staging/jpn-business/index.html');
 const manifestPath = join(root, 'dist/editorial-print-staging/jpn-business/candidate-manifest.json');
 
@@ -21,9 +22,10 @@ function count(source, pattern) {
   return [...source.matchAll(pattern)].length;
 }
 
-const [markdown, indexRaw, html, manifestRaw] = await Promise.all([
+const [markdown, indexRaw, quickReference, html, manifestRaw] = await Promise.all([
   readFile(sourcePath, 'utf8'),
   readFile(indexPath, 'utf8'),
+  readFile(quickReferencePath, 'utf8'),
   readFile(htmlPath, 'utf8'),
   readFile(manifestPath, 'utf8'),
 ]);
@@ -42,6 +44,10 @@ if (manifest.pdf_export !== 'pending') errors.push('pdf_export deve permanecer p
 if (manifest.publication_authorized !== false) errors.push('publication_authorized deve permanecer false');
 if (manifest.source_sha256 !== sha256(markdown)) errors.push('source_sha256 não corresponde ao Markdown atual');
 if (manifest.index_sha256 !== sha256(indexRaw)) errors.push('index_sha256 não corresponde ao BUSINESS_INDEX.json atual');
+if (manifest.quick_reference !== 'docs/products/jpn-business/JPN_BUSINESS_QUICK_REFERENCE_v1.md') errors.push('caminho da Referência Rápida ausente ou divergente no manifesto');
+if (manifest.quick_reference_sha256 !== sha256(quickReference)) errors.push('quick_reference_sha256 não corresponde à Referência Rápida atual');
+if (manifest.quick_reference_state !== 'candidate-companion-editorial-and-visual-qa-pending') errors.push('estado da Referência Rápida foi promovido indevidamente');
+if (manifest.quick_reference_included_in_candidate !== true) errors.push('manifesto não confirma inclusão da Referência Rápida no candidato');
 
 const renderedIds = [...html.matchAll(/data-playbook="(JB-\d{2})"/g)].map((match) => match[1]);
 if (JSON.stringify(renderedIds) !== JSON.stringify(expectedIds)) {
@@ -54,6 +60,12 @@ if (!html.includes('<body class="jpn-business-candidate">')) errors.push('classe
 if (!html.includes('staging interno para revisão')) errors.push('aviso de staging interno ausente');
 if (!html.includes('PDF final aprovado')) errors.push('aviso de que não é PDF final aprovado ausente');
 
+if (count(html, /data-component="jpn-business-quick-reference"/g) !== 1) errors.push('HTML deve conter exatamente uma Referência Rápida integrada');
+if (!html.includes('JPN Business — Referência Rápida v1')) errors.push('título da Referência Rápida ausente do HTML');
+if (!html.includes('Regra de parada')) errors.push('Regra de parada da Referência Rápida ausente do HTML');
+if (!html.includes('Checklist antes de concluir um playbook')) errors.push('checklist da Referência Rápida ausente do HTML');
+if (!html.includes('candidate companion / editorial and visual QA pending')) errors.push('estado candidato da Referência Rápida ausente do HTML');
+
 if (!Array.isArray(manifest.playbooks) || manifest.playbooks.length !== 12) {
   errors.push('manifesto deve listar exatamente 12 playbooks');
 } else {
@@ -65,11 +77,16 @@ if (!Array.isArray(manifest.playbooks) || manifest.playbooks.length !== 12) {
     const expectedLinks = expected.prompt_pack_links ?? [];
     const actualLinks = actual?.prompt_pack_links ?? [];
     if (JSON.stringify(actualLinks) !== JSON.stringify(expectedLinks)) errors.push(`${expected.id}: vínculos PP-* do manifesto divergem do índice`);
+    if (!html.includes(`<strong>${expected.id} — ${expected.name}</strong>`)) errors.push(`${expected.id}: entrada canônica ausente da Referência Rápida renderizada`);
     for (const link of expectedLinks) {
       if (!html.includes(`<code>${link}</code>`)) errors.push(`${expected.id}: vínculo ${link} ausente no HTML renderizado`);
     }
   }
 }
+
+const quickReferenceStart = html.indexOf('data-component="jpn-business-quick-reference"');
+const lastPlaybook = html.lastIndexOf('data-playbook="JB-12"');
+if (quickReferenceStart <= lastPlaybook) errors.push('Referência Rápida deve aparecer como apêndice após os 12 playbooks');
 
 const forbidden = [
   /comprar agora/i,
@@ -86,4 +103,4 @@ if (errors.length) {
   process.exit();
 }
 
-console.log('JPN Business rendered candidate OK: 12 playbooks, 144 campos, vínculos PP-* e manifesto preservados; PDF/QA visual continuam pendentes.');
+console.log('JPN Business rendered candidate OK: 12 playbooks, 144 campos, vínculos PP-*, Referência Rápida e manifesto preservados; PDF/QA visual continuam pendentes.');

@@ -8,6 +8,8 @@ const statusPath = 'docs/product-system/PRODUCT_RELEASE_STATUS_v1.json';
 const planPath = 'docs/product-system/RELEASE_EXECUTION_PLAN_v1.json';
 const editorialPdfCheckerPath = 'scripts/check-editorial-pdf-review.mjs';
 const editorialPdfCommand = 'check:editorial-pdf-review';
+const promptContextCheckerPath = 'scripts/check-prompt-builder-context-regressions.mjs';
+const promptContextCommand = 'check:prompt-builder-context-regressions';
 const releaseQueueScript = 'scripts/report-release-action-queue.mjs';
 const releaseQueueReportCommand = 'report:release-action-queue';
 const releaseQueueCheckCommand = 'check:release-action-queue';
@@ -32,6 +34,18 @@ assert(
   `alias npm ${editorialPdfCommand} deve apontar exatamente para ${editorialPdfCheckerPath}.`,
 );
 assert(runbook.includes(`npm run ${editorialPdfCommand}`), `runbook não referencia npm run ${editorialPdfCommand}.`);
+
+assert(fs.existsSync(path.join(root, promptContextCheckerPath)), 'gate contextual do Prompt Builder ausente.');
+assert(
+  pkg.scripts?.[promptContextCommand] === `node ${promptContextCheckerPath}`,
+  `alias npm ${promptContextCommand} deve apontar exatamente para ${promptContextCheckerPath}.`,
+);
+assert(
+  pkg.scripts?.build?.includes(`npm run ${promptContextCommand}`),
+  `build deve executar npm run ${promptContextCommand}.`,
+);
+assert(runbook.includes(`npm run ${promptContextCommand}`), `runbook não referencia npm run ${promptContextCommand}.`);
+assert(runbook.includes('PB-CTX-*'), 'runbook deve registrar a família de regressões contextuais PB-CTX-*.' );
 
 assert(fs.existsSync(path.join(root, releaseQueueScript)), 'script da fila operacional de release ausente.');
 assert(
@@ -68,6 +82,7 @@ const commands = [
   'export:editorial-pdfs',
   'review:editorial-pdfs',
   editorialPdfCommand,
+  promptContextCommand,
   'check:prompt-builder-staging',
   'stage:prompt-builder',
   'check:pro-kit',
@@ -123,4 +138,4 @@ for (const forbidden of [
 
 assert(plan.publication_authorized === false, 'plano de execução não pode autorizar publicação.');
 
-console.log(`Release runbook OK: ${commands.length} comandos npm, gate PDF e fila operacional protegidos por aliases estáveis; ${dependencies.length} dependências formais preservadas.`);
+console.log(`Release runbook OK: ${commands.length} comandos npm, gate PDF, regressões contextuais do Prompt Builder e fila operacional protegidos por aliases estáveis; ${dependencies.length} dependências formais preservadas.`);

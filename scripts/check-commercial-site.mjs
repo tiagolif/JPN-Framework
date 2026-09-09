@@ -4,6 +4,7 @@ import path from 'node:path';
 const root = process.cwd();
 const siteRoot = path.join(root, 'commercial-site');
 const htmlPath = path.join(siteRoot, 'index.html');
+const selectorPath = path.join(siteRoot, 'escolher-produto.html');
 const cssPath = path.join(siteRoot, 'styles.css');
 const read = (p) => fs.readFileSync(p, 'utf8');
 
@@ -42,16 +43,19 @@ const verifySafety = (html, label) => {
 };
 
 if (!fs.existsSync(htmlPath)) fail('index.html ausente');
+if (!fs.existsSync(selectorPath)) fail('escolher-produto.html ausente');
 if (!fs.existsSync(cssPath)) fail('styles.css ausente');
 if (process.exitCode) process.exit();
 
 const html = read(htmlPath);
+const selector = read(selectorPath);
 const css = read(cssPath);
 
 for (const { id, name } of products) {
   const marker = `data-product="${id}"`;
   if (!html.includes(marker)) fail(`produto sem marcador canônico na landing: ${name}`);
   if (!html.includes(`>${name}<`)) fail(`nome canônico ausente na landing: ${name}`);
+  if (!selector.includes(`>${name}<`)) fail(`nome canônico ausente no seletor: ${name}`);
 }
 
 const uniqueMarkers = [...html.matchAll(/data-product="([^"]+)"/g)].map((m) => m[1]);
@@ -68,6 +72,23 @@ for (const text of requiredSafety) {
   if (!html.includes(text)) fail(`guardrail ausente na landing: ${text}`);
 }
 verifySafety(html, 'landing');
+verifySafety(selector, 'seletor');
+
+const selectorRequirements = [
+  'Comece pela necessidade, não pelo produto.',
+  'Escolha o menor produto que resolva a necessidade atual.',
+  'O Pro Kit não deve ser indicado apenas por ser mais abrangente.',
+  'GF-QA-10 ainda permanece pendente',
+  'sem preço, checkout, reserva ou promessa comercial',
+  'As combinações abaixo são rotas de trabalho, não bundles comerciais nem ofertas.',
+];
+for (const text of selectorRequirements) {
+  if (!selector.includes(text)) fail(`seletor: regra/guardrail ausente: ${text}`);
+}
+if (!html.includes('href="escolher-produto.html"')) fail('landing: link para seletor ausente');
+for (const { file, name } of products) {
+  if (!selector.includes(`href="products/${file}"`)) fail(`seletor: link para ${name} ausente`);
+}
 
 const canonicalTokens = ['#06121c', '#0b1f33', '#0e2639', '#21455e', '#f5f9fc', '#a7bdcc', '#2ec4b6', '#86e2d9'];
 for (const token of canonicalTokens) {
@@ -100,5 +121,5 @@ if (!proKitHtml.includes('EM PREPARAÇÃO')) fail('JPN Pro Kit: estado EM PREPAR
 if (!proKitHtml.includes('sem preço, checkout, reserva')) fail('JPN Pro Kit: guardrail transacional específico ausente');
 
 if (!process.exitCode) {
-  console.log('commercial-site preflight: OK — landing + 6 páginas individuais, guardrails e tokens canônicos presentes.');
+  console.log('commercial-site preflight: OK — landing + seletor + 6 páginas individuais, guardrails e tokens canônicos presentes.');
 }

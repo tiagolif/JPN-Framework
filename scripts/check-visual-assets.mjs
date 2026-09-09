@@ -2,7 +2,11 @@ import { readFile, readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
 const roots = ['assets/covers', 'assets/social'];
-const palette = new Set(['#06121C', '#0B1F33', '#0E2639', '#173A50', '#2EC4B6', '#FFFFFF', '#B9CAD8']);
+const palette = new Set(['#06121C', '#0B1F33', '#0E2639', '#102A3C', '#173A50', '#21455E', '#2EC4B6', '#86E2D9', '#9AF0E7', '#F5F9FC', '#FFFFFF', '#A7BDCC', '#B9CAD8']);
+const requiredCandidateAssets = [
+  'assets/social/jpn-prompt-builder-contexto-1080x1350.svg',
+  'assets/social/jpn-gestao-facil-inicio-1080x1350.svg',
+];
 const forbiddenClaims = [
   /elimina(?:r|ção)?\s+(?:as\s+)?alucina/i,
   /zero\s+alucina/i,
@@ -32,6 +36,22 @@ const errors = [];
 
 if (files.length < 10) {
   errors.push(`Esperados ao menos 10 SVGs versionados; encontrados ${files.length}.`);
+}
+
+for (const required of requiredCandidateAssets) {
+  if (!files.includes(required)) errors.push(`Arte social candidata obrigatória ausente: ${required}.`);
+}
+
+const socialArtSystem = await readFile('docs/brand/SOCIAL_ART_SYSTEM_v1.md', 'utf8');
+for (const marker of [
+  'Status: candidate companion / visual QA pending.',
+  'assets/social/jpn-prompt-builder-contexto-1080x1350.svg',
+  'assets/social/jpn-gestao-facil-inicio-1080x1350.svg',
+  'GF-QA-10 continua pendente',
+  'QA móvel real ainda pendente',
+  'não exportar nem publicar',
+]) {
+  if (!socialArtSystem.includes(marker)) errors.push(`SOCIAL_ART_SYSTEM_v1.md não preserva marcador obrigatório: ${marker}`);
 }
 
 for (const file of files) {
@@ -71,6 +91,12 @@ for (const file of files) {
   if (/gestao-facil/i.test(filename) && !/reconstru/i.test(svg)) {
     fail(errors, file, 'Gestão Fácil deve permanecer identificada como reconstrução controlada.');
   }
+  if (/prompt-builder-contexto/i.test(filename) && !/QA móvel real ainda pendente/i.test(svg)) {
+    fail(errors, file, 'Peça contextual do Prompt Builder deve preservar QA móvel real como pendente.');
+  }
+  if (/gestao-facil-inicio/i.test(filename) && !/GF-QA-10 ainda pendente/i.test(svg)) {
+    fail(errors, file, 'Peça de início da Gestão Fácil deve preservar GF-QA-10 como pendente.');
+  }
 
   if (/font-family="(?!Inter,Arial,sans-serif)[^"]+"/.test(svg)) {
     fail(errors, file, 'fallback tipográfico diverge de Inter,Arial,sans-serif.');
@@ -82,4 +108,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`QA visual aprovado para ${files.length} SVGs (${roots.join(', ')}).`);
+console.log(`QA visual aprovado para ${files.length} SVGs (${roots.join(', ')}), incluindo o sistema social candidato.`);

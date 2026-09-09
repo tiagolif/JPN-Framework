@@ -1,4 +1,4 @@
-const JPN_MOBILE_CONTEXT_RULES = Object.freeze({
+export const JPN_MOBILE_CONTEXT_RULES = Object.freeze({
   "Atendimento / vendas": {
     finalState: "Entregar uma resposta comercial curta, natural e utilizável que avance a conversa sem inventar informações ausentes.",
     format: [
@@ -29,10 +29,10 @@ const JPN_MOBILE_CONTEXT_RULES = Object.freeze({
   },
 });
 
-function jpnClean(value) { return (value || "").trim(); }
-function jpnSentences(text) { return jpnClean(text).split(/(?<=[.!?])\s+/).map((item) => item.trim()).filter(Boolean); }
+export function jpnClean(value) { return (value || "").trim(); }
+export function jpnSentences(text) { return jpnClean(text).split(/(?<=[.!?])\s+/).map((item) => item.trim()).filter(Boolean); }
 
-function jpnExtractContext(idea) {
+export function jpnExtractContext(idea) {
   const sentences = jpnSentences(idea);
   const confirmed = sentences.length ? sentences : [idea];
   const missing = [];
@@ -54,7 +54,7 @@ function jpnExtractContext(idea) {
   return { confirmed, missing: [...new Set(missing)] };
 }
 
-function jpnBuildContextAwarePrompt({ idea, type, restrictions }) {
+export function jpnBuildContextAwarePrompt({ idea, type, restrictions }) {
   const context = jpnExtractContext(idea);
   const rule = JPN_MOBILE_CONTEXT_RULES[type] || JPN_MOBILE_CONTEXT_RULES["Plano / estratégia"];
   const pending = context.missing.length ? context.missing.map((item) => `- ${item}`).join("\n") : "- Nenhuma lacuna explícita extraída automaticamente; revisar antes de assumir dados adicionais.";
@@ -63,22 +63,25 @@ function jpnBuildContextAwarePrompt({ idea, type, restrictions }) {
   return `# JPN — Jornada · Precisão · Narrativa\n\n## J — Jornada\nContexto confirmado:\n${context.confirmed.map((item) => `- ${item}`).join("\n")}\n\nEstado atual e pendências extraídas do próprio pedido:\n${pending}\n\n## P — Precisão\nObjetivo operacional:\n- Produzir: ${type}.\n\nRestrições informadas:\n${restrictionText}\n\nCritérios de aceitação:\n- Usar o contexto confirmado sem reclassificá-lo como “não informado”.\n- Não inventar fatos, condições ou dados ausentes.\n- Tratar lacunas de acordo com a tarefa: perguntar somente quando bloquearem a execução; quando forem parte natural do atendimento, incorporá-las à própria resposta.\n- Separar fatos, inferências e pendências quando isso for material para a tarefa.\n\n## N — Narrativa\nEstado final desejado:\n- ${rule.finalState}\n\nFormato e sequência:\n${format}\n- Encerrar com a próxima ação adequada ao tipo de tarefa, sem criar obrigação externa.\n\n## Regra de execução\nProduza a entrega solicitada diretamente quando o contexto for suficiente. Não faça um preâmbulo de raciocínio nem devolva ao operador perguntas que podem ser tratadas naturalmente dentro da própria entrega. Se uma lacuna realmente impedir uma resposta segura, faça somente a pergunta essencial e explique brevemente por que ela bloqueia a execução.`;
 }
 
-function jpnApplyContextAwareBuild() {
-  const idea = jpnClean(document.getElementById("idea")?.value);
-  if (!idea) return;
-  const type = document.getElementById("type")?.value || "Plano / estratégia";
-  const restrictions = jpnClean(document.getElementById("restrictions")?.value);
+export function jpnApplyContextAwareBuild(doc = globalThis.document) {
+  const idea = jpnClean(doc?.getElementById("idea")?.value);
+  if (!idea) return null;
+  const type = doc.getElementById("type")?.value || "Plano / estratégia";
+  const restrictions = jpnClean(doc.getElementById("restrictions")?.value);
   const output = jpnBuildContextAwarePrompt({ idea, type, restrictions });
   const score = Math.min(100, 45 + (idea.length >= 80 ? 20 : 0) + (restrictions ? 20 : 0) + 15);
-  document.getElementById("output").textContent = output;
-  document.getElementById("score").textContent = `${score}%`;
-  document.getElementById("status").textContent = score >= 80 ? "Estrutura contextual utilizável" : "Revisão recomendada";
-  document.getElementById("status").className = `status ${score >= 80 ? "good" : ""}`;
+  doc.getElementById("output").textContent = output;
+  doc.getElementById("score").textContent = `${score}%`;
+  doc.getElementById("status").textContent = score >= 80 ? "Estrutura contextual utilizável" : "Revisão recomendada";
+  doc.getElementById("status").className = `status ${score >= 80 ? "good" : ""}`;
   const context = jpnExtractContext(idea);
-  document.getElementById("gaps").innerHTML = context.missing.length
+  doc.getElementById("gaps").innerHTML = context.missing.length
     ? context.missing.map((item) => `• ${item}`).join("<br>")
     : "• Nenhuma pendência explícita extraída; revise fatos e restrições antes de executar.";
-  localStorage.setItem("jpn-mobile-draft", JSON.stringify({ idea, type, restrictions, prompt: output, score }));
+  globalThis.localStorage?.setItem("jpn-mobile-draft", JSON.stringify({ idea, type, restrictions, prompt: output, score }));
+  return { idea, type, restrictions, output, score, context };
 }
 
-document.getElementById("generate")?.addEventListener("click", jpnApplyContextAwareBuild);
+if (typeof document !== "undefined") {
+  document.getElementById("generate")?.addEventListener("click", () => jpnApplyContextAwareBuild(document));
+}

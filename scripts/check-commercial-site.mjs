@@ -5,6 +5,8 @@ const root = process.cwd();
 const siteRoot = path.join(root, 'commercial-site');
 const htmlPath = path.join(siteRoot, 'index.html');
 const selectorPath = path.join(siteRoot, 'escolher-produto.html');
+const comparisonPath = path.join(siteRoot, 'comparar-produtos.html');
+const comparisonDocPath = path.join(root, 'docs', 'commercial', 'PRODUCT_COMPARISON_MATRIX_v1.md');
 const cssPath = path.join(siteRoot, 'styles.css');
 const read = (p) => fs.readFileSync(p, 'utf8');
 
@@ -44,11 +46,15 @@ const verifySafety = (html, label) => {
 
 if (!fs.existsSync(htmlPath)) fail('index.html ausente');
 if (!fs.existsSync(selectorPath)) fail('escolher-produto.html ausente');
+if (!fs.existsSync(comparisonPath)) fail('comparar-produtos.html ausente');
+if (!fs.existsSync(comparisonDocPath)) fail('PRODUCT_COMPARISON_MATRIX_v1.md ausente');
 if (!fs.existsSync(cssPath)) fail('styles.css ausente');
 if (process.exitCode) process.exit();
 
 const html = read(htmlPath);
 const selector = read(selectorPath);
+const comparison = read(comparisonPath);
+const comparisonDoc = read(comparisonDocPath);
 const css = read(cssPath);
 
 for (const { id, name } of products) {
@@ -56,6 +62,8 @@ for (const { id, name } of products) {
   if (!html.includes(marker)) fail(`produto sem marcador canônico na landing: ${name}`);
   if (!html.includes(`>${name}<`)) fail(`nome canônico ausente na landing: ${name}`);
   if (!selector.includes(`>${name}<`)) fail(`nome canônico ausente no seletor: ${name}`);
+  if (!comparison.includes(name)) fail(`nome canônico ausente na comparação: ${name}`);
+  if (!comparisonDoc.includes(name)) fail(`nome canônico ausente na matriz documental: ${name}`);
 }
 
 const uniqueMarkers = [...html.matchAll(/data-product="([^"]+)"/g)].map((m) => m[1]);
@@ -73,6 +81,7 @@ for (const text of requiredSafety) {
 }
 verifySafety(html, 'landing');
 verifySafety(selector, 'seletor');
+verifySafety(comparison, 'comparação');
 
 const selectorRequirements = [
   'Comece pela necessidade, não pelo produto.',
@@ -86,8 +95,38 @@ for (const text of selectorRequirements) {
   if (!selector.includes(text)) fail(`seletor: regra/guardrail ausente: ${text}`);
 }
 if (!html.includes('href="escolher-produto.html"')) fail('landing: link para seletor ausente');
+if (!selector.includes('href="comparar-produtos.html"')) fail('seletor: link para comparação ausente');
 for (const { file, name } of products) {
   if (!selector.includes(`href="products/${file}"`)) fail(`seletor: link para ${name} ausente`);
+  if (!comparison.includes(`href="products/${file}"`)) fail(`comparação: link para ${name} ausente`);
+}
+
+const comparisonRequirements = [
+  'Compare o que cada produto resolve — e o que ele não pretende resolver.',
+  'escolher o menor produto que resolva a necessidade atual',
+  'QA físico contextual em celular pendente',
+  'GF-QA-10 multiplataforma pendente',
+  'EM PREPARAÇÃO',
+  'sem preço, checkout, reserva ou promessa comercial',
+  'não é a recomendação automática por ser mais abrangente',
+  'Não substitui contabilidade, conciliação bancária nem validação profissional.',
+];
+for (const text of comparisonRequirements) {
+  if (!comparison.includes(text)) fail(`comparação: regra/estado ausente: ${text}`);
+}
+
+const comparisonDocRequirements = [
+  'candidate companion / commercial QA pending',
+  'Escolha o menor produto que resolva a necessidade atual.',
+  'JPN Pro Kit não é a recomendação automática',
+  'GF-QA-10 multiplataforma ainda pendente',
+  'QA físico contextual em celular ainda pendente',
+  'não substitui contabilidade',
+  'não bundles, descontos ou ofertas',
+  'Regra de parada',
+];
+for (const text of comparisonDocRequirements) {
+  if (!comparisonDoc.includes(text)) fail(`matriz documental: regra/estado ausente: ${text}`);
 }
 
 const canonicalTokens = ['#06121c', '#0b1f33', '#0e2639', '#21455e', '#f5f9fc', '#a7bdcc', '#2ec4b6', '#86e2d9'];
@@ -97,6 +136,7 @@ for (const token of canonicalTokens) {
 if (!css.includes('@media(max-width:900px)') || !css.includes('@media(max-width:620px)')) {
   fail('breakpoints responsivos esperados não encontrados');
 }
+if (!css.includes('.comparison-wrap') || !css.includes('.comparison-table')) fail('estilos da matriz comparativa ausentes');
 
 const productsDir = path.join(siteRoot, 'products');
 if (!fs.existsSync(productsDir)) fail('diretório commercial-site/products ausente');
@@ -121,5 +161,5 @@ if (!proKitHtml.includes('EM PREPARAÇÃO')) fail('JPN Pro Kit: estado EM PREPAR
 if (!proKitHtml.includes('sem preço, checkout, reserva')) fail('JPN Pro Kit: guardrail transacional específico ausente');
 
 if (!process.exitCode) {
-  console.log('commercial-site preflight: OK — landing + seletor + 6 páginas individuais, guardrails e tokens canônicos presentes.');
+  console.log('commercial-site preflight: OK — landing + seletor + comparação + 6 páginas individuais, guardrails e tokens canônicos presentes.');
 }

@@ -91,3 +91,6 @@ console.log(
 
 const quickReferenceCheck = fileURLToPath(new URL('./check-jpn-business-quick-reference.mjs', import.meta.url));
 execFileSync(process.execPath, [quickReferenceCheck], { stdio: 'inherit' });
+
+const implementationWorkbookCheck = fileURLToPath(new URL('./check-jpn-business-implementation-workbook.mjs', import.meta.url));
+execFileSync(process.execPath, [implementationWorkbookCheck], { stdio: 'inherit' });

@@ -1,0 +1,6 @@
+semana_id,data_relativa,playbooks_observados,fatos_confirmados,pendencias,correcoes,bloqueador_critico,semaforo,proximo_passo_1,proximo_passo_2,proximo_passo_3,responsavel_revisao,decisao
+EXEMPLO-SEMANA-01,D+7,JB-12,Cenario ficticio revisado,Uma evidencia ausente,Revisar origem antes de repetir,nao,AMARELO,Validar origem,Repetir teste,Registrar resultado,Revisor ficticio,ajustar
+MODELO-SEMANA-01,,,,,,,,,,,,pendente
+MODELO-SEMANA-02,,,,,,,,,,,,pendente
+MODELO-SEMANA-03,,,,,,,,,,,,pendente
+MODELO-SEMANA-04,,,,,,,,,,,,pendente

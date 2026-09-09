@@ -60,6 +60,47 @@ if (!fs.existsSync(pageSystem)) {
   }
 }
 
+const copyBankPath = path.join(commercialDir, 'COPY_BANK_v1.md');
+if (!fs.existsSync(copyBankPath)) {
+  errors.push('docs/commercial/COPY_BANK_v1.md ausente.');
+} else {
+  const copy = fs.readFileSync(copyBankPath, 'utf8');
+  const requiredMarkers = [
+    '# JPN — Copy Bank v1',
+    'Jornada · Precisão · Narrativa',
+    'Método JPN',
+    'JPN Prompt Pack',
+    'JPN Business',
+    'JPN Prompt Builder',
+    'JPN Gestão Fácil',
+    'JPN Pro Kit',
+    '18 templates canônicos',
+    'Doze playbooks empresariais',
+    'GF-QA-10 continua pendente',
+    'QA físico contextual em celular continua pendente',
+    'Estado atual: `EM PREPARAÇÃO`',
+    'Comece pelo menor recurso suficiente.',
+    'Claims bloqueados sem evidência',
+    'não publicado',
+  ];
+
+  for (const marker of requiredMarkers) {
+    if (!copy.includes(marker)) errors.push(`COPY_BANK_v1.md perdeu marcador obrigatório: ${marker}`);
+  }
+
+  const ctaSection = copy.match(/## 10\. CTAs aprováveis sem transação([\s\S]*?)## 11\./u)?.[1] ?? '';
+  const approvedCtas = ctaSection.match(/^\- /gmu)?.length ?? 0;
+  if (approvedCtas < 8) errors.push(`COPY_BANK_v1.md deve manter ao menos 8 CTAs informativos; encontrados ${approvedCtas}.`);
+
+  const socialSection = copy.match(/## 11\. Frases curtas para arte e social interno([\s\S]*?)## 12\./u)?.[1] ?? '';
+  const socialLines = socialSection.match(/^\- /gmu)?.length ?? 0;
+  if (socialLines < 8) errors.push(`COPY_BANK_v1.md deve manter ao menos 8 frases curtas; encontradas ${socialLines}.`);
+
+  if (/\bR\$\s*\d|https?:\/\/|<form\b|checkout|pix\b|cart[aã]o\s+de\s+cr[eé]dito/iu.test(copy)) {
+    errors.push('COPY_BANK_v1.md contém padrão transacional, URL externa, formulário ou dado de pagamento não autorizado.');
+  }
+}
+
 if (warnings.length) {
   console.warn('Avisos comerciais:');
   for (const warning of warnings) console.warn(`- ${warning}`);
@@ -71,4 +112,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Gate comercial aprovado: ${files.length} arquivo(s) Markdown verificado(s).`);
+console.log(`Gate comercial aprovado: ${files.length} arquivo(s) Markdown verificado(s), incluindo Copy Bank v1.`);

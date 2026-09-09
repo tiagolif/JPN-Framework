@@ -7,8 +7,10 @@ const htmlPath = path.join(siteRoot, 'index.html');
 const selectorPath = path.join(siteRoot, 'escolher-produto.html');
 const comparisonPath = path.join(siteRoot, 'comparar-produtos.html');
 const howPath = path.join(siteRoot, 'como-funciona.html');
+const demoPath = path.join(siteRoot, 'demonstracao.html');
 const comparisonDocPath = path.join(root, 'docs', 'commercial', 'PRODUCT_COMPARISON_MATRIX_v1.md');
 const howDocPath = path.join(root, 'docs', 'commercial', 'HOW_JPN_WORKS_v1.md');
+const demoDocPath = path.join(root, 'docs', 'commercial', 'GUIDED_DEMO_PLAYBOOK_v1.md');
 const cssPath = path.join(siteRoot, 'styles.css');
 const read = (p) => fs.readFileSync(p, 'utf8');
 
@@ -46,7 +48,7 @@ const verifySafety = (html, label) => {
   }
 };
 
-for (const requiredPath of [htmlPath, selectorPath, comparisonPath, howPath, comparisonDocPath, howDocPath, cssPath]) {
+for (const requiredPath of [htmlPath, selectorPath, comparisonPath, howPath, demoPath, comparisonDocPath, howDocPath, demoDocPath, cssPath]) {
   if (!fs.existsSync(requiredPath)) fail(`arquivo obrigatório ausente: ${path.relative(root, requiredPath)}`);
 }
 if (process.exitCode) process.exit();
@@ -55,8 +57,10 @@ const html = read(htmlPath);
 const selector = read(selectorPath);
 const comparison = read(comparisonPath);
 const how = read(howPath);
+const demo = read(demoPath);
 const comparisonDoc = read(comparisonDocPath);
 const howDoc = read(howDocPath);
+const demoDoc = read(demoDocPath);
 const css = read(cssPath);
 
 for (const { id, name } of products) {
@@ -68,6 +72,8 @@ for (const { id, name } of products) {
   if (!comparisonDoc.includes(name)) fail(`nome canônico ausente na matriz documental: ${name}`);
   if (!how.includes(name)) fail(`nome canônico ausente em como funciona: ${name}`);
   if (!howDoc.includes(name)) fail(`nome canônico ausente no documento como funciona: ${name}`);
+  if (!demo.includes(name)) fail(`nome canônico ausente na demonstração: ${name}`);
+  if (!demoDoc.includes(name)) fail(`nome canônico ausente no playbook de demonstração: ${name}`);
 }
 
 const uniqueMarkers = [...html.matchAll(/data-product="([^"]+)"/g)].map((m) => m[1]);
@@ -87,6 +93,7 @@ verifySafety(html, 'landing');
 verifySafety(selector, 'seletor');
 verifySafety(comparison, 'comparação');
 verifySafety(how, 'como funciona');
+verifySafety(demo, 'demonstração');
 
 const selectorRequirements = [
   'Comece pela necessidade, não pelo produto.',
@@ -105,6 +112,7 @@ for (const { file, name } of products) {
   if (!selector.includes(`href="products/${file}"`)) fail(`seletor: link para ${name} ausente`);
   if (!comparison.includes(`href="products/${file}"`)) fail(`comparação: link para ${name} ausente`);
   if (!how.includes(`href="products/${file}"`)) fail(`como funciona: link para ${name} ausente`);
+  if (!demo.includes(`href="products/${file}"`)) fail(`demonstração: link para ${name} ausente`);
 }
 
 const comparisonRequirements = [
@@ -163,6 +171,40 @@ for (const text of howDocRequirements) {
   if (!howDoc.includes(text)) fail(`documento como funciona: regra/estado ausente: ${text}`);
 }
 
+const demoRequirements = [
+  'demonstração curta e controlada',
+  'dados fictícios',
+  'menor recurso suficiente',
+  'QA físico contextual em celular pendente',
+  'GF-QA-10 pendente',
+  'REPOR` é alerta, nunca autorização de compra',
+  'EM PREPARAÇÃO',
+  'Regra de parada',
+];
+for (const text of demoRequirements) {
+  if (!demo.includes(text)) fail(`demonstração: regra/estado ausente: ${text}`);
+}
+for (let i = 1; i <= 6; i += 1) {
+  const id = `DEMO-${String(i).padStart(2, '0')}`;
+  if (!demo.includes(id)) fail(`demonstração: cenário ausente: ${id}`);
+  if (!demoDoc.includes(id)) fail(`playbook de demonstração: cenário ausente: ${id}`);
+}
+
+const demoDocRequirements = [
+  'candidate companion / commercial QA pending',
+  'Toda demo deve seguir a sequência',
+  'Use somente dados fictícios ou explicitamente sanitizados',
+  'QA físico contextual em celular pendente',
+  'GF-QA-10 multiplataforma pendente',
+  '`REPOR` é alerta operacional, não autorização de compra',
+  'Estado obrigatório: **EM PREPARAÇÃO**',
+  'não promete eliminar erros',
+  'Regra de parada',
+];
+for (const text of demoDocRequirements) {
+  if (!demoDoc.includes(text)) fail(`playbook de demonstração: regra/estado ausente: ${text}`);
+}
+
 const canonicalTokens = ['#06121c', '#0b1f33', '#0e2639', '#21455e', '#f5f9fc', '#a7bdcc', '#2ec4b6', '#86e2d9'];
 for (const token of canonicalTokens) {
   if (!css.toLowerCase().includes(token)) fail(`token visual canônico ausente no CSS: ${token}`);
@@ -195,5 +237,5 @@ if (!proKitHtml.includes('EM PREPARAÇÃO')) fail('JPN Pro Kit: estado EM PREPAR
 if (!proKitHtml.includes('sem preço, checkout, reserva')) fail('JPN Pro Kit: guardrail transacional específico ausente');
 
 if (!process.exitCode) {
-  console.log('commercial-site preflight: OK — landing + seletor + comparação + como funciona + 6 páginas individuais, guardrails e tokens canônicos presentes.');
+  console.log('commercial-site preflight: OK — landing + seletor + comparação + como funciona + demonstração + 6 páginas individuais, guardrails e tokens canônicos presentes.');
 }

@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const faqPath = path.join(root, 'docs/commercial/COMMERCIAL_FAQ_v1.md');
+const faqPagePath = path.join(root, 'commercial-site/perguntas-frequentes.html');
 const portfolioPath = path.join(root, 'docs/product-system/PRODUCT_PORTFOLIO_v1.json');
 const promptIndexPath = path.join(root, 'docs/products/prompt-pack/PROMPT_INDEX.json');
 const businessIndexPath = path.join(root, 'docs/products/jpn-business/BUSINESS_INDEX.json');
@@ -14,6 +15,7 @@ function fail(message) {
 
 for (const [label, file] of [
   ['FAQ', faqPath],
+  ['página FAQ', faqPagePath],
   ['portfólio', portfolioPath],
   ['índice do Prompt Pack', promptIndexPath],
   ['índice do JPN Business', businessIndexPath],
@@ -22,6 +24,7 @@ for (const [label, file] of [
 }
 
 const faq = fs.readFileSync(faqPath, 'utf8');
+const faqPage = fs.readFileSync(faqPagePath, 'utf8');
 const portfolio = JSON.parse(fs.readFileSync(portfolioPath, 'utf8'));
 const promptIndex = JSON.parse(fs.readFileSync(promptIndexPath, 'utf8'));
 const businessIndex = JSON.parse(fs.readFileSync(businessIndexPath, 'utf8'));
@@ -37,21 +40,27 @@ for (const product of portfolio.products) {
   if (!product.audience || !product.role) {
     fail(`produto canônico incompleto no portfólio: ${product.id}`);
   }
+  if (!faqPage.includes(product.canonical_name)) {
+    fail(`produto canônico ausente da página FAQ: ${product.id}`);
+  }
 }
 
 const promptCount = Array.isArray(promptIndex.templates) ? promptIndex.templates.length : null;
 const businessCount = Array.isArray(businessIndex.playbooks) ? businessIndex.playbooks.length : null;
 if (!Number.isInteger(promptCount) || promptCount < 1) fail('quantidade de templates não pôde ser derivada');
 if (!Number.isInteger(businessCount) || businessCount < 1) fail('quantidade de playbooks não pôde ser derivada');
-if (!new RegExp(`\\b${promptCount} templates\\b`, 'iu').test(faq)) {
-  fail(`FAQ não declara a quantidade canônica atual de ${promptCount} templates`);
-}
-if (!new RegExp(`\\b${businessCount} playbooks\\b`, 'iu').test(faq)) {
-  fail(`FAQ não declara a quantidade canônica atual de ${businessCount} playbooks`);
+for (const source of [faq, faqPage]) {
+  if (!new RegExp(`\\b${promptCount} templates\\b`, 'iu').test(source)) {
+    fail(`FAQ/página não declara a quantidade canônica atual de ${promptCount} templates`);
+  }
+  if (!new RegExp(`\\b${businessCount} playbooks\\b`, 'iu').test(source)) {
+    fail(`FAQ/página não declara a quantidade canônica atual de ${businessCount} playbooks`);
+  }
 }
 
 for (const dimension of ['Jornada', 'Precisão', 'Narrativa']) {
   if (!faq.includes(dimension)) fail(`dimensão canônica ausente: ${dimension}`);
+  if (!faqPage.includes(dimension)) fail(`dimensão canônica ausente da página FAQ: ${dimension}`);
 }
 
 const requiredSections = [
@@ -108,10 +117,27 @@ for (const blocked of [
   'garante resultado',
 ]) {
   if (!claims.includes(blocked)) fail(`claim bloqueado ausente: ${blocked}`);
+  if (!faqPage.includes(blocked)) fail(`claim bloqueado ausente da página FAQ: ${blocked}`);
+}
+
+for (const required of [
+  'GF-QA-10',
+  'local/offline',
+  'EM PREPARAÇÃO',
+  'REPOR',
+  'Preço autorizado: não',
+  'checkout autorizado: não',
+  'venda autorizada: não',
+  'publicação autorizada: não',
+]) {
+  if (!faqPage.toLowerCase().includes(required.toLowerCase())) fail(`estado/guardrail ausente da página FAQ: ${required}`);
 }
 
 if (!/GF-QA-10/.test(faq)) fail('FAQ não preserva a dependência GF-QA-10 da Gestão Fácil');
 if (!/local\/offline/.test(faq)) fail('FAQ não preserva o caráter local/offline do Prompt Builder');
 if (!/freeze real dos artefatos/.test(faq)) fail('FAQ não preserva o freeze do Pro Kit como dependência');
+if (!/noindex,nofollow/i.test(faqPage)) fail('página FAQ deve permanecer noindex,nofollow');
+if (/https?:\/\//i.test(faqPage)) fail('página FAQ não pode conter URL externa');
+if (/<form\b/i.test(faqPage)) fail('página FAQ não pode conter formulário comercial');
 
-console.log(`Commercial FAQ OK: ${portfolio.products.length} produtos canônicos; Prompt Pack=${promptCount}; Business=${businessCount}; preço/venda/publicação permanecem não autorizados.`);
+console.log(`Commercial FAQ OK: fonte + página; ${portfolio.products.length} produtos canônicos; Prompt Pack=${promptCount}; Business=${businessCount}; preço/venda/publicação permanecem não autorizados.`);

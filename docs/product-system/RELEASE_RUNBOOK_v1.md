@@ -26,6 +26,8 @@ npm run build
 
 O build inclui `npm run check:release-action-queue`, que confirma que o snapshot versionado em `reports/product-readiness/RELEASE_ACTION_QUEUE.md` ainda corresponde ao portfólio, ao status formal e ao plano de execução. Esse gate não executa as ações da fila nem promove qualquer dependência.
 
+O build também inclui `npm run check:prompt-builder-context-regressions`. Esse gate protege regressões determinísticas descobertas durante o teste real do Prompt Builder, incluindo preservação de contexto confirmado, restrições informadas e adaptação da Narrativa ao tipo de tarefa. Ele não comprova compreensão semântica universal e não substitui QA real em navegador/dispositivo.
+
 Critério de parada: qualquer erro interrompe o fluxo. Não avançar para freeze enquanto o build estiver vermelho ou a fila registrada estiver desatualizada.
 
 Evidência mínima: saída do build sem falhas no mesmo estado de código que será usado para produzir candidatos.
@@ -74,18 +76,21 @@ Critério de parada: qualquer correção altera o candidato e exige regeneraçã
 
 ## Fase 3 — JPN Prompt Builder
 
-Objetivo: validar o bundle offline antes do congelamento.
+Objetivo: validar regras contextuais e o bundle offline antes do congelamento.
 
 ```bash
+npm run check:prompt-builder-context-regressions
 npm run check:prompt-builder-staging
 npm run stage:prompt-builder
 ```
 
-Depois, executar QA real em navegador/dispositivo sobre o mesmo bundle candidato. Conferir abertura por servidor HTTP local, criação e edição de prompts, presets, workspaces, recuperação, persistência e comportamento offline planejado.
+O gate de regressão contextual deve passar antes do staging. Ele cobre casos determinísticos `PB-CTX-*` derivados de cenários de vendas, análise, automação, desenvolvimento, conteúdo e estratégia. Em especial, o caso real de atendimento do guarda-roupa impede que contexto já fornecido seja rebaixado para `Estado atual: Não informado` e impede que restrições digitadas sejam perdidas.
 
-Critério de parada: erro funcional, divergência entre fonte e staging, falha de navegador/dispositivo ou ausência de evidência vinculada ao mesmo bundle candidato.
+Depois, executar QA real em navegador/dispositivo sobre o mesmo bundle candidato. Conferir abertura por servidor HTTP local, criação e edição de prompts, presets, workspaces, recuperação, persistência, clipboard, teclado virtual, orientação de tela e comportamento offline planejado.
 
-Não marcar `pacote-offline-final` como `passed` apenas porque o staging foi gerado.
+Critério de parada: erro funcional, regressão contextual, divergência entre fonte e staging, falha de navegador/dispositivo ou ausência de evidência vinculada ao mesmo bundle candidato.
+
+Não marcar `pacote-offline-final` como `passed` apenas porque os gates determinísticos ou o staging foram executados. A inspeção móvel real continua obrigatória.
 
 ## Fase 4 — JPN Gestão Fácil
 

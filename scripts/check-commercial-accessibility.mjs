@@ -28,8 +28,8 @@ if (!fs.existsSync(siteRoot)) {
 const htmlFiles = walk(siteRoot).sort();
 const errors = [];
 
-if (htmlFiles.length !== 8) {
-  errors.push(`esperados 8 HTMLs comerciais (landing + seletor + 6 produtos), encontrados ${htmlFiles.length}`);
+if (htmlFiles.length !== 9) {
+  errors.push(`esperados 9 HTMLs comerciais (landing + seletor + comparação + 6 produtos), encontrados ${htmlFiles.length}`);
 }
 
 for (const file of htmlFiles) {
@@ -64,6 +64,11 @@ for (const file of htmlFiles) {
 
   if (/<details\b/i.test(html) && count(html, /<details\b/gi) !== count(html, /<summary\b/gi)) {
     fail(errors, file, 'cada details deve possuir um summary');
+  }
+
+  if (/<table\b/i.test(html)) {
+    if (!/<th\b[^>]*scope=["']col["']/i.test(html)) fail(errors, file, 'tabela sem cabeçalhos scope="col"');
+    if (!/<th\b[^>]*scope=["']row["']/i.test(html)) fail(errors, file, 'tabela sem cabeçalhos scope="row"');
   }
 
   if (/user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i.test(lower)) {

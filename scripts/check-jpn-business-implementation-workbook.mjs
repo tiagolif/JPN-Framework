@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const workbookPath = path.join(root, 'docs/products/jpn-business/IMPLEMENTATION_WORKBOOK_v1.md');
+const scorecardPath = path.join(root, 'docs/products/jpn-business/OPERATIONAL_SCORECARD_v1.md');
 const indexPath = path.join(root, 'docs/products/jpn-business/BUSINESS_INDEX.json');
 const promptIndexPath = path.join(root, 'docs/products/prompt-pack/PROMPT_INDEX.json');
 
@@ -13,6 +14,7 @@ function fail(message) {
 
 for (const [label, file] of [
   ['workbook', workbookPath],
+  ['scorecard', scorecardPath],
   ['Business index', indexPath],
   ['Prompt Pack index', promptIndexPath],
 ]) {
@@ -20,6 +22,7 @@ for (const [label, file] of [
 }
 
 const workbook = fs.readFileSync(workbookPath, 'utf8');
+const scorecard = fs.readFileSync(scorecardPath, 'utf8');
 const businessIndex = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
 const promptIndex = JSON.parse(fs.readFileSync(promptIndexPath, 'utf8'));
 const playbooks = Array.isArray(businessIndex.playbooks) ? businessIndex.playbooks : [];
@@ -32,6 +35,8 @@ const promptIds = new Set(prompts.map((item) => item.id));
 for (const playbook of playbooks) {
   if (!workbook.includes(playbook.id)) fail(`${playbook.id} ausente no workbook`);
   if (!workbook.includes(playbook.name)) fail(`nome de ${playbook.id} ausente no workbook`);
+  if (!scorecard.includes(playbook.id)) fail(`${playbook.id} ausente no scorecard`);
+  if (!scorecard.includes(playbook.name)) fail(`nome de ${playbook.id} ausente no scorecard`);
   for (const promptId of playbook.prompt_pack_links ?? []) {
     if (!promptIds.has(promptId)) fail(`${playbook.id} referencia prompt inexistente: ${promptId}`);
     if (!workbook.includes(promptId)) fail(`${promptId}, ligado a ${playbook.id}, ausente no workbook`);
@@ -53,6 +58,40 @@ for (const section of requiredSections) {
   if (!workbook.includes(section)) fail(`seção obrigatória ausente: ${section}`);
 }
 
+const requiredScorecardSections = [
+  '## 1. Regra central',
+  '## 2. Escala de avaliação',
+  '## 3. Dimensões do scorecard',
+  '## 4. Classificação auxiliar',
+  '## 5. Bloqueadores críticos',
+  '## 6. Ficha de avaliação',
+  '## 7. Mapa dos 12 playbooks',
+  '## 8. Exemplos fictícios',
+  '## 9. Relação com outros produtos JPN',
+  '## 10. Estado e limites',
+];
+for (const section of requiredScorecardSections) {
+  if (!scorecard.includes(section)) fail(`seção obrigatória ausente no scorecard: ${section}`);
+}
+
+const scoreDimensions = [
+  'Contexto',
+  'Precisão',
+  'Narrativa',
+  'Segurança',
+  'Rastreabilidade',
+  'Revisão humana',
+  'Repetibilidade',
+  'Condição de parada',
+];
+for (const dimension of scoreDimensions) {
+  if (!scorecard.includes(dimension)) fail(`dimensão ausente no scorecard: ${dimension}`);
+}
+
+for (const range of ['0–7', '8–12', '13–16', '16 pontos']) {
+  if (!scorecard.includes(range)) fail(`faixa/limite ausente no scorecard: ${range}`);
+}
+
 const requiredGuardrails = [
   'Não complete lacunas por suposição.',
   'não inventar preço, desconto, prazo, condição, estoque ou disponibilidade',
@@ -70,6 +109,22 @@ for (const marker of requiredGuardrails) {
   if (!workbook.toLowerCase().includes(marker.toLowerCase())) fail(`guardrail/estado ausente: ${marker}`);
 }
 
+const scorecardGuardrails = [
+  'não substitui julgamento humano',
+  'bloqueador crítico',
+  'não autoriza envio automático',
+  'GF-QA-10 permanece pendente',
+  'QA físico contextual em celular permanece pendente',
+  '`REPOR` é alerta, não autorização de compra',
+  '`EM PREPARAÇÃO`',
+  'dados financeiros reais',
+  'garantia de resultado',
+  'aceite de termos legais',
+];
+for (const marker of scorecardGuardrails) {
+  if (!scorecard.toLowerCase().includes(marker.toLowerCase())) fail(`guardrail/estado ausente no scorecard: ${marker}`);
+}
+
 const forbiddenPatterns = [
   /https?:\/\//i,
   /checkout/i,
@@ -78,8 +133,10 @@ const forbiddenPatterns = [
   /cart[aã]o de cr[eé]dito/i,
   /pix\b/i,
 ];
-for (const pattern of forbiddenPatterns) {
-  if (pattern.test(workbook)) fail(`padrão comercial/externo proibido encontrado: ${pattern}`);
+for (const [label, content] of [['workbook', workbook], ['scorecard', scorecard]]) {
+  for (const pattern of forbiddenPatterns) {
+    if (pattern.test(content)) fail(`padrão comercial/externo proibido encontrado em ${label}: ${pattern}`);
+  }
 }
 
-console.log(`JPN Business implementation workbook OK: ${playbooks.length} playbooks e vínculos com Prompt Pack cobertos; guardrails preservados`);
+console.log(`JPN Business implementation workbook + scorecard OK: ${playbooks.length} playbooks, ${scoreDimensions.length} dimensões e vínculos com Prompt Pack cobertos; guardrails preservados`);

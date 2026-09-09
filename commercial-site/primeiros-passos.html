@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Primeiros passos JPN — onboarding prático</title>
+  <meta name="description" content="Guia interno e não publicado para começar a usar o ecossistema JPN com o menor recurso suficiente e sem antecipar estados de QA." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="JPN — voltar ao portfólio">JPN</a>
+    <nav aria-label="Navegação de primeiros passos"><a href="#fluxo">Fluxo</a><a href="#produtos">Produtos</a><a href="#limites">Limites</a></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Jornada · Precisão · Narrativa</p>
+      <h1>Primeiros passos: comece pequeno, revise e só então avance</h1>
+      <p class="lead">Depois de escolher um produto, use um caso real de baixo risco para validar o encaixe antes de combinar mais recursos.</p>
+      <div class="hero-actions"><a class="button" href="escolher-produto.html">Escolher produto</a><a class="button secondary" href="casos-de-uso.html">Ver casos de uso</a></div>
+      <p class="guardrail">Superfície interna e não publicada. Sem preço, checkout, dados financeiros reais ou promessa de resultado.</p>
+    </section>
+
+    <section id="fluxo" class="section">
+      <div class="section-heading"><p class="eyebrow">Onboarding</p><h2>Fluxo em cinco passos</h2></div>
+      <div class="pillars">
+        <article><span>01</span><h3>Confirmar</h3><p>Defina problema, contexto, restrições e saída esperada.</p></article>
+        <article><span>02</span><h3>Escolher</h3><p>Use o menor produto suficiente para a necessidade atual.</p></article>
+        <article><span>03</span><h3>Testar</h3><p>Comece por um caso pequeno, controlado e reversível.</p></article>
+        <article><span>04</span><h3>Revisar</h3><p>Cheque fatos, lacunas, conflitos e estados de QA.</p></article>
+        <article><span>05</span><h3>Avançar</h3><p>Combine recursos somente quando surgir necessidade adicional real.</p></article>
+      </div>
+    </section>
+
+    <section id="produtos" class="section">
+      <div class="section-heading"><p class="eyebrow">Por produto</p><h2>Qual deve ser o primeiro teste?</h2></div>
+      <div class="product-grid">
+        <article class="product-card"><p class="tag">Método</p><h3>Estruture uma tarefa real</h3><p>Organize Jornada, Precisão e Narrativa e revise fatos, inferências e lacunas.</p><a class="text-link" href="products/metodo-jpn.html">Ver Método JPN →</a></article>
+        <article class="product-card"><p class="tag">Builder</p><h3>Monte um prompt curto</h3><p>Preserve contexto e restrições antes de compilar. QA físico contextual em celular pendente.</p><a class="text-link" href="products/jpn-prompt-builder.html">Ver Prompt Builder →</a></article>
+        <article class="product-card"><p class="tag">Prompt Pack</p><h3>Adapte um único template</h3><p>Escolha um PP-* compatível e substitua generalidades pelos fatos do caso atual.</p><a class="text-link" href="products/jpn-prompt-pack.html">Ver Prompt Pack →</a></article>
+        <article class="product-card"><p class="tag">Business</p><h3>Teste um processo recorrente</h3><p>Confirme responsável, entradas, decisões, saída, validação e exceções.</p><a class="text-link" href="products/jpn-business.html">Ver JPN Business →</a></article>
+        <article class="product-card"><p class="tag">Gestão Fácil</p><h3>Use dados fictícios primeiro</h3><p>Confira cadastros, indicadores e alertas antes de uso real. GF-QA-10 multiplataforma pendente.</p><a class="text-link" href="products/jpn-gestao-facil.html">Ver Gestão Fácil →</a></article>
+        <article class="product-card preparing"><p class="tag">EM PREPARAÇÃO</p><h3>JPN Pro Kit</h3><p>Não comece por abrangência. Use apenas quando múltiplos componentes forem realmente necessários.</p><a class="text-link" href="products/jpn-pro-kit.html">Ver Pro Kit →</a></article>
+      </div>
+    </section>
+
+    <section class="section detail-stack" aria-label="Rotas opcionais">
+      <article><p class="eyebrow">Rotas úteis</p><h2>Combine somente depois do primeiro teste</h2><p>Método → Builder; Método → Prompt Pack; Prompt Pack → Business; Business → Gestão Fácil. São fluxos de trabalho, não bundles, descontos ou ofertas.</p></article>
+      <article><p class="eyebrow">Critério de avanço</p><h2>Uma nova necessidade deve justificar o próximo recurso</h2><p>Se o produto atual já resolve o problema, pare nele. Mais componentes não significam automaticamente melhor resultado.</p></article>
+    </section>
+
+    <section id="limites" class="section faq">
+      <div class="section-heading"><p class="eyebrow">Regra de parada</p><h2>Quando não avançar</h2></div>
+      <details><summary>Falta um fato material?</summary><p>Registre a lacuna. Não transforme inferência em fato para completar o fluxo.</p></details>
+      <details><summary>A próxima ação exige gasto, publicação ou compromisso externo?</summary><p>Interrompa. Este onboarding não autoriza compra, anúncio, publicação, contratação, criação de conta ou aceite legal.</p></details>
+      <details><summary>O produto depende de QA ainda pendente?</summary><p>Preserve o estado atual. Prompt Builder mantém QA físico contextual em celular pendente; Gestão Fácil mantém GF-QA-10 pendente.</p></details>
+      <details><summary>Há dados sensíveis ou financeiros reais?</summary><p>Não use credenciais, dados bancários ou informações sensíveis desnecessárias nesta etapa.</p></details>
+    </section>
+  </main>
+  <footer><strong>JPN</strong><span>Jornada · Precisão · Narrativa</span><span>Onboarding interno · não publicado</span></footer>
+</body>
+</html>

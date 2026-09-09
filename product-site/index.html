@@ -25,7 +25,7 @@
     </section>
 
     <section id="builder" class="builder-wrap">
-      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples, carregue um preset guiado ou reutilize presets e projetos salvos localmente. A demo usa o SDK oficial do framework para criar um rascunho JPN, validar o estado, medir prontidão e compilar o prompt.</p></div>
+      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples, carregue um preset guiado ou reutilize presets e projetos salvos localmente. A demo usa o SDK oficial do framework para criar e validar o estado JPN e aplica uma camada contextual conservadora ao prompt exibido, preservando lacunas e restrições informadas.</p></div>
       <div class="builder-grid">
         <div class="panel">
           <label for="workspace">Continuar um projeto local</label>
@@ -109,6 +109,7 @@
   </main>
   <footer>JPN Framework — Jornada · Precisão · Narrativa · Criado por Tiago Cunha de Souza</footer>
   <script type="module" src="app.js"></script>
+  <script type="module" src="context-main-bridge.js"></script>
   <script type="module" src="recovery-app.js"></script>
 </body>
 </html>

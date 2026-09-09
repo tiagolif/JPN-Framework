@@ -166,6 +166,8 @@ Não usar afirmações como:
 - “é compatível com tudo”;
 - “já está pronto para produção” quando o respectivo QA não estiver aprovado.
 
+A demo não promete eliminar erros, substituir especialistas ou garantir desempenho; ela demonstra estrutura, limites e rastreabilidade.
+
 ## Critérios de aprovação da demo
 
 A demonstração candidata só pode ser considerada internamente consistente quando:

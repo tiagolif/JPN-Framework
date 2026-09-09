@@ -1,10 +1,10 @@
 # Prompt Builder — Gate de regressão contextual v1
 
-Estado: `candidate / automated structural regression gate added / human mobile QA pending`.
+Estado: `candidate / automated structural regression gate added / main Builder integration candidate / human mobile QA pending`.
 
 ## Objetivo
 
-Transformar os achados do primeiro teste móvel real do JPN Prompt Builder em regressões executáveis antes de integrar a lógica contextual ao Builder principal.
+Transformar os achados do primeiro teste móvel real do JPN Prompt Builder em regressões executáveis e usar a mesma camada contextual no Builder principal sem substituir o SDK canônico, sua validação de estado ou sua medição de prontidão.
 
 O gate não tenta provar compreensão semântica universal. Ele verifica propriedades determinísticas que não devem regredir enquanto a implementação evolui.
 
@@ -37,13 +37,32 @@ O script `scripts/check-prompt-builder-context-regressions.mjs` cobre também:
 - PB-CTX-05 — conteúdo limitado a briefing confirmado;
 - PB-CTX-06 — estratégia sem linha de base suficiente para metas numéricas.
 
+## Integração candidata no Builder principal
+
+A superfície principal agora carrega `product-site/context-main-bridge.js` imediatamente após `app.js`.
+
+A ponte não substitui o fluxo estrutural existente. O Builder principal continua executando:
+
+1. `createJpnDraftFromText`;
+2. `validateJpnState`;
+3. `assessJpnReadiness`;
+4. seus diagnósticos estruturais e estado interno.
+
+Somente depois dos listeners síncronos do Builder, por `queueMicrotask`, a ponte reutiliza a transformação já coberta pelas regressões `PB-CTX-*` para melhorar o prompt apresentado ao usuário. Se o SDK principal retornar `Não foi possível gerar um estado JPN válido.`, a ponte não mascara a falha.
+
+A prontidão exibida permanece a calculada pelo SDK principal. As pendências contextuais são adicionadas aos diagnósticos já produzidos, em vez de apagar a evidência estrutural.
+
+Essa integração não adiciona API, rede, tracking, conta, checkout ou sincronização externa.
+
 ## Execução
 
 ```bash
-node scripts/check-prompt-builder-context-regressions.mjs
+npm run check:prompt-builder-context-regressions
 ```
 
-O módulo `product-site/mobile-context-aware.js` pode agora ser importado em Node sem exigir DOM. O binding ao botão `generate` só é registrado quando `document` existe.
+O alias faz parte do `npm run build` antes do staging do Prompt Builder.
+
+O módulo `product-site/mobile-context-aware.js` continua importável em Node sem exigir DOM. O binding móvel ao botão `generate` só é registrado quando `document` existe; a superfície principal usa a ponte separada para preservar o gate do SDK.
 
 ## O que este gate comprova
 
@@ -51,7 +70,12 @@ O módulo `product-site/mobile-context-aware.js` pode agora ser importado em Nod
 - ausência de regressões textuais conhecidas;
 - ordem Jornada → Precisão → Narrativa;
 - adaptação determinística por tipo de tarefa;
-- extração conservadora das pendências explícitas usadas no caso de referência.
+- extração conservadora das pendências explícitas usadas no caso de referência;
+- presença da ponte contextual na superfície principal;
+- ordem de carregamento `app.js` → `context-main-bridge.js`;
+- preservação explícita das chamadas canônicas de criação, validação e prontidão do SDK;
+- proteção para não mascarar falha estrutural do SDK;
+- ausência de padrões explícitos de rede/API na ponte.
 
 ## O que este gate não comprova
 
@@ -65,7 +89,7 @@ O módulo `product-site/mobile-context-aware.js` pode agora ser importado em Nod
 
 ## Próximo passo seguro
 
-Após o gate estrutural e a inspeção móvel da fixture v2, integrar a transformação contextual ao Builder principal por uma camada compartilhada, mantendo o SDK canônico e seus validadores como fonte de integridade estrutural.
+Executar a mesma entrada PB-CTX-01 na superfície principal e na fixture móvel v2 em navegador/aparelho real. Confirmar que o prompt contextual aparece, que o score continua vindo do SDK, que copiar/baixar/salvar projeto preserva o prompt exibido e que recuperação/teclado/viewport não regrediram. Somente essa evidência pode promover QA de navegador/dispositivo.
 
 ## Guardrails
 

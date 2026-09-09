@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   JPN_MOBILE_CONTEXT_RULES,
   jpnBuildContextAwarePrompt,
@@ -89,5 +90,23 @@ assert.ok(salesContext.missing.some((item) => item.includes("Orçamento/faixa de
 assert.ok(salesContext.missing.some((item) => item.includes("Espaço ou medida")), "PB-CTX-01: medida/espaço não reconhecido como pendência");
 assert.ok(salesContext.missing.some((item) => item.includes("Forma de pagamento")), "PB-CTX-01: forma de pagamento não reconhecida como pendência");
 
-console.log(`PASS check-prompt-builder-context-regressions: ${cases.length} casos estruturais verificados.`);
-console.log("Nota: este gate valida transformação determinística; não substitui inspeção humana móvel, benchmark semântico ou QA do bundle final.");
+// A regressão contextual agora também protege a superfície principal do Builder.
+// O SDK continua sendo o gate estrutural; a ponte só substitui a apresentação
+// depois que os listeners síncronos do app.js terminaram.
+const mainHtml = readFileSync(new URL("../product-site/index.html", import.meta.url), "utf8");
+const mainBridge = readFileSync(new URL("../product-site/context-main-bridge.js", import.meta.url), "utf8");
+const mainApp = readFileSync(new URL("../product-site/app.js", import.meta.url), "utf8");
+
+assert.ok(mainHtml.includes('<script type="module" src="app.js"></script>'), "PB-CTX-MAIN: app principal ausente do HTML");
+assert.ok(mainHtml.includes('<script type="module" src="context-main-bridge.js"></script>'), "PB-CTX-MAIN: ponte contextual ausente do HTML principal");
+assert.ok(mainHtml.indexOf('src="app.js"') < mainHtml.indexOf('src="context-main-bridge.js"'), "PB-CTX-MAIN: ponte contextual deve carregar após o app principal");
+assert.ok(mainBridge.includes('from "./mobile-context-aware.js"'), "PB-CTX-MAIN: ponte não reutiliza a camada contextual testada");
+assert.ok(mainBridge.includes("queueMicrotask"), "PB-CTX-MAIN: ponte deve executar depois do gate síncrono do SDK");
+assert.ok(mainBridge.includes('startsWith("Não foi possível gerar um estado JPN válido.")'), "PB-CTX-MAIN: ponte não protege falha estrutural do SDK");
+assert.ok(!/fetch\s*\(|XMLHttpRequest|WebSocket|EventSource/.test(mainBridge), "PB-CTX-MAIN: ponte não pode adicionar rede/API");
+assert.ok(mainApp.includes("createJpnDraftFromText"), "PB-CTX-MAIN: SDK canônico deixou de criar o rascunho");
+assert.ok(mainApp.includes("validateJpnState"), "PB-CTX-MAIN: validação canônica removida");
+assert.ok(mainApp.includes("assessJpnReadiness"), "PB-CTX-MAIN: prontidão canônica removida");
+
+console.log(`PASS check-prompt-builder-context-regressions: ${cases.length} casos estruturais + integração principal verificados.`);
+console.log("Nota: este gate valida transformação determinística e ligação do Builder principal; não substitui inspeção humana móvel, benchmark semântico ou QA do bundle final.");

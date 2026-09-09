@@ -84,4 +84,9 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Gestão Fácil: modelo v0.2 íntegro (${requiredSheets.length} abas, ${requiredKpis.length} KPIs, ${requiredFlows.length} fluxos).`);
+await import('./check-gestao-facil-quick-start.mjs');
+if (process.exitCode) {
+  throw new Error('Guia de início rápido da JPN Gestão Fácil falhou no gate.');
+}
+
+console.log(`Gestão Fácil: modelo v0.2 íntegro (${requiredSheets.length} abas, ${requiredKpis.length} KPIs, ${requiredFlows.length} fluxos) + guia de início rápido validado.`);

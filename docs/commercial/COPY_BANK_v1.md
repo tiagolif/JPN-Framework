@@ -215,18 +215,18 @@ Esses CTAs são de navegação ou entendimento. Não implicam compra, reserva, c
 
 ## 12. Claims bloqueados sem evidência
 
-Não usar como copy comercial sem estudo, benchmark ou evidência correspondente:
+Cada exemplo abaixo é explicitamente proibido enquanto não houver estudo, benchmark ou evidência correspondente:
 
-- “aumenta vendas”;
-- “reduz custos em X%”;
-- “economiza X horas”;
-- “melhora respostas em X%”;
-- “elimina erros” ou “sem erros”;
-- “funciona em qualquer IA sem adaptação”;
-- “100% privado”;
-- “substitui funcionário, consultor, contador ou ERP”;
-- “garante resultado”;
-- “últimas vagas”, “últimas unidades” ou urgência equivalente sem fato comprovado.
+- Não usar: “aumenta vendas”.
+- Não usar: “reduz custos em X%”.
+- Não usar: “economiza X horas”.
+- Não usar: “melhora respostas em X%”.
+- Não usar: “elimina erros” ou “sem erros”.
+- Não usar: “funciona em qualquer IA sem adaptação”.
+- Não usar: “100% privado”.
+- Não usar: “substitui funcionário, consultor, contador ou ERP”.
+- Não usar: “garante resultado”.
+- Não usar: “últimas vagas”, “últimas unidades” ou urgência equivalente sem fato comprovado.
 
 ## 13. Checklist antes de reutilizar uma copy
 

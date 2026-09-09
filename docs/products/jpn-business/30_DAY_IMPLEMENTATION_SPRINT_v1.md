@@ -22,7 +22,7 @@ Ao final do ciclo, a equipe deve ter:
 - avaliação pelo `OPERATIONAL_SCORECARD_v1.md`;
 - decisão humana entre continuar em teste, ajustar ou tornar candidato a rotina interna recorrente.
 
-Nenhuma pontuação ou quantidade de testes autoriza publicação, envio automático, compra, gasto, aceite legal ou integração externa.
+Este sprint não autoriza publicação. Este sprint não autoriza envio automático. Nenhuma pontuação ou quantidade de testes autoriza compra, gasto, aceite legal ou integração externa.
 
 ## 3. Semana 1 — Escolher e delimitar
 

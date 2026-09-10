@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">Template editorial vertical JPN</title>
+  <desc id="desc">Fonte vetorial interna com assinatura JPN, headline, três módulos e estado de publicação.</desc>
+  <rect width="1080" height="1350" fill="#06121C"/>
+  <rect x="72" y="72" width="936" height="1206" rx="36" fill="#0B1F33" stroke="#21455E" stroke-width="2"/>
+  <text x="112" y="142" fill="#86E2D9" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="800" letter-spacing="4">JPN</text>
+  <text x="112" y="218" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="700">CATEGORIA · EDITAR</text>
+  <text x="112" y="326" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="82" font-weight="900">Headline principal</text>
+  <text x="112" y="414" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="82" font-weight="900">em até duas linhas</text>
+  <text x="112" y="492" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="500">Apoio factual curto. Substituir pela mensagem canônica.</text>
+  <g transform="translate(112 610)">
+    <rect width="260" height="260" rx="28" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="28" y="70" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="48" font-weight="900">J</text>
+    <text x="28" y="120" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="800">Módulo 1</text>
+    <text x="28" y="165" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">Apoio curto</text>
+  </g>
+  <g transform="translate(410 610)">
+    <rect width="260" height="260" rx="28" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="28" y="70" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="48" font-weight="900">P</text>
+    <text x="28" y="120" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="800">Módulo 2</text>
+    <text x="28" y="165" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">Apoio curto</text>
+  </g>
+  <g transform="translate(708 610)">
+    <rect width="260" height="260" rx="28" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="28" y="70" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="48" font-weight="900">N</text>
+    <text x="28" y="120" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="800">Módulo 3</text>
+    <text x="28" y="165" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">Apoio curto</text>
+  </g>
+  <line x1="112" y1="1030" x2="968" y2="1030" stroke="#21455E" stroke-width="2"/>
+  <text x="112" y="1106" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="700">Mensagem de fechamento factual.</text>
+  <text x="112" y="1220" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">Fonte de design · não publicada</text>
+</svg>

@@ -113,3 +113,5 @@ if (errors.length) {
 }
 
 console.log(`Gate comercial aprovado: ${files.length} arquivo(s) Markdown verificado(s), incluindo Copy Bank v1.`);
+
+await import('./check-social-content-library.mjs');

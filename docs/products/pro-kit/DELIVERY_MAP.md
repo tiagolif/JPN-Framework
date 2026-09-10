@@ -15,6 +15,7 @@ Este mapa distingue **fonte canônica**, **formato de entrega futuro** e **statu
 | JPN Gestão Fácil | `deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx` | XLSX | binário versionado; GF-QA-01 a GF-QA-09 aprovados localmente; compatibilidade cruzada pendente |
 | Manual Gestão Fácil | `docs/products/gestao-facil/MANUAL_v0.1.md` | PDF | fonte editorial versionada; artefato PDF final pendente |
 | Guia inicial | `docs/products/pro-kit/LEIA_PRIMEIRO.md` | PDF/TXT/Markdown | presente |
+| Guia de uso e combinação | `docs/products/pro-kit/USAGE_ROUTING_GUIDE_v1.md` | PDF/Markdown | candidato presente; QA operacional/editorial pendente |
 | Checklist de release | `docs/products/pro-kit/RELEASE_CHECKLIST.md` | Markdown interno | presente |
 | Manifesto | `docs/products/pro-kit/MANIFEST.template.json` | JSON final com hashes | template presente; congelamento pendente |
 | Release notes | `docs/products/pro-kit/RELEASE_NOTES_v1.md` | Markdown/PDF opcional | presente |
@@ -24,7 +25,8 @@ Este mapa distingue **fonte canônica**, **formato de entrega futuro** e **statu
 ```text
 JPN_Pro_Kit_v1/
 ├── 00_LEIA_PRIMEIRO/
-│   └── LEIA_PRIMEIRO.pdf
+│   ├── LEIA_PRIMEIRO.pdf
+│   └── GUIA_DE_USO_E_COMBINACAO.pdf
 ├── 01_METODO_JPN/
 │   ├── METODO_JPN_v1.pdf
 │   └── METODO_JPN_v1.docx

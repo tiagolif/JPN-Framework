@@ -35,5 +35,6 @@ if (!html.includes('type="module" src="app.js"')) {
 
 await import('./check-prompt-builder-accessibility.mjs');
 await import('./check-prompt-builder-sensitive-data-guard.mjs');
+await import('./check-prompt-builder-temporary-mode.mjs');
 
 console.log('Prompt Builder usa o bundle browser oficial sem duplicar as funções centrais.');

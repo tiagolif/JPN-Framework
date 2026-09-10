@@ -2,6 +2,7 @@
 
 Status: candidate companion / visual QA pending.
 Base: `docs/brand/BRAND_KIT_v1.md` + `docs/brand/DESIGN_TOKENS.css`.
+Kit de produção: `docs/brand/SOCIAL_PRODUCTION_KIT_v1.md`.
 
 ## Objetivo
 
@@ -67,6 +68,16 @@ Não usar em arte:
 - dados reais de clientes, empresas ou finanças;
 - afirmação de disponibilidade quando o produto permanece candidato.
 
+## Templates canônicos de produção
+
+O kit reutilizável mantém três fontes-base em `assets/social/templates/`:
+
+- `jpn-template-editorial-1080x1350.svg` — TPL-SOC-01;
+- `jpn-template-card-1080x1080.svg` — TPL-SOC-02;
+- `jpn-template-horizontal-1920x1080.svg` — TPL-SOC-03.
+
+Eles devem permanecer genéricos, sem preço, oferta, claim de desempenho, dado real ou indicação de publicação. A adaptação deve seguir `SOCIAL_PRODUCTION_KIT_v1.md` e partir de uma fonte editorial/comercial canônica.
+
 ## Novas peças desta etapa
 
 ### Prompt Builder — contexto preservado
@@ -91,6 +102,14 @@ Mensagem factual: existe um roteiro de início rápido para a reconstrução con
 - [ ] estado do produto confere com a documentação atual;
 - [ ] inspeção visual real foi executada em renderização;
 - [ ] publicação recebeu autorização específica.
+
+## Estados reais preservados
+
+- Prompt Builder: QA móvel real ainda pendente;
+- Gestão Fácil: GF-QA-10 continua pendente;
+- Gestão Fácil: `REPOR` é alerta operacional, não autorização de compra;
+- JPN Pro Kit: `EM PREPARAÇÃO`;
+- templates e peças sociais: fontes internas, não publicadas.
 
 ## Regra de parada
 

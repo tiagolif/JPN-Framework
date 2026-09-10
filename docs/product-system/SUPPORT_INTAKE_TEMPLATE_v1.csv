@@ -1,0 +1,2 @@
+ticket_id,produto,categoria,severidade,status,reproducao,descricao_curta,confianca_causa,causa,contorno_reversivel,proximo_passo,bloqueio_externo,evidencia_encerramento
+SUP-EXEMPLO-001,Método JPN,DUVIDA_DE_USO,S4_BAIXO,NOVO,NAO_TESTADO,Exemplo fictício de registro sem dados reais,unknown,,,Revisar referência rápida,,

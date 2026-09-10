@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 const requiredSources = [
   'docs/products/pro-kit/LEIA_PRIMEIRO.md',
   'docs/products/pro-kit/DELIVERY_MAP.md',
+  'docs/products/pro-kit/USAGE_ROUTING_GUIDE_v1.md',
   'docs/products/pro-kit/RELEASE_CHECKLIST.md',
   'docs/products/pro-kit/MANIFEST.template.json',
   'docs/products/pro-kit/RELEASE_NOTES_v1.md',
@@ -59,9 +60,60 @@ if (manifest.files.some((item) => item.sha256 !== null)) {
   throw new Error('Template não deve conter hashes antes do congelamento dos artefatos finais');
 }
 
+const usageGuidePath = 'docs/products/pro-kit/USAGE_ROUTING_GUIDE_v1.md';
+const usageGuide = readFileSync(usageGuidePath, 'utf8');
+const requiredUsageMarkers = [
+  'menor recurso suficiente',
+  'Jornada, Precisão e Narrativa',
+  'JPN Prompt Builder',
+  '18 templates',
+  '12 playbooks',
+  'GF-QA-10',
+  'REPOR',
+  'EM PREPARAÇÃO',
+  'Rota A',
+  'Rota B',
+  'Rota C',
+  'Rota D',
+  'Rota E',
+  'Não são bundles, ofertas, descontos ou exigência de compra conjunta',
+  'publicação de conteúdo, anúncio ou envio externo não autorizado',
+  'compra de mídia, contratação, compra de produto ou qualquer gasto',
+  'senha, token, chave de API, credencial ou segredo',
+  'aceite de termos legais',
+  'criação de conta que exija verificação de identidade',
+  'QA físico contextual em celular continua pendente'
+];
+for (const marker of requiredUsageMarkers) {
+  if (!usageGuide.includes(marker)) {
+    throw new Error(`Guia de uso do Pro Kit sem marcador obrigatório: ${marker}`);
+  }
+}
+
+const routeCount = [...usageGuide.matchAll(/^### Rota [A-E]/gm)].length;
+if (routeCount !== 5) {
+  throw new Error(`Guia de uso do Pro Kit deveria conter 5 rotas, encontrou ${routeCount}`);
+}
+
+const usageForbidden = [
+  /\bR\$\s*\d/i,
+  /https?:\/\//i,
+  /compre agora/i,
+  /garantia de resultado/i,
+  /compatibilidade móvel (?:comprovada|garantida)/i,
+  /GF-QA-10\s+(?:aprovado|concluído|passou)/i,
+  /REPOR\s+(?:autoriza|aprova|executa).*compra/i
+];
+for (const pattern of usageForbidden) {
+  if (pattern.test(usageGuide)) {
+    throw new Error(`Padrão bloqueado encontrado no guia de uso do Pro Kit: ${pattern}`);
+  }
+}
+
 const textFiles = [
   'docs/products/pro-kit/LEIA_PRIMEIRO.md',
   'docs/products/pro-kit/DELIVERY_MAP.md',
+  usageGuidePath,
   'docs/products/pro-kit/RELEASE_NOTES_v1.md',
   'docs/products/pro-kit/READINESS_MATRIX_v1.md'
 ];
@@ -85,4 +137,4 @@ if (process.exitCode) {
   throw new Error('Matriz operacional de prontidão do Pro Kit falhou no gate.');
 }
 
-console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; Gestão Fácil versionada com QA local; matriz operacional validada)`);
+console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; guia de uso com ${routeCount} rotas; Gestão Fácil versionada com QA local; matriz operacional validada)`);

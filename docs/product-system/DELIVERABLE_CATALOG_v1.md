@@ -79,7 +79,7 @@ O produto continua **EM PREPARAÇÃO**. Freeze, hashes finais e CI no head defin
 
 ## Superfícies compartilhadas
 
-O catálogo também registra como candidatas as páginas comerciais internas, FAQ, sistema de artes sociais, kit de produção visual, messaging, Copy Bank, biblioteca de objeções, biblioteca/board de conteúdo social, one-pagers, guia de handoff, registro central de evidências, **guia/checklist de onboarding do cliente**, **playbook/template de triagem de suporte ao cliente**, **loop/registro sanitizado de feedback de produto** e templates de empacotamento. Essas superfícies continuam internas/candidatas e não constituem publicação comercial nem comprovam release.
+O catálogo também registra como candidatas as páginas comerciais internas, FAQ, sistema de artes sociais, kit de produção visual, messaging, Copy Bank, biblioteca de objeções, biblioteca/board de conteúdo social, one-pagers, guia de handoff, registro central de evidências, **guia/checklist de onboarding do cliente**, **playbook/template de triagem de suporte ao cliente**, **loop/registro sanitizado de feedback de produto**, **política/checklist de tratamento seguro de dados** e templates de empacotamento. Essas superfícies continuam internas/candidatas e não constituem publicação comercial nem comprovam release.
 
 ## Regra operacional
 
@@ -90,10 +90,11 @@ O catálogo também registra como candidatas as páginas comerciais internas, FA
 5. Hash só pode ser chamado de final depois do freeze do artefato correspondente.
 6. Ao criar um novo material candidato relevante para um produto ou para o ecossistema, atualizar este catálogo na mesma cadeia de trabalho ou registrar explicitamente a pendência.
 7. Feedback de produto deve manter relato, evidência, interpretação e decisão separados; sugestão isolada não autoriza mudança nem release.
+8. Antes de reutilizar conteúdo real em exemplo, prompt, fixture, suporte, documentação ou material comercial, aplicar a política de tratamento seguro e sanitizar dados pessoais, credenciais, dados financeiros reais e referências privadas desnecessárias.
 
 ## Regra de parada
 
-Interromper qualquer promoção de estado se houver arquivo ausente, divergência entre catálogo e portfólio canônico, dependência sem evidência, QA executado em outro artefato, hash anterior ao freeze ou CI associado a outro commit.
+Interromper qualquer promoção de estado se houver arquivo ausente, divergência entre catálogo e portfólio canônico, dependência sem evidência, QA executado em outro artefato, hash anterior ao freeze, CI associado a outro commit ou dado sensível não sanitizado em material candidato.
 
 ## Guardrails
 

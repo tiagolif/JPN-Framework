@@ -3,6 +3,7 @@ import './check-release-evidence-register.mjs';
 import './check-customer-onboarding.mjs';
 import './check-customer-support-playbook.mjs';
 import './check-product-feedback-loop.mjs';
+import './check-safe-data-handling.mjs';
 import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -16,23 +17,17 @@ const portfolio = JSON.parse(await readFile(portfolioPath, 'utf8'));
 const doc = await readFile(docPath, 'utf8');
 const errors = [];
 
-if (catalog.version !== '1.0.4') errors.push('DELIVERABLE_CATALOG_v1.json deve usar version 1.0.4.');
+if (catalog.version !== '1.0.5') errors.push('DELIVERABLE_CATALOG_v1.json deve usar version 1.0.5.');
 if (catalog.framework !== portfolio.framework) errors.push('framework do catálogo diverge do portfólio canônico.');
 if (!/candidate inventory/i.test(catalog.state ?? '')) errors.push('estado do catálogo deve permanecer candidato.');
 
 const products = Array.isArray(catalog.products) ? catalog.products : [];
 const portfolioProducts = Array.isArray(portfolio.products) ? portfolio.products : [];
-if (products.length !== portfolioProducts.length) {
-  errors.push(`Quantidade de produtos divergente: catálogo=${products.length}, portfólio=${portfolioProducts.length}.`);
-}
+if (products.length !== portfolioProducts.length) errors.push(`Quantidade de produtos divergente: catálogo=${products.length}, portfólio=${portfolioProducts.length}.`);
 
 const minimumCandidateCounts = new Map([
-  ['metodo-jpn', 3],
-  ['jpn-prompt-pack', 4],
-  ['jpn-business', 10],
-  ['jpn-prompt-builder', 5],
-  ['jpn-pro-kit', 6],
-  ['jpn-gestao-facil', 6],
+  ['metodo-jpn', 3], ['jpn-prompt-pack', 4], ['jpn-business', 10],
+  ['jpn-prompt-builder', 5], ['jpn-pro-kit', 6], ['jpn-gestao-facil', 6],
 ]);
 
 const requiredRecentDeliverables = [
@@ -52,47 +47,30 @@ const catalogById = new Map(products.map((product) => [product.id, product]));
 const allProductDeliverables = new Set();
 for (const canonical of portfolioProducts) {
   const product = catalogById.get(canonical.id);
-  if (!product) {
-    errors.push(`${canonical.id}: ausente do catálogo de entregáveis.`);
-    continue;
-  }
+  if (!product) { errors.push(`${canonical.id}: ausente do catálogo de entregáveis.`); continue; }
   if (product.canonical_name !== canonical.canonical_name) errors.push(`${canonical.id}: nome canônico divergente.`);
   if (product.release_ready !== false) errors.push(`${canonical.id}: release_ready deve permanecer false até evidência final.`);
   if (!Array.isArray(product.candidate_deliverables) || product.candidate_deliverables.length === 0) {
     errors.push(`${canonical.id}: candidate_deliverables vazio.`);
   } else {
     const minimum = minimumCandidateCounts.get(canonical.id) ?? 1;
-    if (product.candidate_deliverables.length < minimum) {
-      errors.push(`${canonical.id}: catálogo regressou para ${product.candidate_deliverables.length} candidatos; mínimo atual=${minimum}.`);
-    }
+    if (product.candidate_deliverables.length < minimum) errors.push(`${canonical.id}: catálogo regressou para ${product.candidate_deliverables.length} candidatos; mínimo atual=${minimum}.`);
     for (const relative of product.candidate_deliverables) {
       allProductDeliverables.add(relative);
-      try {
-        await access(path.join(root, relative));
-      } catch {
-        errors.push(`${canonical.id}: entregável candidato ausente: ${relative}`);
-      }
+      try { await access(path.join(root, relative)); } catch { errors.push(`${canonical.id}: entregável candidato ausente: ${relative}`); }
     }
   }
   const expectedDeps = canonical.release_dependencies ?? [];
   const listedDeps = product.final_release_dependencies ?? [];
-  for (const dep of expectedDeps) {
-    if (!listedDeps.includes(dep)) errors.push(`${canonical.id}: dependência canônica ausente do catálogo: ${dep}`);
-  }
+  for (const dep of expectedDeps) if (!listedDeps.includes(dep)) errors.push(`${canonical.id}: dependência canônica ausente do catálogo: ${dep}`);
 }
 
-for (const required of requiredRecentDeliverables) {
-  if (!allProductDeliverables.has(required)) errors.push(`Entregável recente não registrado no catálogo: ${required}`);
-}
+for (const required of requiredRecentDeliverables) if (!allProductDeliverables.has(required)) errors.push(`Entregável recente não registrado no catálogo: ${required}`);
 
 const shared = catalog.shared_candidate_surfaces ?? [];
-if (shared.length < 30) errors.push(`Superfícies compartilhadas regressaram para ${shared.length}; mínimo atual=30.`);
+if (shared.length < 32) errors.push(`Superfícies compartilhadas regressaram para ${shared.length}; mínimo atual=32.`);
 for (const relative of shared) {
-  try {
-    await access(path.join(root, relative));
-  } catch {
-    errors.push(`Superfície compartilhada ausente: ${relative}`);
-  }
+  try { await access(path.join(root, relative)); } catch { errors.push(`Superfície compartilhada ausente: ${relative}`); }
 }
 
 for (const required of [
@@ -110,11 +88,11 @@ for (const required of [
   'docs/product-system/SUPPORT_INTAKE_TEMPLATE_v1.csv',
   'docs/product-system/PRODUCT_FEEDBACK_LOOP_v1.md',
   'docs/product-system/PRODUCT_FEEDBACK_REGISTER_v1.csv',
+  'docs/product-system/SAFE_DATA_HANDLING_v1.md',
+  'docs/product-system/SAFE_DATA_REVIEW_CHECKLIST_v1.csv',
   'deliverables/templates/README_ENTREGA.template.md',
   'deliverables/templates/SHA256SUMS.template.txt',
-]) {
-  if (!shared.includes(required)) errors.push(`Superfície compartilhada recente não registrada: ${required}`);
-}
+]) if (!shared.includes(required)) errors.push(`Superfície compartilhada recente não registrada: ${required}`);
 
 for (const phrase of [
   'QA físico contextual em celular continua pendente',
@@ -124,9 +102,8 @@ for (const phrase of [
   'atualizar este catálogo na mesma cadeia de trabalho',
   'playbook/template de triagem de suporte ao cliente',
   'loop/registro sanitizado de feedback de produto',
-]) {
-  if (!doc.includes(phrase)) errors.push(`DELIVERABLE_CATALOG_v1.md deve preservar: ${phrase}`);
-}
+  'política/checklist de tratamento seguro de dados',
+]) if (!doc.includes(phrase)) errors.push(`DELIVERABLE_CATALOG_v1.md deve preservar: ${phrase}`);
 
 const forbiddenReady = products.filter((product) => product.release_ready === true);
 if (forbiddenReady.length) errors.push(`Produtos promovidos indevidamente: ${forbiddenReady.map((p) => p.id).join(', ')}`);

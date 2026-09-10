@@ -58,9 +58,7 @@ for (const item of businessItems) {
     failures.push(`prompt_pack_links ausente/vazio em ${item.id ?? '<sem-id>'}`);
     continue;
   }
-
   if (!businessDoc.includes(item.id)) failures.push(`${item.id} não encontrado no documento humano do JPN Business`);
-
   for (const linkedId of item.prompt_pack_links) {
     linkCount += 1;
     if (!promptIdSet.has(linkedId)) failures.push(`${item.id} referencia Prompt Pack inexistente: ${linkedId}`);
@@ -85,12 +83,13 @@ if (failures.length) {
 }
 
 const linkedPromptIds = new Set(businessItems.flatMap((item) => item.prompt_pack_links));
-console.log(
-  `JPN Business ↔ Prompt Pack: consistente (${businessItems.length} playbooks, ${promptItems.length} prompts, ${linkCount} vínculos, ${linkedPromptIds.size} prompts referenciados).`,
-);
+console.log(`JPN Business ↔ Prompt Pack: consistente (${businessItems.length} playbooks, ${promptItems.length} prompts, ${linkCount} vínculos, ${linkedPromptIds.size} prompts referenciados).`);
 
 const quickReferenceCheck = fileURLToPath(new URL('./check-jpn-business-quick-reference.mjs', import.meta.url));
 execFileSync(process.execPath, [quickReferenceCheck], { stdio: 'inherit' });
 
 const implementationWorkbookCheck = fileURLToPath(new URL('./check-jpn-business-implementation-workbook.mjs', import.meta.url));
 execFileSync(process.execPath, [implementationWorkbookCheck], { stdio: 'inherit' });
+
+const outcomeReviewCheck = fileURLToPath(new URL('./check-jpn-business-30-day-review.mjs', import.meta.url));
+execFileSync(process.execPath, [outcomeReviewCheck], { stdio: 'inherit' });

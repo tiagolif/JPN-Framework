@@ -1,3 +1,4 @@
+import './check-delivery-handoff-guide.mjs';
 import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 

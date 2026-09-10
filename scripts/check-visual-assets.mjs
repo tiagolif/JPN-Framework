@@ -6,6 +6,9 @@ const palette = new Set(['#06121C', '#0B1F33', '#0E2639', '#102A3C', '#173A50', 
 const requiredCandidateAssets = [
   'assets/social/jpn-prompt-builder-contexto-1080x1350.svg',
   'assets/social/jpn-gestao-facil-inicio-1080x1350.svg',
+  'assets/social/templates/jpn-template-editorial-1080x1350.svg',
+  'assets/social/templates/jpn-template-card-1080x1080.svg',
+  'assets/social/templates/jpn-template-horizontal-1920x1080.svg',
 ];
 const forbiddenClaims = [
   /elimina(?:r|ção)?\s+(?:as\s+)?alucina/i,
@@ -34,8 +37,8 @@ function fail(errors, file, message) {
 const files = (await Promise.all(roots.map(listSvgFiles))).flat();
 const errors = [];
 
-if (files.length < 10) {
-  errors.push(`Esperados ao menos 10 SVGs versionados; encontrados ${files.length}.`);
+if (files.length < 13) {
+  errors.push(`Esperados ao menos 13 SVGs versionados; encontrados ${files.length}.`);
 }
 
 for (const required of requiredCandidateAssets) {
@@ -49,9 +52,29 @@ for (const marker of [
   'assets/social/jpn-gestao-facil-inicio-1080x1350.svg',
   'GF-QA-10 continua pendente',
   'QA móvel real ainda pendente',
+  'SOCIAL_PRODUCTION_KIT_v1.md',
+  'jpn-template-editorial-1080x1350.svg',
+  'jpn-template-card-1080x1080.svg',
+  'jpn-template-horizontal-1920x1080.svg',
   'não exportar nem publicar',
 ]) {
   if (!socialArtSystem.includes(marker)) errors.push(`SOCIAL_ART_SYSTEM_v1.md não preserva marcador obrigatório: ${marker}`);
+}
+
+const productionKit = await readFile('docs/brand/SOCIAL_PRODUCTION_KIT_v1.md', 'utf8');
+for (const marker of [
+  'Status: candidate production system / visual QA pending.',
+  'TPL-SOC-01',
+  'TPL-SOC-02',
+  'TPL-SOC-03',
+  'Fato → Formato → Hierarquia → Estado → QA → Revisão humana',
+  'Prompt Builder: QA físico contextual em dispositivo real continua pendente',
+  'GF-QA-10 multiplataforma continua pendente',
+  '`REPOR` é alerta, não autorização de compra',
+  'JPN Pro Kit: permanece `EM PREPARAÇÃO`',
+  'O template nunca substitui autorização humana',
+]) {
+  if (!productionKit.includes(marker)) errors.push(`SOCIAL_PRODUCTION_KIT_v1.md não preserva marcador obrigatório: ${marker}`);
 }
 
 for (const file of files) {
@@ -97,6 +120,9 @@ for (const file of files) {
   if (/gestao-facil-inicio/i.test(filename) && !/GF-QA-10 ainda pendente/i.test(svg)) {
     fail(errors, file, 'Peça de início da Gestão Fácil deve preservar GF-QA-10 como pendente.');
   }
+  if (/jpn-template-/i.test(filename) && !/Fonte de design · não publicada/i.test(svg)) {
+    fail(errors, file, 'Template social deve preservar estado “Fonte de design · não publicada”.');
+  }
 
   if (/font-family="(?!Inter,Arial,sans-serif)[^"]+"/.test(svg)) {
     fail(errors, file, 'fallback tipográfico diverge de Inter,Arial,sans-serif.');
@@ -108,4 +134,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`QA visual aprovado para ${files.length} SVGs (${roots.join(', ')}), incluindo o sistema social candidato.`);
+console.log(`QA visual aprovado para ${files.length} SVGs (${roots.join(', ')}), incluindo o sistema social candidato e os templates de produção.`);

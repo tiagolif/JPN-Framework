@@ -1,5 +1,5 @@
 {
-  "version": "1.0.4",
+  "version": "1.0.5",
   "framework": "JPN Framework",
   "state": "candidate inventory / release evidence pending",
   "purpose": "Catalogar os entregáveis candidatos existentes e separar presença no repositório de prontidão final de release.",
@@ -114,6 +114,8 @@
     "docs/product-system/SUPPORT_INTAKE_TEMPLATE_v1.csv",
     "docs/product-system/PRODUCT_FEEDBACK_LOOP_v1.md",
     "docs/product-system/PRODUCT_FEEDBACK_REGISTER_v1.csv",
+    "docs/product-system/SAFE_DATA_HANDLING_v1.md",
+    "docs/product-system/SAFE_DATA_REVIEW_CHECKLIST_v1.csv",
     "deliverables/templates/README_ENTREGA.template.md",
     "deliverables/templates/CHANGELOG_RESUMIDO.template.md",
     "deliverables/templates/MANIFEST.template.txt",

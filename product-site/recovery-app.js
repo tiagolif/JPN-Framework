@@ -1,3 +1,4 @@
+import "./temporary-mode.js";
 import { clearRecoverySnapshot, loadRecoverySnapshot, saveRecoverySnapshot } from "./recovery.js";
 
 const $ = (id) => document.getElementById(id);

@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import './check-metodo-casebook.mjs';
 
 const methodPath = 'docs/products/metodo-jpn/METODO_JPN_v1.md';
 const quickReferencePath = 'docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md';

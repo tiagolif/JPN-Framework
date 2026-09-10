@@ -110,4 +110,66 @@ if (!/não representa publicação, disponibilidade comercial, checkout, aceite 
   throw new Error('O estado interno e não-publicado do guia precisa permanecer explícito.');
 }
 
-console.log('OK: guia de entrega/handoff preserva estados, estrutura mínima e guardrails.');
+const templateFiles = {
+  'deliverables/templates/README_ENTREGA.template.md': [
+    '{{PRODUCT_NAME}}',
+    '{{PACKAGE_STATE}}',
+    '{{VERSION}}',
+    '{{PRIMARY_FILES}}',
+    '{{PENDING_ITEMS}}',
+    'confirmed',
+    'inferred',
+    'unknown',
+    'conflicting',
+    'Hash comprova integridade do arquivo, não qualidade',
+  ],
+  'deliverables/templates/CHANGELOG_RESUMIDO.template.md': [
+    '{{PRODUCT_NAME}}',
+    '{{VERSION}}',
+    '{{PACKAGE_STATE}}',
+    '{{ADDED}}',
+    '{{CHANGED}}',
+    '{{FIXED}}',
+    '{{PENDING}}',
+  ],
+  'deliverables/templates/MANIFEST.template.txt': [
+    '{{PRODUCT_NAME}}',
+    '{{VERSION}}',
+    '{{PACKAGE_STATE}}',
+    '{{FILE_LIST}}',
+    '{{PENDING_ITEMS}}',
+    'SHA256SUMS.txt',
+  ],
+  'deliverables/templates/SHA256SUMS.template.txt': [
+    'TEMPLATE ONLY',
+    '{{SHA256}}',
+    '{{RELATIVE_FILE_PATH}}',
+    'Hash comprova integridade do arquivo, não qualidade',
+  ],
+};
+
+for (const [templatePath, markers] of Object.entries(templateFiles)) {
+  if (!fs.existsSync(templatePath)) {
+    throw new Error(`Template de entrega obrigatório ausente: ${templatePath}`);
+  }
+
+  const templateText = fs.readFileSync(templatePath, 'utf8');
+  for (const marker of markers) {
+    if (!templateText.includes(marker)) {
+      throw new Error(`${templatePath} não contém marcador obrigatório: ${marker}`);
+    }
+  }
+
+  for (const pattern of blockedPatterns) {
+    if (pattern.test(templateText)) {
+      throw new Error(`Padrão bloqueado encontrado em ${templatePath}: ${pattern}`);
+    }
+  }
+}
+
+const checksumTemplate = fs.readFileSync('deliverables/templates/SHA256SUMS.template.txt', 'utf8');
+if (/\b[a-f0-9]{64}\b/i.test(checksumTemplate)) {
+  throw new Error('O template de checksum não deve conter hash SHA-256 real antes do freeze.');
+}
+
+console.log('OK: guia de entrega/handoff e templates preservam estados, estrutura mínima e guardrails.');

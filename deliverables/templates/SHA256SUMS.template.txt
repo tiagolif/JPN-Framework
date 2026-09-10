@@ -1,0 +1,5 @@
+# TEMPLATE ONLY — NÃO É CHECKSUM FINAL
+# Gere um SHA-256 real somente depois que o pacote estiver efetivamente FROZEN.
+# Hash comprova integridade do arquivo, não qualidade, revisão humana ou aprovação de release.
+
+{{SHA256}}  {{RELATIVE_FILE_PATH}}

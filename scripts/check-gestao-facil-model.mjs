@@ -89,4 +89,9 @@ if (process.exitCode) {
   throw new Error('Guia de início rápido da JPN Gestão Fácil falhou no gate.');
 }
 
-console.log(`Gestão Fácil: modelo v0.2 íntegro (${requiredSheets.length} abas, ${requiredKpis.length} KPIs, ${requiredFlows.length} fluxos) + guia de início rápido validado.`);
+await import('./check-gestao-facil-data-dictionary.mjs');
+if (process.exitCode) {
+  throw new Error('Dicionário operacional da JPN Gestão Fácil falhou no gate.');
+}
+
+console.log(`Gestão Fácil: modelo v0.2 íntegro (${requiredSheets.length} abas, ${requiredKpis.length} KPIs, ${requiredFlows.length} fluxos) + guia de início rápido + dicionário operacional validados.`);

@@ -2,6 +2,7 @@ import './check-delivery-handoff-guide.mjs';
 import './check-release-evidence-register.mjs';
 import './check-customer-onboarding.mjs';
 import './check-customer-support-playbook.mjs';
+import './check-product-feedback-loop.mjs';
 import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -15,7 +16,7 @@ const portfolio = JSON.parse(await readFile(portfolioPath, 'utf8'));
 const doc = await readFile(docPath, 'utf8');
 const errors = [];
 
-if (catalog.version !== '1.0.3') errors.push('DELIVERABLE_CATALOG_v1.json deve usar version 1.0.3.');
+if (catalog.version !== '1.0.4') errors.push('DELIVERABLE_CATALOG_v1.json deve usar version 1.0.4.');
 if (catalog.framework !== portfolio.framework) errors.push('framework do catálogo diverge do portfólio canônico.');
 if (!/candidate inventory/i.test(catalog.state ?? '')) errors.push('estado do catálogo deve permanecer candidato.');
 
@@ -85,7 +86,7 @@ for (const required of requiredRecentDeliverables) {
 }
 
 const shared = catalog.shared_candidate_surfaces ?? [];
-if (shared.length < 28) errors.push(`Superfícies compartilhadas regressaram para ${shared.length}; mínimo atual=28.`);
+if (shared.length < 30) errors.push(`Superfícies compartilhadas regressaram para ${shared.length}; mínimo atual=30.`);
 for (const relative of shared) {
   try {
     await access(path.join(root, relative));
@@ -107,6 +108,8 @@ for (const required of [
   'docs/product-system/CUSTOMER_ONBOARDING_CHECKLIST_v1.csv',
   'docs/product-system/CUSTOMER_SUPPORT_PLAYBOOK_v1.md',
   'docs/product-system/SUPPORT_INTAKE_TEMPLATE_v1.csv',
+  'docs/product-system/PRODUCT_FEEDBACK_LOOP_v1.md',
+  'docs/product-system/PRODUCT_FEEDBACK_REGISTER_v1.csv',
   'deliverables/templates/README_ENTREGA.template.md',
   'deliverables/templates/SHA256SUMS.template.txt',
 ]) {
@@ -120,6 +123,7 @@ for (const phrase of [
   'Hash só pode ser chamado de final depois do freeze',
   'atualizar este catálogo na mesma cadeia de trabalho',
   'playbook/template de triagem de suporte ao cliente',
+  'loop/registro sanitizado de feedback de produto',
 ]) {
   if (!doc.includes(phrase)) errors.push(`DELIVERABLE_CATALOG_v1.md deve preservar: ${phrase}`);
 }

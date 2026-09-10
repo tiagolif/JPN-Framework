@@ -4,6 +4,7 @@ const $ = (id) => document.getElementById(id);
 const watchedIds = ["workspaceName", "idea", "type", "restrictions"];
 let timer = null;
 let restored = false;
+let temporaryMode = false;
 
 function setRecoveryNotice(message) {
   const node = $("recoveryStatus");
@@ -22,9 +23,24 @@ function currentSnapshot() {
   };
 }
 
+function clearRecoveryForTemporaryMode() {
+  clearTimeout(timer);
+  try {
+    clearRecoverySnapshot();
+    setRecoveryNotice("Modo temporário ativo: recuperação automática local desativada e rascunho de recuperação removido.");
+  } catch {
+    setRecoveryNotice("Modo temporário ativo, mas o navegador não permitiu confirmar a limpeza da recuperação local.");
+  }
+}
+
 function scheduleSave() {
+  if (temporaryMode) {
+    setRecoveryNotice("Modo temporário ativo: nenhuma recuperação automática será gravada.");
+    return;
+  }
   clearTimeout(timer);
   timer = setTimeout(() => {
+    if (temporaryMode) return;
     try {
       const snapshot = saveRecoverySnapshot(currentSnapshot());
       setRecoveryNotice(snapshot ? "Rascunho local protegido automaticamente." : "Sem alterações para recuperar.");
@@ -66,6 +82,12 @@ $("clearRecovery")?.addEventListener("click", () => {
   }
 });
 
+window.addEventListener("jpn:temporary-mode", (event) => {
+  temporaryMode = event.detail?.enabled === true;
+  if (temporaryMode) clearRecoveryForTemporaryMode();
+  else setRecoveryNotice("Modo temporário desligado: a recuperação automática local pode voltar a salvar novas alterações.");
+});
+
 try {
   const snapshot = loadRecoverySnapshot();
   if (snapshot) restore(snapshot);
@@ -75,6 +97,7 @@ try {
 }
 
 window.addEventListener("pagehide", () => {
+  if (temporaryMode) return;
   if (!restored || watchedIds.some((id) => $(id)?.value?.trim())) {
     try { saveRecoverySnapshot(currentSnapshot()); } catch { /* best effort */ }
   }

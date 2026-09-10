@@ -1,0 +1,19 @@
+JPN DELIVERY MANIFEST TEMPLATE
+
+product={{PRODUCT_NAME}}
+version={{VERSION}}
+package_state={{PACKAGE_STATE}}
+prepared_date={{PREPARED_DATE}}
+
+# FILES
+{{FILE_LIST}}
+
+# PENDING QA / BLOCKERS
+{{PENDING_ITEMS}}
+
+# NOTES
+- Este arquivo é um modelo de inventário; não representa release final.
+- Liste somente arquivos realmente presentes no pacote.
+- Não inclua credenciais, tokens, dados financeiros reais ou segredos.
+- Não marque QA, compatibilidade, freeze ou aprovação como concluídos sem evidência correspondente.
+- `SHA256SUMS.txt` só deve ser gerado após freeze real do conjunto final.

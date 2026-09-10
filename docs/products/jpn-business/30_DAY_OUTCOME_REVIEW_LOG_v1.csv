@@ -1,0 +1,2 @@
+review_id,cycle_label,problem_initial,component_or_playbook,used,evidence_summary,confidence,clarity,consistency,rework,time_perceived,decision,next_cycle_step,status
+R30-EXAMPLE-01,CICLO_FICTICIO,Padronizar uma rotina operacional,JB-12,SIM,Exemplo ficticio de revisao semanal preenchida,confirmed,MELHOROU,ESTAVEL,SEM_EVIDENCIA,SEM_EVIDENCIA,MANTER,Repetir a rotina com o menor escopo suficiente,PENDING

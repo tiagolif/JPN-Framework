@@ -1,4 +1,5 @@
 import './check-delivery-handoff-guide.mjs';
+import './check-release-evidence-register.mjs';
 import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -82,7 +83,7 @@ for (const required of requiredRecentDeliverables) {
 }
 
 const shared = catalog.shared_candidate_surfaces ?? [];
-if (shared.length < 22) errors.push(`Superfícies compartilhadas regressaram para ${shared.length}; mínimo atual=22.`);
+if (shared.length < 24) errors.push(`Superfícies compartilhadas regressaram para ${shared.length}; mínimo atual=24.`);
 for (const relative of shared) {
   try {
     await access(path.join(root, relative));
@@ -98,6 +99,8 @@ for (const required of [
   'docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md',
   'docs/commercial/PRODUCT_ONE_PAGERS_v1.md',
   'docs/product-system/CUSTOMER_DELIVERY_HANDOFF_v1.md',
+  'docs/product-system/RELEASE_EVIDENCE_REGISTER_v1.md',
+  'docs/product-system/RELEASE_EVIDENCE_REGISTER_v1.csv',
   'deliverables/templates/README_ENTREGA.template.md',
   'deliverables/templates/SHA256SUMS.template.txt',
 ]) {

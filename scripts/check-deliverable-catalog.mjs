@@ -1,5 +1,6 @@
 import './check-delivery-handoff-guide.mjs';
 import './check-release-evidence-register.mjs';
+import './check-customer-onboarding.mjs';
 import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -13,7 +14,7 @@ const portfolio = JSON.parse(await readFile(portfolioPath, 'utf8'));
 const doc = await readFile(docPath, 'utf8');
 const errors = [];
 
-if (catalog.version !== '1.0.1') errors.push('DELIVERABLE_CATALOG_v1.json deve usar version 1.0.1.');
+if (catalog.version !== '1.0.2') errors.push('DELIVERABLE_CATALOG_v1.json deve usar version 1.0.2.');
 if (catalog.framework !== portfolio.framework) errors.push('framework do catálogo diverge do portfólio canônico.');
 if (!/candidate inventory/i.test(catalog.state ?? '')) errors.push('estado do catálogo deve permanecer candidato.');
 
@@ -83,7 +84,7 @@ for (const required of requiredRecentDeliverables) {
 }
 
 const shared = catalog.shared_candidate_surfaces ?? [];
-if (shared.length < 24) errors.push(`Superfícies compartilhadas regressaram para ${shared.length}; mínimo atual=24.`);
+if (shared.length < 26) errors.push(`Superfícies compartilhadas regressaram para ${shared.length}; mínimo atual=26.`);
 for (const relative of shared) {
   try {
     await access(path.join(root, relative));
@@ -101,6 +102,8 @@ for (const required of [
   'docs/product-system/CUSTOMER_DELIVERY_HANDOFF_v1.md',
   'docs/product-system/RELEASE_EVIDENCE_REGISTER_v1.md',
   'docs/product-system/RELEASE_EVIDENCE_REGISTER_v1.csv',
+  'docs/product-system/CUSTOMER_ONBOARDING_v1.md',
+  'docs/product-system/CUSTOMER_ONBOARDING_CHECKLIST_v1.csv',
   'deliverables/templates/README_ENTREGA.template.md',
   'deliverables/templates/SHA256SUMS.template.txt',
 ]) {

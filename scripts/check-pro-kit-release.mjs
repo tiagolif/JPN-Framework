@@ -4,6 +4,8 @@ const requiredSources = [
   'docs/products/pro-kit/LEIA_PRIMEIRO.md',
   'docs/products/pro-kit/DELIVERY_MAP.md',
   'docs/products/pro-kit/USAGE_ROUTING_GUIDE_v1.md',
+  'docs/products/pro-kit/FIRST_WEEK_PLAN_v1.md',
+  'docs/products/pro-kit/FIRST_WEEK_CHECKLIST_v1.csv',
   'docs/products/pro-kit/RELEASE_CHECKLIST.md',
   'docs/products/pro-kit/MANIFEST.template.json',
   'docs/products/pro-kit/RELEASE_NOTES_v1.md',
@@ -114,6 +116,7 @@ const textFiles = [
   'docs/products/pro-kit/LEIA_PRIMEIRO.md',
   'docs/products/pro-kit/DELIVERY_MAP.md',
   usageGuidePath,
+  'docs/products/pro-kit/FIRST_WEEK_PLAN_v1.md',
   'docs/products/pro-kit/RELEASE_NOTES_v1.md',
   'docs/products/pro-kit/READINESS_MATRIX_v1.md'
 ];
@@ -132,9 +135,14 @@ for (const pattern of forbiddenClaims) {
   }
 }
 
+await import('./check-pro-kit-first-week.mjs');
+if (process.exitCode) {
+  throw new Error('Plano da primeira semana do Pro Kit falhou no gate.');
+}
+
 await import('./check-pro-kit-readiness-matrix.mjs');
 if (process.exitCode) {
   throw new Error('Matriz operacional de prontidão do Pro Kit falhou no gate.');
 }
 
-console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; guia de uso com ${routeCount} rotas; Gestão Fácil versionada com QA local; matriz operacional validada)`);
+console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; guia de uso com ${routeCount} rotas; plano de primeira semana validado; Gestão Fácil versionada com QA local; matriz operacional validada)`);

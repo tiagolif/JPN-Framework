@@ -5,11 +5,47 @@ const PERSISTENCE_ACTION_IDS = [
   "savePreset",
 ];
 
-const toggle = document.getElementById("temporaryMode");
-const status = document.getElementById("temporaryModeStatus");
 let enabled = false;
+let status = null;
+
+function ensureControls() {
+  let toggle = document.getElementById("temporaryMode");
+  if (toggle) return toggle;
+
+  const recoveryStatus = document.getElementById("recoveryStatus");
+  const recoveryNote = recoveryStatus?.closest(".demo-note");
+  if (!recoveryNote) return null;
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "temporary-mode-control";
+
+  const label = document.createElement("label");
+  label.setAttribute("for", "temporaryMode");
+  label.className = "temporary-mode-label";
+
+  toggle = document.createElement("input");
+  toggle.id = "temporaryMode";
+  toggle.type = "checkbox";
+  toggle.setAttribute("aria-describedby", "temporaryModeStatus");
+
+  const text = document.createElement("span");
+  text.textContent = "Modo temporário — não criar novos salvamentos locais";
+
+  status = document.createElement("span");
+  status.id = "temporaryModeStatus";
+  status.className = "field-help";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  status.setAttribute("aria-atomic", "true");
+
+  label.append(toggle, text);
+  wrapper.append(label, status);
+  recoveryNote.append(wrapper);
+  return toggle;
+}
 
 function setStatus(message) {
+  status ??= document.getElementById("temporaryModeStatus");
   if (status) status.textContent = message;
 }
 
@@ -26,14 +62,15 @@ function applyMode(nextEnabled) {
 
   window.dispatchEvent(new CustomEvent("jpn:temporary-mode", { detail: { enabled } }));
   setStatus(enabled
-    ? "Modo temporário ativo: recuperação automática e novos salvamentos locais estão desativados nesta sessão."
-    : "Modo temporário desligado: a recuperação automática local pode voltar a salvar alterações desta sessão.");
+    ? "Ativo nesta sessão: recuperação automática e novos snapshots/presets locais ficam desativados. Exportações e cópia continuam sendo ações explícitas do usuário."
+    : "Desligado: a recuperação automática local e os botões de salvar podem funcionar normalmente.");
 }
 
 export function isTemporaryModeEnabled() {
   return enabled;
 }
 
+const toggle = ensureControls();
 if (toggle) {
   toggle.checked = false;
   toggle.addEventListener("change", () => applyMode(toggle.checked));

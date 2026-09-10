@@ -1,0 +1,2 @@
+Feedback ID,Produto,Categoria,Descrição sanitizada,Origem,Confiança,Recorrência,Impacto,Evidência,Decisão,Próximo gate,Estado
+FB-EX-01,JPN Prompt Builder,USABILIDADE,"Exemplo fictício: pessoa não percebeu onde revisar o contexto antes de copiar o prompt",INTERNA,inferred,UNICO,BAIXO,"Exemplo fictício; sem evidência de uso real",OBSERVAR,"QA contextual / revisão de interface",PENDING

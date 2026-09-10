@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Template quadrado JPN</title>
+  <desc id="desc">Fonte vetorial interna para princípio ou conceito curto com assinatura JPN e estado de publicação.</desc>
+  <rect width="1080" height="1080" fill="#06121C"/>
+  <rect x="72" y="72" width="936" height="936" rx="36" fill="#0B1F33" stroke="#21455E" stroke-width="2"/>
+  <text x="112" y="142" fill="#86E2D9" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="800" letter-spacing="4">JPN</text>
+  <text x="112" y="236" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="700">PRINCÍPIO · EDITAR</text>
+  <text x="112" y="360" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="86" font-weight="900">Uma ideia principal</text>
+  <text x="112" y="452" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="86" font-weight="900">curta e verificável</text>
+  <text x="112" y="548" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="500">Apoio factual em uma ou duas linhas.</text>
+  <g transform="translate(112 666)">
+    <rect width="92" height="92" rx="22" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="29" y="61" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="900">J</text>
+    <rect x="116" width="92" height="92" rx="22" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="144" y="61" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="900">P</text>
+    <rect x="232" width="92" height="92" rx="22" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="259" y="61" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="900">N</text>
+  </g>
+  <line x1="112" y1="846" x2="968" y2="846" stroke="#21455E" stroke-width="2"/>
+  <text x="112" y="930" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">Fonte de design · não publicada</text>
+</svg>

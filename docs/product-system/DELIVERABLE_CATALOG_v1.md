@@ -79,7 +79,7 @@ O produto continua **EM PREPARAÇÃO**. Freeze, hashes finais e CI no head defin
 
 ## Superfícies compartilhadas
 
-O catálogo também registra como candidatas as páginas comerciais internas, FAQ, sistema de artes sociais, kit de produção visual, messaging, Copy Bank, biblioteca de objeções, biblioteca/board de conteúdo social, one-pagers, guia de handoff, registro central de evidências, **guia/checklist de onboarding do cliente** e templates de empacotamento. Essas superfícies continuam internas/candidatas e não constituem publicação comercial nem comprovam release.
+O catálogo também registra como candidatas as páginas comerciais internas, FAQ, sistema de artes sociais, kit de produção visual, messaging, Copy Bank, biblioteca de objeções, biblioteca/board de conteúdo social, one-pagers, guia de handoff, registro central de evidências, **guia/checklist de onboarding do cliente**, **playbook/template de triagem de suporte ao cliente** e templates de empacotamento. Essas superfícies continuam internas/candidatas e não constituem publicação comercial nem comprovam release.
 
 ## Regra operacional
 

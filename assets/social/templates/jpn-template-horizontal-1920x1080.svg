@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Template horizontal JPN</title>
+  <desc id="desc">Fonte vetorial interna horizontal para comparação, mapa ou apresentação de três módulos JPN.</desc>
+  <rect width="1920" height="1080" fill="#06121C"/>
+  <rect x="96" y="80" width="1728" height="920" rx="40" fill="#0B1F33" stroke="#21455E" stroke-width="2"/>
+  <text x="144" y="158" fill="#86E2D9" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="800" letter-spacing="4">JPN</text>
+  <text x="144" y="250" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="700">MAPA · EDITAR</text>
+  <text x="144" y="366" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="86" font-weight="900">Headline horizontal</text>
+  <text x="144" y="454" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="86" font-weight="900">em até duas linhas</text>
+  <text x="144" y="528" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="30">Contexto curto e factual para orientar a leitura.</text>
+  <g transform="translate(920 220)">
+    <rect width="250" height="470" rx="30" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="30" y="82" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="54" font-weight="900">J</text>
+    <text x="30" y="145" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="800">Módulo 1</text>
+    <text x="30" y="202" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">Fato curto</text>
+    <text x="30" y="244" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">e verificável.</text>
+  </g>
+  <g transform="translate(1200 220)">
+    <rect width="250" height="470" rx="30" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="30" y="82" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="54" font-weight="900">P</text>
+    <text x="30" y="145" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="800">Módulo 2</text>
+    <text x="30" y="202" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">Fato curto</text>
+    <text x="30" y="244" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">e verificável.</text>
+  </g>
+  <g transform="translate(1480 220)">
+    <rect width="250" height="470" rx="30" fill="#0E2639" stroke="#21455E" stroke-width="2"/>
+    <text x="30" y="82" fill="#2EC4B6" font-family="Inter,Arial,sans-serif" font-size="54" font-weight="900">N</text>
+    <text x="30" y="145" fill="#F5F9FC" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="800">Módulo 3</text>
+    <text x="30" y="202" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">Fato curto</text>
+    <text x="30" y="244" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="22">e verificável.</text>
+  </g>
+  <line x1="144" y1="820" x2="1776" y2="820" stroke="#21455E" stroke-width="2"/>
+  <text x="144" y="910" fill="#A7BDCC" font-family="Inter,Arial,sans-serif" font-size="24">Fonte de design · não publicada</text>
+</svg>

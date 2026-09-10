@@ -1,0 +1,19 @@
+id,tema,produto_foco,formato,template,estado_producao,qa_visual,revisao_humana,autorizacao_publicacao,observacao
+SC-01,Manifesto,Ecossistema,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,Não publicar automaticamente
+SC-02,Método em 3 partes,Método JPN,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,Preservar Jornada Precisão Narrativa
+SC-03,Lacunas,Método JPN,1080x1080,TPL-SOC-02,IDEIA,pendente,pendente,NAO_AUTORIZADA,Não transformar lacuna em certeza
+SC-04,Antes do prompt,Método JPN,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,Sem claim de performance
+SC-05,Tela em branco,JPN Prompt Pack,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,Adaptação obrigatória ao contexto
+SC-06,18 templates,JPN Prompt Pack,1920x1080,TPL-SOC-03,IDEIA,pendente,pendente,NAO_AUTORIZADA,Manter contagem canônica 18
+SC-07,Seleção de template,JPN Prompt Pack,1080x1080,TPL-SOC-02,IDEIA,pendente,pendente,NAO_AUTORIZADA,Menor template suficiente
+SC-08,Tarefa vira processo,JPN Business,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,Não apresentar como automação autônoma
+SC-09,12 playbooks,JPN Business,1920x1080,TPL-SOC-03,IDEIA,pendente,pendente,NAO_AUTORIZADA,Manter contagem canônica 12
+SC-10,Revisão semanal,JPN Business,1080x1080,TPL-SOC-02,IDEIA,pendente,pendente,NAO_AUTORIZADA,Decisão humana obrigatória
+SC-11,Builder guiado,JPN Prompt Builder,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,QA físico contextual móvel pendente
+SC-12,Contexto explícito,JPN Prompt Builder,1080x1080,TPL-SOC-02,IDEIA,pendente,pendente,NAO_AUTORIZADA,Não usar 100% privado
+SC-13,Organização simples,JPN Gestão Fácil,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,GF-QA-10 pendente
+SC-14,REPOR,JPN Gestão Fácil,1080x1080,TPL-SOC-02,IDEIA,pendente,pendente,NAO_AUTORIZADA,REPOR é alerta e não autorização de compra
+SC-15,Menor recurso suficiente,JPN Pro Kit,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,EM PREPARAÇÃO
+SC-16,Ecossistema modular,Ecossistema,1920x1080,TPL-SOC-03,IDEIA,pendente,pendente,NAO_AUTORIZADA,Sem recomendação automática do Pro Kit
+SC-17,Comparação conceitual,Ecossistema,1920x1080,TPL-SOC-03,IDEIA,pendente,pendente,NAO_AUTORIZADA,Não garante resposta do modelo
+SC-18,Confiança explícita,Ecossistema,1080x1350,TPL-SOC-01,IDEIA,pendente,pendente,NAO_AUTORIZADA,Estado não comunicado apenas por cor

@@ -1,0 +1,17 @@
+id,produto,etapa,evidencia_esperada,estado_inicial,bloqueio_se_faltar
+ONB-C01,Método JPN,Ler referência rápida,Leitura registrada,PENDING,Não iniciar exercício avançado
+ONB-C02,Método JPN,Aplicar J-P-N a uma tarefa,Exemplo revisado,PENDING,Não considerar onboarding concluído
+ONB-C03,JPN Prompt Pack,Escolher template pelo tipo de tarefa,Template e justificativa registrados,PENDING,Não ampliar para combinação de templates
+ONB-C04,JPN Prompt Pack,Executar teste pequeno,Resultado e ajustes registrados,PENDING,Não tratar template como garantia de resultado
+ONB-C05,JPN Business,Selecionar rotina e playbook,Playbook e responsável definidos,PENDING,Não iniciar automação externa
+ONB-C06,JPN Business,Registrar próximo passo,Próxima ação observável registrada,PENDING,Não considerar rotina implantada
+ONB-C07,JPN Prompt Builder,Ler Quick Start,Leitura registrada,PENDING,Não ampliar uso sem entender fluxo básico
+ONB-C08,JPN Prompt Builder,Montar e revisar prompt simples,Prompt revisado salvo,PENDING,Não declarar experiência móvel validada
+ONB-C09,JPN Gestão Fácil,Ler Quick Start e dicionário,Leitura registrada,PENDING,Não preencher operação sem conhecer campos calculados
+ONB-C10,JPN Gestão Fácil,Usar cópia com dados fictícios ou não sensíveis,Cópia de trabalho revisada,PENDING,Não usar dado financeiro real em demonstração
+ONB-C11,JPN Gestão Fácil,Confirmar tratamento de REPOR,Registro de que REPOR é somente alerta,PENDING,Não tratar alerta como autorização de compra
+ONB-C12,JPN Gestão Fácil,Reconhecer GF-QA-10 pendente,Pendência registrada,PENDING,Não declarar compatibilidade multiplataforma final
+ONB-C13,JPN Pro Kit,Confirmar múltiplas necessidades,Justificativa por componente,PENDING,Não recomendar pacote completo por padrão
+ONB-C14,JPN Pro Kit,Preservar estado EM PREPARAÇÃO,Estado registrado,PENDING,Não tratar Pro Kit como release final
+ONB-C15,Compartilhado,Revisar segurança operacional,Checklist de guardrails revisado,PENDING,Parar antes de ação externa ou irreversível
+ONB-C16,Compartilhado,Registrar confiança do contexto,confirmed/inferred/unknown/conflicting aplicados,PENDING,Não afirmar como confirmado o que não possui evidência

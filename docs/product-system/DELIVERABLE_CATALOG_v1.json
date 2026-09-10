@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "framework": "JPN Framework",
   "state": "candidate inventory / release evidence pending",
   "purpose": "Catalogar os entregáveis candidatos existentes e separar presença no repositório de prontidão final de release.",
@@ -9,7 +9,8 @@
       "canonical_name": "Método JPN",
       "candidate_deliverables": [
         "docs/products/metodo-jpn/METODO_JPN_v1.md",
-        "docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md"
+        "docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_PRACTICE_WORKBOOK_v1.md"
       ],
       "final_release_dependencies": ["revisao-editorial-humana", "pdf-final"],
       "release_ready": false
@@ -20,7 +21,8 @@
       "candidate_deliverables": [
         "docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md",
         "docs/products/prompt-pack/JPN_PROMPT_PACK_QUICK_REFERENCE_v1.md",
-        "docs/products/prompt-pack/PROMPT_INDEX.json"
+        "docs/products/prompt-pack/PROMPT_INDEX.json",
+        "docs/products/prompt-pack/PROMPT_SELECTION_WORKBOOK_v1.md"
       ],
       "final_release_dependencies": ["revisao-editorial-humana", "pdf-final"],
       "release_ready": false
@@ -32,7 +34,13 @@
         "docs/products/jpn-business/JPN_BUSINESS_v1.md",
         "docs/products/jpn-business/JPN_BUSINESS_QUICK_REFERENCE_v1.md",
         "docs/products/jpn-business/BUSINESS_INDEX.json",
-        "docs/products/jpn-business/PRINT_CANDIDATE_v1.md"
+        "docs/products/jpn-business/PRINT_CANDIDATE_v1.md",
+        "docs/products/jpn-business/IMPLEMENTATION_WORKBOOK_v1.md",
+        "docs/products/jpn-business/OPERATIONAL_SCORECARD_v1.md",
+        "docs/products/jpn-business/30_DAY_IMPLEMENTATION_SPRINT_v1.md",
+        "docs/products/jpn-business/IMPLEMENTATION_TRACKER_v1.csv",
+        "docs/products/jpn-business/WEEKLY_OPERATING_REVIEW_v1.md",
+        "docs/products/jpn-business/WEEKLY_REVIEW_LOG_v1.csv"
       ],
       "final_release_dependencies": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"],
       "release_ready": false
@@ -44,7 +52,8 @@
         "product-site/index.html",
         "product-site/context-main-bridge.js",
         "product-site/mobile-context-aware-test.html",
-        "docs/products/prompt-builder/PROMPT_BUILDER_MOBILE_QA_v1.md"
+        "docs/products/prompt-builder/PROMPT_BUILDER_MOBILE_QA_v1.md",
+        "docs/products/prompt-builder/PROMPT_BUILDER_QUICK_START_v1.md"
       ],
       "final_release_dependencies": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"],
       "release_ready": false
@@ -57,7 +66,8 @@
         "docs/products/pro-kit/DELIVERY_MAP.md",
         "docs/products/pro-kit/READINESS_MATRIX_v1.md",
         "docs/products/pro-kit/MANIFEST.template.json",
-        "docs/products/pro-kit/RELEASE_GATES.json"
+        "docs/products/pro-kit/RELEASE_GATES.json",
+        "docs/products/pro-kit/USAGE_ROUTING_GUIDE_v1.md"
       ],
       "final_release_dependencies": ["artefatos-congelados", "hashes-finais", "ci-final"],
       "release_ready": false
@@ -69,7 +79,9 @@
         "deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx",
         "docs/products/gestao-facil/MANUAL_v0.1.md",
         "docs/products/gestao-facil/QUICK_START_v0.1.md",
-        "docs/products/gestao-facil/QA_EXECUTION_v0.1.md"
+        "docs/products/gestao-facil/QA_EXECUTION_v0.1.md",
+        "docs/products/gestao-facil/OPERATIONAL_DATA_DICTIONARY_v0.1.md",
+        "docs/products/gestao-facil/STARTER_DATA_KIT_v0.1.md"
       ],
       "final_release_dependencies": ["gf-qa-10", "arquivo-final-validado"],
       "release_ready": false
@@ -83,9 +95,21 @@
     "commercial-site/casos-de-uso.html",
     "commercial-site/primeiros-passos.html",
     "commercial-site/demonstracao.html",
+    "commercial-site/perguntas-frequentes.html",
     "docs/brand/SOCIAL_ART_SYSTEM_v1.md",
+    "docs/brand/SOCIAL_PRODUCTION_KIT_v1.md",
     "docs/commercial/COMMERCIAL_MESSAGING_v1.md",
-    "docs/commercial/PRODUCT_PAGE_COPY_PACK_v1.md"
+    "docs/commercial/PRODUCT_PAGE_COPY_PACK_v1.md",
+    "docs/commercial/COPY_BANK_v1.md",
+    "docs/commercial/OBJECTION_RESPONSE_LIBRARY_v1.md",
+    "docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md",
+    "docs/commercial/SOCIAL_CONTENT_PRODUCTION_BOARD_v1.csv",
+    "docs/commercial/PRODUCT_ONE_PAGERS_v1.md",
+    "docs/product-system/CUSTOMER_DELIVERY_HANDOFF_v1.md",
+    "deliverables/templates/README_ENTREGA.template.md",
+    "deliverables/templates/CHANGELOG_RESUMIDO.template.md",
+    "deliverables/templates/MANIFEST.template.txt",
+    "deliverables/templates/SHA256SUMS.template.txt"
   ],
   "rules": [
     "candidate_deliverables registra arquivos existentes; não declara aprovação humana nem release final.",

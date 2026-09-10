@@ -33,4 +33,6 @@ if (!html.includes('type="module" src="app.js"')) {
   throw new Error('index.html deve carregar app.js como ES module');
 }
 
+await import('./check-prompt-builder-accessibility.mjs');
+
 console.log('Prompt Builder usa o bundle browser oficial sem duplicar as funções centrais.');

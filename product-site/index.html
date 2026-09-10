@@ -8,80 +8,85 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="nav"><div class="brand">JPN <span>Framework</span></div><a href="#builder" class="btn ghost">Testar Builder</a></header>
-  <main>
-    <section class="hero">
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+  <header class="nav">
+    <div class="brand" aria-label="JPN Framework">JPN <span>Framework</span></div>
+    <nav aria-label="Navegação principal"><a href="#builder" class="btn ghost">Testar Builder</a></nav>
+  </header>
+  <main id="conteudo-principal" tabindex="-1">
+    <section class="hero" aria-labelledby="titulo-principal">
       <div class="eyebrow">JORNADA · PRECISÃO · NARRATIVA</div>
-      <h1>Estruture antes de executar.</h1>
+      <h1 id="titulo-principal">Estruture antes de executar.</h1>
       <p>Transforme uma ideia vaga em uma instrução mais clara, revisável e reutilizável para trabalhar com IA.</p>
       <div class="actions"><a class="btn primary" href="#builder">Experimentar demo</a><a class="btn ghost" href="#metodo">Conhecer o método</a></div>
       <p class="micro">Sem promessa de resposta perfeita. O foco é tornar contexto, critérios e lacunas mais explícitos antes da execução.</p>
     </section>
 
-    <section class="proof-grid">
-      <article><strong>J</strong><h3>Jornada</h3><p>Contexto, histórico, estado atual, recursos, restrições e incertezas.</p></article>
-      <article><strong>P</strong><h3>Precisão</h3><p>Objetivo operacional, escopo, saídas, riscos, critérios de aceitação e validação.</p></article>
-      <article><strong>N</strong><h3>Narrativa</h3><p>Estado final desejado, sequência de entrega, formato, detalhe e próxima ação.</p></article>
+    <section class="proof-grid" aria-label="Princípios do método JPN">
+      <article><strong aria-hidden="true">J</strong><h3>Jornada</h3><p>Contexto, histórico, estado atual, recursos, restrições e incertezas.</p></article>
+      <article><strong aria-hidden="true">P</strong><h3>Precisão</h3><p>Objetivo operacional, escopo, saídas, riscos, critérios de aceitação e validação.</p></article>
+      <article><strong aria-hidden="true">N</strong><h3>Narrativa</h3><p>Estado final desejado, sequência de entrega, formato, detalhe e próxima ação.</p></article>
     </section>
 
-    <section id="builder" class="builder-wrap">
-      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2>JPN Prompt Builder</h2><p>Digite uma ideia simples, carregue um preset guiado ou reutilize presets e projetos salvos localmente. A demo usa o SDK oficial do framework para criar e validar o estado JPN e aplica uma camada contextual conservadora ao prompt exibido, preservando lacunas e restrições informadas.</p></div>
+    <section id="builder" class="builder-wrap" aria-labelledby="builder-title">
+      <div class="section-head"><span>DEMONSTRAÇÃO</span><h2 id="builder-title">JPN Prompt Builder</h2><p>Digite uma ideia simples, carregue um preset guiado ou reutilize presets e projetos salvos localmente. A demo usa o SDK oficial do framework para criar e validar o estado JPN e aplica uma camada contextual conservadora ao prompt exibido, preservando lacunas e restrições informadas.</p></div>
       <div class="builder-grid">
         <div class="panel">
           <label for="workspace">Continuar um projeto local</label>
           <select id="workspace"><option value="">Nenhum projeto carregado</option></select>
           <label for="workspaceName">Nome do projeto</label>
-          <input id="workspaceName" maxlength="120" placeholder="Ex.: Campanha setembro — versão 2" />
-          <div class="output-actions">
-            <button class="btn ghost" id="saveWorkspace">Salvar novo snapshot</button>
-            <button class="btn ghost" id="updateWorkspace">Atualizar carregado</button>
-            <button class="btn ghost" id="duplicateWorkspace">Duplicar</button>
-            <button class="btn ghost" id="deleteWorkspace">Excluir</button>
+          <input id="workspaceName" maxlength="120" placeholder="Ex.: Campanha setembro — versão 2" aria-describedby="workspace-help" />
+          <div class="output-actions" aria-label="Ações do projeto local">
+            <button class="btn ghost" id="saveWorkspace" type="button">Salvar novo snapshot</button>
+            <button class="btn ghost" id="updateWorkspace" type="button">Atualizar carregado</button>
+            <button class="btn ghost" id="duplicateWorkspace" type="button">Duplicar</button>
+            <button class="btn ghost" id="deleteWorkspace" type="button">Excluir</button>
           </div>
-          <div class="output-actions">
-            <button class="btn ghost" id="exportWorkspaces">Exportar projetos</button>
-            <button class="btn ghost" id="importWorkspaces">Importar projetos</button>
-            <input id="workspaceFile" type="file" accept="application/json,.json" hidden />
+          <div class="output-actions" aria-label="Importação e exportação de projetos">
+            <button class="btn ghost" id="exportWorkspaces" type="button">Exportar projetos</button>
+            <button class="btn ghost" id="importWorkspaces" type="button">Importar projetos</button>
+            <input id="workspaceFile" type="file" accept="application/json,.json" hidden aria-label="Selecionar arquivo JSON de projetos" />
           </div>
-          <p class="field-help">Projetos guardam localmente campos, prompt e rascunho atual para continuidade. Atualizar mantém o mesmo projeto; duplicar cria uma nova cópia independente. Não há conta, nuvem ou sincronização automática.</p>
-          <div class="demo-note" aria-live="polite">
+          <p class="field-help" id="workspace-help">Projetos guardam localmente campos, prompt e rascunho atual para continuidade. Atualizar mantém o mesmo projeto; duplicar cria uma nova cópia independente. Não há conta, nuvem ou sincronização automática.</p>
+          <div class="demo-note" aria-live="polite" aria-atomic="true">
             <strong>Recuperação automática local:</strong> <span id="recoveryStatus">preparando proteção do rascunho…</span>
-            <div class="output-actions"><button class="btn ghost" id="clearRecovery">Limpar recuperação</button></div>
+            <div class="output-actions"><button class="btn ghost" id="clearRecovery" type="button">Limpar recuperação</button></div>
           </div>
 
           <label for="preset">Começar por um preset</label>
-          <select id="preset"><option value="">Sem preset — começar do zero</option></select>
-          <p class="field-help">Presets só preenchem um ponto de partida editável. Eles não executam IA nem adicionam fatos sobre o seu caso.</p>
-          <label>Sua ideia</label>
-          <textarea id="idea" placeholder="Ex.: Quero criar uma campanha de 7 dias para minha loja no Instagram."></textarea>
-          <label>Resultado principal</label>
+          <select id="preset" aria-describedby="preset-help"><option value="">Sem preset — começar do zero</option></select>
+          <p class="field-help" id="preset-help">Presets só preenchem um ponto de partida editável. Eles não executam IA nem adicionam fatos sobre o seu caso.</p>
+          <label for="idea">Sua ideia</label>
+          <textarea id="idea" placeholder="Ex.: Quero criar uma campanha de 7 dias para minha loja no Instagram." aria-describedby="idea-help"></textarea>
+          <p class="field-help" id="idea-help">Descreva o pedido com suas próprias palavras. Lacunas continuarão explícitas no rascunho.</p>
+          <label for="type">Resultado principal</label>
           <select id="type"><option>Plano / estratégia</option><option>Texto / conteúdo</option><option>Análise</option><option>Atendimento / vendas</option><option>Automação / processo</option><option>Produto digital / código</option></select>
-          <label>O que a IA não pode fazer?</label>
+          <label for="restrictions">O que a IA não pode fazer?</label>
           <input id="restrictions" placeholder="Ex.: não inventar preços, dados ou depoimentos" />
-          <button class="btn primary wide" id="generate">Criar rascunho JPN</button>
+          <button class="btn primary wide" id="generate" type="button">Criar rascunho JPN</button>
           <div class="demo-note">Campos ausentes continuam explícitos para revisão. A demo não usa um modelo de IA para preencher informações que você não forneceu.</div>
 
           <label for="presetName">Salvar esta configuração como preset local</label>
-          <input id="presetName" maxlength="120" placeholder="Ex.: Meu roteiro de análise" />
-          <div class="output-actions">
-            <button class="btn ghost" id="savePreset">Salvar neste navegador</button>
-            <button class="btn ghost" id="exportPresets">Exportar presets</button>
-            <button class="btn ghost" id="importPresets">Importar presets</button>
-            <input id="presetFile" type="file" accept="application/json,.json" hidden />
+          <input id="presetName" maxlength="120" placeholder="Ex.: Meu roteiro de análise" aria-describedby="preset-storage-help" />
+          <div class="output-actions" aria-label="Ações de presets locais">
+            <button class="btn ghost" id="savePreset" type="button">Salvar neste navegador</button>
+            <button class="btn ghost" id="exportPresets" type="button">Exportar presets</button>
+            <button class="btn ghost" id="importPresets" type="button">Importar presets</button>
+            <input id="presetFile" type="file" accept="application/json,.json" hidden aria-label="Selecionar arquivo JSON de presets" />
           </div>
-          <p class="field-help">Presets pessoais ficam somente no armazenamento local do navegador. A exportação JSON serve como backup ou transferência manual; nenhum dado é enviado para servidor.</p>
+          <p class="field-help" id="preset-storage-help">Presets pessoais ficam somente no armazenamento local do navegador. A exportação JSON serve como backup ou transferência manual; nenhum dado é enviado para servidor.</p>
         </div>
-        <div class="panel output-panel">
-          <div class="score-row"><div><span class="score-label">Prontidão</span><strong id="score">0%</strong></div><span id="status" class="status">Aguardando entrada</span></div>
-          <div id="gaps" class="demo-note" aria-live="polite"></div>
-          <pre id="output">Seu prompt JPN aparecerá aqui.</pre>
-          <div class="output-actions"><button class="btn ghost" id="copy">Copiar</button><button class="btn ghost" id="download">Baixar .txt</button><button class="btn ghost" id="downloadJson">Exportar rascunho JSON</button></div>
+        <div class="panel output-panel" aria-labelledby="resultado-title">
+          <div class="score-row"><div><span class="score-label" id="resultado-title">Prontidão</span><strong id="score" aria-live="polite">0%</strong></div><span id="status" class="status" role="status" aria-live="polite" aria-atomic="true">Aguardando entrada</span></div>
+          <div id="gaps" class="demo-note" role="status" aria-live="polite" aria-atomic="true"></div>
+          <pre id="output" tabindex="0" aria-label="Prompt JPN gerado">Seu prompt JPN aparecerá aqui.</pre>
+          <div class="output-actions" aria-label="Ações do resultado"><button class="btn ghost" id="copy" type="button">Copiar</button><button class="btn ghost" id="download" type="button">Baixar .txt</button><button class="btn ghost" id="downloadJson" type="button">Exportar rascunho JSON</button></div>
         </div>
       </div>
     </section>
 
-    <section id="metodo" class="content-section">
-      <div class="section-head"><span>ECOSSISTEMA</span><h2>Um método. Várias formas de aplicar.</h2><p>Todos os produtos usam a mesma base Jornada · Precisão · Narrativa e têm papéis diferentes dentro da jornada.</p></div>
+    <section id="metodo" class="content-section" aria-labelledby="metodo-title">
+      <div class="section-head"><span>ECOSSISTEMA</span><h2 id="metodo-title">Um método. Várias formas de aplicar.</h2><p>Todos os produtos usam a mesma base Jornada · Precisão · Narrativa e têm papéis diferentes dentro da jornada.</p></div>
       <div class="cards">
         <article><h3>Método JPN</h3><p>Aprenda a lógica do framework e como estruturar contexto, objetivo, critérios e lacunas antes de executar.</p></article>
         <article><h3>JPN Prompt Pack</h3><p>Use estruturas reutilizáveis como ponto de partida para tarefas de comunicação, pesquisa, vendas, suporte, operações, dados e tecnologia.</p></article>
@@ -91,12 +96,12 @@
       </div>
     </section>
 
-    <section class="offer">
-      <div><span class="eyebrow">EM PREPARAÇÃO</span><h2>JPN Pro Kit</h2><p>Do método à aplicação recorrente. Os artefatos finais ainda estão sendo consolidados; preço, checkout e publicação serão definidos separadamente antes de qualquer lançamento.</p></div>
+    <section class="offer" aria-labelledby="pro-kit-title">
+      <div><span class="eyebrow">EM PREPARAÇÃO</span><h2 id="pro-kit-title">JPN Pro Kit</h2><p>Do método à aplicação recorrente. Os artefatos finais ainda estão sendo consolidados; preço, checkout e publicação serão definidos separadamente antes de qualquer lançamento.</p></div>
       <span class="btn disabled" aria-disabled="true">Ainda não publicado</span>
     </section>
 
-    <section class="faq content-section"><div class="section-head"><span>FAQ</span><h2>Perguntas importantes</h2></div>
+    <section class="faq content-section" aria-labelledby="faq-title"><div class="section-head"><span>FAQ</span><h2 id="faq-title">Perguntas importantes</h2></div>
       <details><summary>Isso é só um prompt grande?</summary><p>Não. O método separa contexto, objetivo, restrições, critérios, estado final e lacunas para que a solicitação possa ser revisada antes de executar.</p></details>
       <details><summary>Funciona só no ChatGPT?</summary><p>Não. O núcleo do JPN é independente de provedor e pode orientar prompts para diferentes modelos e agentes.</p></details>
       <details><summary>O JPN garante respostas perfeitas?</summary><p>Não. O framework organiza a especificação e torna ambiguidades mais visíveis, mas modelos de IA continuam sujeitos a erros.</p></details>

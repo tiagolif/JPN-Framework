@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "source": "docs/product-system/PRODUCT_RELEASE_STATUS_v1.json",
+  "purpose": "Prevent internal commercial surfaces from presenting products as release-ready while canonical release dependencies remain open.",
+  "allowed_commercial_states": [
+    "internal-review",
+    "release-ready"
+  ],
+  "products": [
+    {
+      "id": "metodo-jpn",
+      "page": "commercial-site/products/metodo-jpn.html",
+      "commercial_state": "internal-review",
+      "public_presentation_allowed": false,
+      "open_dependencies": ["revisao-editorial-humana", "pdf-final"]
+    },
+    {
+      "id": "jpn-prompt-pack",
+      "page": "commercial-site/products/jpn-prompt-pack.html",
+      "commercial_state": "internal-review",
+      "public_presentation_allowed": false,
+      "open_dependencies": ["revisao-editorial-humana", "pdf-final"]
+    },
+    {
+      "id": "jpn-business",
+      "page": "commercial-site/products/jpn-business.html",
+      "commercial_state": "internal-review",
+      "public_presentation_allowed": false,
+      "open_dependencies": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"]
+    },
+    {
+      "id": "jpn-prompt-builder",
+      "page": "commercial-site/products/jpn-prompt-builder.html",
+      "commercial_state": "internal-review",
+      "public_presentation_allowed": false,
+      "open_dependencies": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"]
+    },
+    {
+      "id": "jpn-pro-kit",
+      "page": "commercial-site/products/jpn-pro-kit.html",
+      "commercial_state": "internal-review",
+      "public_presentation_allowed": false,
+      "open_dependencies": ["artefatos-congelados", "hashes-finais", "ci-final"]
+    },
+    {
+      "id": "jpn-gestao-facil",
+      "page": "commercial-site/products/jpn-gestao-facil.html",
+      "commercial_state": "internal-review",
+      "public_presentation_allowed": false,
+      "open_dependencies": ["gf-qa-10", "arquivo-final-validado"]
+    }
+  ],
+  "guardrails": [
+    "Commercial state is derived from canonical release dependencies and cannot promote a product independently.",
+    "public_presentation_allowed remains false until every canonical dependency is passed or not-applicable.",
+    "This contract does not authorize publication, advertising, checkout, pricing, lead capture or sale.",
+    "Human, visual, physical and compatibility gates remain human or physical when defined that way in the release contract."
+  ]
+}

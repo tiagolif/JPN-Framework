@@ -66,6 +66,8 @@ node scripts/check-commercial-page-copy-sync.mjs
 
 O gate verifica fatos selecionados nas seis páginas, estados bloqueantes, `noindex,nofollow` e padrões comerciais proibidos. Ele complementa os gates já existentes da superfície comercial; não substitui QA visual, acessibilidade manual ou revisão editorial humana.
 
+O verificador também está encadeado em `scripts/check-commercial-copy.mjs`. Como `check:commercial-copy` já participa de `npm run build`, divergências futuras entre a copy canônica e as seis páginas passam a bloquear o build principal em vez de depender somente da execução manual do checker.
+
 ## Estado que continua pendente
 
 - QA visual das páginas em desktop e mobile reais;

@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "purpose": "Definir o escopo determinístico do handoff de revisão editorial dos dois produtos com bloqueio canônico revisao-editorial-humana + pdf-final.",
+  "status": "human-review-scope-only",
+  "release_effect": "none",
+  "publication_authorized": false,
+  "checklist": [
+    "hierarquia-e-diagramacao",
+    "sem-clipping-ou-overflow",
+    "acentuacao-e-fontes",
+    "tabelas-codigo-e-urls",
+    "sem-paginas-vazias-indevidas",
+    "legibilidade-normal-e-reduzida",
+    "coerencia-com-fonte-canonica"
+  ],
+  "products": [
+    {
+      "id": "metodo-jpn",
+      "title": "Método JPN",
+      "source": "docs/products/metodo-jpn/METODO_JPN_v1.md",
+      "audit": "docs/products/metodo-jpn/AUDIT.md",
+      "release_dependencies": ["revisao-editorial-humana", "pdf-final"]
+    },
+    {
+      "id": "jpn-prompt-pack",
+      "title": "JPN Prompt Pack",
+      "source": "docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md",
+      "audit": "docs/products/prompt-pack/AUDIT.md",
+      "release_dependencies": ["revisao-editorial-humana", "pdf-final"]
+    }
+  ],
+  "guardrails": [
+    "O pacote de handoff não aprova revisão editorial, PDF final, freeze, release ou publicação.",
+    "Todos os itens de página nascem PENDING e só podem mudar após inspeção humana real.",
+    "Qualquer alteração na fonte ou no PDF candidato invalida a evidência de revisão anterior daquele documento.",
+    "Hashes de candidatos não são hashes finais de release."
+  ]
+}

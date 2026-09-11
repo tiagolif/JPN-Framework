@@ -27,7 +27,7 @@ const activeHumanItems = plan.items
   .sort((a, b) => {
     const priority = String(a.priority).localeCompare(String(b.priority));
     if (priority !== 0) return priority;
-    return String(a.product?.name ?? a.product_id).localeCompare(String(b.product?.name ?? b.product_id), 'pt-BR');
+    return String(a.product?.canonical_name ?? a.product_id).localeCompare(String(b.product?.canonical_name ?? b.product_id), 'pt-BR');
   });
 
 const errors = [];
@@ -61,7 +61,7 @@ const lines = [
 ];
 
 activeHumanItems.forEach((item, index) => {
-  const productName = item.product?.name ?? item.product_id;
+  const productName = item.product?.canonical_name ?? item.product_id;
   lines.push(`### ${index + 1}. ${productName} — \`${item.dependency_id}\` (${item.priority})`);
   lines.push('');
   lines.push(`- **Estado atual:** ${item.dependency.status}`);

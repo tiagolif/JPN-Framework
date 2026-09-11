@@ -89,11 +89,11 @@ if (!fs.existsSync(copyBankPath)) {
   }
 
   const ctaSection = copy.match(/## 10\. CTAs aprováveis sem transação([\s\S]*?)## 11\./u)?.[1] ?? '';
-  const approvedCtas = ctaSection.match(/^\- /gmu)?.length ?? 0;
+  const approvedCtas = ctaSection.match(/^- /gmu)?.length ?? 0;
   if (approvedCtas < 8) errors.push(`COPY_BANK_v1.md deve manter ao menos 8 CTAs informativos; encontrados ${approvedCtas}.`);
 
   const socialSection = copy.match(/## 11\. Frases curtas para arte e social interno([\s\S]*?)## 12\./u)?.[1] ?? '';
-  const socialLines = socialSection.match(/^\- /gmu)?.length ?? 0;
+  const socialLines = socialSection.match(/^- /gmu)?.length ?? 0;
   if (socialLines < 8) errors.push(`COPY_BANK_v1.md deve manter ao menos 8 frases curtas; encontradas ${socialLines}.`);
 
   if (/\bR\$\s*\d|https?:\/\/|<form\b|checkout|pix\b|cart[aã]o\s+de\s+cr[eé]dito/iu.test(copy)) {
@@ -116,3 +116,4 @@ console.log(`Gate comercial aprovado: ${files.length} arquivo(s) Markdown verifi
 
 await import('./check-social-content-library.mjs');
 await import('./check-commercial-one-pagers.mjs');
+await import('./check-product-page-copy.mjs');

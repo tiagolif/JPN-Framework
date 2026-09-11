@@ -145,4 +145,9 @@ if (process.exitCode) {
   throw new Error('Matriz operacional de prontidão do Pro Kit falhou no gate.');
 }
 
-console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; guia de uso com ${routeCount} rotas; plano de primeira semana validado; Gestão Fácil versionada com QA local; matriz operacional validada)`);
+await import('./check-pro-kit-component-rollup.mjs');
+if (process.exitCode) {
+  throw new Error('Roll-up de componentes do Pro Kit falhou no gate.');
+}
+
+console.log(`PASS: estrutura Pro Kit verificada (${requiredSources.length} fontes, ${manifest.files.length} entradas no manifesto; guia de uso com ${routeCount} rotas; plano de primeira semana validado; Gestão Fácil versionada com QA local; matriz operacional validada; roll-up dos componentes alinhado)`);

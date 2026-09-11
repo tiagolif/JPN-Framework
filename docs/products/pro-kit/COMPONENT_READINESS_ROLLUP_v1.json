@@ -1,0 +1,66 @@
+{
+  "product": "JPN Pro Kit",
+  "version": "v1",
+  "status": "component-readiness-rollup",
+  "source_contract": "docs/product-system/PRODUCT_RELEASE_STATUS_v1.json",
+  "release_effect": "none",
+  "components": [
+    {
+      "id": "metodo-jpn",
+      "name": "Método JPN",
+      "dependencies": [
+        {"id": "revisao-editorial-humana", "status": "pending"},
+        {"id": "pdf-final", "status": "pending"}
+      ]
+    },
+    {
+      "id": "jpn-prompt-pack",
+      "name": "JPN Prompt Pack",
+      "dependencies": [
+        {"id": "revisao-editorial-humana", "status": "pending"},
+        {"id": "pdf-final", "status": "pending"}
+      ]
+    },
+    {
+      "id": "jpn-business",
+      "name": "JPN Business",
+      "dependencies": [
+        {"id": "revisao-editorial-humana", "status": "pending"},
+        {"id": "diagramacao-final", "status": "in-progress"},
+        {"id": "pdf-final", "status": "pending"}
+      ]
+    },
+    {
+      "id": "jpn-prompt-builder",
+      "name": "JPN Prompt Builder",
+      "dependencies": [
+        {"id": "qa-fisico-contextual-celular", "status": "pending"},
+        {"id": "ci-final", "status": "pending"},
+        {"id": "pacote-offline-final", "status": "pending"}
+      ]
+    },
+    {
+      "id": "jpn-gestao-facil",
+      "name": "JPN Gestão Fácil",
+      "dependencies": [
+        {"id": "gf-qa-10", "status": "pending"},
+        {"id": "arquivo-final-validado", "status": "pending"}
+      ]
+    }
+  ],
+  "summary": {
+    "component_count": 5,
+    "dependency_count": 12,
+    "passed": 0,
+    "in_progress": 1,
+    "pending": 11,
+    "blocked": 0,
+    "all_components_release_ready": false
+  },
+  "guardrails": [
+    "Este roll-up apenas espelha o contrato canônico de status e não aprova nenhuma dependência.",
+    "JPN Pro Kit não pode ser considerado pronto enquanto qualquer dependência bloqueante de componente permanecer diferente de passed ou not-applicable.",
+    "A conclusão dos componentes não autoriza publicação, venda, anúncio, checkout, gasto, criação de conta ou aceite legal.",
+    "Hashes finais continuam proibidos antes do congelamento dos artefatos finais."
+  ]
+}

@@ -99,4 +99,9 @@ if (process.exitCode) {
   throw new Error('Starter Data Kit da JPN Gestão Fácil falhou no gate.');
 }
 
-console.log(`Gestão Fácil: modelo v0.2 íntegro (${requiredSheets.length} abas, ${requiredKpis.length} KPIs, ${requiredFlows.length} fluxos) + guia de início rápido + dicionário operacional + Starter Data Kit validados.`);
+await import('./check-gestao-facil-v0.2-candidate.mjs');
+if (process.exitCode) {
+  throw new Error('Especificação candidata v0.2 da JPN Gestão Fácil falhou no gate.');
+}
+
+console.log(`Gestão Fácil: modelo v0.2 íntegro (${requiredSheets.length} abas, ${requiredKpis.length} KPIs, ${requiredFlows.length} fluxos) + guia de início rápido + dicionário operacional + Starter Data Kit + candidata v0.2 validados.`);

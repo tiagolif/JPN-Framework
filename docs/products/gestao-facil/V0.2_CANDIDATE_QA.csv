@@ -1,0 +1,19 @@
+id,area,check,status,evidence_or_next_step
+GF2-QA-01,Estrutura,Oito abas canônicas presentes,AUTO_PASS,Inspeção do workbook gerado nesta execução
+GF2-QA-02,Dashboard,KPIs calculam com dados fictícios,AUTO_PASS,Valores 3;1;2;1;2;1 observados
+GF2-QA-03,Fórmulas,Varredura sem erros comuns,AUTO_PASS,Zero matches para REF DIV0 VALUE NAME N/A
+GF2-QA-04,Vendas,Valor total usa Quantidade x Valor unitário,AUTO_PASS,Fórmula aplicada até a linha 500
+GF2-QA-05,Estoque,REPOR quando atual <= mínimo,AUTO_PASS,Fórmula e exemplo fictício verificados
+GF2-QA-06,Segurança,REPOR não autoriza compra,AUTO_PASS,Aviso presente em Leia-me Dashboard e especificação
+GF2-QA-07,Dados,Financeiro inicia sem exemplos monetários preenchidos,AUTO_PASS,Nenhuma linha financeira fictícia pré-populada
+GF2-QA-08,Listas,Validações apontam para valores controlados,AUTO_PASS,Validações criadas para campos categóricos
+GF2-QA-09,Visual,Gráfico de situação das vendas existe,AUTO_PASS,Gráfico criado no Dashboard
+GF2-QA-10,Excel,Abrir salvar editar e recalcular em Excel,PENDING,Requer teste físico no Excel
+GF2-QA-11,LibreOffice,Abrir salvar editar e recalcular no Calc,PENDING,Requer teste físico no LibreOffice
+GF2-QA-12,Google Sheets,Importar editar e recalcular no Sheets,PENDING,Requer teste físico no Google Sheets
+GF2-QA-13,Compatibilidade,Validar listas suspensas nos três aplicativos,PENDING,Executar após GF2-QA-10 a 12
+GF2-QA-14,Compatibilidade,Validar tabelas e filtros nos três aplicativos,PENDING,Executar após GF2-QA-10 a 12
+GF2-QA-15,Compatibilidade,Validar gráfico nos três aplicativos,PENDING,Executar após GF2-QA-10 a 12
+GF2-QA-16,Compatibilidade,Validar datas e moeda sem deslocamento,PENDING,Executar após GF2-QA-10 a 12
+GF2-QA-17,Visual,Revisar legibilidade em notebook e tela menor,PENDING,QA visual humano
+GF2-QA-18,Release,Decidir promoção da v0.2 a candidata canônica,PENDING,Somente após evidência dos gates anteriores

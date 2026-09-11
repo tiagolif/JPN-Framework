@@ -1,0 +1,37 @@
+{
+  "product": "JPN Business",
+  "version": "v1-candidate-source-manifest",
+  "framework_base": "0.3.0-draft",
+  "status": "composition-source-prep-only",
+  "release_effect": "none",
+  "map_source": "docs/products/jpn-business/COMPOSITION_MAP_v1.json",
+  "rules": {
+    "copy_policy": "reuse-canonical-source-before-rewriting",
+    "missing_content": "flag-for-editorial-review-do-not-invent",
+    "playbook_order": "must-match-composition-map",
+    "human_review_required": true
+  },
+  "sections": [
+    {"id": "cover", "kind": "front-matter", "source_type": "composed-metadata", "sources": ["docs/products/jpn-business/BUSINESS_INDEX.json"], "source_anchor": "product/version/framework_base"},
+    {"id": "scope", "kind": "front-matter", "source_type": "canonical-excerpt", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md", "docs/products/jpn-business/COMPOSITION_SPEC_v1.md"], "source_anchor": "## 1. O que é o JPN Business + Regras de conteúdo"},
+    {"id": "toc", "kind": "front-matter", "source_type": "generated-from-map", "sources": ["docs/products/jpn-business/COMPOSITION_MAP_v1.json"], "source_anchor": "front_matter/playbooks/back_matter"},
+    {"id": "how-to-use", "kind": "front-matter", "source_type": "canonical-excerpt", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "## 2. Como usar"},
+    {"id": "method-foundations", "kind": "front-matter", "source_type": "canonical-excerpt", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "## 3. Estrutura dos playbooks"},
+    {"id": "JB-01", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-01 — Entrada e triagem de novo lead"},
+    {"id": "JB-02", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-02 — Follow-up comercial responsável"},
+    {"id": "JB-03", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-03 — Qualificação sem inventar necessidade"},
+    {"id": "JB-04", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-04 — Preparação de proposta sem definir condição não autorizada"},
+    {"id": "JB-05", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-05 — Atendimento e resolução de solicitação"},
+    {"id": "JB-06", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-06 — Escalonamento e handoff interno"},
+    {"id": "JB-07", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-07 — Planejamento de conteúdo comercial"},
+    {"id": "JB-08", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-08 — Planejamento de campanha sem publicação automática"},
+    {"id": "JB-09", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-09 — Criação e manutenção de SOP"},
+    {"id": "JB-10", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-10 — Reunião com decisão e plano de ação"},
+    {"id": "JB-11", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-11 — Base de conhecimento operacional"},
+    {"id": "JB-12", "kind": "playbook", "source_type": "canonical-playbook", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md"], "source_anchor": "# Playbook JB-12 — Revisão semanal operacional"},
+    {"id": "prompt-cross-reference", "kind": "back-matter", "source_type": "generated-cross-reference", "sources": ["docs/products/jpn-business/BUSINESS_INDEX.json", "docs/products/prompt-pack/PROMPT_INDEX.json"], "source_anchor": "playbooks[].prompt_pack_links -> templates[].id"},
+    {"id": "application-checklist", "kind": "back-matter", "source_type": "canonical-synthesis", "sources": ["docs/products/jpn-business/JPN_BUSINESS_QUICK_REFERENCE_v1.md", "docs/products/jpn-business/IMPLEMENTATION_WORKBOOK_v1.md"], "source_anchor": "checklists and review steps"},
+    {"id": "limits", "kind": "back-matter", "source_type": "canonical-synthesis", "sources": ["docs/products/jpn-business/JPN_BUSINESS_v1.md", "docs/products/jpn-business/COMPOSITION_SPEC_v1.md"], "source_anchor": "product limits + Regras de conteúdo"}
+  ],
+  "promotion_rule": "This manifest only establishes source traceability for composition. It cannot set diagramacao-final, pdf-final, freeze or release to passed."
+}

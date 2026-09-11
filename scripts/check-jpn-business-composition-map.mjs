@@ -4,12 +4,14 @@ const mapPath = new URL('../docs/products/jpn-business/COMPOSITION_MAP_v1.json',
 const businessIndexPath = new URL('../docs/products/jpn-business/BUSINESS_INDEX.json', import.meta.url);
 const promptIndexPath = new URL('../docs/products/prompt-pack/PROMPT_INDEX.json', import.meta.url);
 const specPath = new URL('../docs/products/jpn-business/COMPOSITION_SPEC_v1.md', import.meta.url);
+const checklistPath = new URL('../docs/products/jpn-business/COMPOSITION_QA_CHECKLIST_v1.csv', import.meta.url);
 
-const [mapRaw, businessRaw, promptRaw, spec] = await Promise.all([
+const [mapRaw, businessRaw, promptRaw, spec, checklistRaw] = await Promise.all([
   readFile(mapPath, 'utf8'),
   readFile(businessIndexPath, 'utf8'),
   readFile(promptIndexPath, 'utf8'),
   readFile(specPath, 'utf8'),
+  readFile(checklistPath, 'utf8'),
 ]);
 
 const map = JSON.parse(mapRaw);
@@ -105,6 +107,28 @@ for (const requirement of specRequirements) {
   if (!spec.includes(requirement)) failures.push(`COMPOSITION_SPEC perdeu requisito esperado: ${requirement}`);
 }
 
+const checklistLines = checklistRaw.trim().split(/\r?\n/);
+const checklistHeader = checklistLines.shift();
+if (checklistHeader !== 'id,area,item,status,evidence_required,notes') failures.push('COMPOSITION_QA_CHECKLIST: cabeçalho inesperado');
+const checklistRows = checklistLines.map((line) => {
+  const [id, area, item, status, evidenceRequired, notes = ''] = line.split(',');
+  return { id, area, item, status, evidenceRequired, notes };
+});
+const expectedChecklistIds = Array.from({ length: 26 }, (_, index) => `JB-COMP-${String(index + 1).padStart(2, '0')}`);
+const checklistIds = checklistRows.map((row) => row.id);
+if (!sameArray(checklistIds, expectedChecklistIds)) failures.push('COMPOSITION_QA_CHECKLIST: IDs ausentes, extras ou fora de ordem');
+if (checklistRows.length !== 26) failures.push(`COMPOSITION_QA_CHECKLIST: ${checklistRows.length} itens; esperado 26`);
+if (checklistRows.some((row) => row.status !== 'PENDING')) failures.push('COMPOSITION_QA_CHECKLIST: todos os itens devem iniciar como PENDING');
+if (checklistRows.some((row) => !row.evidenceRequired?.trim())) failures.push('COMPOSITION_QA_CHECKLIST: evidence_required ausente');
+if (duplicates(checklistIds).length) failures.push(`COMPOSITION_QA_CHECKLIST: IDs duplicados: ${duplicates(checklistIds).join(', ')}`);
+
+for (const playbook of mappedPlaybooks) {
+  const itemNumber = Number(playbook.id.slice(3));
+  const checklistId = `JB-COMP-${String(itemNumber + 5).padStart(2, '0')}`;
+  const row = checklistRows.find((entry) => entry.id === checklistId);
+  if (!row || !row.item.startsWith(playbook.id)) failures.push(`${playbook.id}: item correspondente ausente no checklist`);
+}
+
 const forbiddenPromotionTerms = [
   /"status"\s*:\s*"(?:passed|released|final)"/i,
   /"release_effect"\s*:\s*"(?:promote|pass|release)"/i,
@@ -122,4 +146,4 @@ if (failures.length) {
 }
 
 const linkCount = mappedPlaybooks.reduce((sum, item) => sum + (item.prompt_pack_links?.length ?? 0), 0);
-console.log(`Mapa de composição JPN Business: consistente (${mappedPlaybooks.length} playbooks, ${linkCount} vínculos PP-*, ${map.front_matter.length} seções iniciais, ${map.back_matter.length} seções finais).`);
+console.log(`Mapa de composição JPN Business: consistente (${mappedPlaybooks.length} playbooks, ${linkCount} vínculos PP-*, ${map.front_matter.length} seções iniciais, ${map.back_matter.length} seções finais, ${checklistRows.length} itens de QA pendentes).`);

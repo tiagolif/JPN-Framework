@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "product_id": "jpn-prompt-builder",
+  "status": "human-qa-handoff-prep-only",
+  "release_effect": "none",
+  "publication_authorized": false,
+  "canonical_release_status": "docs/product-system/PRODUCT_RELEASE_STATUS_v1.json",
+  "source_documents": [
+    "docs/products/prompt-builder/CONTEXT_AWARE_MOBILE_QA_v1.md",
+    "docs/products/prompt-builder/ACCESSIBILITY_BASELINE_v1.md"
+  ],
+  "release_dependency": {
+    "id": "qa-fisico-contextual-celular",
+    "required_status": "pending"
+  },
+  "tracks": [
+    {
+      "id": "mobile-context",
+      "title": "QA contextual em celular real",
+      "source": "docs/products/prompt-builder/CONTEXT_AWARE_MOBILE_QA_v1.md",
+      "checks": [
+        {"id": "PB-HQA-M01", "case": "PB-CTX-01", "label": "Atendimento/vendas preserva contexto confirmado e lacunas comerciais", "status": "PENDING"},
+        {"id": "PB-HQA-M02", "case": "PB-CTX-02", "label": "Análise documental separa fatos, inferências, conflitos e lacunas", "status": "PENDING"},
+        {"id": "PB-HQA-M03", "case": "PB-CTX-03", "label": "Automação prioriza fluxo, exceções, validações e intervenção humana", "status": "PENDING"},
+        {"id": "PB-HQA-M04", "case": "PB-CTX-04", "label": "Desenvolvimento não assume arquitetura ou dependências", "status": "PENDING"},
+        {"id": "PB-HQA-M05", "case": "PB-CTX-05", "label": "Texto/conteúdo entrega peça final sem inventar números ou condições", "status": "PENDING"},
+        {"id": "PB-HQA-M06", "case": "PB-CTX-06", "label": "Plano/estratégia preserva sequência, dependências, premissas e próximos passos", "status": "PENDING"}
+      ]
+    },
+    {
+      "id": "assistive-physical",
+      "title": "QA assistivo e físico",
+      "source": "docs/products/prompt-builder/ACCESSIBILITY_BASELINE_v1.md",
+      "checks": [
+        {"id": "PB-HQA-A01", "label": "Navegação completa somente por teclado e ordem de foco", "status": "PENDING"},
+        {"id": "PB-HQA-A02", "label": "Leitor de tela em combinação real de navegador e tecnologia assistiva", "status": "PENDING"},
+        {"id": "PB-HQA-A03", "label": "Zoom de 200% e reflow sem perda funcional", "status": "PENDING"},
+        {"id": "PB-HQA-A04", "label": "Contraste percebido em estados dinâmicos e foco", "status": "PENDING"},
+        {"id": "PB-HQA-A05", "label": "Anúncio de mudanças de prontidão e lacunas sem repetição excessiva", "status": "PENDING"},
+        {"id": "PB-HQA-A06", "label": "Importação de arquivos operável por teclado e tecnologia assistiva", "status": "PENDING"},
+        {"id": "PB-HQA-A07", "label": "Comportamento em celular real preserva o fluxo contextual", "status": "PENDING"},
+        {"id": "PB-HQA-A08", "label": "Linguagem clara e entendimento validados por uso humano", "status": "PENDING"}
+      ]
+    }
+  ],
+  "summary": {
+    "total_checks": 14,
+    "passed": 0,
+    "failed": 0,
+    "pending": 14
+  },
+  "guardrails": [
+    "Nenhum item pode nascer como PASS sem evidência humana correspondente.",
+    "PASS estrutural ou checker verde não comprova acessibilidade, compatibilidade assistiva ou experiência móvel real.",
+    "O gate qa-fisico-contextual-celular permanece pending até registro humano verificável e atualização deliberada do contrato canônico.",
+    "Este escopo não autoriza publicação, venda, anúncio, checkout, gasto, criação de conta, uso de dados financeiros ou aceite legal."
+  ]
+}

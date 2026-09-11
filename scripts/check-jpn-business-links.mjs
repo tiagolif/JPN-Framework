@@ -105,3 +105,6 @@ execFileSync(process.execPath, [compositionSourceManifestCheck], { stdio: 'inher
 
 const composedCandidateCheck = fileURLToPath(new URL('./build-jpn-business-composed-candidate.mjs', import.meta.url));
 execFileSync(process.execPath, [composedCandidateCheck, '--check'], { stdio: 'inherit' });
+
+const composedRenderCheck = fileURLToPath(new URL('./check-jpn-business-composed-render.mjs', import.meta.url));
+execFileSync(process.execPath, [composedRenderCheck], { stdio: 'inherit' });

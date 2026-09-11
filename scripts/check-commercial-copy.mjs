@@ -117,3 +117,4 @@ console.log(`Gate comercial aprovado: ${files.length} arquivo(s) Markdown verifi
 await import('./check-social-content-library.mjs');
 await import('./check-commercial-one-pagers.mjs');
 await import('./check-product-page-copy.mjs');
+await import('./check-commercial-page-copy-sync.mjs');

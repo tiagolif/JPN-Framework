@@ -96,3 +96,6 @@ execFileSync(process.execPath, [outcomeReviewCheck], { stdio: 'inherit' });
 
 const compositionPreflightCheck = fileURLToPath(new URL('./check-jpn-business-composition-preflight.mjs', import.meta.url));
 execFileSync(process.execPath, [compositionPreflightCheck], { stdio: 'inherit' });
+
+const compositionMapCheck = fileURLToPath(new URL('./check-jpn-business-composition-map.mjs', import.meta.url));
+execFileSync(process.execPath, [compositionMapCheck], { stdio: 'inherit' });

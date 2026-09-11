@@ -93,3 +93,6 @@ execFileSync(process.execPath, [implementationWorkbookCheck], { stdio: 'inherit'
 
 const outcomeReviewCheck = fileURLToPath(new URL('./check-jpn-business-30-day-review.mjs', import.meta.url));
 execFileSync(process.execPath, [outcomeReviewCheck], { stdio: 'inherit' });
+
+const compositionPreflightCheck = fileURLToPath(new URL('./check-jpn-business-composition-preflight.mjs', import.meta.url));
+execFileSync(process.execPath, [compositionPreflightCheck], { stdio: 'inherit' });

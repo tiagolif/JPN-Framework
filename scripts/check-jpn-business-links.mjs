@@ -99,3 +99,6 @@ execFileSync(process.execPath, [compositionPreflightCheck], { stdio: 'inherit' }
 
 const compositionMapCheck = fileURLToPath(new URL('./check-jpn-business-composition-map.mjs', import.meta.url));
 execFileSync(process.execPath, [compositionMapCheck], { stdio: 'inherit' });
+
+const compositionSourceManifestCheck = fileURLToPath(new URL('./check-jpn-business-source-manifest.mjs', import.meta.url));
+execFileSync(process.execPath, [compositionSourceManifestCheck], { stdio: 'inherit' });

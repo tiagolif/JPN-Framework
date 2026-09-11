@@ -28,6 +28,7 @@
     {
       "id": "jpn-prompt-builder",
       "dependencies": [
+        {"id": "qa-fisico-contextual-celular", "status": "pending", "evidence": null, "note": "Exige validação física em celular do fluxo contextual e da experiência real antes do release."},
         {"id": "ci-final", "status": "pending", "evidence": null, "note": "O head atual ainda precisa de CI verde no candidato de release."},
         {"id": "pacote-offline-final", "status": "pending", "evidence": null, "note": "O pacote offline final ainda precisa ser congelado e validado."}
       ]

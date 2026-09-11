@@ -5,10 +5,10 @@
 ## Resumo
 
 - Produtos canônicos: **6**
-- Dependências registradas: **14**
+- Dependências registradas: **15**
 - Aprovadas com evidência: **0**
 - Em andamento: **1**
-- Pendentes: **13**
+- Pendentes: **14**
 - Bloqueadas: **0**
 - Não aplicáveis: **0**
 - Prontidão agregada por dependências aplicáveis: **0%**
@@ -21,7 +21,7 @@
 | Método JPN | 2 | 0 | 0 | 2 | 0 | 0% | Não |
 | JPN Prompt Pack | 2 | 0 | 0 | 2 | 0 | 0% | Não |
 | JPN Business | 3 | 0 | 1 | 2 | 0 | 0% | Não |
-| JPN Prompt Builder | 2 | 0 | 0 | 2 | 0 | 0% | Não |
+| JPN Prompt Builder | 3 | 0 | 0 | 3 | 0 | 0% | Não |
 | JPN Pro Kit | 3 | 0 | 0 | 3 | 0 | 0% | Não |
 | JPN Gestão Fácil | 2 | 0 | 0 | 2 | 0 | 0% | Não |
 
@@ -43,6 +43,7 @@
 
 ## JPN Prompt Builder
 
+- **qa-fisico-contextual-celular** — Pendente. Exige validação física em celular do fluxo contextual e da experiência real antes do release.
 - **ci-final** — Pendente. O head atual ainda precisa de CI verde no candidato de release.
 - **pacote-offline-final** — Pendente. O pacote offline final ainda precisa ser congelado e validado.
 

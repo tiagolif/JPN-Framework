@@ -60,9 +60,21 @@ for (const canonical of portfolioProducts) {
       try { await access(path.join(root, relative)); } catch { errors.push(`${canonical.id}: entregável candidato ausente: ${relative}`); }
     }
   }
+
   const expectedDeps = canonical.release_dependencies ?? [];
   const listedDeps = product.final_release_dependencies ?? [];
-  for (const dep of expectedDeps) if (!listedDeps.includes(dep)) errors.push(`${canonical.id}: dependência canônica ausente do catálogo: ${dep}`);
+  const expectedSet = new Set(expectedDeps);
+  const listedSet = new Set(listedDeps);
+
+  if (expectedSet.size !== expectedDeps.length) errors.push(`${canonical.id}: portfólio contém dependências de release duplicadas.`);
+  if (listedSet.size !== listedDeps.length) errors.push(`${canonical.id}: catálogo contém dependências finais duplicadas.`);
+
+  for (const dep of expectedSet) {
+    if (!listedSet.has(dep)) errors.push(`${canonical.id}: dependência canônica ausente do catálogo: ${dep}`);
+  }
+  for (const dep of listedSet) {
+    if (!expectedSet.has(dep)) errors.push(`${canonical.id}: catálogo contém dependência final não canônica: ${dep}`);
+  }
 }
 
 for (const required of requiredRecentDeliverables) if (!allProductDeliverables.has(required)) errors.push(`Entregável recente não registrado no catálogo: ${required}`);

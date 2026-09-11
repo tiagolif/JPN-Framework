@@ -36,7 +36,7 @@
       "primary_artifact": "local-web-tool",
       "audience": "usuários que querem montar e reutilizar prompts de forma guiada",
       "role": "ferramenta local para estruturar, revisar e salvar trabalhos JPN",
-      "release_dependencies": ["ci-final", "pacote-offline-final"]
+      "release_dependencies": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"]
     },
     {
       "id": "jpn-pro-kit",

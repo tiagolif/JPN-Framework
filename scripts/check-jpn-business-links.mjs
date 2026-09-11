@@ -102,3 +102,6 @@ execFileSync(process.execPath, [compositionMapCheck], { stdio: 'inherit' });
 
 const compositionSourceManifestCheck = fileURLToPath(new URL('./check-jpn-business-source-manifest.mjs', import.meta.url));
 execFileSync(process.execPath, [compositionSourceManifestCheck], { stdio: 'inherit' });
+
+const composedCandidateCheck = fileURLToPath(new URL('./build-jpn-business-composed-candidate.mjs', import.meta.url));
+execFileSync(process.execPath, [composedCandidateCheck, '--check'], { stdio: 'inherit' });

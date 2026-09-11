@@ -47,18 +47,24 @@ for (const section of requiredSections) {
 }
 
 const blockedPatterns = [
-  { re: /\b(?:compre|comprar)\s+agora\b/iu, label: 'CTA transacional' },
-  { re: /\bR\$\s*\d/iu, label: 'preço monetário' },
-  { re: /\b(?:desconto|cupom)\s+de\s+\d+%/iu, label: 'desconto' },
-  { re: /\búltimas?\s+(?:vagas?|unidades?)\b/iu, label: 'escassez artificial' },
-  { re: /\bgarante?\s+(?:resultado|vendas?|faturamento|roi|respostas? corretas?)\b/iu, label: 'garantia não comprovada' },
-  { re: /\belimina\s+(?:erros|alucinações)\b/iu, label: 'claim absoluto' },
-  { re: /https?:\/\//iu, label: 'URL externa' },
-  { re: /<form\b/iu, label: 'formulário' },
+  { re: /\b(?:compre|comprar)\s+agora\b/giu, label: 'CTA transacional' },
+  { re: /\bR\$\s*\d/giu, label: 'preço monetário' },
+  { re: /\b(?:desconto|cupom)\s+de\s+\d+%/giu, label: 'desconto' },
+  { re: /\búltimas?\s+(?:vagas?|unidades?)\b/giu, label: 'escassez artificial' },
+  { re: /\bgarante?\s+(?:resultado|vendas?|faturamento|roi|respostas? corretas?)\b/giu, label: 'garantia não comprovada' },
+  { re: /\belimina\s+(?:erros|alucinações)\b/giu, label: 'claim absoluto' },
+  { re: /https?:\/\//giu, label: 'URL externa' },
+  { re: /<form\b/giu, label: 'formulário' },
 ];
 
+const negationWindow = /(?:não|nao|sem|evitar|bloquead[oa]s?|não usar|nao usar)[^.!?\n]{0,70}$/iu;
 for (const { re, label } of blockedPatterns) {
-  if (re.test(page)) failures.push(`copy contém padrão bloqueado: ${label}`);
+  re.lastIndex = 0;
+  for (const match of page.matchAll(re)) {
+    const before = page.slice(Math.max(0, match.index - 80), match.index);
+    if (negationWindow.test(before)) continue;
+    failures.push(`copy contém padrão bloqueado: ${label}: “${match[0]}”`);
+  }
 }
 
 const ctaSection = page.match(/## CTAs informativos aprováveis nesta fase([\s\S]*?)## Claims/u)?.[1] ?? '';

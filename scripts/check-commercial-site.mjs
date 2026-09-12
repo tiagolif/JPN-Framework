@@ -98,7 +98,7 @@ if (!html.selector.includes('href="comparar-produtos.html"')) fail('diagnóstico
 const selectorRequirements = [
   'Comece pelo menor produto suficiente.',
   'SMALL_BUSINESS_DIAGNOSTIC_v1.json',
-  'As respostas existem apenas durante a interação corrente no navegador',
+  'A lógica roda localmente nesta página',
   'O Pro Kit pode aparecer como resultado?',
   'não substitui contabilidade, banco, fiscal, ERP ou auditoria',
 ];

@@ -1,0 +1,19 @@
+id,escopo,status,evidencia
+GF3-QA-01,Estrutura com 8 abas canônicas,AUTO_PASS,Workbook gerado com Leia-me Dashboard Clientes Vendas Tarefas Estoque Financeiro Listas
+GF3-QA-02,Dashboard com 7 KPIs derivados,AUTO_PASS,Inspeção retornou 3 1 2 1 2 1 0 para os KPIs documentados
+GF3-QA-03,Valor total calculado por fórmula,AUTO_PASS,Fórmula Quantidade x Valor unitário preenchida na coluna Valor total
+GF3-QA-04,Reposição ignora linhas vazias,AUTO_PASS,Fórmula corrigida para retornar vazio quando Item não está preenchido
+GF3-QA-05,Reposição sinaliza REPOR e OK,AUTO_PASS,Validação local retornou 1 item REPOR com exemplos fictícios
+GF3-QA-06,Tarefas vencidas ignoram linhas vazias,AUTO_PASS,KPI corrigido para exigir tarefa cadastrada e status diferente de Concluída
+GF3-QA-07,Dropdowns operacionais configurados,AUTO_PASS,Validações ligadas à aba Listas nas colunas categóricas
+GF3-QA-08,Financeiro sem exemplos monetários preenchidos,AUTO_PASS,Tabela criada sem linhas financeiras de exemplo
+GF3-QA-09,Varredura de erros de fórmula,AUTO_PASS,Zero ocorrências de REF DIV0 VALUE NAME e NA
+GF3-QA-10,Renderização básica do Dashboard,AUTO_PASS,Dashboard renderizado no ambiente de geração para inspeção de hierarquia cards tabela e gráfico
+GF3-QA-11,Abertura e fórmulas no Microsoft Excel,PENDING,Exige teste físico no aplicativo
+GF3-QA-12,Dropdowns e tabelas no Microsoft Excel,PENDING,Exige teste físico no aplicativo
+GF3-QA-13,Abertura e fórmulas no LibreOffice Calc,PENDING,Exige teste físico no aplicativo
+GF3-QA-14,Dropdowns e tabelas no LibreOffice Calc,PENDING,Exige teste físico no aplicativo
+GF3-QA-15,Importação e fórmulas no Google Sheets,PENDING,Exige teste físico no aplicativo
+GF3-QA-16,Dropdowns e gráfico no Google Sheets,PENDING,Exige teste físico no aplicativo
+GF3-QA-17,QA visual em notebook e tela menor,PENDING,Exige inspeção humana em dispositivos reais
+GF3-QA-18,Decisão de promoção da candidata,PENDING,Depende dos testes físicos anteriores e de evidência registrada

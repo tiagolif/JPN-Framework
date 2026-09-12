@@ -1,0 +1,111 @@
+{
+  "version": "1.0.0",
+  "purpose": "Preparar os três produtos editoriais JPN para revisão humana, diagramação e exportação sem promover release por inferência.",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "title": "Método JPN",
+      "cover": "assets/covers/metodo-jpn-v1.svg",
+      "primary_sources": [
+        "docs/products/metodo-jpn/METODO_JPN_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_CASEBOOK_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_PRACTICE_WORKBOOK_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md"
+      ],
+      "supporting_review_sources": [
+        "docs/products/metodo-jpn/AUDIT.md",
+        "docs/products/metodo-jpn/CASEBOOK_REVIEW_CHECKLIST_v1.csv",
+        "docs/products/metodo-jpn/CROSS_PRODUCT_INTEGRITY_v1.md"
+      ],
+      "editorial_order": ["núcleo do método", "casebook", "workbook prático", "referência rápida"],
+      "required_release_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "preflight_checks": [
+        "terminologia Jornada, Precisão e Narrativa consistente",
+        "exemplos identificados como exemplos e sem promessa de resultado",
+        "referências cruzadas entre método, casebook e workbook válidas",
+        "hierarquia de títulos pronta para diagramação",
+        "leitura humana integral do candidato composto",
+        "PDF exportado revisado página a página"
+      ],
+      "target_artifact": "Metodo_JPN.pdf"
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "title": "JPN Prompt Pack",
+      "cover": "assets/covers/jpn-prompt-pack-v1.svg",
+      "primary_sources": [
+        "docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md",
+        "docs/products/prompt-pack/PROMPT_SELECTION_WORKBOOK_v1.md",
+        "docs/products/prompt-pack/JPN_PROMPT_PACK_QUICK_REFERENCE_v1.md"
+      ],
+      "supporting_review_sources": [
+        "docs/products/prompt-pack/PROMPT_INDEX.json",
+        "docs/products/prompt-pack/QA_CASES_v1.md",
+        "docs/products/prompt-pack/AUDIT.md"
+      ],
+      "editorial_order": ["orientação de uso", "biblioteca de prompts", "seleção guiada", "referência rápida"],
+      "required_release_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "preflight_checks": [
+        "todos os prompts canônicos aparecem uma única vez no índice",
+        "variáveis e campos substituíveis estão claramente identificados",
+        "nenhum prompt promete precisão ou resultado garantido",
+        "seleção guiada aponta para IDs válidos do índice",
+        "leitura humana integral do candidato composto",
+        "PDF exportado revisado página a página"
+      ],
+      "target_artifact": "JPN_Prompt_Pack.pdf"
+    },
+    {
+      "product_id": "jpn-business",
+      "title": "JPN Business",
+      "cover": "assets/covers/jpn-business-v1.svg",
+      "primary_sources": [
+        "docs/products/jpn-business/JPN_BUSINESS_v1.md",
+        "docs/products/jpn-business/IMPLEMENTATION_WORKBOOK_v1.md",
+        "docs/products/jpn-business/30_DAY_IMPLEMENTATION_SPRINT_v1.md",
+        "docs/products/jpn-business/OPERATIONAL_SCORECARD_v1.md",
+        "docs/products/jpn-business/WEEKLY_OPERATING_REVIEW_v1.md",
+        "docs/products/jpn-business/JPN_BUSINESS_QUICK_REFERENCE_v1.md"
+      ],
+      "supporting_review_sources": [
+        "docs/products/jpn-business/BUSINESS_INDEX.json",
+        "docs/products/jpn-business/COMPOSITION_MAP_v1.json",
+        "docs/products/jpn-business/COMPOSITION_SOURCE_MANIFEST_v1.json",
+        "docs/products/jpn-business/COMPOSITION_QA_CHECKLIST_v1.csv",
+        "docs/products/jpn-business/VISUAL_QA_CHECKLIST_v1.md",
+        "docs/products/jpn-business/HUMAN_REVIEW_HANDOFF_v1.md",
+        "docs/products/jpn-business/AUDIT.md"
+      ],
+      "editorial_order": ["núcleo Business", "workbook de implementação", "sprint de 30 dias", "scorecard operacional", "revisão semanal", "referência rápida"],
+      "required_release_dependencies": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"],
+      "preflight_checks": [
+        "12 playbooks preservados conforme BUSINESS_INDEX.json",
+        "crosswalk com Prompt Pack não cria automação ou autorização externa",
+        "workbook, sprint, scorecard e revisão semanal não contradizem o núcleo",
+        "composição segue COMPOSITION_MAP_v1.json",
+        "QA visual e handoff humano executados sobre o candidato diagramado",
+        "PDF exportado revisado página a página"
+      ],
+      "target_artifact": "JPN_Business.pdf"
+    }
+  ],
+  "shared_editorial_rules": [
+    "preservar nomes canônicos dos produtos e do framework",
+    "não introduzir preço, checkout, anúncio, captação de lead ou tracking",
+    "não afirmar garantia de resultado, precisão absoluta ou substituição de revisão humana",
+    "não usar dados reais de clientes, credenciais, dados financeiros ou informações sensíveis",
+    "não converter checklist mecânico em aprovação editorial humana",
+    "não marcar PDF como final sem inspeção visual página a página"
+  ],
+  "handoff_states": [
+    "source-ready",
+    "human-editorial-review-pending",
+    "layout-candidate",
+    "visual-qa-pending",
+    "pdf-candidate",
+    "page-by-page-review-pending",
+    "release-decision-pending"
+  ]
+}

@@ -7,65 +7,62 @@
 
 Oferecer uma comparação lado a lado dos seis produtos JPN para reduzir sobreposição de posicionamento e ajudar a escolher o menor escopo que resolva a necessidade atual.
 
-Esta matriz não substitui diagnóstico, revisão humana, documentação canônica de cada produto nem validações de release.
+Esta matriz não substitui diagnóstico, revisão humana, documentação canônica de cada produto nem validações de release. A fonte estruturada desta comparação é `PRODUCT_COMPARISON_MATRIX_v1.json` e as sequências entre produtos devem seguir `PRODUCT_USAGE_ROUTES_v1.json`.
 
 ## Regra principal
 
-> Escolha o menor produto que resolva a necessidade atual.
+> Escolha o menor produto que resolva a necessidade atual e pare quando a necessidade estiver resolvida.
 
-O **JPN Pro Kit não é a recomendação automática** por ser mais abrangente. Ele permanece **EM PREPARAÇÃO** enquanto os gates finais não forem concluídos.
+O **JPN Pro Kit não é a recomendação automática** por ser mais abrangente. Ele permanece condicionado ao encerramento de seus gates finais.
 
 ## Matriz
 
-| Produto | Problema principal | Forma de uso | Entregável central | Melhor quando | Não usar como atalho para | Estado/limite relevante |
-|---|---|---|---|---|---|---|
-| Método JPN | Pedidos à IA mal estruturados | Método de raciocínio e revisão | Estrutura Jornada · Precisão · Narrativa | Aprender a organizar contexto, objetivo, restrições e critérios | Automatizar execução ou substituir validação especializada | Revisão editorial/visual final ainda pendente |
-| JPN Prompt Builder | Ideia solta que precisa virar prompt guiado | Ferramenta local guiada | Prompt JPN revisável | Conduzir preenchimento e manter lacunas visíveis | Alegar compreensão semântica universal ou dispensar QA humano | QA físico contextual em celular ainda pendente |
-| JPN Prompt Pack | Tarefas recorrentes sem ponto de partida consistente | Biblioteca de templates | 18 templates PP-01..PP-18 | Reutilizar estruturas já preparadas e adaptar ao contexto | Tratar template como resposta pronta sem revisão | Revisão editorial/visual final ainda pendente |
-| JPN Business | Processos de negócio pouco estruturados | Playbooks operacionais | 12 playbooks JB-01..JB-12 | Organizar entradas, passos, decisões, saídas, validação e continuidade | Executar ações externas irreversíveis ou assumir condições comerciais | PDF/QA visual final ainda pendente |
-| JPN Gestão Fácil | Rotina de pequena empresa dispersa | Planilha operacional | XLSX com 8 abas, fórmulas e dashboard | Acompanhar cadastro, vendas, estoque, tarefas e financeiro operacional | Contabilidade, conciliação bancária ou autorização automática de compra | GF-QA-10 multiplataforma ainda pendente |
-| JPN Pro Kit | Necessidade real de reunir vários componentes | Pacote integrado | Conjunto de produtos e materiais | Quando múltiplos componentes são necessários e seus gates estiverem concluídos | Vender abrangência quando um produto individual basta | **EM PREPARAÇÃO**; sem preço, checkout, reserva ou promessa comercial |
+| Produto | Melhor para | Comece quando | Evite quando | Saída principal |
+|---|---|---|---|---|
+| Método JPN | aprender a estruturar pedidos para IA | a necessidade ainda está ambígua ou é preciso aprender o raciocínio | a tarefa já está clara e um modelo pronto resolve | pedido estruturado + critérios de revisão |
+| JPN Prompt Pack | executar a partir de modelos reutilizáveis | o objetivo já está claro e falta um ponto de partida | é preciso primeiro entender o problema ou desenhar um processo | prompt adaptado |
+| JPN Prompt Builder | montar prompts com estrutura consistente | há valor em padronizar campos e montagem, inclusive entre pessoas | a necessidade é aprendizagem ou gestão operacional | prompt montado localmente |
+| JPN Business | padronizar atividades empresariais recorrentes | uma atividade precisa virar processo repetível | a necessidade é apenas um prompt pontual ou só registrar controles | playbook + rotina + prompts de apoio |
+| JPN Gestão Fácil | organizar controles operacionais básicos | clientes, vendas, tarefas ou estoque precisam de acompanhamento simples | a necessidade exige ERP, contabilidade, fiscal, banco ou integrações avançadas | visão gerencial básica + alertas |
+| JPN Pro Kit | reunir componentes finais do ecossistema | somente após os artefatos componentes e gates finais estarem concluídos | houver dependências abertas ou um produto isolado já for suficiente | pacote integrado de entrega |
 
-## Diferenças que não podem ser apagadas
+## Diferenças que não podem se perder
 
-### Método JPN × Prompt Builder
+### Método JPN × Prompt Pack
 
-- **Método JPN** ensina e documenta a estrutura.
-- **Prompt Builder** operacionaliza um fluxo guiado.
-- Um não deve ser descrito como substituto integral do outro.
+- **Método JPN** ensina a estruturar o pedido.
+- **Prompt Pack** oferece modelos para acelerar a execução.
+- Quem já sabe exatamente o que precisa pode começar pelo Pack; quem ainda precisa organizar contexto, objetivo e restrições tende a começar pelo Método.
 
-### Prompt Builder × Prompt Pack
+### Prompt Pack × Prompt Builder
 
-- **Builder** parte da ideia/contexto do usuário e conduz a estruturação.
 - **Prompt Pack** parte de templates recorrentes já preparados.
-- O Pack não deve ser apresentado como ferramenta dinâmica; o Builder não deve ser apresentado como biblioteca de 18 templates.
-
-### Prompt Pack × JPN Business
-
-- **Prompt Pack** organiza prompts reutilizáveis.
-- **Business** organiza processos em playbooks mais amplos, podendo referenciar templates do Pack.
-- Um template não equivale a um processo completo.
+- **Prompt Builder** conduz a montagem por campos explícitos e ajuda a manter consistência.
+- O Pack não exige o Builder para funcionar, e o Builder não deve ser apresentado como biblioteca de templates.
 
 ### JPN Business × Gestão Fácil
 
-- **Business** define como o trabalho deve acontecer.
-- **Gestão Fácil** ajuda a acompanhar parte da rotina operacional em planilha.
-- A planilha não executa playbooks automaticamente e não substitui contabilidade.
+- **JPN Business** organiza como executar um processo.
+- **Gestão Fácil** organiza como registrar e acompanhar parte da operação.
+- Um playbook pode funcionar sem planilha; a planilha pode ser suficiente sem playbook adicional.
 
 ### Produtos individuais × Pro Kit
 
 - O Pro Kit só faz sentido quando existe necessidade real de vários componentes.
 - Abrangência, por si só, não é justificativa comercial.
-- Enquanto os gates finais estiverem pendentes, o Pro Kit deve permanecer como **EM PREPARAÇÃO**.
+- Enquanto os gates finais estiverem pendentes, a rota do Pro Kit permanece apenas arquitetural.
 
-## Combinações de trabalho permitidas
+## Rotas canônicas de trabalho
 
 Estas relações descrevem fluxo de uso, não bundles, descontos ou ofertas:
 
-1. **Método JPN → Prompt Builder** — aprender a estrutura e depois aplicá-la em fluxo guiado.
-2. **Método JPN → Prompt Pack** — compreender os campos e reutilizar templates com critério.
-3. **Prompt Pack → JPN Business** — usar templates dentro de processos mais amplos quando houver vínculo canônico.
-4. **JPN Business → Gestão Fácil** — estruturar o processo e acompanhar parte da execução em planilha quando fizer sentido.
+1. **Aprender:** Método JPN → Prompt Pack → Prompt Builder.
+2. **Executar:** Prompt Pack → Prompt Builder.
+3. **Operar:** JPN Business → Prompt Pack → Prompt Builder → Gestão Fácil.
+4. **Gerir:** Gestão Fácil → JPN Business.
+5. **Conjunto:** JPN Pro Kit, apenas quando seus gates finais estiverem concluídos; enquanto isso, a rota é arquitetural.
+
+Em qualquer rota, pare assim que o produto atual já resolver a necessidade.
 
 ## Guardrails comerciais
 
@@ -74,6 +71,7 @@ Estas relações descrevem fluxo de uso, não bundles, descontos ou ofertas:
 - Não prometer resultado, ROI, lucro, economia, produtividade garantida ou compatibilidade não validada.
 - Não promover GF-QA-10, QA móvel, PDF final, freeze ou release para `passed` sem evidência correspondente.
 - Não apresentar `REPOR` na Gestão Fácil como autorização automática de compra.
+- Gestão Fácil não substitui contabilidade, banco, fiscal, ERP ou auditoria.
 - Não sugerir o Pro Kit apenas por ser o produto mais amplo.
 
 ## Regra de parada
@@ -87,4 +85,4 @@ Interromper a recomendação e retornar à necessidade do usuário quando:
 
 ## Próxima evidência necessária
 
-Antes de qualquer uso público desta matriz: revisão editorial humana, inspeção visual desktop/mobile da página derivada, navegação por teclado e confirmação de que estados de QA/release continuam sincronizados com as fontes canônicas.
+Antes de qualquer uso público desta matriz: revisão editorial humana, inspeção visual da superfície derivada, navegação por teclado quando aplicável e confirmação de que estados de QA/release continuam sincronizados com as fontes canônicas.

@@ -53,26 +53,23 @@ for (const item of products) {
   if (JSON.stringify(actualDeps) !== JSON.stringify(releaseDeps)) {
     errors.push(`${item.product_id}: dependências do manifesto divergem de PRODUCT_RELEASE_STATUS_v1.json.`);
   }
+
+  const positiveSurface = [item.delivery_name, ...(item.customer_receives ?? []), item.completion_signal].join(' ');
+  const forbiddenPositiveClaims = [
+    /resultado garantido/i,
+    /roi garantido/i,
+    /vendas garantidas/i,
+    /100% compat[ií]vel/i,
+    /substitui (a )?contabilidade/i,
+    /substitui (um )?ERP/i,
+  ];
+  for (const pattern of forbiddenPositiveClaims) {
+    if (pattern.test(positiveSurface)) errors.push(`${item.product_id}: superfície positiva contém claim de risco: ${pattern}`);
+  }
 }
 
 for (const product of portfolioProducts) {
   if (!seen.has(product.id)) errors.push(`${product.id}: sem manifesto de entrega.`);
-}
-
-const allText = JSON.stringify(manifest);
-const forbiddenPositiveClaims = [
-  /resultado garantido/i,
-  /roi garantido/i,
-  /vendas garantidas/i,
-  /100% compat[ií]vel/i,
-  /substitui (a )?contabilidade/i,
-];
-for (const pattern of forbiddenPositiveClaims) {
-  const sanitized = allText
-    .replace(/n[aã]o substitui (a )?contabilidade/gi, '')
-    .replace(/n[aã]o substitui contabilidade, banco, fiscal, ERP ou auditoria/gi, '')
-    .replace(/resultado garantido/gi, '');
-  if (pattern.test(sanitized)) errors.push(`Manifestos contêm claim de risco: ${pattern}`);
 }
 
 const gestao = products.find((item) => item.product_id === 'jpn-gestao-facil');

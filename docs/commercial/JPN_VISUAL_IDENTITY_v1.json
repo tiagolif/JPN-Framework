@@ -13,23 +13,10 @@
       "weight": 800,
       "letter_spacing_em": 0.08,
       "preferred_on_dark": "#F5F9FC",
-      "do_not": [
-        "distorcer proporções",
-        "aplicar sombras decorativas",
-        "usar gradientes dentro do wordmark",
-        "misturar mais de uma cor no mesmo wordmark",
-        "substituir o nome canônico por uma promessa comercial"
-      ]
+      "do_not": ["distorcer proporções", "aplicar sombras decorativas", "usar gradientes dentro do wordmark", "misturar mais de uma cor no mesmo wordmark", "substituir o nome canônico por uma promessa comercial"]
     },
     "positioning": "Sistema prático para estruturar, executar, operar e gerir trabalho com IA de forma clara e verificável.",
-    "tone_keywords": [
-      "claro",
-      "prático",
-      "técnico",
-      "sóbrio",
-      "confiável",
-      "sem exagero"
-    ]
+    "tone_keywords": ["claro", "prático", "técnico", "sóbrio", "confiável", "sem exagero"]
   },
   "color_tokens": {
     "bg": "#06121C",
@@ -56,25 +43,10 @@
   "typography": {
     "font_stack": "Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif",
     "fallback_required": true,
-    "display": {
-      "weight": 800,
-      "line_height": 0.98,
-      "letter_spacing_em": -0.055
-    },
-    "heading": {
-      "weight": 800,
-      "line_height": 1.05,
-      "letter_spacing_em": -0.04
-    },
-    "body": {
-      "weight": 400,
-      "line_height": 1.6
-    },
-    "label": {
-      "weight": 800,
-      "uppercase": true,
-      "letter_spacing_em": 0.14
-    }
+    "display": {"weight": 800, "line_height": 0.98, "letter_spacing_em": -0.055},
+    "heading": {"weight": 800, "line_height": 1.05, "letter_spacing_em": -0.04},
+    "body": {"weight": 400, "line_height": 1.6},
+    "label": {"weight": 800, "uppercase": true, "letter_spacing_em": 0.14}
   },
   "shape": {
     "radius_primary_px": 18,
@@ -90,66 +62,20 @@
     "hierarchy": "uma mensagem principal por seção, seguida de evidência ou orientação prática"
   },
   "component_rules": {
-    "primary_button": {
-      "background": "accent",
-      "foreground": "#06121C",
-      "weight": 800,
-      "radius_px": 12
-    },
-    "secondary_button": {
-      "background": "transparent",
-      "foreground": "text",
-      "border": "line",
-      "radius_px": 12
-    },
-    "card": {
-      "background": "surface to surface2",
-      "border": "line",
-      "radius_px": 18
-    },
-    "eyebrow": {
-      "foreground": "accent2",
-      "uppercase": true,
-      "weight": 800
-    },
-    "focus": {
-      "outline": "3px solid accent2",
-      "outline_offset_px": 4
-    }
+    "primary_button": {"background": "accent", "foreground": "#06121C", "weight": 800, "radius_px": 12},
+    "secondary_button": {"background": "transparent", "foreground": "text", "border": "line", "radius_px": 12},
+    "card": {"background": "surface to surface2", "border": "line", "radius_px": 18},
+    "eyebrow": {"foreground": "accent2", "uppercase": true, "weight": 800},
+    "focus": {"outline": "3px solid accent2", "outline_offset_px": 4}
   },
   "image_direction": {
-    "preferred": [
-      "diagramas limpos",
-      "mockups funcionais",
-      "capturas reais ou claramente demonstrativas",
-      "geometria simples",
-      "contraste alto e fundo controlado"
-    ],
-    "avoid": [
-      "stock genérico de pessoas apontando para telas",
-      "robôs humanoides como símbolo padrão de IA",
-      "neon excessivo",
-      "fundos visualmente poluídos",
-      "imagens que sugiram capacidades que o produto não possui",
-      "depoimentos ou resultados visuais inventados"
-    ]
+    "preferred": ["diagramas limpos", "mockups funcionais", "capturas reais ou claramente demonstrativas", "geometria simples", "contraste alto e fundo controlado"],
+    "avoid": ["stock genérico de pessoas apontando para telas", "robôs humanoides como símbolo padrão de IA", "neon excessivo", "fundos visualmente poluídos", "imagens que sugiram capacidades que o produto não possui", "depoimentos ou resultados visuais inventados"]
   },
   "art_direction": {
     "core_motif": "estrutura, fluxo e precisão",
-    "recommended_elements": [
-      "linhas de conexão discretas",
-      "blocos modulares",
-      "grades",
-      "números ou marcadores funcionais",
-      "microdetalhes técnicos moderados"
-    ],
-    "prohibited_elements": [
-      "selos de resultado garantido",
-      "contadores falsos",
-      "urgência artificial",
-      "badges de autoridade não comprovados",
-      "preço ou desconto sem autorização específica"
-    ]
+    "recommended_elements": ["linhas de conexão discretas", "blocos modulares", "grades", "números ou marcadores funcionais", "microdetalhes técnicos moderados"],
+    "prohibited_elements": ["selos de resultado garantido", "contadores falsos", "urgência artificial", "badges de autoridade não comprovados", "preço ou desconto sem autorização específica"]
   },
   "accessibility": {
     "focus_visible_required": true,
@@ -167,58 +93,19 @@
     "spreadsheet": "aplicar identidade de forma funcional: cabeçalhos, destaques e legenda; não prejudicar leitura de dados"
   },
   "product_usage": [
-    {
-      "product_id": "metodo-jpn",
-      "visual_emphasis": "clareza conceitual e estrutura",
-      "recommended_pattern": "diagramas J-P-N, páginas editoriais e exercícios com bastante respiro"
-    },
-    {
-      "product_id": "prompt-pack",
-      "visual_emphasis": "execução rápida e seleção",
-      "recommended_pattern": "cards numerados, categorias e exemplos compactos"
-    },
-    {
-      "product_id": "prompt-builder",
-      "visual_emphasis": "ferramenta e fluxo",
-      "recommended_pattern": "interface, etapas, estados e exemplos de entrada/saída"
-    },
-    {
-      "product_id": "jpn-business",
-      "visual_emphasis": "processo e aplicação empresarial",
-      "recommended_pattern": "playbooks, fluxos e quadros operacionais"
-    },
-    {
-      "product_id": "gestao-facil",
-      "visual_emphasis": "controle e leitura gerencial",
-      "recommended_pattern": "tabelas limpas, indicadores explicados e estados sem dados reais"
-    },
-    {
-      "product_id": "jpn-pro-kit",
-      "visual_emphasis": "sistema integrado",
-      "recommended_pattern": "visão de conjunto e arquitetura dos componentes, sem tratá-lo como release enquanto os gates estiverem abertos"
-    }
+    {"product_id": "metodo-jpn", "visual_emphasis": "clareza conceitual e estrutura", "recommended_pattern": "diagramas J-P-N, páginas editoriais e exercícios com bastante respiro"},
+    {"product_id": "jpn-prompt-pack", "visual_emphasis": "execução rápida e seleção", "recommended_pattern": "cards numerados, categorias e exemplos compactos"},
+    {"product_id": "jpn-prompt-builder", "visual_emphasis": "ferramenta e fluxo", "recommended_pattern": "interface, etapas, estados e exemplos de entrada/saída"},
+    {"product_id": "jpn-business", "visual_emphasis": "processo e aplicação empresarial", "recommended_pattern": "playbooks, fluxos e quadros operacionais"},
+    {"product_id": "jpn-gestao-facil", "visual_emphasis": "controle e leitura gerencial", "recommended_pattern": "tabelas limpas, indicadores explicados e estados sem dados reais"},
+    {"product_id": "jpn-pro-kit", "visual_emphasis": "sistema integrado", "recommended_pattern": "visão de conjunto e arquitetura dos componentes, sem tratá-lo como release enquanto os gates estiverem abertos"}
   ],
   "canonical_surface": {
     "path": "commercial-site/styles.css",
-    "sync_required_tokens": [
-      "bg",
-      "bg2",
-      "surface",
-      "surface2",
-      "line",
-      "text",
-      "muted",
-      "accent",
-      "accent2"
-    ]
+    "sync_required_tokens": ["bg", "bg2", "surface", "surface2", "line", "text", "muted", "accent", "accent2"]
   },
   "guardrails": {
-    "must_not_claim": [
-      "resultado garantido",
-      "ROI garantido",
-      "100% de precisão",
-      "substitui revisão humana"
-    ],
+    "must_not_claim": ["resultado garantido", "ROI garantido", "100% de precisão", "substitui revisão humana"],
     "must_not_publish_without_authorization": true,
     "must_not_add_price_or_checkout": true,
     "must_not_use_real_financial_data": true,

@@ -51,7 +51,7 @@ const forbiddenPatterns = [
   /desconto\s+de\s+\d+/i,
   /garantia de vendas/i,
   /roi garantido/i,
-  /release[- ]ready/i,
+  /(?:est[aá]|marcado como|status:?)[^.\n]{0,40}release[- ]ready/i,
 ];
 
 for (const [label, text] of [

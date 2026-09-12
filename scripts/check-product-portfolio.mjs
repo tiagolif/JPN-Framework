@@ -82,16 +82,22 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-const usageRoutesCheck = spawnSync(process.execPath, ['scripts/check-product-usage-routes.mjs'], {
-  cwd: root,
-  encoding: 'utf8',
-});
+const childChecks = [
+  ['scripts/check-product-usage-routes.mjs', 'rotas de uso'],
+  ['scripts/check-small-business-use-cases.mjs', 'casos de uso para pequenas empresas'],
+];
 
-if (usageRoutesCheck.stdout) process.stdout.write(usageRoutesCheck.stdout);
-if (usageRoutesCheck.stderr) process.stderr.write(usageRoutesCheck.stderr);
-if (usageRoutesCheck.status !== 0) {
-  console.error('Product portfolio check falhou no gate de rotas de uso.');
-  process.exit(usageRoutesCheck.status ?? 1);
+for (const [script, label] of childChecks) {
+  const result = spawnSync(process.execPath, [script], {
+    cwd: root,
+    encoding: 'utf8',
+  });
+  if (result.stdout) process.stdout.write(result.stdout);
+  if (result.stderr) process.stderr.write(result.stderr);
+  if (result.status !== 0) {
+    console.error(`Product portfolio check falhou no gate de ${label}.`);
+    process.exit(result.status ?? 1);
+  }
 }
 
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos cobertos e rotas de uso validadas.`);
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas e casos de uso validados.`);

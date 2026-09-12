@@ -1,0 +1,99 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "purpose": "Definir a estrutura de distribuição futura dos produtos JPN sem promover candidatos a release final.",
+  "rules": [
+    "O índice descreve nomes e posições esperadas, mas não declara que os arquivos finais já existem.",
+    "Arquivos finais só podem ocupar slots release após todas as dependências canônicas do produto estarem passed.",
+    "Materiais candidatos, fontes e evidências de QA permanecem fora do pacote final do cliente.",
+    "Nenhum pacote deve incluir dados reais de clientes, credenciais, chaves, dados financeiros ou segredos.",
+    "O Pro Kit só pode consolidar arquivos congelados e versionados de componentes elegíveis."
+  ],
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "package_root": "dist/metodo-jpn/",
+      "release_filename": "Metodo_JPN.pdf",
+      "index_filename": "LEIA-ME.md",
+      "slots": [
+        {"id": "principal", "path": "Metodo_JPN.pdf", "source_manifest_item": "PDF final do Método JPN", "requires": ["revisao-editorial-humana", "pdf-final"]},
+        {"id": "inicio", "path": "LEIA-ME.md", "source_manifest_item": "guia rápido de início", "requires": ["pdf-final"]},
+        {"id": "referencia", "path": "Referencia_JPN.md", "source_manifest_item": "referência das etapas Jornada, Precisão e Narrativa", "requires": ["pdf-final"]},
+        {"id": "limites", "path": "LIMITES_E_BOAS_PRATICAS.md", "source_manifest_item": "nota de limites e boas práticas", "requires": ["pdf-final"]}
+      ],
+      "excluded_from_customer_package": ["fontes editáveis internas", "checklists de revisão", "evidências de QA"]
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "package_root": "dist/jpn-prompt-pack/",
+      "release_filename": "JPN_Prompt_Pack.pdf",
+      "index_filename": "LEIA-ME.md",
+      "slots": [
+        {"id": "principal", "path": "JPN_Prompt_Pack.pdf", "source_manifest_item": "PDF final do Prompt Pack", "requires": ["revisao-editorial-humana", "pdf-final"]},
+        {"id": "indice", "path": "INDICE_DE_PROMPTS.md", "source_manifest_item": "índice dos prompts canônicos", "requires": ["pdf-final"]},
+        {"id": "adaptacao", "path": "GUIA_DE_ADAPTACAO.md", "source_manifest_item": "guia de adaptação ao contexto", "requires": ["pdf-final"]},
+        {"id": "seguranca", "path": "USO_SEGURO.md", "source_manifest_item": "nota de uso seguro e revisão antes de ações externas", "requires": ["pdf-final"]}
+      ],
+      "excluded_from_customer_package": ["rascunhos", "fontes internas", "logs de geração"]
+    },
+    {
+      "product_id": "jpn-business",
+      "package_root": "dist/jpn-business/",
+      "release_filename": "JPN_Business.pdf",
+      "index_filename": "LEIA-ME.md",
+      "slots": [
+        {"id": "principal", "path": "JPN_Business.pdf", "source_manifest_item": "PDF final do JPN Business", "requires": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"]},
+        {"id": "indice", "path": "INDICE_PLAYBOOKS.md", "source_manifest_item": "índice dos 12 playbooks", "requires": ["pdf-final"]},
+        {"id": "crosswalk", "path": "PROMPT_PACK_CROSSWALK.md", "source_manifest_item": "crosswalk com o JPN Prompt Pack", "requires": ["pdf-final"]},
+        {"id": "aplicacao", "path": "GUIA_DE_APLICACAO.md", "source_manifest_item": "guia de aplicação em processos de pequenas empresas", "requires": ["pdf-final"]},
+        {"id": "limites", "path": "LIMITES_OPERACIONAIS.md", "source_manifest_item": "nota de limites operacionais", "requires": ["pdf-final"]}
+      ],
+      "excluded_from_customer_package": ["composição de trabalho", "assets intermediários", "notas editoriais internas"]
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "package_root": "dist/jpn-prompt-builder/",
+      "release_filename": "JPN_Prompt_Builder_Offline.zip",
+      "index_filename": "LEIA-ME.md",
+      "slots": [
+        {"id": "principal", "path": "JPN_Prompt_Builder_Offline.zip", "source_manifest_item": "pacote offline final do Prompt Builder", "requires": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"]},
+        {"id": "inicio", "path": "LEIA-ME.md", "source_manifest_item": "arquivo de abertura/inicialização local", "requires": ["pacote-offline-final"]},
+        {"id": "guia", "path": "GUIA_RAPIDO.md", "source_manifest_item": "guia rápido de uso", "requires": ["pacote-offline-final"]},
+        {"id": "backup", "path": "BACKUP_E_EXPORTACAO.md", "source_manifest_item": "instruções de backup/exportação dos trabalhos", "requires": ["pacote-offline-final"]},
+        {"id": "privacidade", "path": "PRIVACIDADE_E_LIMITES.md", "source_manifest_item": "nota de privacidade e limites de execução local", "requires": ["pacote-offline-final"]}
+      ],
+      "excluded_from_customer_package": ["dependências de desenvolvimento", "segredos", "logs", "fixtures de teste"]
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "package_root": "dist/jpn-gestao-facil/",
+      "release_filename": "JPN_Gestao_Facil.xlsx",
+      "index_filename": "LEIA-ME.md",
+      "slots": [
+        {"id": "principal", "path": "JPN_Gestao_Facil.xlsx", "source_manifest_item": "arquivo final validado da planilha", "requires": ["gf-qa-10", "arquivo-final-validado"]},
+        {"id": "inicio", "path": "LEIA-ME.md", "source_manifest_item": "guia Leia-me/onboarding", "requires": ["arquivo-final-validado"]},
+        {"id": "rotina", "path": "GUIA_OPERACIONAL.md", "source_manifest_item": "guia operacional para rotina diária e revisão semanal", "requires": ["arquivo-final-validado"]},
+        {"id": "indicadores", "path": "INDICADORES_E_ALERTAS.md", "source_manifest_item": "legenda dos indicadores e alertas", "requires": ["arquivo-final-validado"]},
+        {"id": "limites", "path": "LIMITES_GERENCIAIS.md", "source_manifest_item": "nota de limites contábeis, fiscais e bancários", "requires": ["arquivo-final-validado"]}
+      ],
+      "excluded_from_customer_package": ["dados de teste", "dados financeiros reais", "evidências de QA", "versões candidatas"]
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "package_root": "dist/jpn-pro-kit/",
+      "release_filename": "JPN_Pro_Kit.zip",
+      "index_filename": "COMECE_AQUI.md",
+      "slots": [
+        {"id": "principal", "path": "JPN_Pro_Kit.zip", "source_manifest_item": "componentes JPN congelados e versionados", "requires": ["artefatos-congelados", "hashes-finais", "ci-final"]},
+        {"id": "manifesto", "path": "MANIFEST.json", "source_manifest_item": "manifesto do bundle", "requires": ["artefatos-congelados"]},
+        {"id": "indice", "path": "INDEX.md", "source_manifest_item": "índice de arquivos", "requires": ["artefatos-congelados"]},
+        {"id": "checksums", "path": "SHA256SUMS.txt", "source_manifest_item": "checksums finais", "requires": ["hashes-finais"]},
+        {"id": "inicio", "path": "COMECE_AQUI.md", "source_manifest_item": "guia Comece Aqui do portfólio", "requires": ["artefatos-congelados"]},
+        {"id": "release-notes", "path": "RELEASE_NOTES.md", "source_manifest_item": "notas de versão e limites", "requires": ["artefatos-congelados", "ci-final"]}
+      ],
+      "excluded_from_customer_package": ["componentes não congelados", "candidatos", "fontes privadas", "segredos", "evidências internas de QA"]
+    }
+  ]
+}

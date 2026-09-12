@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Orientar o uso combinado dos produtos sem transformar rotas de trabalho em bundles, ofertas ou claims de release.",
+  "source_of_truth": [
+    "docs/product-system/PRODUCT_PORTFOLIO_v1.json",
+    "docs/product-system/PRODUCT_RELEASE_STATUS_v1.json"
+  ],
+  "rules": [
+    "Começar pelo menor produto suficiente para a necessidade atual.",
+    "Uma rota de uso não implica compra conjunta, desconto, bundle ou disponibilidade pública.",
+    "Nenhum produto com dependências abertas deve ser apresentado como release-ready.",
+    "JPN Pro Kit só deve ser tratado como conjunto final depois que seus componentes forem congelados e validados.",
+    "JPN Gestão Fácil é complementar e não substitui contabilidade, banco, fiscal ou auditoria."
+  ],
+  "routes": [
+    {
+      "id": "rota-aprender",
+      "name": "Aprender a estruturar pedidos para IA",
+      "start_with": "metodo-jpn",
+      "then": ["jpn-prompt-pack", "jpn-prompt-builder"],
+      "use_when": "A pessoa ainda precisa dominar a lógica JPN antes de acelerar a execução.",
+      "stop_when": "O objetivo imediato já puder ser resolvido com clareza usando somente o Método JPN."
+    },
+    {
+      "id": "rota-executar",
+      "name": "Executar uma tarefa com ponto de partida pronto",
+      "start_with": "jpn-prompt-pack",
+      "then": ["jpn-prompt-builder"],
+      "use_when": "A necessidade já é conhecida e um template reutilizável reduz trabalho de estruturação.",
+      "stop_when": "O template escolhido já puder ser adaptado e utilizado sem ferramenta adicional."
+    },
+    {
+      "id": "rota-operar",
+      "name": "Aplicar o JPN em rotina empresarial",
+      "start_with": "jpn-business",
+      "then": ["jpn-prompt-pack", "jpn-prompt-builder", "jpn-gestao-facil"],
+      "use_when": "A pequena empresa precisa transformar uma necessidade recorrente em playbook, prompt e acompanhamento operacional.",
+      "stop_when": "O playbook e os materiais necessários já forem suficientes para executar a rotina escolhida."
+    },
+    {
+      "id": "rota-gestao",
+      "name": "Organizar a operação da pequena empresa",
+      "start_with": "jpn-gestao-facil",
+      "then": ["jpn-business"],
+      "use_when": "A necessidade principal é organizar clientes, vendas, tarefas, estoque e controle gerencial básico.",
+      "stop_when": "A rotina operacional estiver organizada sem necessidade de playbook adicional."
+    },
+    {
+      "id": "rota-conjunto",
+      "name": "Usar o ecossistema integrado",
+      "start_with": "jpn-pro-kit",
+      "then": [],
+      "use_when": "Somente quando o kit estiver efetivamente congelado e validado como release final.",
+      "stop_when": "Sempre que um produto isolado já resolver a necessidade; o menor produto suficiente continua sendo preferido.",
+      "availability_guard": "Enquanto houver dependências abertas no contrato canônico, esta rota é apenas arquitetural e não comercial."
+    }
+  ],
+  "publication_authorized": false,
+  "release_effect": "none"
+}

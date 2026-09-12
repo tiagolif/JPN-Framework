@@ -1,0 +1,178 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Centralizar respostas curtas e consistentes para dúvidas e objeções recorrentes sobre os produtos JPN, sem criar preço, oferta, promessa de resultado, depoimento ou autorização de publicação.",
+  "usage_rule": "Use estas respostas para esclarecer adequação, limites e próximo passo. Quando houver dúvida entre produtos, recomende o menor produto suficiente para a necessidade atual.",
+  "global_faq": [
+    {
+      "id": "faq-001",
+      "question": "Preciso comprar ou usar todos os produtos JPN?",
+      "answer": "Não. Os produtos podem ser usados de forma independente. A regra é começar pelo menor produto suficiente para a necessidade atual e avançar apenas quando surgir uma necessidade adicional real."
+    },
+    {
+      "id": "faq-002",
+      "question": "O JPN Framework garante respostas corretas da IA?",
+      "answer": "Não. O framework ajuda a estruturar contexto, objetivo, restrições e critérios de revisão, mas a saída da IA continua exigindo análise crítica e validação humana quando aplicável."
+    },
+    {
+      "id": "faq-003",
+      "question": "Os produtos executam tarefas automaticamente em sistemas externos?",
+      "answer": "Não por padrão. Método, Pack, Builder e Business organizam o trabalho; a Gestão Fácil apoia controle gerencial básico. Integrações ou automações externas não devem ser presumidas."
+    },
+    {
+      "id": "faq-004",
+      "question": "A Gestão Fácil substitui ERP, contabilidade ou banco?",
+      "answer": "Não. A Gestão Fácil é uma planilha de acompanhamento gerencial básico e não substitui ERP, contabilidade, banco, fiscal, auditoria ou decisão profissional especializada."
+    },
+    {
+      "id": "faq-005",
+      "question": "O JPN Pro Kit já deve ser tratado como produto final liberado?",
+      "answer": "Não. O Pro Kit permanece condicionado ao fechamento dos gates finais de release dos componentes e não deve ser apresentado como oferta final enquanto houver dependências abertas."
+    }
+  ],
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "faq": [
+        {
+          "id": "metodo-001",
+          "question": "Para que serve o Método JPN?",
+          "answer": "Para organizar Jornada, Precisão e Narrativa antes e durante o uso de IA, tornando explícitos contexto, objetivo, restrições e critérios de revisão."
+        },
+        {
+          "id": "metodo-002",
+          "question": "Posso usar o Método JPN sem nenhum outro produto?",
+          "answer": "Sim. Se a necessidade é aprender a estruturar pedidos e critérios de revisão, o Método pode ser suficiente sozinho."
+        }
+      ],
+      "objections": [
+        {
+          "id": "metodo-obj-001",
+          "objection": "Eu já sei escrever prompts.",
+          "response": "Nesse caso, o Método só faz sentido se ainda houver valor em padronizar contexto, restrições e critérios de revisão. Se seu processo já é consistente, não há motivo para adicionar outra camada."
+        }
+      ]
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "faq": [
+        {
+          "id": "pack-001",
+          "question": "Os prompts do Pack funcionam sem adaptação?",
+          "answer": "Eles são pontos de partida reutilizáveis. O contexto real da tarefa deve ser inserido e a saída precisa ser revisada."
+        },
+        {
+          "id": "pack-002",
+          "question": "Quando o Prompt Pack é a melhor porta de entrada?",
+          "answer": "Quando a tarefa já está clara e um modelo pronto reduz o trabalho de começar do zero."
+        }
+      ],
+      "objections": [
+        {
+          "id": "pack-obj-001",
+          "objection": "Posso simplesmente salvar meus próprios prompts.",
+          "response": "Sim. O Pack só agrega valor quando uma biblioteca organizada, alinhada ao Método JPN e pronta para adaptação reduz retrabalho no seu contexto."
+        }
+      ]
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "faq": [
+        {
+          "id": "builder-001",
+          "question": "O Prompt Builder envia o prompt diretamente para uma IA?",
+          "answer": "O escopo canônico é montar, revisar, copiar e reutilizar o prompt localmente. Execução automática externa não deve ser presumida."
+        },
+        {
+          "id": "builder-002",
+          "question": "Quando usar o Builder em vez do Pack?",
+          "answer": "Use o Builder quando a tarefa está clara, mas existe valor em montar prompts de forma guiada e padronizada em vez de partir de um modelo pronto."
+        }
+      ],
+      "objections": [
+        {
+          "id": "builder-obj-001",
+          "objection": "Parece mais rápido escrever direto no chat.",
+          "response": "Para tarefas simples pode ser. O Builder é útil quando consistência, reaproveitamento ou padronização entre usos e pessoas justificam uma estrutura guiada."
+        }
+      ]
+    },
+    {
+      "product_id": "jpn-business",
+      "faq": [
+        {
+          "id": "business-001",
+          "question": "O JPN Business é um software de gestão?",
+          "answer": "Não. É um conjunto de playbooks, rotinas e prompts de apoio para estruturar atividades empresariais recorrentes."
+        },
+        {
+          "id": "business-002",
+          "question": "Quando o Business faz sentido?",
+          "answer": "Quando uma atividade recorrente precisa ganhar padrão entre pessoas, etapas ou momentos diferentes."
+        }
+      ],
+      "objections": [
+        {
+          "id": "business-obj-001",
+          "objection": "Minha empresa já tem procedimentos escritos.",
+          "response": "Se os procedimentos já são claros, usados e suficientes, o Business pode não ser necessário. Ele é mais útil quando o processo ainda depende de memória, improviso ou instruções dispersas."
+        }
+      ]
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "faq": [
+        {
+          "id": "gestao-001",
+          "question": "A Gestão Fácil serve para controle financeiro completo?",
+          "answer": "Não. A área financeira é gerencial e básica; não substitui contabilidade, banco, fiscal, auditoria ou conciliação profissional."
+        },
+        {
+          "id": "gestao-002",
+          "question": "Para quem a planilha é indicada?",
+          "answer": "Para pequenas operações que precisam centralizar acompanhamento básico de clientes, vendas, tarefas, estoque e registros operacionais sem implantar um sistema mais complexo."
+        }
+      ],
+      "objections": [
+        {
+          "id": "gestao-obj-001",
+          "objection": "Eu já uso um ERP.",
+          "response": "Se o ERP já cobre o acompanhamento necessário, a Gestão Fácil pode ser redundante. Ela é uma opção de controle simples, não uma substituição obrigatória de sistemas existentes."
+        }
+      ]
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "faq": [
+        {
+          "id": "prokit-001",
+          "question": "O que é o Pro Kit?",
+          "answer": "É a arquitetura de uma entrega integrada dos componentes JPN, condicionada ao fechamento dos gates finais de release."
+        },
+        {
+          "id": "prokit-002",
+          "question": "Devo começar pelo Pro Kit?",
+          "answer": "Não por padrão. O princípio do portfólio é começar pelo menor produto suficiente; o Pro Kit só faz sentido quando os componentes estiverem finalizados e houver necessidade real do conjunto."
+        }
+      ],
+      "objections": [
+        {
+          "id": "prokit-obj-001",
+          "objection": "Quero o pacote completo desde o início.",
+          "response": "O pacote completo não deve ser recomendado automaticamente. Primeiro é preciso confirmar que produtos isolados não atendem à necessidade e que todos os componentes estão com os gates finais concluídos."
+        }
+      ]
+    }
+  ],
+  "guardrails": [
+    "FAQ e objeções são materiais internos de esclarecimento e não constituem oferta, anúncio, checkout ou autorização de venda.",
+    "Nenhuma resposta deve prometer ROI, vendas, economia, produtividade, precisão ou resultado garantidos.",
+    "Nenhuma resposta deve usar depoimento, prova social inventada ou caso de sucesso não comprovado.",
+    "O produto recomendado deve ser o menor produto suficiente para a necessidade atual.",
+    "JPN Gestão Fácil permanece controle gerencial básico e não substitui contabilidade, banco, fiscal, ERP ou auditoria.",
+    "JPN Pro Kit permanece não comercial enquanto seus gates finais estiverem abertos.",
+    "publication_authorized permanece false até autorização e gates próprios de publicação."
+  ],
+  "publication_authorized": false,
+  "release_effect": "none"
+}

@@ -1,0 +1,106 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Orientar os primeiros passos depois que a pessoa identifica o menor produto JPN suficiente para a necessidade atual, sem criar bundle obrigatório, disponibilidade pública ou efeito de release.",
+  "principle": "Começar pelo menor produto suficiente, executar um caso pequeno e reversível, revisar lacunas e avançar apenas quando surgir necessidade adicional real.",
+  "flow": [
+    {"step": 1, "name": "Confirmar o problema", "instruction": "Registrar objetivo, contexto, restrições e saída esperada."},
+    {"step": 2, "name": "Escolher o ponto de entrada", "instruction": "Usar um único produto quando ele for suficiente."},
+    {"step": 3, "name": "Executar um caso pequeno", "instruction": "Começar por um teste simples, controlado e reversível."},
+    {"step": 4, "name": "Revisar resultado e lacunas", "instruction": "Separar fatos, inferências, desconhecidos e conflitos antes de continuar."},
+    {"step": 5, "name": "Avançar somente se necessário", "instruction": "Adicionar outro produto apenas quando uma nova necessidade real aparecer."}
+  ],
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "first_steps": [
+        "Escolher uma tarefa real de baixo risco.",
+        "Organizar Jornada, Precisão e Narrativa.",
+        "Marcar fatos confirmados, inferências, desconhecidos e conflitos.",
+        "Revisar antes de delegar a tarefa à IA."
+      ],
+      "done_signal": "A tarefa ficou clara, verificável e com restrições explícitas.",
+      "release_note": "Revisão editorial humana e PDF final continuam dependentes de evidência real."
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "first_steps": [
+        "Escolher somente um template PP-* compatível com a tarefa.",
+        "Substituir campos genéricos pelos fatos do caso atual.",
+        "Revisar restrições, critérios e regra de parada.",
+        "Salvar a versão adaptada apenas quando estiver coerente."
+      ],
+      "done_signal": "O template deixou de ser genérico e passou a refletir o caso real.",
+      "release_note": "Revisão editorial humana e PDF final continuam dependentes de evidência real."
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "first_steps": [
+        "Começar por uma tarefa curta.",
+        "Preencher contexto e restrições já conhecidos.",
+        "Revisar lacunas antes de compilar o prompt.",
+        "Testar a saída sem depender de ação externa irreversível."
+      ],
+      "done_signal": "O prompt compilado pode ser revisado e reutilizado sem esconder fatos ausentes.",
+      "release_note": "QA físico contextual em celular continua pendente."
+    },
+    {
+      "product_id": "jpn-business",
+      "first_steps": [
+        "Escolher um único processo recorrente.",
+        "Confirmar responsável, entradas, decisões, saída e validação.",
+        "Aplicar o playbook em um cenário controlado.",
+        "Ajustar exceções antes de ampliar o uso."
+      ],
+      "done_signal": "O processo pode ser revisado por outra pessoa sem depender de contexto implícito.",
+      "release_note": "Revisão editorial humana, diagramação final e PDF final continuam dependentes de evidência real."
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "first_steps": [
+        "Configurar listas e cadastros com dados fictícios de teste.",
+        "Registrar cliente, oportunidade, tarefa e estoque de exemplo.",
+        "Conferir indicadores e alertas.",
+        "Substituir exemplos por operação real somente conforme a política interna do usuário."
+      ],
+      "done_signal": "A operação de teste pode ser acompanhada sem transformar alertas em autorizações automáticas.",
+      "release_note": "GF-QA-10 multiplataforma continua pendente; REPOR é somente alerta operacional."
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "first_steps": [
+        "Não começar por ele apenas por ser mais abrangente.",
+        "Usar somente quando múltiplos componentes forem realmente necessários.",
+        "Conferir readiness e estados de QA de cada componente antes de tratar o conjunto como entrega final."
+      ],
+      "done_signal": "O conjunto só faz sentido quando produtos isolados deixaram de ser suficientes e os componentes necessários estão validados.",
+      "release_note": "Rota apenas arquitetural enquanto houver dependências abertas; produto continua em preparação."
+    }
+  ],
+  "route_ids": ["rota-aprender", "rota-executar", "rota-operar", "rota-gestao", "rota-conjunto"],
+  "stop_conditions": [
+    "Existe fato material ausente ou conflitante.",
+    "A próxima ação exige gasto, publicação, compra, contratação ou aceite legal.",
+    "Há credenciais, dados financeiros reais ou informações sensíveis desnecessárias.",
+    "O uso depende de QA ainda não aprovado.",
+    "Há risco de transformar alerta ou recomendação em autorização automática."
+  ],
+  "checklist": [
+    "Problema real confirmado.",
+    "Menor produto suficiente escolhido.",
+    "Primeiro caso pequeno definido.",
+    "Fatos e restrições revisados.",
+    "QA pendente continua explicitamente pendente.",
+    "Nenhuma ação externa irreversível foi executada.",
+    "Próximo passo só existe se uma nova necessidade real aparecer."
+  ],
+  "guardrails": [
+    "Sem preço, checkout, captura de lead, garantia de resultado ou anúncio.",
+    "Sem autorização de publicação, compra, contratação, aceite legal ou criação de conta externa.",
+    "Sem uso de dados financeiros reais no onboarding de exemplo.",
+    "JPN Gestão Fácil é controle gerencial complementar e não substitui contabilidade, banco, fiscal, ERP ou auditoria.",
+    "JPN Pro Kit não deve ser apresentado como release-ready enquanto houver dependências abertas."
+  ],
+  "publication_authorized": false,
+  "release_effect": "none"
+}

@@ -1,0 +1,74 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Definir uma demonstração curta, segura e repetível dos produtos JPN usando somente exemplos fictícios ou sanitizados e sem ação externa irreversível.",
+  "principle": "Demonstrar o menor produto suficiente para uma necessidade concreta e parar quando o problema demonstrado estiver resolvido.",
+  "sequence": ["Contextualizar", "Escolher", "Demonstrar", "Revisar", "Parar"],
+  "allowed_data": ["dados fictícios", "dados explicitamente sanitizados"],
+  "forbidden_data": ["credenciais", "dados bancários ou financeiros reais", "documentos pessoais", "informações internas não autorizadas", "tokens", "chaves", "senhas", "identificadores sensíveis"],
+  "demos": [
+    {
+      "id": "DEMO-01",
+      "product_id": "metodo-jpn",
+      "problem": "Transformar uma solicitação vaga em tarefa estruturada.",
+      "sample_input": "Preciso melhorar o atendimento da loja.",
+      "show": ["Jornada", "Precisão", "Narrativa", "separação entre fatos, inferências, desconhecidos e restrições"],
+      "expected_output": "Uma tarefa clara e revisável, sem promessa de desempenho."
+    },
+    {
+      "id": "DEMO-02",
+      "product_id": "jpn-prompt-builder",
+      "problem": "Montar um prompt preservando contexto e restrições.",
+      "sample_input": "Cliente procura guarda-roupa até 2 m; orçamento e entrega ainda dependem de confirmação.",
+      "show": ["contexto confirmado", "lacunas", "restrições", "perguntas úteis", "saída orientada à tarefa"],
+      "expected_output": "Prompt revisável sem inventar condição comercial.",
+      "required_state_note": "QA físico contextual em celular pendente."
+    },
+    {
+      "id": "DEMO-03",
+      "product_id": "jpn-prompt-pack",
+      "problem": "Reutilizar uma tarefa recorrente.",
+      "sample_input": "Retomar contato depois de ausência de resposta por alguns dias.",
+      "show": ["escolha de um template PP-*", "adaptação aos fatos", "remoção de afirmações não confirmadas", "revisão antes do uso"],
+      "expected_output": "Template adaptado ao caso, ainda sujeito a revisão."
+    },
+    {
+      "id": "DEMO-04",
+      "product_id": "jpn-business",
+      "problem": "Transformar uma rotina informal em processo operacional.",
+      "sample_input": "Recebimento e triagem de solicitações de clientes.",
+      "show": ["responsável", "entrada", "decisão", "saída", "validação", "exceção ou regra de parada"],
+      "expected_output": "Playbook revisável sem executar mensagens, integrações ou automações reais."
+    },
+    {
+      "id": "DEMO-05",
+      "product_id": "jpn-gestao-facil",
+      "problem": "Acompanhar uma operação simples de pequena empresa.",
+      "sample_input": "Cliente, produto, oportunidade, tarefa e estoque inteiramente fictícios.",
+      "show": ["cliente de teste", "item fictício", "oportunidade fictícia", "tarefa", "alerta OK/REPOR", "indicadores"],
+      "expected_output": "Leitura gerencial de teste, sem tratar a planilha como ERP, banco ou contabilidade oficial.",
+      "required_state_note": "GF-QA-10 multiplataforma pendente; REPOR é alerta operacional, não autorização de compra."
+    },
+    {
+      "id": "DEMO-06",
+      "product_id": "jpn-pro-kit",
+      "problem": "Explicar como os componentes do ecossistema podem se relacionar.",
+      "sample_input": "Necessidade fictícia que realmente exige mais de uma camada do portfólio.",
+      "show": ["composição", "critérios de uso", "dependências de readiness", "regra do menor produto suficiente"],
+      "expected_output": "Explicação arquitetural do conjunto, sem recomendação automática.",
+      "required_state_note": "EM PREPARAÇÃO; não apresentar como release-ready enquanto houver dependências abertas."
+    }
+  ],
+  "safe_phrases": [
+    "Neste exemplo, estamos usando dados fictícios.",
+    "Este é o menor recurso suficiente para o problema demonstrado.",
+    "O estado de QA deste componente continua pendente onde indicado.",
+    "Esta rota de uso não é um bundle nem uma obrigação de seguir para outro produto.",
+    "A saída deve ser revisada antes de qualquer uso externo."
+  ],
+  "forbidden_claims": ["funciona em qualquer situação", "garante resultado", "substitui um especialista", "elimina erros", "é compatível com tudo", "já está pronto para produção sem QA aprovado"],
+  "approval_criteria": ["dados fictícios ou sanitizados", "menor produto suficiente", "estados reais de QA preservados", "sem preço ou checkout", "sem ação externa", "revisão e regra de parada"],
+  "stop_conditions": ["dado real sensível", "gasto", "publicação ou envio externo", "aceite de termos", "criação de conta", "compra", "condição comercial não confirmada", "promoção de QA pendente"],
+  "publication_authorized": false,
+  "release_effect": "none"
+}

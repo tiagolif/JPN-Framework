@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Inventariar os ativos visuais e comerciais existentes, ligar cada arquivo ao produto/escopo correto e às suas fontes canônicas, sem autorizar publicação ou release.",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "source_contracts": [
+    "docs/product-system/PRODUCT_PORTFOLIO_v1.json",
+    "docs/commercial/JPN_VISUAL_IDENTITY_v1.json",
+    "docs/commercial/PRODUCT_ONE_PAGERS_v1.json",
+    "docs/commercial/CREATIVE_BRIEFS_v1.md",
+    "docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md",
+    "docs/brand/BRAND_KIT_v1.md",
+    "docs/brand/SOCIAL_ART_SYSTEM_v1.md"
+  ],
+  "policy": {
+    "external_publication_allowed": false,
+    "paid_media_allowed": false,
+    "transactional_cta_allowed": false,
+    "lead_capture_allowed": false,
+    "financial_data_allowed": false,
+    "release_readiness_implied": false
+  },
+  "assets": [
+    {"id":"brand-jpn-mark","path":"assets/brand/jpn-mark.svg","kind":"brand","scope":"shared","product_id":null,"source_paths":["docs/brand/BRAND_KIT_v1.md","docs/commercial/JPN_VISUAL_IDENTITY_v1.json"],"allowed_usage":["internal-preview","design-source"]},
+    {"id":"brand-jpn-lockup","path":"assets/brand/jpn-lockup.svg","kind":"brand","scope":"shared","product_id":null,"source_paths":["docs/brand/BRAND_KIT_v1.md","docs/commercial/JPN_VISUAL_IDENTITY_v1.json"],"allowed_usage":["internal-preview","design-source"]},
+
+    {"id":"cover-metodo-jpn","path":"assets/covers/metodo-jpn-v1.svg","kind":"cover","scope":"product","product_id":"metodo-jpn","source_paths":["docs/commercial/PRODUCT_ONE_PAGERS_v1.json","docs/commercial/JPN_VISUAL_IDENTITY_v1.json"],"allowed_usage":["internal-preview","product-page-reference"]},
+    {"id":"cover-jpn-prompt-pack","path":"assets/covers/jpn-prompt-pack-v1.svg","kind":"cover","scope":"product","product_id":"jpn-prompt-pack","source_paths":["docs/commercial/PRODUCT_ONE_PAGERS_v1.json","docs/commercial/JPN_VISUAL_IDENTITY_v1.json"],"allowed_usage":["internal-preview","product-page-reference"]},
+    {"id":"cover-jpn-business","path":"assets/covers/jpn-business-v1.svg","kind":"cover","scope":"product","product_id":"jpn-business","source_paths":["docs/commercial/PRODUCT_ONE_PAGERS_v1.json","docs/commercial/JPN_VISUAL_IDENTITY_v1.json"],"allowed_usage":["internal-preview","product-page-reference"]},
+    {"id":"cover-jpn-prompt-builder","path":"assets/covers/jpn-prompt-builder-v1.svg","kind":"cover","scope":"product","product_id":"jpn-prompt-builder","source_paths":["docs/commercial/PRODUCT_ONE_PAGERS_v1.json","docs/commercial/JPN_VISUAL_IDENTITY_v1.json"],"allowed_usage":["internal-preview","product-page-reference"]},
+    {"id":"cover-jpn-pro-kit","path":"assets/covers/jpn-pro-kit-v1.svg","kind":"cover","scope":"product","product_id":"jpn-pro-kit","source_paths":["docs/commercial/PRODUCT_ONE_PAGERS_v1.json","docs/commercial/JPN_VISUAL_IDENTITY_v1.json"],"allowed_usage":["internal-preview","product-page-reference"]},
+    {"id":"cover-jpn-gestao-facil","path":"assets/covers/jpn-gestao-facil-v01.svg","kind":"cover","scope":"product","product_id":"jpn-gestao-facil","source_paths":["docs/commercial/PRODUCT_ONE_PAGERS_v1.json","docs/commercial/JPN_VISUAL_IDENTITY_v1.json"],"allowed_usage":["internal-preview","product-page-reference"]},
+
+    {"id":"social-jpn-business","path":"assets/social/jpn-business-1080x1350.svg","kind":"social","scope":"product","product_id":"jpn-business","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-jpn-gestao-facil","path":"assets/social/jpn-gestao-facil-1080x1350.svg","kind":"social","scope":"product","product_id":"jpn-gestao-facil","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-jpn-gestao-facil-inicio","path":"assets/social/jpn-gestao-facil-inicio-1080x1350.svg","kind":"social","scope":"product","product_id":"jpn-gestao-facil","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-jpn-pro-kit","path":"assets/social/jpn-pro-kit-1080x1350.svg","kind":"social","scope":"product","product_id":"jpn-pro-kit","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-jpn-prompt-builder-contexto","path":"assets/social/jpn-prompt-builder-contexto-1080x1350.svg","kind":"social","scope":"product","product_id":"jpn-prompt-builder","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-jpn-prompt-pack","path":"assets/social/jpn-prompt-pack-1080x1350.svg","kind":"social","scope":"product","product_id":"jpn-prompt-pack","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-metodo-jpn-carousel-01","path":"assets/social/metodo-jpn-carousel-01-1080x1350.svg","kind":"social","scope":"product","product_id":"metodo-jpn","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-metodo-jpn-carousel-02","path":"assets/social/metodo-jpn-carousel-02-1080x1350.svg","kind":"social","scope":"product","product_id":"metodo-jpn","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-metodo-jpn-carousel-03","path":"assets/social/metodo-jpn-carousel-03-1080x1350.svg","kind":"social","scope":"product","product_id":"metodo-jpn","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-metodo-jpn-carousel-04","path":"assets/social/metodo-jpn-carousel-04-1080x1350.svg","kind":"social","scope":"product","product_id":"metodo-jpn","source_paths":["docs/commercial/CREATIVE_BRIEFS_v1.md","docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+
+    {"id":"social-comparacao-conceitual","path":"assets/social/jpn-comparacao-conceitual-1920x1080.svg","kind":"social","scope":"ecosystem","product_id":null,"source_paths":["docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md","docs/commercial/PRODUCT_COMPARISON_MATRIX_v1.json"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-ecossistema","path":"assets/social/jpn-ecossistema-1920x1080.svg","kind":"social","scope":"ecosystem","product_id":null,"source_paths":["docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md","docs/product-system/PRODUCT_PORTFOLIO_v1.json"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-jornada-precisao-narrativa","path":"assets/social/jpn-jornada-precisao-narrativa-1080x1350.svg","kind":"social","scope":"framework","product_id":null,"source_paths":["docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md","docs/brand/BRAND_KIT_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-manifesto","path":"assets/social/jpn-manifesto-1080x1350.svg","kind":"social","scope":"framework","product_id":null,"source_paths":["docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md","docs/brand/BRAND_KIT_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+    {"id":"social-principio-lacunas","path":"assets/social/jpn-principio-lacunas-1080x1080.svg","kind":"social","scope":"framework","product_id":null,"source_paths":["docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md","docs/brand/BRAND_KIT_v1.md"],"allowed_usage":["internal-preview","content-candidate"]},
+
+    {"id":"template-social-card","path":"assets/social/templates/jpn-template-card-1080x1080.svg","kind":"template","scope":"shared","product_id":null,"source_paths":["docs/brand/SOCIAL_ART_SYSTEM_v1.md","docs/brand/SOCIAL_PRODUCTION_KIT_v1.md"],"allowed_usage":["design-source"]},
+    {"id":"template-social-editorial","path":"assets/social/templates/jpn-template-editorial-1080x1350.svg","kind":"template","scope":"shared","product_id":null,"source_paths":["docs/brand/SOCIAL_ART_SYSTEM_v1.md","docs/brand/SOCIAL_PRODUCTION_KIT_v1.md"],"allowed_usage":["design-source"]},
+    {"id":"template-social-horizontal","path":"assets/social/templates/jpn-template-horizontal-1920x1080.svg","kind":"template","scope":"shared","product_id":null,"source_paths":["docs/brand/SOCIAL_ART_SYSTEM_v1.md","docs/brand/SOCIAL_PRODUCTION_KIT_v1.md"],"allowed_usage":["design-source"]}
+  ],
+  "guardrails": {
+    "must_register_every_svg_under_managed_roots": true,
+    "must_cover_every_product_with_exactly_one_cover": true,
+    "must_cover_every_product_with_at_least_one_social_asset": true,
+    "must_not_publish_without_authorization": true,
+    "must_not_add_price_or_checkout": true,
+    "must_not_add_lead_capture_or_tracking": true,
+    "must_not_use_real_financial_data": true,
+    "must_not_imply_release_readiness": true,
+    "pro_kit_assets_remain_internal_while_release_dependencies_are_open": true
+  },
+  "managed_roots": ["assets/brand", "assets/covers", "assets/social"]
+}

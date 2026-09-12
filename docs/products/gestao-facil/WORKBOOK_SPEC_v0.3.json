@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "product_id": "jpn-gestao-facil",
+  "candidate_version": "0.3",
+  "status": "candidate / local generation verified / cross-app QA pending",
+  "release_ready": false,
+  "publication_authorized": false,
+  "sheets": [
+    {
+      "name": "Leia-me",
+      "role": "onboarding, limites e status da candidata"
+    },
+    {
+      "name": "Dashboard",
+      "role": "visão derivada; sem entrada manual",
+      "kpis": [
+        "Clientes cadastrados",
+        "Clientes qualificados",
+        "Vendas abertas",
+        "Vendas ganhas",
+        "Tarefas pendentes",
+        "Itens para reposição",
+        "Tarefas vencidas",
+        "Saldo registrado"
+      ],
+      "chart": "Situação das vendas"
+    },
+    {
+      "name": "Clientes",
+      "headers": ["ID", "Nome/Empresa", "Contato", "Canal", "Etapa", "Responsável", "Próxima ação", "Data da próxima ação", "Observações", "Atualização"]
+    },
+    {
+      "name": "Vendas",
+      "headers": ["ID", "Data", "Cliente", "Produto/Serviço", "Etapa", "Responsável", "Quantidade", "Valor unitário", "Valor total", "Próxima ação", "Observações"],
+      "calculated_fields": {
+        "Valor total": "IF(OR(Quantidade=\"\",Valor unitário=\"\"),\"\",Quantidade*Valor unitário)"
+      }
+    },
+    {
+      "name": "Tarefas",
+      "headers": ["ID", "Tarefa", "Categoria", "Responsável", "Prioridade", "Status", "Início", "Prazo", "Próximo passo", "Observações"]
+    },
+    {
+      "name": "Estoque",
+      "headers": ["Código", "Item", "Categoria", "Unidade", "Estoque atual", "Estoque mínimo", "Reposição?", "Fornecedor", "Observações"],
+      "calculated_fields": {
+        "Reposição?": "vazio sem item ou insumos; REPOR quando estoque atual <= estoque mínimo; caso contrário OK"
+      }
+    },
+    {
+      "name": "Financeiro",
+      "headers": ["ID", "Data", "Tipo", "Descrição", "Categoria", "Centro/Projeto", "Valor", "Status", "Vencimento", "Observações"],
+      "candidate_seed_rule": "sem exemplos monetários preenchidos"
+    },
+    {
+      "name": "Listas",
+      "role": "fonte de validações categóricas",
+      "lists": ["Canal", "Etapa cliente", "Etapa venda", "Prioridade", "Status tarefa", "Categoria tarefa", "Tipo financeiro", "Status financeiro", "Unidade estoque"]
+    }
+  ],
+  "sample_data_policy": {
+    "fictitious_only": true,
+    "sales_values_zero": true,
+    "finance_rows_empty": true,
+    "real_financial_data_required": false
+  },
+  "guardrails": [
+    "REPOR é somente alerta operacional e não autoriza compra",
+    "Financeiro é gerencial e não substitui contabilidade, banco, obrigação fiscal ou auditoria",
+    "não registrar senhas, tokens, chaves, número completo de cartão ou credenciais",
+    "compatibilidade com Excel, LibreOffice Calc e Google Sheets depende de teste físico",
+    "presença do XLSX candidato não implica release_ready=true"
+  ],
+  "qa_contract": {
+    "auto_cases": "GF3-QA-01..10",
+    "physical_cases": "GF3-QA-11..18",
+    "physical_status_required": "PENDING"
+  },
+  "local_candidate_evidence": {
+    "filename": "JPN_Gestao_Facil_v0.3_candidata.xlsx",
+    "size_bytes": 53596,
+    "sha256": "aa03a722b4210b0aade70fbc466d7ddb5c3d6a65f9afb3721c7d2d143406018c",
+    "dashboard_observed": {
+      "Clientes cadastrados": 3,
+      "Clientes qualificados": 1,
+      "Vendas abertas": 2,
+      "Vendas ganhas": 1,
+      "Tarefas pendentes": 2,
+      "Itens para reposição": 1,
+      "Tarefas vencidas": 0,
+      "Saldo registrado": 0
+    },
+    "formula_error_scan": 0,
+    "repository_binary_promoted": false,
+    "note": "Artefato reproduzido e inspecionado localmente; promoção binária ao repositório permanece separada até transferência binária íntegra e QA físico."
+  }
+}

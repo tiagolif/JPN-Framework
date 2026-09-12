@@ -98,6 +98,7 @@ const childChecks = [
   ['scripts/check-product-distribution-source-map.mjs', 'proveniência dos pacotes de distribuição'],
   ['scripts/check-jpn-visual-identity.mjs', 'identidade visual canônica'],
   ['scripts/check-commercial-surface-manifest.mjs', 'manifesto das superfícies comerciais'],
+  ['scripts/check-commercial-asset-manifest.mjs', 'manifesto dos ativos comerciais'],
 ];
 
 for (const [script, label] of childChecks) {
@@ -113,4 +114,4 @@ for (const [script, label] of childChecks) {
   }
 }
 
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição, proveniência dos pacotes, identidade visual e manifesto das superfícies comerciais validados.`);
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição, proveniência dos pacotes, identidade visual, manifesto das superfícies comerciais e manifesto dos ativos comerciais validados.`);

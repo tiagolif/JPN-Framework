@@ -1,0 +1,76 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "purpose": "Conectar cada slot do índice de distribuição às fontes reais do repositório, distinguindo fonte editorial, referência de candidato e geração condicionada a gates.",
+  "rules": [
+    "source_paths aponta apenas para fontes existentes no repositório e não transforma essas fontes em release final.",
+    "candidate_reference_paths pode apontar para candidatos existentes apenas como evidência de trabalho; candidatos não podem ser copiados como finais por inferência.",
+    "generated_after_gate identifica artefatos que só podem ser materializados depois que todas as dependências do slot estiverem passed com evidência.",
+    "Nenhum source_path pode apontar para dist/ ou para um arquivo declarado final apenas por conveniência de nome.",
+    "Nenhum pacote pode incorporar dados reais de clientes, credenciais, chaves, segredos ou dados financeiros reais.",
+    "O mapa não executa build, exportação, publicação, venda, checkout ou anúncio."
+  ],
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "slots": [
+        {"slot_id": "principal", "target_path": "Metodo_JPN.pdf", "assembly_mode": "render_after_gate", "source_paths": ["docs/products/metodo-jpn/METODO_JPN_v1.md", "docs/products/metodo-jpn/METODO_JPN_CASEBOOK_v1.md", "docs/products/metodo-jpn/METODO_JPN_PRACTICE_WORKBOOK_v1.md", "docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["revisao-editorial-humana", "pdf-final"]},
+        {"slot_id": "inicio", "target_path": "LEIA-ME.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]},
+        {"slot_id": "referencia", "target_path": "Referencia_JPN.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md", "docs/products/metodo-jpn/METODO_JPN_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]},
+        {"slot_id": "limites", "target_path": "LIMITES_E_BOAS_PRATICAS.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/metodo-jpn/METODO_JPN_v1.md", "docs/product-system/SAFE_DATA_HANDLING_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]}
+      ]
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "slots": [
+        {"slot_id": "principal", "target_path": "JPN_Prompt_Pack.pdf", "assembly_mode": "render_after_gate", "source_paths": ["docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md", "docs/products/prompt-pack/PROMPT_INDEX.json", "docs/products/prompt-pack/JPN_PROMPT_PACK_QUICK_REFERENCE_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["revisao-editorial-humana", "pdf-final"]},
+        {"slot_id": "indice", "target_path": "INDICE_DE_PROMPTS.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/prompt-pack/PROMPT_INDEX.json"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]},
+        {"slot_id": "adaptacao", "target_path": "GUIA_DE_ADAPTACAO.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/prompt-pack/PROMPT_SELECTION_WORKBOOK_v1.md", "docs/products/prompt-pack/JPN_PROMPT_PACK_QUICK_REFERENCE_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]},
+        {"slot_id": "seguranca", "target_path": "USO_SEGURO.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md", "docs/product-system/SAFE_DATA_HANDLING_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]}
+      ]
+    },
+    {
+      "product_id": "jpn-business",
+      "slots": [
+        {"slot_id": "principal", "target_path": "JPN_Business.pdf", "assembly_mode": "render_after_gate", "source_paths": ["docs/products/jpn-business/JPN_BUSINESS_v1.md", "docs/products/jpn-business/BUSINESS_INDEX.json", "docs/products/jpn-business/IMPLEMENTATION_WORKBOOK_v1.md", "docs/products/jpn-business/JPN_BUSINESS_QUICK_REFERENCE_v1.md"], "candidate_reference_paths": ["docs/products/jpn-business/PRINT_CANDIDATE_v1.md"], "generated_after_gate": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"]},
+        {"slot_id": "indice", "target_path": "INDICE_PLAYBOOKS.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/jpn-business/BUSINESS_INDEX.json"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]},
+        {"slot_id": "crosswalk", "target_path": "PROMPT_PACK_CROSSWALK.md", "assembly_mode": "copy_after_gate", "source_paths": ["docs/products/jpn-business/PROMPT_PACK_CROSSWALK_v1.md", "docs/products/jpn-business/PROMPT_PACK_CROSSWALK_v1.json"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]},
+        {"slot_id": "aplicacao", "target_path": "GUIA_DE_APLICACAO.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/jpn-business/IMPLEMENTATION_WORKBOOK_v1.md", "docs/products/jpn-business/30_DAY_IMPLEMENTATION_SPRINT_v1.md", "docs/products/jpn-business/WEEKLY_OPERATING_REVIEW_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]},
+        {"slot_id": "limites", "target_path": "LIMITES_OPERACIONAIS.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/jpn-business/JPN_BUSINESS_v1.md", "docs/product-system/SAFE_DATA_HANDLING_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pdf-final"]}
+      ]
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "slots": [
+        {"slot_id": "principal", "target_path": "JPN_Prompt_Builder_Offline.zip", "assembly_mode": "archive_after_gate", "source_paths": ["product-site", "docs/products/prompt-builder/OFFLINE_DELIVERY_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"]},
+        {"slot_id": "inicio", "target_path": "LEIA-ME.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/prompt-builder/INSTRUCOES_DE_ACESSO.txt", "docs/products/prompt-builder/PROMPT_BUILDER_QUICK_START_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pacote-offline-final"]},
+        {"slot_id": "guia", "target_path": "GUIA_RAPIDO.md", "assembly_mode": "copy_after_gate", "source_paths": ["docs/products/prompt-builder/PROMPT_BUILDER_QUICK_START_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pacote-offline-final"]},
+        {"slot_id": "backup", "target_path": "BACKUP_E_EXPORTACAO.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/prompt-builder/LOCAL_RECOVERY_v1.md", "docs/products/prompt-builder/LOCAL_WORKSPACES_v1.md", "docs/products/prompt-builder/WORKSPACE_MANAGEMENT_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pacote-offline-final"]},
+        {"slot_id": "privacidade", "target_path": "PRIVACIDADE_E_LIMITES.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/prompt-builder/SENSITIVE_DATA_GUARD_v1.md", "docs/products/prompt-builder/TEMPORARY_MODE_v1.md", "docs/product-system/SAFE_DATA_HANDLING_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["pacote-offline-final"]}
+      ]
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "slots": [
+        {"slot_id": "principal", "target_path": "JPN_Gestao_Facil.xlsx", "assembly_mode": "freeze_validated_binary_after_gate", "source_paths": [], "candidate_reference_paths": ["deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx"], "generated_after_gate": ["gf-qa-10", "arquivo-final-validado"]},
+        {"slot_id": "inicio", "target_path": "LEIA-ME.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/gestao-facil/QUICK_START_v0.1.md"], "candidate_reference_paths": [], "generated_after_gate": ["arquivo-final-validado"]},
+        {"slot_id": "rotina", "target_path": "GUIA_OPERACIONAL.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/gestao-facil/SMALL_BUSINESS_OPERATING_GUIDE_v1.md", "docs/products/gestao-facil/OPERATING_RHYTHM_v0.2.md", "docs/products/gestao-facil/MANUAL_v0.1.md"], "candidate_reference_paths": [], "generated_after_gate": ["arquivo-final-validado"]},
+        {"slot_id": "indicadores", "target_path": "INDICADORES_E_ALERTAS.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/gestao-facil/OPERATIONAL_DATA_DICTIONARY_v0.1.md", "docs/products/gestao-facil/MANUAL_v0.1.md"], "candidate_reference_paths": [], "generated_after_gate": ["arquivo-final-validado"]},
+        {"slot_id": "limites", "target_path": "LIMITES_GERENCIAIS.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/gestao-facil/MANUAL_v0.1.md", "docs/product-system/SAFE_DATA_HANDLING_v1.md"], "candidate_reference_paths": [], "generated_after_gate": ["arquivo-final-validado"]}
+      ]
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "slots": [
+        {"slot_id": "principal", "target_path": "JPN_Pro_Kit.zip", "assembly_mode": "archive_frozen_components_after_gate", "source_paths": [], "candidate_reference_paths": ["docs/products/pro-kit/DELIVERY_MAP.md", "docs/products/pro-kit/READINESS_MATRIX_v1.md"], "generated_after_gate": ["artefatos-congelados", "hashes-finais", "ci-final"]},
+        {"slot_id": "manifesto", "target_path": "MANIFEST.json", "assembly_mode": "instantiate_template_after_gate", "source_paths": ["docs/products/pro-kit/MANIFEST.template.json"], "candidate_reference_paths": [], "generated_after_gate": ["artefatos-congelados"]},
+        {"slot_id": "indice", "target_path": "INDEX.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/pro-kit/DELIVERY_MAP.md"], "candidate_reference_paths": [], "generated_after_gate": ["artefatos-congelados"]},
+        {"slot_id": "checksums", "target_path": "SHA256SUMS.txt", "assembly_mode": "generate_checksums_after_gate", "source_paths": ["deliverables/templates/SHA256SUMS.template.txt"], "candidate_reference_paths": [], "generated_after_gate": ["hashes-finais"]},
+        {"slot_id": "inicio", "target_path": "COMECE_AQUI.md", "assembly_mode": "copy_after_gate", "source_paths": ["docs/products/pro-kit/LEIA_PRIMEIRO.md"], "candidate_reference_paths": [], "generated_after_gate": ["artefatos-congelados"]},
+        {"slot_id": "release-notes", "target_path": "RELEASE_NOTES.md", "assembly_mode": "derive_after_gate", "source_paths": ["docs/products/pro-kit/RELEASE_NOTES_v1.md", "docs/products/pro-kit/RELEASE_GATES.json"], "candidate_reference_paths": [], "generated_after_gate": ["artefatos-congelados", "ci-final"]}
+      ]
+    }
+  ]
+}

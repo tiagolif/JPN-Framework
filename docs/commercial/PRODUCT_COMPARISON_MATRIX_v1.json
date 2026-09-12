@@ -23,7 +23,7 @@
       "primary_input": "Contexto específico da tarefa e seleção do modelo adequado.",
       "primary_output": "Prompt adaptado para execução.",
       "operational_scope": "Biblioteca de modelos; não é sistema de gestão nem automação externa.",
-      "next_if_needed": ["jpn-prompt-builder", "jpn-business"]
+      "next_if_needed": ["jpn-prompt-builder"]
     },
     {
       "product_id": "jpn-prompt-builder",

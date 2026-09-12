@@ -87,6 +87,7 @@ const childChecks = [
   ['scripts/check-small-business-use-cases.mjs', 'casos de uso para pequenas empresas'],
   ['scripts/check-small-business-diagnostic.mjs', 'diagnóstico para pequenas empresas'],
   ['scripts/check-product-comparison-matrix.mjs', 'matriz comparativa dos produtos'],
+  ['scripts/check-product-one-pagers.mjs', 'one-pagers dos produtos'],
 ];
 
 for (const [script, label] of childChecks) {
@@ -102,4 +103,4 @@ for (const [script, label] of childChecks) {
   }
 }
 
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico e matriz comparativa validados.`);
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, matriz comparativa e one-pagers validados.`);

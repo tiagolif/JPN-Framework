@@ -1,3 +1,4 @@
+import './check-commercial-catalog.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -76,5 +77,5 @@ for (const file of htmlFiles) {
 }
 
 if (!process.exitCode) {
-  console.log(`commercial navigation: OK — ${htmlFiles.length} páginas, links relativos e destinos internos válidos.`);
+  console.log(`commercial navigation: OK — ${htmlFiles.length} páginas, catálogo sincronizado, links relativos e destinos internos válidos.`);
 }

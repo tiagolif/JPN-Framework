@@ -86,16 +86,17 @@ if (!diagnostic.fallback || diagnostic.fallback.start_product !== 'metodo-jpn' |
 }
 
 const serialized = JSON.stringify(diagnostic);
+const claimText = serialized.replace(/n[aã]o\s+substitui\s+(erp|contabilidade|banco|fiscal|auditoria)/gi, 'guardrail-de-nao-substituicao');
 const riskyClaims = [
   /roi\s+garantid/i,
   /resultado\s+garantid/i,
   /aument(a|o)\s+vendas/i,
   /economia\s+garantid/i,
   /100%\s+precis/i,
-  /substitui\s+(erp|contabilidade|banco|fiscal)/i,
+  /substitui\s+(erp|contabilidade|banco|fiscal|auditoria)/i,
 ];
 for (const claim of riskyClaims) {
-  if (claim.test(serialized)) errors.push(`Diagnóstico contém claim de risco: ${claim}`);
+  if (claim.test(claimText)) errors.push(`Diagnóstico contém claim de risco: ${claim}`);
 }
 
 if (errors.length > 0) {

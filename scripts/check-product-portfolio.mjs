@@ -95,6 +95,7 @@ const childChecks = [
   ['scripts/check-guided-demo-playbook.mjs', 'demo guiada dos produtos'],
   ['scripts/check-product-delivery-manifests.mjs', 'manifestos de entrega dos produtos'],
   ['scripts/check-product-distribution-index.mjs', 'índice de distribuição dos produtos'],
+  ['scripts/check-product-distribution-source-map.mjs', 'proveniência dos pacotes de distribuição'],
 ];
 
 for (const [script, label] of childChecks) {
@@ -110,4 +111,4 @@ for (const [script, label] of childChecks) {
   }
 }
 
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega e índice de distribuição validados.`);
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição e proveniência dos pacotes validados.`);

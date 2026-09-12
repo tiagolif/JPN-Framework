@@ -1,5 +1,6 @@
 import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
 const portfolioPath = path.join(root, 'docs/product-system/PRODUCT_PORTFOLIO_v1.json');
@@ -81,4 +82,16 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos cobertos.`);
+const usageRoutesCheck = spawnSync(process.execPath, ['scripts/check-product-usage-routes.mjs'], {
+  cwd: root,
+  encoding: 'utf8',
+});
+
+if (usageRoutesCheck.stdout) process.stdout.write(usageRoutesCheck.stdout);
+if (usageRoutesCheck.stderr) process.stderr.write(usageRoutesCheck.stderr);
+if (usageRoutesCheck.status !== 0) {
+  console.error('Product portfolio check falhou no gate de rotas de uso.');
+  process.exit(usageRoutesCheck.status ?? 1);
+}
+
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos cobertos e rotas de uso validadas.`);

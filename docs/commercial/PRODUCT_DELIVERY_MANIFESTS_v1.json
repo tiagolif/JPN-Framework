@@ -1,0 +1,106 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "purpose": "Definir o que deve compor a entrega de cada produto JPN sem declarar release, venda, checkout ou disponibilidade pública.",
+  "delivery_rules": [
+    "Nenhum manifesto transforma candidato, fonte ou material interno em artefato final.",
+    "Itens finais só podem ser marcados como entregáveis após os respectivos gates canônicos de release.",
+    "Arquivos de instrução devem explicar uso, limites e próxima ação sem prometer resultado.",
+    "O menor produto suficiente continua sendo a regra de escolha; os manifestos não criam bundles implícitos.",
+    "JPN Gestão Fácil é ferramenta gerencial e não substitui contabilidade, banco, fiscal, ERP ou auditoria.",
+    "JPN Pro Kit só pode consolidar componentes após o congelamento canônico dos artefatos que o compõem."
+  ],
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "delivery_name": "Pacote de entrega — Método JPN",
+      "primary_artifact_type": "editorial",
+      "customer_receives": [
+        "PDF final do Método JPN",
+        "guia rápido de início",
+        "referência das etapas Jornada, Precisão e Narrativa",
+        "nota de limites e boas práticas"
+      ],
+      "required_release_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "completion_signal": "PDF final revisado e guia de início coerente com o conteúdo canônico.",
+      "must_not_claim": "resultado garantido, precisão absoluta ou eliminação de revisão humana"
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "delivery_name": "Pacote de entrega — JPN Prompt Pack",
+      "primary_artifact_type": "prompt-library",
+      "customer_receives": [
+        "PDF final do Prompt Pack",
+        "índice dos prompts canônicos",
+        "guia de adaptação ao contexto",
+        "nota de uso seguro e revisão antes de ações externas"
+      ],
+      "required_release_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "completion_signal": "Biblioteca final revisada, indexada e acompanhada de instruções de adaptação.",
+      "must_not_claim": "prompts universais, resultado garantido ou execução automática de ações externas"
+    },
+    {
+      "product_id": "jpn-business",
+      "delivery_name": "Pacote de entrega — JPN Business",
+      "primary_artifact_type": "business-playbooks",
+      "customer_receives": [
+        "PDF final do JPN Business",
+        "índice dos 12 playbooks",
+        "crosswalk com o JPN Prompt Pack",
+        "guia de aplicação em processos de pequenas empresas",
+        "nota de limites operacionais"
+      ],
+      "required_release_dependencies": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"],
+      "completion_signal": "Playbooks revisados, diagramados e exportados em PDF final com referências internas válidas.",
+      "must_not_claim": "automação completa da empresa, aumento garantido de vendas ou substituição de sistemas de gestão"
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "delivery_name": "Pacote de entrega — JPN Prompt Builder",
+      "primary_artifact_type": "local-web-tool",
+      "customer_receives": [
+        "pacote offline final do Prompt Builder",
+        "arquivo de abertura/inicialização local",
+        "guia rápido de uso",
+        "instruções de backup/exportação dos trabalhos",
+        "nota de privacidade e limites de execução local"
+      ],
+      "required_release_dependencies": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"],
+      "completion_signal": "Pacote offline validado após QA físico/contextual e CI final.",
+      "must_not_claim": "compatibilidade não testada, execução automática externa ou armazenamento em nuvem implícito"
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "delivery_name": "Pacote de entrega — JPN Gestão Fácil",
+      "primary_artifact_type": "spreadsheet",
+      "customer_receives": [
+        "arquivo final validado da planilha",
+        "guia Leia-me/onboarding",
+        "guia operacional para rotina diária e revisão semanal",
+        "legenda dos indicadores e alertas",
+        "nota de limites contábeis, fiscais e bancários"
+      ],
+      "required_release_dependencies": ["gf-qa-10", "arquivo-final-validado"],
+      "completion_signal": "Arquivo final validado nos ambientes previstos e documentação de uso coerente com os KPIs canônicos.",
+      "must_not_claim": "substituição de ERP, contabilidade, banco, fiscal ou auditoria; REPOR como autorização automática de compra"
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "delivery_name": "Pacote de entrega — JPN Pro Kit",
+      "primary_artifact_type": "bundle",
+      "customer_receives": [
+        "componentes JPN congelados e versionados",
+        "manifesto do bundle",
+        "índice de arquivos",
+        "checksums finais",
+        "guia Comece Aqui do portfólio",
+        "notas de versão e limites"
+      ],
+      "required_release_dependencies": ["artefatos-congelados", "hashes-finais", "ci-final"],
+      "completion_signal": "Todos os componentes elegíveis congelados, hashes finais registrados e CI final aprovado.",
+      "must_not_claim": "bundle pronto antes dos componentes, desconto implícito, resultado garantido ou necessidade de usar todos os produtos"
+    }
+  ]
+}

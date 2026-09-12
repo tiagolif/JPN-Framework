@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Fornecer uma apresentação curta, consistente e reutilizável de cada produto JPN para demonstrações e materiais comerciais internos, sem preço, checkout, publicação ou promessa de resultado.",
+  "usage_rule": "Use o one-pager somente para explicar adequação, entrada, saída e limites. A decisão deve continuar seguindo a regra do menor produto suficiente.",
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "headline": "Estruture melhor o pedido antes de pedir mais da IA.",
+      "problem": "Quando objetivo, contexto, restrições e critérios estão soltos, a resposta tende a exigir mais retrabalho e revisão.",
+      "what_it_is": "Uma metodologia para organizar Jornada, Precisão e Narrativa antes e durante o trabalho com IA.",
+      "use_when": "A necessidade ainda está ambígua, a pessoa quer aprender o raciocínio ou precisa criar critérios claros para revisar a saída.",
+      "input": "Problema, contexto, recursos, restrições e critérios de qualidade.",
+      "output": "Pedido estruturado e critérios de revisão.",
+      "not_for": "Não é CRM, ERP, automação externa nem garantia de qualidade da resposta.",
+      "next_if_needed": ["jpn-prompt-pack", "jpn-prompt-builder"]
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "headline": "Comece de um modelo quando a tarefa já está clara.",
+      "problem": "Tarefas recorrentes perdem tempo quando cada prompt precisa ser recriado do zero.",
+      "what_it_is": "Uma biblioteca de prompts reutilizáveis alinhados ao Método JPN, preparada para adaptação ao contexto real da tarefa.",
+      "use_when": "O objetivo já está claro e um modelo pronto reduz o trabalho de estruturação inicial.",
+      "input": "Contexto específico da tarefa e seleção do modelo adequado.",
+      "output": "Prompt adaptado para execução e revisão.",
+      "not_for": "Não substitui entendimento do problema, sistema de gestão ou automação de ferramentas externas.",
+      "next_if_needed": ["jpn-prompt-builder"]
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "headline": "Monte prompts de forma guiada e consistente.",
+      "problem": "Mesmo com um método conhecido, campos importantes podem ser esquecidos quando a montagem acontece de forma improvisada.",
+      "what_it_is": "Uma ferramenta local para preencher campos JPN, revisar a estrutura e reutilizar trabalhos sem depender de integração externa.",
+      "use_when": "A tarefa está clara e existe valor em padronizar a montagem do prompt entre usos ou pessoas.",
+      "input": "Campos estruturados do trabalho JPN.",
+      "output": "Prompt montado localmente para copiar, revisar e reutilizar.",
+      "not_for": "Não é CRM, ERP, executor automático de tarefas externas nem substituto da revisão humana.",
+      "next_if_needed": []
+    },
+    {
+      "product_id": "jpn-business",
+      "headline": "Transforme atividades recorrentes em processos mais claros.",
+      "problem": "Pequenas equipes perdem consistência quando uma atividade depende apenas da memória de quem a executa.",
+      "what_it_is": "Um conjunto de playbooks, rotinas e prompts de apoio para organizar atividades empresariais recorrentes.",
+      "use_when": "Uma atividade precisa ser repetida com padrão entre pessoas, etapas ou momentos diferentes.",
+      "input": "Processo atual, responsáveis, etapas, entradas, saídas e pontos de decisão.",
+      "output": "Playbook aplicável, rotina e prompts de apoio.",
+      "not_for": "Não executa automaticamente sistemas externos e não substitui ferramentas transacionais da empresa.",
+      "next_if_needed": ["jpn-prompt-pack", "jpn-prompt-builder", "jpn-gestao-facil"]
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "headline": "Centralize o acompanhamento operacional básico em uma planilha simples.",
+      "problem": "Clientes, vendas, tarefas e estoque ficam difíceis de acompanhar quando estão espalhados em anotações e arquivos separados.",
+      "what_it_is": "Uma planilha de controle gerencial básico para pequenas empresas, com visão de clientes, vendas, tarefas, estoque e registros operacionais.",
+      "use_when": "A empresa precisa organizar acompanhamento operacional sem implantar um sistema mais complexo.",
+      "input": "Registros operacionais inseridos pela equipe.",
+      "output": "Visão gerencial básica, alertas e acompanhamento operacional.",
+      "not_for": "Não substitui contabilidade, banco, fiscal, ERP, auditoria ou decisão de compra.",
+      "next_if_needed": ["jpn-business"]
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "headline": "Uma entrega integrada somente quando os componentes estiverem finalizados.",
+      "problem": "Materiais separados podem exigir organização adicional quando existe necessidade real de usar o conjunto.",
+      "what_it_is": "A arquitetura de um pacote integrado dos componentes comerciais JPN, condicionado ao fechamento dos gates finais de release.",
+      "use_when": "Somente depois que os componentes finais estiverem congelados e quando um produto isolado não for suficiente.",
+      "input": "Artefatos finais e validados dos produtos componentes.",
+      "output": "Pacote integrado de entrega.",
+      "not_for": "Não deve ser apresentado como produto liberado enquanto houver dependências de release abertas e não é recomendação automática para toda necessidade.",
+      "next_if_needed": []
+    }
+  ],
+  "guardrails": [
+    "One-pagers são materiais internos de explicação e não constituem oferta, anúncio, checkout ou autorização de venda.",
+    "Nenhum texto deve prometer resultado, ROI, produtividade, vendas, economia ou precisão garantidos.",
+    "O produto recomendado deve ser o menor produto suficiente para a necessidade atual.",
+    "JPN Gestão Fácil permanece controle gerencial e não substitui contabilidade, banco, fiscal, ERP ou auditoria.",
+    "JPN Pro Kit permanece não comercial enquanto seus gates finais estiverem abertos.",
+    "publication_authorized permanece false até autorização e gates próprios de publicação."
+  ],
+  "publication_authorized": false,
+  "release_effect": "none"
+}

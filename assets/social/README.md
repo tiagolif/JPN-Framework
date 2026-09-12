@@ -11,10 +11,18 @@ Base editorial/comercial: `docs/commercial/CREATIVE_BRIEFS_v1.md`.
 - `jpn-manifesto-1080x1350.svg` — CB-01, manifesto vertical;
 - `jpn-principio-lacunas-1080x1080.svg` — CB-09, princípio sobre lacunas;
 - `jpn-ecossistema-1920x1080.svg` — CB-10, mapa horizontal do ecossistema;
+- `metodo-jpn-carousel-01-1080x1350.svg` — CB-02, abertura “Um pedido claro começa antes do prompt”;
+- `metodo-jpn-carousel-02-1080x1350.svg` — CB-02, Jornada;
+- `metodo-jpn-carousel-03-1080x1350.svg` — CB-02, Precisão;
+- `metodo-jpn-carousel-04-1080x1350.svg` — CB-02, Narrativa;
 - `jpn-prompt-pack-1080x1350.svg` — CB-04, adaptação social do Prompt Pack;
 - `jpn-business-1080x1350.svg` — CB-05, adaptação social do Business;
 - `jpn-prompt-builder-contexto-1080x1350.svg` — estado candidato da camada contextual do Prompt Builder;
 - `jpn-gestao-facil-inicio-1080x1350.svg` — onboarding da reconstrução controlada da Gestão Fácil.
+
+### Carrossel do Método JPN
+
+Os quatro arquivos `metodo-jpn-carousel-01..04-1080x1350.svg` formam uma sequência única e devem permanecer nessa ordem. A copy deriva diretamente do CB-02 de `CREATIVE_BRIEFS_v1.md`: abertura, Jornada, Precisão e Narrativa. O conjunto é educativo e interno; o CTA editorial previsto no brief não foi transformado em CTA de compra, disponibilidade ou publicação.
 
 ## Templates reutilizáveis
 

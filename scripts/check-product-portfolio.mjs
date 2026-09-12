@@ -85,6 +85,7 @@ if (errors.length > 0) {
 const childChecks = [
   ['scripts/check-product-usage-routes.mjs', 'rotas de uso'],
   ['scripts/check-small-business-use-cases.mjs', 'casos de uso para pequenas empresas'],
+  ['scripts/check-small-business-diagnostic.mjs', 'diagnóstico para pequenas empresas'],
 ];
 
 for (const [script, label] of childChecks) {
@@ -100,4 +101,4 @@ for (const [script, label] of childChecks) {
   }
 }
 
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas e casos de uso validados.`);
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso e diagnóstico validados.`);

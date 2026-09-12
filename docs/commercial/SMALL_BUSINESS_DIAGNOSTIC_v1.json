@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Ajudar uma pequena empresa a escolher o menor produto JPN suficiente para a necessidade atual, sem transformar o diagnóstico em venda automática, promessa de resultado ou coleta de dados.",
+  "rules": [
+    "O diagnóstico é orientativo e deve começar pela necessidade atual, não pelo produto mais completo.",
+    "Cada resultado principal deve apontar para uma rota existente em PRODUCT_USAGE_ROUTES_v1.json.",
+    "Cada produto recomendado deve existir em PRODUCT_PORTFOLIO_v1.json.",
+    "Produtos opcionais só aparecem quando agregam uma etapa adicional clara.",
+    "JPN Pro Kit não pode ser recomendado como resultado comercial enquanto sua rota permanecer apenas arquitetural.",
+    "JPN Gestão Fácil é controle gerencial básico e não substitui contabilidade, banco, fiscal, ERP ou auditoria.",
+    "Nenhuma resposta autoriza publicação, compra, contratação, automação externa ou envio de mensagens."
+  ],
+  "questions": [
+    {
+      "id": "dq-01",
+      "prompt": "Qual é o principal objetivo agora?",
+      "options": [
+        {"id": "aprender", "label": "Aprender a estruturar pedidos melhores para IA"},
+        {"id": "executar", "label": "Ter modelos prontos para executar tarefas"},
+        {"id": "operar", "label": "Organizar processos recorrentes da empresa"},
+        {"id": "gerir", "label": "Organizar clientes, vendas, tarefas e controles básicos"}
+      ]
+    },
+    {
+      "id": "dq-02",
+      "prompt": "Você já sabe exatamente o que precisa pedir para a IA?",
+      "options": [
+        {"id": "nao", "label": "Ainda preciso organizar contexto, objetivo e restrições"},
+        {"id": "sim", "label": "Sim, quero acelerar a execução"}
+      ]
+    },
+    {
+      "id": "dq-03",
+      "prompt": "A tarefa acontece uma vez ou se repete?",
+      "options": [
+        {"id": "pontual", "label": "É pontual ou varia bastante"},
+        {"id": "recorrente", "label": "Se repete e merece um processo"}
+      ]
+    },
+    {
+      "id": "dq-04",
+      "prompt": "Você precisa apenas de texto/prompts ou também de um controle operacional?",
+      "options": [
+        {"id": "texto", "label": "Texto, prompts, roteiro ou playbook"},
+        {"id": "controle", "label": "Também preciso registrar clientes, tarefas, vendas ou estoque básico"}
+      ]
+    },
+    {
+      "id": "dq-05",
+      "prompt": "Existe uma equipe que precisa repetir o mesmo padrão?",
+      "options": [
+        {"id": "nao", "label": "Não, o uso é principalmente individual"},
+        {"id": "sim", "label": "Sim, preciso de consistência entre pessoas"}
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "out-metodo",
+      "start_product": "metodo-jpn",
+      "route_id": "rota-aprender",
+      "when": ["dq-01=aprender", "dq-02=nao"],
+      "message": "Comece pelo Método JPN para estruturar contexto, objetivo, restrições e saída antes de escolher templates.",
+      "optional_next": ["jpn-prompt-pack", "jpn-prompt-builder"],
+      "stop_rule": "Se o pedido estruturado já resolve a necessidade, não é necessário adicionar outro produto."
+    },
+    {
+      "id": "out-pack",
+      "start_product": "jpn-prompt-pack",
+      "route_id": "rota-executar",
+      "when": ["dq-01=executar", "dq-02=sim", "dq-03=pontual"],
+      "message": "Comece pelo JPN Prompt Pack para partir de modelos reutilizáveis e adaptar apenas o contexto necessário.",
+      "optional_next": ["jpn-prompt-builder"],
+      "stop_rule": "Se os templates cobrem bem a tarefa, não é necessário avançar para o Builder."
+    },
+    {
+      "id": "out-builder",
+      "start_product": "jpn-prompt-builder",
+      "route_id": "rota-executar",
+      "when": ["dq-01=executar", "dq-02=sim", "dq-03=pontual", "dq-05=sim"],
+      "message": "Use o JPN Prompt Builder quando a equipe precisa montar prompts com estrutura mais consistente e campos explícitos.",
+      "optional_next": [],
+      "stop_rule": "O Builder é suficiente quando a necessidade é estruturar prompts; não adiciona gestão operacional."
+    },
+    {
+      "id": "out-business",
+      "start_product": "jpn-business",
+      "route_id": "rota-operar",
+      "when": ["dq-01=operar", "dq-03=recorrente", "dq-04=texto"],
+      "message": "Comece pelo JPN Business para transformar uma atividade recorrente em playbook, rotina e apoio por prompts.",
+      "optional_next": ["jpn-prompt-pack", "jpn-prompt-builder", "jpn-gestao-facil"],
+      "stop_rule": "Se o playbook e os prompts bastam, não é necessário adicionar uma planilha de gestão."
+    },
+    {
+      "id": "out-gestao",
+      "start_product": "jpn-gestao-facil",
+      "route_id": "rota-gestao",
+      "when": ["dq-01=gerir", "dq-04=controle"],
+      "message": "Comece pela JPN Gestão Fácil para centralizar controle gerencial simples de clientes, vendas, tarefas e alertas básicos.",
+      "optional_next": ["jpn-business"],
+      "stop_rule": "Se o controle operacional básico atende, não é necessário adicionar playbooks ou outras camadas."
+    },
+    {
+      "id": "out-business-gestao",
+      "start_product": "jpn-business",
+      "route_id": "rota-operar",
+      "when": ["dq-01=operar", "dq-03=recorrente", "dq-04=controle"],
+      "message": "Comece pelo JPN Business para definir o processo e use a Gestão Fácil somente se também precisar registrar os checkpoints operacionais.",
+      "optional_next": ["jpn-gestao-facil"],
+      "stop_rule": "Não adicione a Gestão Fácil se o processo não exige acompanhamento estruturado."
+    }
+  ],
+  "fallback": {
+    "start_product": "metodo-jpn",
+    "route_id": "rota-aprender",
+    "message": "Quando a necessidade ainda está ambígua, comece pelo Método JPN para esclarecer o pedido antes de escolher outra ferramenta."
+  },
+  "publication_authorized": false,
+  "release_effect": "none"
+}

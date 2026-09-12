@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "product": "JPN Business",
+  "source_business_index": "docs/products/jpn-business/BUSINESS_INDEX.json",
+  "source_prompt_index": "docs/products/prompt-pack/PROMPT_INDEX.json",
+  "purpose": "Tornar explícita e verificável a relação entre cada playbook JPN Business e os prompts reutilizáveis do JPN Prompt Pack.",
+  "playbooks": [
+    {"id":"JB-01","name":"Entrada e triagem de novo lead","prompt_ids":["PP-06","PP-07"],"use":"Usar PP-07 para diagnosticar a solicitação e PP-06 quando houver continuidade comercial responsável."},
+    {"id":"JB-02","name":"Follow-up comercial responsável","prompt_ids":["PP-06"],"use":"Usar PP-06 para retomar a conversa sem inventar urgência, condição ou interesse do cliente."},
+    {"id":"JB-03","name":"Qualificação sem inventar necessidade","prompt_ids":["PP-07"],"use":"Usar PP-07 para organizar contexto, dúvida, lacunas e próximo passo antes de propor solução."},
+    {"id":"JB-04","name":"Preparação de proposta sem definir condição não autorizada","prompt_ids":["PP-03","PP-09"],"use":"Usar PP-03 para comparar alternativas e PP-09 para estruturar a oferta apenas com condições confirmadas."},
+    {"id":"JB-05","name":"Atendimento e resolução de solicitação","prompt_ids":["PP-07"],"use":"Usar PP-07 para transformar a solicitação em diagnóstico, resposta e próximo passo verificável."},
+    {"id":"JB-06","name":"Escalonamento e handoff interno","prompt_ids":["PP-18"],"use":"Usar PP-18 para transferir contexto, estado, pendências e responsabilidade sem perder continuidade."},
+    {"id":"JB-07","name":"Planejamento de conteúdo comercial","prompt_ids":["PP-08","PP-09"],"use":"Usar PP-08 para conteúdo sem invenção comercial e PP-09 quando houver oferta baseada em condições confirmadas."},
+    {"id":"JB-08","name":"Planejamento de campanha sem publicação automática","prompt_ids":["PP-08","PP-09"],"use":"Usar PP-08 para estruturar conteúdo e PP-09 para revisar a oferta; publicação continua uma ação separada e autorizada."},
+    {"id":"JB-09","name":"Criação e manutenção de SOP","prompt_ids":["PP-11"],"use":"Usar PP-11 para converter notas operacionais em procedimento estruturado, revisável e reutilizável."},
+    {"id":"JB-10","name":"Reunião com decisão e plano de ação","prompt_ids":["PP-10","PP-17"],"use":"Usar PP-10 para registrar decisões e PP-17 para explicitar trade-offs quando houver alternativas reais."},
+    {"id":"JB-11","name":"Base de conhecimento operacional","prompt_ids":["PP-16"],"use":"Usar PP-16 para transformar conhecimento recorrente em material operacional reutilizável."},
+    {"id":"JB-12","name":"Revisão semanal operacional","prompt_ids":["PP-04","PP-10","PP-17"],"use":"Usar PP-04 para síntese com continuidade, PP-10 para registrar ações e PP-17 quando a revisão exigir decisão entre alternativas."}
+  ],
+  "guardrails": [
+    "O crosswalk não altera o conteúdo dos prompts nem dos playbooks.",
+    "Prompt sugerido é ponto de partida e deve ser adaptado ao contexto real.",
+    "Nenhum prompt autoriza publicação, envio, compra, contratação ou condição comercial por conta própria.",
+    "Referências devem existir simultaneamente em BUSINESS_INDEX.json e PROMPT_INDEX.json."
+  ]
+}

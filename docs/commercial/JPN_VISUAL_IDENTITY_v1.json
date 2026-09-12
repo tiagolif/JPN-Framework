@@ -1,0 +1,227 @@
+{
+  "version": "1.0.0",
+  "system": "JPN Visual Identity",
+  "status": "internal_review",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "purpose": "Definir uma linguagem visual reutilizável e verificável para páginas, PDFs, artes, apresentações e materiais comerciais JPN sem promover qualquer artefato a release final.",
+  "brand": {
+    "canonical_name": "JPN",
+    "wordmark": "JPN",
+    "wordmark_usage": {
+      "case": "uppercase",
+      "weight": 800,
+      "letter_spacing_em": 0.08,
+      "preferred_on_dark": "#F5F9FC",
+      "do_not": [
+        "distorcer proporções",
+        "aplicar sombras decorativas",
+        "usar gradientes dentro do wordmark",
+        "misturar mais de uma cor no mesmo wordmark",
+        "substituir o nome canônico por uma promessa comercial"
+      ]
+    },
+    "positioning": "Sistema prático para estruturar, executar, operar e gerir trabalho com IA de forma clara e verificável.",
+    "tone_keywords": [
+      "claro",
+      "prático",
+      "técnico",
+      "sóbrio",
+      "confiável",
+      "sem exagero"
+    ]
+  },
+  "color_tokens": {
+    "bg": "#06121C",
+    "bg2": "#0B1F33",
+    "surface": "#0E2639",
+    "surface2": "#102A3C",
+    "line": "#21455E",
+    "text": "#F5F9FC",
+    "muted": "#A7BDCC",
+    "accent": "#2EC4B6",
+    "accent2": "#86E2D9"
+  },
+  "color_roles": {
+    "background_primary": "bg",
+    "background_secondary": "bg2",
+    "surface_primary": "surface",
+    "surface_secondary": "surface2",
+    "border_default": "line",
+    "text_primary": "text",
+    "text_secondary": "muted",
+    "action_primary": "accent",
+    "action_secondary": "accent2"
+  },
+  "typography": {
+    "font_stack": "Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif",
+    "fallback_required": true,
+    "display": {
+      "weight": 800,
+      "line_height": 0.98,
+      "letter_spacing_em": -0.055
+    },
+    "heading": {
+      "weight": 800,
+      "line_height": 1.05,
+      "letter_spacing_em": -0.04
+    },
+    "body": {
+      "weight": 400,
+      "line_height": 1.6
+    },
+    "label": {
+      "weight": 800,
+      "uppercase": true,
+      "letter_spacing_em": 0.14
+    }
+  },
+  "shape": {
+    "radius_primary_px": 18,
+    "radius_action_px": 12,
+    "border_style": "1px solid line",
+    "cards": "superfícies escuras com contraste sutil e borda visível; evitar vidro excessivo e sombras pesadas"
+  },
+  "layout": {
+    "content_max_width_px": 1180,
+    "section_spacing": "amplo",
+    "grid_principle": "priorizar 1 a 3 colunas conforme largura; reduzir para uma coluna em telas pequenas",
+    "density": "baixa a média",
+    "hierarchy": "uma mensagem principal por seção, seguida de evidência ou orientação prática"
+  },
+  "component_rules": {
+    "primary_button": {
+      "background": "accent",
+      "foreground": "#06121C",
+      "weight": 800,
+      "radius_px": 12
+    },
+    "secondary_button": {
+      "background": "transparent",
+      "foreground": "text",
+      "border": "line",
+      "radius_px": 12
+    },
+    "card": {
+      "background": "surface to surface2",
+      "border": "line",
+      "radius_px": 18
+    },
+    "eyebrow": {
+      "foreground": "accent2",
+      "uppercase": true,
+      "weight": 800
+    },
+    "focus": {
+      "outline": "3px solid accent2",
+      "outline_offset_px": 4
+    }
+  },
+  "image_direction": {
+    "preferred": [
+      "diagramas limpos",
+      "mockups funcionais",
+      "capturas reais ou claramente demonstrativas",
+      "geometria simples",
+      "contraste alto e fundo controlado"
+    ],
+    "avoid": [
+      "stock genérico de pessoas apontando para telas",
+      "robôs humanoides como símbolo padrão de IA",
+      "neon excessivo",
+      "fundos visualmente poluídos",
+      "imagens que sugiram capacidades que o produto não possui",
+      "depoimentos ou resultados visuais inventados"
+    ]
+  },
+  "art_direction": {
+    "core_motif": "estrutura, fluxo e precisão",
+    "recommended_elements": [
+      "linhas de conexão discretas",
+      "blocos modulares",
+      "grades",
+      "números ou marcadores funcionais",
+      "microdetalhes técnicos moderados"
+    ],
+    "prohibited_elements": [
+      "selos de resultado garantido",
+      "contadores falsos",
+      "urgência artificial",
+      "badges de autoridade não comprovados",
+      "preço ou desconto sem autorização específica"
+    ]
+  },
+  "accessibility": {
+    "focus_visible_required": true,
+    "reduced_motion_required": true,
+    "body_text_minimum_px": 16,
+    "meaning_must_not_depend_on_color_only": true,
+    "interactive_state_must_be_visible": true,
+    "contrast_policy": "usar combinações previstas nos tokens e validar contraste antes de publicar qualquer novo suporte"
+  },
+  "surface_adaptation": {
+    "web": "usar tokens diretamente e preservar foco visível, responsividade e reduced motion",
+    "pdf": "preservar hierarquia, contraste e espaçamento; adaptar fundos escuros apenas quando legibilidade e impressão forem aceitáveis",
+    "social_art": "usar uma mensagem principal, poucos elementos e área segura; não transformar a arte em catálogo denso",
+    "presentation": "uma ideia central por slide; combinar headline curta, evidência e próximo passo",
+    "spreadsheet": "aplicar identidade de forma funcional: cabeçalhos, destaques e legenda; não prejudicar leitura de dados"
+  },
+  "product_usage": [
+    {
+      "product_id": "metodo-jpn",
+      "visual_emphasis": "clareza conceitual e estrutura",
+      "recommended_pattern": "diagramas J-P-N, páginas editoriais e exercícios com bastante respiro"
+    },
+    {
+      "product_id": "prompt-pack",
+      "visual_emphasis": "execução rápida e seleção",
+      "recommended_pattern": "cards numerados, categorias e exemplos compactos"
+    },
+    {
+      "product_id": "prompt-builder",
+      "visual_emphasis": "ferramenta e fluxo",
+      "recommended_pattern": "interface, etapas, estados e exemplos de entrada/saída"
+    },
+    {
+      "product_id": "jpn-business",
+      "visual_emphasis": "processo e aplicação empresarial",
+      "recommended_pattern": "playbooks, fluxos e quadros operacionais"
+    },
+    {
+      "product_id": "gestao-facil",
+      "visual_emphasis": "controle e leitura gerencial",
+      "recommended_pattern": "tabelas limpas, indicadores explicados e estados sem dados reais"
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "visual_emphasis": "sistema integrado",
+      "recommended_pattern": "visão de conjunto e arquitetura dos componentes, sem tratá-lo como release enquanto os gates estiverem abertos"
+    }
+  ],
+  "canonical_surface": {
+    "path": "commercial-site/styles.css",
+    "sync_required_tokens": [
+      "bg",
+      "bg2",
+      "surface",
+      "surface2",
+      "line",
+      "text",
+      "muted",
+      "accent",
+      "accent2"
+    ]
+  },
+  "guardrails": {
+    "must_not_claim": [
+      "resultado garantido",
+      "ROI garantido",
+      "100% de precisão",
+      "substitui revisão humana"
+    ],
+    "must_not_publish_without_authorization": true,
+    "must_not_add_price_or_checkout": true,
+    "must_not_use_real_financial_data": true,
+    "must_not_imply_release_readiness": true
+  }
+}

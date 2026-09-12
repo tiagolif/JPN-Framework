@@ -1,0 +1,213 @@
+{
+  "version": "1.0.0",
+  "status": "internal-review",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "purpose": "Define the complete internal commercial surface, its sources of truth, allowed local actions and release boundaries without authorizing publication or transaction.",
+  "site_root": "commercial-site",
+  "shared_stylesheet": "commercial-site/styles.css",
+  "global_requirements": {
+    "robots": "noindex,nofollow",
+    "navigation": "relative-local-only",
+    "external_urls_allowed": false,
+    "transactional_cta_allowed": false,
+    "pricing_allowed": false,
+    "lead_capture_allowed": false,
+    "tracking_allowed": false,
+    "publication_allowed": false
+  },
+  "surfaces": [
+    {
+      "id": "portfolio-home",
+      "path": "commercial-site/index.html",
+      "type": "portfolio",
+      "purpose": "Apresentar o ecossistema JPN e orientar para exploração interna do portfólio.",
+      "source_contracts": [
+        "docs/product-system/PRODUCT_PORTFOLIO_v1.json",
+        "docs/product-system/PRODUCT_USAGE_ROUTES_v1.json",
+        "docs/commercial/JPN_VISUAL_IDENTITY_v1.json"
+      ],
+      "allowed_actions": ["explore-catalog", "choose-product", "open-product-page"]
+    },
+    {
+      "id": "portfolio-catalog",
+      "path": "commercial-site/catalogo.html",
+      "type": "catalog",
+      "purpose": "Comparar os seis produtos em uma única superfície interna.",
+      "source_contracts": [
+        "docs/product-system/PRODUCT_PORTFOLIO_v1.json",
+        "docs/product-system/PRODUCT_USAGE_ROUTES_v1.json",
+        "docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json",
+        "docs/commercial/PRODUCT_COMPARISON_MATRIX_v1.json"
+      ],
+      "allowed_actions": ["open-product-page", "choose-product", "compare-products"]
+    },
+    {
+      "id": "product-diagnostic",
+      "path": "commercial-site/escolher-produto.html",
+      "type": "local-diagnostic",
+      "purpose": "Indicar localmente o menor produto suficiente a partir das perguntas canônicas.",
+      "source_contracts": [
+        "docs/commercial/SMALL_BUSINESS_DIAGNOSTIC_v1.json",
+        "docs/product-system/PRODUCT_USAGE_ROUTES_v1.json"
+      ],
+      "allowed_actions": ["answer-local-diagnostic", "view-local-result", "open-relative-page"],
+      "form_policy": "local-only-no-submit-no-persistence"
+    },
+    {
+      "id": "product-comparison",
+      "path": "commercial-site/comparar-produtos.html",
+      "type": "comparison",
+      "purpose": "Explicar diferenças de escopo sem transformar abrangência em pressão comercial.",
+      "source_contracts": [
+        "docs/commercial/PRODUCT_COMPARISON_MATRIX_v1.json",
+        "docs/product-system/PRODUCT_PORTFOLIO_v1.json"
+      ],
+      "allowed_actions": ["compare-products", "choose-product", "open-product-page"]
+    },
+    {
+      "id": "how-it-works",
+      "path": "commercial-site/como-funciona.html",
+      "type": "education",
+      "purpose": "Explicar Jornada, Precisão e Narrativa e como os produtos se relacionam ao método.",
+      "source_contracts": [
+        "docs/commercial/HOW_JPN_WORKS_v1.md",
+        "docs/product-system/CORE_TERMINOLOGY_v1.json"
+      ],
+      "allowed_actions": ["learn-framework", "open-relative-page"]
+    },
+    {
+      "id": "use-cases",
+      "path": "commercial-site/casos-de-uso.html",
+      "type": "use-cases",
+      "purpose": "Apresentar cenários ilustrativos para pequenas empresas sem alegar caso de sucesso.",
+      "source_contracts": [
+        "docs/commercial/SMALL_BUSINESS_USE_CASES_v1.json"
+      ],
+      "allowed_actions": ["review-use-case", "choose-product", "open-relative-page"]
+    },
+    {
+      "id": "first-steps",
+      "path": "commercial-site/primeiros-passos.html",
+      "type": "onboarding",
+      "purpose": "Explicar o primeiro uso de cada produto sem antecipar release.",
+      "source_contracts": [
+        "docs/commercial/CUSTOMER_ONBOARDING_GUIDE_v1.json"
+      ],
+      "allowed_actions": ["review-first-steps", "open-relative-page"]
+    },
+    {
+      "id": "guided-demo",
+      "path": "commercial-site/demonstracao.html",
+      "type": "demo-guide",
+      "purpose": "Apresentar uma demonstração guiada e sanitizada dos produtos.",
+      "source_contracts": [
+        "docs/commercial/GUIDED_DEMO_PLAYBOOK_v1.json"
+      ],
+      "allowed_actions": ["review-demo", "open-relative-page"]
+    },
+    {
+      "id": "faq",
+      "path": "commercial-site/perguntas-frequentes.html",
+      "type": "faq",
+      "purpose": "Responder dúvidas e objeções sem urgência artificial ou promessa de resultado.",
+      "source_contracts": [
+        "docs/commercial/PRODUCT_FAQ_OBJECTIONS_v1.json"
+      ],
+      "allowed_actions": ["review-faq", "open-relative-page"]
+    },
+    {
+      "id": "product-metodo-jpn",
+      "path": "commercial-site/products/metodo-jpn.html",
+      "type": "product-page",
+      "product_id": "metodo-jpn",
+      "cover_asset": "assets/covers/metodo-jpn-v1.svg",
+      "purpose": "Explicar o Método JPN, seu uso e seus limites.",
+      "source_contracts": [
+        "docs/commercial/PRODUCT_ONE_PAGERS_v1.json",
+        "docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json",
+        "docs/products/metodo-jpn/METODO_JPN_v1.md"
+      ],
+      "allowed_actions": ["learn-product", "return-to-portfolio"]
+    },
+    {
+      "id": "product-prompt-builder",
+      "path": "commercial-site/products/jpn-prompt-builder.html",
+      "type": "product-page",
+      "product_id": "jpn-prompt-builder",
+      "cover_asset": "assets/covers/jpn-prompt-builder-v1.svg",
+      "purpose": "Explicar a ferramenta local de estruturação de prompts e seus limites.",
+      "source_contracts": [
+        "docs/commercial/PRODUCT_ONE_PAGERS_v1.json",
+        "docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json",
+        "docs/products/prompt-builder/PROMPT_BUILDER_QUICK_START_v1.md"
+      ],
+      "allowed_actions": ["learn-product", "review-demo", "return-to-portfolio"]
+    },
+    {
+      "id": "product-prompt-pack",
+      "path": "commercial-site/products/jpn-prompt-pack.html",
+      "type": "product-page",
+      "product_id": "jpn-prompt-pack",
+      "cover_asset": "assets/covers/jpn-prompt-pack-v1.svg",
+      "purpose": "Explicar a biblioteca de estruturas reutilizáveis e a necessidade de adaptação.",
+      "source_contracts": [
+        "docs/commercial/PRODUCT_ONE_PAGERS_v1.json",
+        "docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json",
+        "docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md"
+      ],
+      "allowed_actions": ["learn-product", "return-to-portfolio"]
+    },
+    {
+      "id": "product-business",
+      "path": "commercial-site/products/jpn-business.html",
+      "type": "product-page",
+      "product_id": "jpn-business",
+      "cover_asset": "assets/covers/jpn-business-v1.svg",
+      "purpose": "Explicar os playbooks operacionais sem prometer resultado comercial.",
+      "source_contracts": [
+        "docs/commercial/PRODUCT_ONE_PAGERS_v1.json",
+        "docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json",
+        "docs/products/jpn-business/JPN_BUSINESS_v1.md"
+      ],
+      "allowed_actions": ["learn-product", "review-playbooks", "return-to-portfolio"]
+    },
+    {
+      "id": "product-gestao-facil",
+      "path": "commercial-site/products/jpn-gestao-facil.html",
+      "type": "product-page",
+      "product_id": "jpn-gestao-facil",
+      "cover_asset": "assets/covers/jpn-gestao-facil-v01.svg",
+      "purpose": "Explicar a planilha gerencial para rotina básica de pequenas empresas.",
+      "source_contracts": [
+        "docs/commercial/PRODUCT_ONE_PAGERS_v1.json",
+        "docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json",
+        "docs/products/gestao-facil/SMALL_BUSINESS_OPERATING_GUIDE_v1.md"
+      ],
+      "allowed_actions": ["learn-product", "review-workflow", "return-to-portfolio"]
+    },
+    {
+      "id": "product-pro-kit",
+      "path": "commercial-site/products/jpn-pro-kit.html",
+      "type": "product-page",
+      "product_id": "jpn-pro-kit",
+      "cover_asset": "assets/covers/jpn-pro-kit-v1.svg",
+      "purpose": "Explicar a arquitetura do conjunto mantendo estado EM PREPARAÇÃO.",
+      "source_contracts": [
+        "docs/commercial/PRODUCT_ONE_PAGERS_v1.json",
+        "docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json",
+        "docs/products/pro-kit/COMPONENT_READINESS_ROLLUP_v1.json"
+      ],
+      "allowed_actions": ["learn-product", "review-readiness", "return-to-portfolio"]
+    }
+  ],
+  "guardrails": [
+    "Every listed surface is internal and does not authorize publication.",
+    "Every product page must map to exactly one canonical product and to COMMERCIAL_RELEASE_STATE_v1.json.",
+    "A broader product must not be positioned as necessary when a smaller product already satisfies the stated need.",
+    "The diagnostic is the only surface allowed to contain form controls and it must remain fully local, non-persistent and non-submitting.",
+    "No surface may contain price, checkout, lead capture, external tracking, artificial scarcity or guaranteed outcomes.",
+    "JPN Pro Kit must remain presented as EM PREPARAÇÃO while canonical release dependencies are open.",
+    "JPN Gestão Fácil remains a managerial aid and does not replace accounting, banking, fiscal systems, ERP or audit."
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Fornecer casos de uso ilustrativos e reutilizáveis para pequenas empresas sem transformar exemplos em promessa de resultado, prova social ou autorização comercial.",
+  "rules": [
+    "Todo caso deve ser ilustrativo e não pode afirmar resultado real, ROI, economia garantida ou ganho de produtividade medido.",
+    "Cada caso deve começar pelo menor produto suficiente para a necessidade descrita.",
+    "Rotas referenciadas devem existir em PRODUCT_USAGE_ROUTES_v1.json.",
+    "Produtos referenciados devem existir em PRODUCT_PORTFOLIO_v1.json.",
+    "JPN Gestão Fácil é controle gerencial básico e não substitui contabilidade, banco, fiscal ou auditoria.",
+    "JPN Pro Kit não deve ser usado em caso comercial enquanto sua rota for apenas arquitetural."
+  ],
+  "use_cases": [
+    {
+      "id": "uc-varejo-atendimento",
+      "segment": "varejo local",
+      "scenario": "Padronizar respostas de atendimento sem perder contexto do cliente.",
+      "start_product": "jpn-prompt-pack",
+      "route_id": "rota-executar",
+      "optional_products": ["jpn-prompt-builder"],
+      "workflow": [
+        "Selecionar um template de atendimento compatível com a situação.",
+        "Adicionar contexto, restrições e próximo passo.",
+        "Revisar tom e informações antes de enviar a mensagem."
+      ],
+      "expected_output": "rascunho de resposta revisável",
+      "boundary": "Não automatiza envio, não acessa conversas por conta própria e não garante conversão."
+    },
+    {
+      "id": "uc-servicos-proposta",
+      "segment": "prestação de serviços",
+      "scenario": "Estruturar uma proposta a partir de briefing ainda incompleto.",
+      "start_product": "metodo-jpn",
+      "route_id": "rota-aprender",
+      "optional_products": ["jpn-prompt-pack", "jpn-prompt-builder"],
+      "workflow": [
+        "Organizar objetivo, escopo, recursos, restrições e lacunas.",
+        "Identificar perguntas que precisam ser respondidas antes da proposta.",
+        "Montar o prompt final somente depois de fechar as informações críticas."
+      ],
+      "expected_output": "briefing estruturado e prompt de proposta",
+      "boundary": "Não substitui análise comercial, técnica ou jurídica da proposta."
+    },
+    {
+      "id": "uc-comercial-followup",
+      "segment": "equipe comercial",
+      "scenario": "Criar uma rotina consistente de follow-up para oportunidades em andamento.",
+      "start_product": "jpn-business",
+      "route_id": "rota-operar",
+      "optional_products": ["jpn-prompt-pack", "jpn-prompt-builder", "jpn-gestao-facil"],
+      "workflow": [
+        "Definir o playbook de follow-up e seus gatilhos operacionais.",
+        "Preparar mensagens com contexto por estágio da oportunidade.",
+        "Registrar a próxima ação e o prazo no controle operacional."
+      ],
+      "expected_output": "playbook de follow-up, mensagens e próxima ação registrada",
+      "boundary": "Não dispara mensagens, não substitui CRM e não promete aumento de vendas."
+    },
+    {
+      "id": "uc-loja-organizacao",
+      "segment": "pequena loja",
+      "scenario": "Organizar clientes, vendas, tarefas e alertas básicos de estoque em um único fluxo gerencial.",
+      "start_product": "jpn-gestao-facil",
+      "route_id": "rota-gestao",
+      "optional_products": ["jpn-business"],
+      "workflow": [
+        "Cadastrar clientes e oportunidades.",
+        "Transformar próximos passos em tarefas com prazo.",
+        "Atualizar quantidade de estoque e revisar alertas operacionais.",
+        "Usar o dashboard para uma revisão semanal."
+      ],
+      "expected_output": "visão operacional organizada para revisão manual",
+      "boundary": "Não substitui ERP, contabilidade, sistema fiscal, banco ou controle oficial de estoque."
+    },
+    {
+      "id": "uc-social-planejamento",
+      "segment": "negócio local",
+      "scenario": "Planejar conteúdo social sem começar pela legenda final.",
+      "start_product": "metodo-jpn",
+      "route_id": "rota-aprender",
+      "optional_products": ["jpn-prompt-pack"],
+      "workflow": [
+        "Definir público, objetivo, oferta de valor e restrições de linguagem.",
+        "Separar fatos comprováveis de ideias criativas.",
+        "Gerar variações de pauta ou copy para revisão humana."
+      ],
+      "expected_output": "briefing e rascunhos de conteúdo",
+      "boundary": "Não publica conteúdo e não garante alcance, leads ou vendas."
+    },
+    {
+      "id": "uc-suporte-base",
+      "segment": "atendimento e suporte",
+      "scenario": "Transformar dúvidas repetidas em respostas-base consistentes.",
+      "start_product": "jpn-business",
+      "route_id": "rota-operar",
+      "optional_products": ["jpn-prompt-pack", "jpn-prompt-builder"],
+      "workflow": [
+        "Mapear dúvidas recorrentes e informações obrigatórias.",
+        "Criar um roteiro de resposta com limites claros.",
+        "Montar prompts reutilizáveis para casos semelhantes."
+      ],
+      "expected_output": "roteiro de suporte e prompts reutilizáveis",
+      "boundary": "Não substitui política oficial, equipe responsável ou revisão de informação sensível."
+    },
+    {
+      "id": "uc-orcamento-servico",
+      "segment": "serviço técnico",
+      "scenario": "Preparar a coleta de informações antes de elaborar um orçamento.",
+      "start_product": "jpn-prompt-pack",
+      "route_id": "rota-executar",
+      "optional_products": ["jpn-prompt-builder"],
+      "workflow": [
+        "Usar um template para levantar escopo, prazo, restrições e premissas.",
+        "Destacar lacunas que impedem fechar o orçamento.",
+        "Gerar um checklist de confirmação antes da proposta final."
+      ],
+      "expected_output": "checklist de briefing e prompt para organizar o orçamento",
+      "boundary": "Não calcula preço automaticamente e não substitui orçamento técnico ou financeiro."
+    },
+    {
+      "id": "uc-rotina-semanal",
+      "segment": "microempresa",
+      "scenario": "Criar uma revisão semanal simples de operação.",
+      "start_product": "jpn-gestao-facil",
+      "route_id": "rota-gestao",
+      "optional_products": ["jpn-business"],
+      "workflow": [
+        "Atualizar clientes, vendas, tarefas e estoque.",
+        "Revisar indicadores do dashboard.",
+        "Escolher os próximos passos mais importantes da semana."
+      ],
+      "expected_output": "lista priorizada de próximos passos operacionais",
+      "boundary": "Os indicadores são gerenciais e dependem da qualidade dos dados preenchidos."
+    },
+    {
+      "id": "uc-treinamento-interno",
+      "segment": "pequena equipe",
+      "scenario": "Ensinar a equipe a pedir melhor para IA antes de distribuir templates.",
+      "start_product": "metodo-jpn",
+      "route_id": "rota-aprender",
+      "optional_products": ["jpn-prompt-pack"],
+      "workflow": [
+        "Explicar Jornada, Precisão e Narrativa com um exemplo real da equipe.",
+        "Comparar um pedido vago com um pedido estruturado.",
+        "Adaptar um template do Prompt Pack ao contexto interno."
+      ],
+      "expected_output": "exercício de treinamento e template contextualizado",
+      "boundary": "Não certifica competência e não substitui política interna de uso de IA."
+    },
+    {
+      "id": "uc-processo-recorrente",
+      "segment": "operação de pequena empresa",
+      "scenario": "Documentar um processo recorrente que hoje depende de memória individual.",
+      "start_product": "jpn-business",
+      "route_id": "rota-operar",
+      "optional_products": ["jpn-prompt-pack", "jpn-gestao-facil"],
+      "workflow": [
+        "Descrever gatilho, entradas, passos, exceções e saída esperada.",
+        "Transformar a rotina em um playbook simples.",
+        "Criar apoio por prompt quando houver atividade textual repetitiva.",
+        "Registrar tarefas recorrentes ou checkpoints no controle operacional."
+      ],
+      "expected_output": "playbook operacional e pontos de controle",
+      "boundary": "Não executa o processo sozinho e não substitui supervisão responsável."
+    }
+  ],
+  "publication_authorized": false,
+  "release_effect": "none"
+}

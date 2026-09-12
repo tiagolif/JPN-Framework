@@ -13,12 +13,23 @@ Ele não substitui nenhum dos dois arquivos e não altera estados.
 
 ## Uso
 
+Via scripts npm:
+
+```bash
+npm run check:human-release-workbench
+npm run build:human-release-workbench
+```
+
+Os comandos diretos equivalentes continuam disponíveis:
+
 ```bash
 node scripts/build-human-release-workbench.mjs --check
 node scripts/build-human-release-workbench.mjs
 ```
 
-A execução normal gera em `dist/release-human-workbench/`:
+A validação `check:human-release-workbench` faz parte de `npm run build`. Assim, qualquer mudança que torne a fila inconsistente, inclua gate humano bloqueado ou deixe uma ação `autonomous-local` executável sem tratamento quebra o pipeline principal em vez de passar silenciosamente.
+
+A execução de `build:human-release-workbench` gera em `dist/release-human-workbench/`:
 
 - `HUMAN_RELEASE_WORKBENCH.md`;
 - `human-release-workbench.json`.

@@ -122,15 +122,41 @@
 
     <section id="rotas" class="section">
       <div class="section-heading">
-        <p class="eyebrow">Rotas de uso</p>
-        <h2>Combine apenas quando a próxima necessidade aparecer.</h2>
-        <p>As rotas abaixo descrevem continuidade de trabalho. Não são bundles, descontos, ofertas ou recomendação automática do produto mais abrangente.</p>
+        <p class="eyebrow">Rotas de uso canônicas</p>
+        <h2>Comece pelo menor produto suficiente e avance só quando houver necessidade.</h2>
+        <p>As rotas abaixo espelham o contrato interno de uso do portfólio. Elas descrevem continuidade de trabalho, não bundles, descontos, ofertas ou obrigação de usar todos os produtos.</p>
       </div>
       <div class="route-grid">
-        <article><p class="tag">Aprender → estruturar</p><h3>Método + Prompt Builder</h3><p><strong>Quando faz sentido:</strong> aprender a lógica JPN e depois aplicá-la com apoio de uma interface guiada.</p></article>
-        <article><p class="tag">Estruturar → reutilizar</p><h3>Método + Prompt Pack</h3><p><strong>Quando faz sentido:</strong> dominar o critério de estruturação e acelerar tarefas recorrentes com templates adaptáveis.</p></article>
-        <article><p class="tag">Reutilizar → operacionalizar</p><h3>Prompt Pack + JPN Business</h3><p><strong>Quando faz sentido:</strong> ligar instruções reutilizáveis a processos e playbooks de operação.</p></article>
-        <article><p class="tag">Operação → visão gerencial</p><h3>Business + Gestão Fácil</h3><p><strong>Quando faz sentido:</strong> documentar rotinas e acompanhar registros operacionais em uma planilha simples, sem tratar a planilha como sistema contábil ou bancário.</p></article>
+        <article data-route="rota-aprender">
+          <p class="tag">Aprender</p>
+          <h3>Método JPN → Prompt Pack → Prompt Builder</h3>
+          <p><strong>Use quando:</strong> a pessoa ainda precisa dominar a lógica JPN antes de acelerar a execução.</p>
+          <p><strong>Pare quando:</strong> o objetivo imediato já puder ser resolvido com clareza usando somente o Método JPN.</p>
+        </article>
+        <article data-route="rota-executar">
+          <p class="tag">Executar</p>
+          <h3>Prompt Pack → Prompt Builder</h3>
+          <p><strong>Use quando:</strong> a necessidade já é conhecida e um template reutilizável reduz trabalho de estruturação.</p>
+          <p><strong>Pare quando:</strong> o template escolhido já puder ser adaptado e utilizado sem ferramenta adicional.</p>
+        </article>
+        <article data-route="rota-operar">
+          <p class="tag">Operar</p>
+          <h3>JPN Business → Prompt Pack → Prompt Builder → Gestão Fácil</h3>
+          <p><strong>Use quando:</strong> a pequena empresa precisa transformar uma necessidade recorrente em playbook, prompt e acompanhamento operacional.</p>
+          <p><strong>Pare quando:</strong> o playbook e os materiais necessários já forem suficientes para executar a rotina escolhida.</p>
+        </article>
+        <article data-route="rota-gestao">
+          <p class="tag">Gestão</p>
+          <h3>Gestão Fácil → JPN Business</h3>
+          <p><strong>Use quando:</strong> a necessidade principal é organizar clientes, vendas, tarefas, estoque e controle gerencial básico.</p>
+          <p><strong>Pare quando:</strong> a rotina operacional estiver organizada sem necessidade de playbook adicional.</p>
+        </article>
+        <article data-route="rota-conjunto">
+          <p class="tag">Conjunto · apenas arquitetural</p>
+          <h3>JPN Pro Kit</h3>
+          <p><strong>Use quando:</strong> somente quando o kit estiver efetivamente congelado e validado como release final.</p>
+          <p><strong>Estado atual:</strong> enquanto houver dependências abertas, esta rota permanece apenas arquitetural e não comercial.</p>
+        </article>
       </div>
     </section>
 

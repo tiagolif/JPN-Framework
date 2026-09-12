@@ -16,7 +16,7 @@ const matrixProducts = Array.isArray(matrix.products) ? matrix.products : [];
 const portfolioProducts = Array.isArray(portfolio.products) ? portfolio.products : [];
 const portfolioIds = new Set(portfolioProducts.map((item) => item.id));
 const matrixIds = new Set(matrixProducts.map((item) => item.product_id));
-const routeIds = new Set((routes.routes ?? []).flatMap((route) => [route.start_with, ...(route.then ?? [])]));
+const routeProducts = new Set((routes.routes ?? []).flatMap((route) => [route.start_with, ...(route.then ?? [])]));
 
 if (matrix.version !== '1.0.0') errors.push('PRODUCT_COMPARISON_MATRIX_v1.json deve usar version 1.0.0.');
 if (matrix.framework !== portfolio.framework) errors.push('framework da matriz diverge do portfólio canônico.');
@@ -51,8 +51,20 @@ for (const product of matrixProducts) {
   }
 }
 
-for (const id of routeIds) {
+for (const id of routeProducts) {
   if (!portfolioIds.has(id)) errors.push(`Rota canônica referencia produto inexistente no portfólio: ${id}.`);
+}
+
+// Toda continuidade declarada na matriz deve aparecer em pelo menos uma rota canônica
+// que contenha o produto de origem e o produto de destino.
+for (const product of matrixProducts) {
+  for (const nextId of product.next_if_needed ?? []) {
+    const represented = (routes.routes ?? []).some((route) => {
+      const sequence = [route.start_with, ...(route.then ?? [])];
+      return sequence.includes(product.product_id) && sequence.includes(nextId);
+    });
+    if (!represented) errors.push(`${product.product_id}: continuidade ${nextId} não é representada em nenhuma rota canônica.`);
+  }
 }
 
 const proKit = matrixProducts.find((item) => item.product_id === 'jpn-pro-kit');
@@ -75,7 +87,20 @@ if (!gestao) {
   }
 }
 
-const text = JSON.stringify(matrix).toLowerCase();
+// Claims são verificados apenas na superfície descritiva dos produtos. Guardrails como
+// "sem checkout" e "não substitui" não devem gerar falsos positivos.
+const productSurface = matrixProducts
+  .map((product) => [
+    product.best_for,
+    product.start_when,
+    product.avoid_when,
+    product.primary_input,
+    product.primary_output,
+    product.operational_scope,
+  ].join(' '))
+  .join(' ')
+  .toLowerCase();
+
 const blockedClaims = [
   /roi\s+garantid/,
   /resultado\s+garantid/,
@@ -83,18 +108,17 @@ const blockedClaims = [
   /100%\s+precis/,
   /substitui\s+revis[aã]o\s+humana/,
   /compre\s+agora/,
-  /checkout/,
   /pre[cç]o\s*:/,
 ];
 for (const claim of blockedClaims) {
-  if (claim.test(text)) errors.push(`Matriz contém claim ou elemento comercial bloqueado: ${claim}.`);
+  if (claim.test(productSurface)) errors.push(`Matriz contém claim ou elemento comercial bloqueado: ${claim}.`);
 }
 
-const safeNegatives = text
-  .replaceAll('não substitui contabilidade', '')
-  .replaceAll('não substitui contabilidade, banco, fiscal, erp ou auditoria', '');
-if (/substitui\s+(contabilidade|banco|fiscal|erp|auditoria)/.test(safeNegatives)) {
-  errors.push('Matriz não pode apresentar Gestão Fácil como substituta de sistema contábil, bancário, fiscal, ERP ou auditoria.');
+const safeNegatives = productSurface
+  .replaceAll('não substitui contabilidade, banco, fiscal, erp ou auditoria', '')
+  .replaceAll('não substitui crm, erp ou ferramenta de automação', '');
+if (/substitui\s+(contabilidade|banco|fiscal|erp|auditoria|crm)/.test(safeNegatives)) {
+  errors.push('Matriz não pode apresentar produto JPN como substituto de sistema operacional especializado.');
 }
 
 if (errors.length > 0) {

@@ -51,3 +51,4 @@ console.log('qa_auto=GF2-QA-01..09 AUTO_PASS');
 console.log('qa_physical=GF2-QA-10..18 PENDING');
 
 await import('./check-gestao-facil-operating-guide.mjs');
+await import('./check-gestao-facil-v0.3-candidate.mjs');

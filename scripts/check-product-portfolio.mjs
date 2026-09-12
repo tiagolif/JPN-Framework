@@ -91,6 +91,7 @@ const childChecks = [
   ['scripts/check-product-one-pagers.mjs', 'one-pagers dos produtos'],
   ['scripts/check-product-faq-objections.mjs', 'FAQ e objeções dos produtos'],
   ['scripts/check-business-prompt-crosswalk.mjs', 'crosswalk JPN Business × Prompt Pack'],
+  ['scripts/check-customer-onboarding.mjs', 'onboarding dos produtos'],
 ];
 
 for (const [script, label] of childChecks) {
@@ -106,4 +107,4 @@ for (const [script, label] of childChecks) {
   }
 }
 
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções e crosswalk Business × Prompt Pack validados.`);
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, crosswalk Business × Prompt Pack e onboarding validados.`);

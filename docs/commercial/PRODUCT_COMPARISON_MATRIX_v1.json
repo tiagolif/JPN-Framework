@@ -1,0 +1,78 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Comparar os seis produtos JPN pela necessidade atendida, tipo de entrega e limite de uso, sem preço, promessa de resultado ou incentivo a comprar mais do que o necessário.",
+  "decision_rule": "Comece pelo menor produto suficiente para resolver a necessidade atual e só avance quando surgir uma necessidade adicional clara.",
+  "dimensions": ["best_for", "start_when", "avoid_when", "primary_input", "primary_output", "operational_scope", "next_if_needed"],
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "best_for": "Aprender a estruturar pedidos para IA com contexto, objetivo, restrições e saída esperada.",
+      "start_when": "A necessidade ainda está ambígua ou a pessoa quer aprender o raciocínio antes de usar modelos prontos.",
+      "avoid_when": "A tarefa já está clara e um template reutilizável resolve sem estudo adicional.",
+      "primary_input": "Problema, contexto, recursos, restrições e critérios de qualidade.",
+      "primary_output": "Pedido estruturado e critérios para revisar a resposta da IA.",
+      "operational_scope": "Método e aprendizagem; não executa gestão operacional.",
+      "next_if_needed": ["jpn-prompt-pack", "jpn-prompt-builder"]
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "best_for": "Executar tarefas recorrentes ou frequentes a partir de modelos de prompt reutilizáveis.",
+      "start_when": "A pessoa já entende o objetivo e quer um ponto de partida pronto para adaptar.",
+      "avoid_when": "O problema ainda não está claro ou exige primeiro desenhar um processo de negócio.",
+      "primary_input": "Contexto específico da tarefa e seleção do modelo adequado.",
+      "primary_output": "Prompt adaptado para execução.",
+      "operational_scope": "Biblioteca de modelos; não é sistema de gestão nem automação externa.",
+      "next_if_needed": ["jpn-prompt-builder", "jpn-business"]
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "best_for": "Montar e reutilizar prompts de forma guiada, com campos explícitos e estrutura consistente.",
+      "start_when": "A tarefa está clara e há valor em padronizar a montagem do prompt, especialmente entre pessoas.",
+      "avoid_when": "A necessidade é apenas aprender o método ou controlar clientes, vendas, tarefas ou estoque.",
+      "primary_input": "Campos estruturados do trabalho JPN.",
+      "primary_output": "Prompt montado localmente para copiar, revisar e reutilizar.",
+      "operational_scope": "Ferramenta local de construção de prompts; não substitui CRM, ERP ou ferramenta de automação.",
+      "next_if_needed": []
+    },
+    {
+      "product_id": "jpn-business",
+      "best_for": "Transformar atividades empresariais recorrentes em playbooks, rotinas e apoio por prompts.",
+      "start_when": "A empresa precisa repetir uma atividade com padrão entre pessoas ou etapas.",
+      "avoid_when": "A necessidade é apenas um prompt pontual ou somente registrar controles operacionais básicos.",
+      "primary_input": "Processo atual, responsáveis, etapas, entradas, saídas e pontos de decisão.",
+      "primary_output": "Playbook aplicável, rotina e prompts de apoio.",
+      "operational_scope": "Padronização de processo; não executa automaticamente sistemas externos.",
+      "next_if_needed": ["jpn-prompt-pack", "jpn-prompt-builder", "jpn-gestao-facil"]
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "best_for": "Organizar controle gerencial simples de clientes, vendas, tarefas, estoque e registros básicos.",
+      "start_when": "A pequena empresa precisa centralizar acompanhamento operacional em uma planilha simples.",
+      "avoid_when": "A necessidade exige contabilidade, fiscal, banco, ERP completo, automação transacional ou integrações avançadas.",
+      "primary_input": "Registros operacionais inseridos pela equipe.",
+      "primary_output": "Visão gerencial básica, alertas e acompanhamento operacional.",
+      "operational_scope": "Controle gerencial; não substitui contabilidade, banco, fiscal, ERP ou auditoria.",
+      "next_if_needed": ["jpn-business"]
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "best_for": "Reunir componentes JPN em uma entrega integrada quando os componentes finais estiverem liberados.",
+      "start_when": "Somente após os artefatos componentes estarem congelados e os gates finais do Pro Kit concluídos.",
+      "avoid_when": "Enquanto houver dependências de release abertas ou quando um produto isolado já resolver a necessidade.",
+      "primary_input": "Artefatos finais dos produtos componentes.",
+      "primary_output": "Pacote integrado de entrega.",
+      "operational_scope": "Bundle de entrega; não representa automaticamente maior adequação para toda necessidade.",
+      "next_if_needed": []
+    }
+  ],
+  "guardrails": [
+    "A matriz não é tabela de preços, oferta, checkout ou recomendação automática de compra.",
+    "Nenhum produto é apresentado como garantia de produtividade, vendas, economia, precisão ou ROI.",
+    "JPN Gestão Fácil permanece controle gerencial e não substitui contabilidade, banco, fiscal, ERP ou auditoria.",
+    "JPN Pro Kit permanece não comercial enquanto seus gates finais estiverem abertos.",
+    "Rotas e produtos opcionais não são obrigatórios; pare quando a necessidade estiver resolvida."
+  ],
+  "publication_authorized": false,
+  "release_effect": "none"
+}

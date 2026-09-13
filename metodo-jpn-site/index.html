@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Método JPN — Canvas local</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="kicker">Método JPN · ferramenta local</p>
+      <h1>Canvas Jornada · Precisão · Narrativa</h1>
+      <p class="lead">Preencha apenas o que influencia materialmente a tarefa. O conteúdo fica no navegador e não é enviado para nenhum serviço.</p>
+    </header>
+
+    <section class="notice" aria-label="Limites"><strong>Importante:</strong> esta ferramenta organiza um rascunho. Ela não transforma inferências em fatos, não substitui revisão humana e não autoriza ações externas, gastos ou decisões especializadas.</section>
+
+    <form id="jpn-form" autocomplete="off">
+      <section class="panel" aria-labelledby="j-title">
+        <p class="letter">J</p><div><h2 id="j-title">Jornada</h2><p>Qual é a situação real?</p></div>
+        <label>Contexto<textarea name="contexto" placeholder="Contexto mínimo necessário"></textarea></label>
+        <label>Estado atual<textarea name="estadoAtual"></textarea></label>
+        <label>Recursos disponíveis<textarea name="recursos"></textarea></label>
+        <label>Restrições conhecidas<textarea name="restricoesJ"></textarea></label>
+        <label>Incertezas e conflitos<textarea name="incertezas"></textarea></label>
+        <label>Confiança relevante
+          <select name="confianca"><option value="confirmed">confirmed</option><option value="inferred">inferred</option><option value="unknown">unknown</option><option value="conflicting">conflicting</option></select>
+        </label>
+      </section>
+
+      <section class="panel" aria-labelledby="p-title">
+        <p class="letter">P</p><div><h2 id="p-title">Precisão</h2><p>O que exatamente precisa ser feito e como será verificado?</p></div>
+        <label>Objetivo operacional<textarea name="objetivo"></textarea></label>
+        <label>Inclui<textarea name="inclui"></textarea></label>
+        <label>Não inclui<textarea name="naoInclui"></textarea></label>
+        <label>Entradas<textarea name="entradas"></textarea></label>
+        <label>Saída esperada<textarea name="saida"></textarea></label>
+        <label>Restrições<textarea name="restricoesP"></textarea></label>
+        <label>Critérios de aceitação<textarea name="criterios"></textarea></label>
+        <label>Riscos<textarea name="riscos"></textarea></label>
+        <label>Validação<textarea name="validacao"></textarea></label>
+      </section>
+
+      <section class="panel" aria-labelledby="n-title">
+        <p class="letter">N</p><div><h2 id="n-title">Narrativa</h2><p>Como deve ficar o resultado final e o que acontece depois?</p></div>
+        <label>Estado final desejado<textarea name="estadoFinal"></textarea></label>
+        <label>Sequência de entrega<textarea name="sequencia"></textarea></label>
+        <label>Formato<textarea name="formato"></textarea></label>
+        <label>Nível de detalhe<textarea name="detalhe"></textarea></label>
+        <label>Próxima ação<textarea name="proxima"></textarea></label>
+        <label>Continuidade a preservar<textarea name="continuidade"></textarea></label>
+      </section>
+
+      <div class="actions"><button type="submit">Gerar rascunho JPN</button><button type="button" id="clear" class="secondary">Limpar</button></div>
+    </form>
+
+    <section class="output" aria-labelledby="out-title">
+      <div class="output-head"><div><p class="kicker">Saída local</p><h2 id="out-title">Rascunho estruturado</h2></div><button type="button" id="copy" class="secondary">Copiar</button></div>
+      <pre id="result" tabindex="0">Preencha o canvas e gere o rascunho.</pre>
+      <p id="status" class="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

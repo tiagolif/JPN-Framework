@@ -83,6 +83,7 @@ const childChecks = [
   ['scripts/check-gestao-facil-v0.3-candidate.mjs', 'contrato da candidata Gestão Fácil v0.3'],
   ['scripts/check-gestao-facil-import-kit.mjs', 'kit de importação da Gestão Fácil v0.3'],
   ['scripts/check-gestao-facil-import-validator.mjs', 'validador local de importação da Gestão Fácil v0.3'],
+  ['scripts/check-metodo-jpn-canvas.mjs', 'canvas local do Método JPN'],
   ['scripts/check-prompt-pack-selector.mjs', 'seletor local do JPN Prompt Pack'],
   ['scripts/check-jpn-business-playbook-navigator.mjs', 'navegador local de playbooks do JPN Business'],
 ];
@@ -96,4 +97,4 @@ for (const [script, label] of childChecks) {
     process.exit(result.status ?? 1);
   }
 }
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, descoberta comercial, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição, proveniência dos pacotes, contrato de pacote ao cliente, identidade visual, manifesto das superfícies comerciais, manifesto dos ativos comerciais, galeria interna de artes, contrato canônico de copy comercial, preflight editorial, composição editorial candidata, painel canônico de prontidão, contrato de evidência de release, blueprint de montagem do Pro Kit, contrato da candidata Gestão Fácil v0.3, kit e validador local de importação da Gestão Fácil v0.3, seletor local do JPN Prompt Pack e navegador local de playbooks do JPN Business validados.`);
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, descoberta comercial, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição, proveniência dos pacotes, contrato de pacote ao cliente, identidade visual, manifesto das superfícies comerciais, manifesto dos ativos comerciais, galeria interna de artes, contrato canônico de copy comercial, preflight editorial, composição editorial candidata, painel canônico de prontidão, contrato de evidência de release, blueprint de montagem do Pro Kit, contrato da candidata Gestão Fácil v0.3, kit e validador local de importação da Gestão Fácil v0.3, canvas local do Método JPN, seletor local do JPN Prompt Pack e navegador local de playbooks do JPN Business validados.`);

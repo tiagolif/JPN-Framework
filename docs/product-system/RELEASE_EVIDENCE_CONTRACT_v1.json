@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "status_source": "docs/product-system/PRODUCT_RELEASE_STATUS_v1.json",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "principles": [
+    "Nenhum gate pode ser aprovado por inferência.",
+    "Evidência deve ser verificável, específica ao gate e vinculada ao artefato ou execução correspondente.",
+    "Evidência humana, física, visual, multiplataforma ou de CI não pode ser substituída por validação mecânica diferente da exigida.",
+    "A existência de evidência não autoriza publicação, venda, anúncio ou checkout."
+  ],
+  "products": [
+    {
+      "id": "metodo-jpn",
+      "gates": [
+        {"id":"revisao-editorial-humana","accepted_evidence":["registro de revisão humana com versão/revisão identificada","checklist editorial preenchido referenciando o candidato revisado"],"minimum_fields":["artifact","reviewer_or_review_record","date","result"],"must_not_accept":["ausência de erro automático","existência do texto-fonte"]},
+        {"id":"pdf-final","accepted_evidence":["PDF candidato final identificado por hash ou path estável","registro de revisão página a página sem bloqueios abertos"],"minimum_fields":["artifact","hash_or_path","page_review_result"],"must_not_accept":["arquivo-fonte sem PDF","exportação sem inspeção visual"]}
+      ]
+    },
+    {
+      "id": "jpn-prompt-pack",
+      "gates": [
+        {"id":"revisao-editorial-humana","accepted_evidence":["registro de revisão humana do conteúdo e dos templates","checklist editorial preenchido referenciando a versão revisada"],"minimum_fields":["artifact","review_record","date","result"],"must_not_accept":["contagem correta de templates isoladamente"]},
+        {"id":"pdf-final","accepted_evidence":["PDF candidato final identificado por hash ou path estável","registro de revisão página a página"],"minimum_fields":["artifact","hash_or_path","page_review_result"],"must_not_accept":["exportação sem inspeção"]}
+      ]
+    },
+    {
+      "id": "jpn-business",
+      "gates": [
+        {"id":"revisao-editorial-humana","accepted_evidence":["registro de revisão humana do núcleo e dos 12 playbooks"],"minimum_fields":["artifact_set","review_record","result"],"must_not_accept":["checker mecânico isolado"]},
+        {"id":"diagramacao-final","accepted_evidence":["arquivo diagramado completo","QA visual do conjunto sem bloqueios críticos"],"minimum_fields":["artifact","visual_qa_result"],"must_not_accept":["especificação de composição sem artefato diagramado completo"]},
+        {"id":"pdf-final","accepted_evidence":["PDF final candidato identificado","revisão página a página concluída"],"minimum_fields":["artifact","hash_or_path","page_review_result"],"must_not_accept":["PDF não revisado"]}
+      ]
+    },
+    {
+      "id": "jpn-prompt-builder",
+      "gates": [
+        {"id":"qa-fisico-contextual-celular","accepted_evidence":["registro de teste em dispositivo móvel real cobrindo fluxo contextual e experiência de uso"],"minimum_fields":["device","build_or_artifact","scenarios","result"],"must_not_accept":["viewport desktop emulado como única evidência"]},
+        {"id":"ci-final","accepted_evidence":["execução de CI associada ao commit candidato com conclusão success"],"minimum_fields":["commit_sha","workflow_run","conclusion"],"must_not_accept":["ausência de workflow run"]},
+        {"id":"pacote-offline-final","accepted_evidence":["pacote offline congelado identificado por hash","teste de abertura/uso do pacote congelado"],"minimum_fields":["artifact","sha256","validation_result"],"must_not_accept":["diretório-fonte não empacotado"]}
+      ]
+    },
+    {
+      "id": "jpn-pro-kit",
+      "gates": [
+        {"id":"artefatos-congelados","accepted_evidence":["manifesto de componentes finais com versões/hashes imutáveis"],"minimum_fields":["manifest","components","freeze_record"],"must_not_accept":["componentes ainda candidatos"]},
+        {"id":"hashes-finais","accepted_evidence":["SHA256SUMS gerado somente após freeze e correspondente aos binários finais"],"minimum_fields":["sha256sums","artifact_set"],"must_not_accept":["hashes de candidatos anteriores"]},
+        {"id":"ci-final","accepted_evidence":["CI verde associada ao commit/bundle final"],"minimum_fields":["commit_sha","workflow_run","conclusion"],"must_not_accept":["run inexistente ou não associado ao candidato"]}
+      ]
+    },
+    {
+      "id": "jpn-gestao-facil",
+      "gates": [
+        {"id":"gf-qa-10","accepted_evidence":["resultado do mesmo XLSX em Excel, LibreOffice Calc e Google Sheets","registro de fórmulas, validações, layout e fluxo essencial por plataforma"],"minimum_fields":["artifact_hash","excel_result","libreoffice_result","google_sheets_result"],"must_not_accept":["teste em apenas uma plataforma","arquivo diferente entre plataformas"]},
+        {"id":"arquivo-final-validado","accepted_evidence":["XLSX congelado após GF-QA-10 identificado por hash","registro de validação final correspondente ao mesmo hash"],"minimum_fields":["artifact","sha256","gf_qa_10_reference","final_validation"],"must_not_accept":["candidata anterior ao QA multiplataforma"]}
+      ]
+    }
+  ]
+}

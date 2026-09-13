@@ -5,15 +5,18 @@ const root = process.cwd();
 const manifestPath = path.join(root, 'docs/commercial/COMMERCIAL_SURFACE_MANIFEST_v1.json');
 const portfolioPath = path.join(root, 'docs/product-system/PRODUCT_PORTFOLIO_v1.json');
 const releasePath = path.join(root, 'docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json');
+const copyPath = path.join(root, 'docs/commercial/COMMERCIAL_COPY_CONTRACT_v1.json');
 
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
 const portfolio = JSON.parse(await readFile(portfolioPath, 'utf8'));
 const release = JSON.parse(await readFile(releasePath, 'utf8'));
+const copy = JSON.parse(await readFile(copyPath, 'utf8'));
 const errors = [];
 
 const surfaces = Array.isArray(manifest.surfaces) ? manifest.surfaces : [];
 const productIds = new Set((portfolio.products ?? []).map((item) => item.id));
 const releaseByProduct = new Map((release.products ?? []).map((item) => [item.id, item]));
+const copyByProduct = new Map((copy.products ?? []).map((item) => [item.product_id, item]));
 const ids = new Set();
 const paths = new Set();
 const listedHtml = new Set();
@@ -24,17 +27,8 @@ if (manifest.release_effect !== 'none') errors.push('release_effect deve permane
 if (manifest.site_root !== 'commercial-site') errors.push('site_root deve permanecer commercial-site.');
 
 const global = manifest.global_requirements ?? {};
-const requiredFalse = [
-  'external_urls_allowed',
-  'transactional_cta_allowed',
-  'pricing_allowed',
-  'lead_capture_allowed',
-  'tracking_allowed',
-  'publication_allowed',
-];
-for (const key of requiredFalse) {
-  if (global[key] !== false) errors.push(`global_requirements.${key} deve permanecer false.`);
-}
+const requiredFalse = ['external_urls_allowed','transactional_cta_allowed','pricing_allowed','lead_capture_allowed','tracking_allowed','publication_allowed'];
+for (const key of requiredFalse) if (global[key] !== false) errors.push(`global_requirements.${key} deve permanecer false.`);
 if (global.robots !== 'noindex,nofollow') errors.push('global_requirements.robots deve ser noindex,nofollow.');
 if (global.navigation !== 'relative-local-only') errors.push('global_requirements.navigation deve ser relative-local-only.');
 
@@ -63,10 +57,7 @@ for (const surface of surfaces) {
     listedHtml.add(surface.path);
     try {
       const html = await readFile(path.join(root, surface.path), 'utf8');
-      if (!/name=["']robots["'][^>]*content=["']noindex,nofollow["']/i.test(html) &&
-          !/content=["']noindex,nofollow["'][^>]*name=["']robots["']/i.test(html)) {
-        errors.push(`${surface.id}: HTML deve manter meta robots noindex,nofollow.`);
-      }
+      if (!/name=["']robots["'][^>]*content=["']noindex,nofollow["']/i.test(html) && !/content=["']noindex,nofollow["'][^>]*name=["']robots["']/i.test(html)) errors.push(`${surface.id}: HTML deve manter meta robots noindex,nofollow.`);
       const expectedStylesheet = surface.path.startsWith('commercial-site/products/') ? '../styles.css' : 'styles.css';
       if (!html.includes(expectedStylesheet)) errors.push(`${surface.id}: não referencia ${expectedStylesheet}.`);
     } catch {
@@ -83,9 +74,7 @@ for (const surface of surfaces) {
     }
   }
 
-  if (!Array.isArray(surface.allowed_actions) || surface.allowed_actions.length === 0) {
-    errors.push(`${surface.id}: allowed_actions deve ter ao menos um item.`);
-  }
+  if (!Array.isArray(surface.allowed_actions) || surface.allowed_actions.length === 0) errors.push(`${surface.id}: allowed_actions deve ter ao menos um item.`);
 
   if (surface.type === 'product-page') {
     if (!productIds.has(surface.product_id)) errors.push(`${surface.id}: product_id não pertence ao portfólio: ${surface.product_id}`);
@@ -109,28 +98,43 @@ if (actualHtml.size !== surfaces.length) errors.push(`Cobertura divergente: HTML
 
 const productSurfaces = surfaces.filter((item) => item.type === 'product-page');
 if (productSurfaces.length !== productIds.size) errors.push(`Cobertura de páginas de produto divergente: páginas=${productSurfaces.length}, produtos=${productIds.size}.`);
-for (const productId of productIds) {
-  if (productSurfaces.filter((item) => item.product_id === productId).length !== 1) {
-    errors.push(`${productId}: deve ter exatamente uma página de produto no manifesto.`);
-  }
-}
+for (const productId of productIds) if (productSurfaces.filter((item) => item.product_id === productId).length !== 1) errors.push(`${productId}: deve ter exatamente uma página de produto no manifesto.`);
 
 const diagnostic = surfaces.find((item) => item.id === 'product-diagnostic');
 if (!diagnostic || diagnostic.type !== 'local-diagnostic') errors.push('product-diagnostic deve existir como local-diagnostic.');
 else if (diagnostic.form_policy !== 'local-only-no-submit-no-persistence') errors.push('product-diagnostic deve manter form_policy local-only-no-submit-no-persistence.');
 
-const forbiddenActions = /buy|checkout|purchase|price|lead|track|publish|subscribe|order/i;
-for (const surface of surfaces) {
-  for (const action of surface.allowed_actions ?? []) {
-    if (forbiddenActions.test(action)) errors.push(`${surface.id}: ação não permitida pelo guardrail: ${action}`);
+const salesSheet = surfaces.find((item) => item.id === 'commercial-sales-sheet');
+if (!salesSheet || salesSheet.type !== 'sales-sheet') {
+  errors.push('commercial-sales-sheet deve existir como sales-sheet.');
+} else {
+  const requiredSources = ['docs/product-system/PRODUCT_PORTFOLIO_v1.json','docs/commercial/COMMERCIAL_COPY_CONTRACT_v1.json','docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json'];
+  for (const source of requiredSources) if (!salesSheet.source_contracts?.includes(source)) errors.push(`commercial-sales-sheet: fonte obrigatória ausente: ${source}`);
+  const html = await readFile(path.join(root, salesSheet.path), 'utf8');
+  if (!/@media\s+print/i.test(html)) errors.push('commercial-sales-sheet: deve possuir regras explícitas de impressão.');
+  if (!/Material interno|composição interna/i.test(html)) errors.push('commercial-sales-sheet: deve sinalizar uso interno.');
+  if (/<form\b|<input\b|<button\b/i.test(html)) errors.push('commercial-sales-sheet: não pode conter formulário, input ou botão transacional.');
+  for (const productId of productIds) {
+    const occurrences = [...html.matchAll(new RegExp(`data-product=["']${productId}["']`, 'g'))].length;
+    if (occurrences !== 1) errors.push(`commercial-sales-sheet: ${productId} deve aparecer exatamente uma vez como data-product (encontrado ${occurrences}).`);
+    const item = copyByProduct.get(productId);
+    if (!item) {
+      errors.push(`commercial-sales-sheet: copy canônica ausente para ${productId}.`);
+      continue;
+    }
+    for (const text of [item.headline, item.subheadline, item.short_description, item.mandatory_limit]) {
+      if (typeof text === 'string' && text.length > 0 && !html.includes(text)) errors.push(`commercial-sales-sheet: copy canônica de ${productId} não foi preservada integralmente: ${text.slice(0, 48)}…`);
+    }
   }
+  if (!/EM PREPARAÇÃO/i.test(html)) errors.push('commercial-sales-sheet: JPN Pro Kit deve permanecer sinalizado EM PREPARAÇÃO.');
 }
+
+const forbiddenActions = /buy|checkout|purchase|price|lead|track|publish|subscribe|order/i;
+for (const surface of surfaces) for (const action of surface.allowed_actions ?? []) if (forbiddenActions.test(action)) errors.push(`${surface.id}: ação não permitida pelo guardrail: ${action}`);
 
 const proKit = productSurfaces.find((item) => item.product_id === 'jpn-pro-kit');
 const proKitHtml = proKit ? await readFile(path.join(root, proKit.path), 'utf8') : '';
-if (proKit && !/EM PREPARA(?:Ç|&Ccedil;|&#199;|&#xC7;)ÃO/i.test(proKitHtml) && !/EM PREPARA/i.test(proKitHtml)) {
-  errors.push('Página do JPN Pro Kit deve continuar sinalizando EM PREPARAÇÃO.');
-}
+if (proKit && !/EM PREPARA(?:Ç|&Ccedil;|&#199;|&#xC7;)ÃO/i.test(proKitHtml) && !/EM PREPARA/i.test(proKitHtml)) errors.push('Página do JPN Pro Kit deve continuar sinalizando EM PREPARAÇÃO.');
 
 if (errors.length) {
   console.error('Commercial surface manifest check falhou:');
@@ -138,4 +142,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Commercial surface manifest check OK: ${surfaces.length} superfícies internas, ${productSurfaces.length} páginas de produto e respectivas fontes validadas.`);
+console.log(`Commercial surface manifest check OK: ${surfaces.length} superfícies internas, ${productSurfaces.length} páginas de produto e folha comercial consolidada validadas.`);

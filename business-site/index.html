@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>JPN Business — Navegador de playbooks</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">JPN Business · ferramenta local</p>
+      <h1>Encontre o playbook certo antes de começar a executar.</h1>
+      <p class="lead">Descreva a situação, filtre a área e receba até três candidatos entre os 12 playbooks canônicos. O navegador funciona localmente: não envia dados, não publica, não compra e não executa ações externas.</p>
+      <div class="notice"><strong>Estado:</strong> apoio operacional candidato. A escolha do playbook não autoriza ação externa nem substitui revisão humana.</div>
+    </header>
+
+    <section class="panel">
+      <h2>1. Descreva a situação</h2>
+      <label for="goal">O que precisa acontecer?</label>
+      <textarea id="goal" rows="4" placeholder="Ex.: preciso organizar o follow-up de um cliente sem pressionar nem inventar condição"></textarea>
+      <label for="category">Área <span>(opcional)</span></label>
+      <select id="category"><option value="">Todas as áreas</option></select>
+      <fieldset>
+        <legend>Há algum limite material?</legend>
+        <label class="check"><input type="checkbox" id="external-action"> publicar, enviar ou alterar algo fora desta ferramenta</label>
+        <label class="check"><input type="checkbox" id="spend"> gasto, compra, contratação ou condição comercial</label>
+        <label class="check"><input type="checkbox" id="sensitive"> credencial, segredo ou dado sensível</label>
+        <label class="check"><input type="checkbox" id="specialized"> decisão jurídica, financeira, tributária, contábil, médica ou especializada</label>
+      </fieldset>
+      <div class="actions">
+        <button id="recommend" type="button">Sugerir playbooks</button>
+        <button id="clear" type="button" class="secondary">Limpar</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-live="polite">
+      <h2>2. Candidatos</h2>
+      <div id="stop-alert" class="stop-alert" hidden></div>
+      <p id="result-summary" class="muted">Descreva a situação ou escolha uma área para começar.</p>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section class="panel compact">
+      <h2>3. Como usar o resultado</h2>
+      <ol>
+        <li>Escolha o menor playbook que cubra a situação real.</li>
+        <li>Abra os templates do Prompt Pack indicados como apoio, quando houver.</li>
+        <li>Separe fatos confirmados, hipóteses, lacunas e decisões pendentes.</li>
+        <li>Pare antes de publicar, enviar, comprar, contratar ou assumir condição não autorizada.</li>
+        <li>Registre a decisão e o próximo passo verificável.</li>
+      </ol>
+    </section>
+
+    <footer>JPN Business · navegador offline candidato · nenhum dado é transmitido.</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

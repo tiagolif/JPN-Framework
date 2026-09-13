@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "purpose": "Definir a montagem determinística de candidatos editoriais em Markdown para revisão humana, sem materializar PDF final ou promover gates de release.",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "output_root": "dist/editorial-candidates",
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "title": "Método JPN",
+      "output_file": "Metodo_JPN_CANDIDATO.md",
+      "sources": [
+        "docs/products/metodo-jpn/METODO_JPN_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_CASEBOOK_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_PRACTICE_WORKBOOK_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md"
+      ],
+      "blocked_final_artifact": "Metodo_JPN.pdf"
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "title": "JPN Prompt Pack",
+      "output_file": "JPN_Prompt_Pack_CANDIDATO.md",
+      "sources": [
+        "docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md",
+        "docs/products/prompt-pack/PROMPT_SELECTION_WORKBOOK_v1.md",
+        "docs/products/prompt-pack/JPN_PROMPT_PACK_QUICK_REFERENCE_v1.md"
+      ],
+      "blocked_final_artifact": "JPN_Prompt_Pack.pdf"
+    },
+    {
+      "product_id": "jpn-business",
+      "title": "JPN Business",
+      "output_file": "JPN_Business_CANDIDATO.md",
+      "sources": [
+        "docs/products/jpn-business/JPN_BUSINESS_v1.md",
+        "docs/products/jpn-business/IMPLEMENTATION_WORKBOOK_v1.md",
+        "docs/products/jpn-business/30_DAY_IMPLEMENTATION_SPRINT_v1.md",
+        "docs/products/jpn-business/OPERATIONAL_SCORECARD_v1.md",
+        "docs/products/jpn-business/WEEKLY_OPERATING_REVIEW_v1.md",
+        "docs/products/jpn-business/JPN_BUSINESS_QUICK_REFERENCE_v1.md"
+      ],
+      "blocked_final_artifact": "JPN_Business.pdf"
+    }
+  ],
+  "candidate_header": {
+    "status": "CANDIDATO INTERNO — NÃO É RELEASE FINAL",
+    "required_notices": [
+      "Revisão editorial humana pendente.",
+      "Diagramação/QA visual não são inferidos desta montagem.",
+      "PDF final só pode existir após os gates oficiais do produto.",
+      "Não publicar, vender ou distribuir este candidato como produto final."
+    ]
+  },
+  "manifest_requirements": [
+    "product_id",
+    "output_file",
+    "generated_at",
+    "source_files",
+    "source_sha256",
+    "candidate_sha256",
+    "release_ready"
+  ],
+  "guardrails": [
+    "não editar as fontes durante a composição",
+    "não converter automaticamente Markdown em PDF final",
+    "não marcar revisão humana, QA visual ou revisão página a página como concluídos",
+    "não usar dados reais, financeiros, credenciais ou informações sensíveis",
+    "não publicar nem criar CTA transacional"
+  ]
+}

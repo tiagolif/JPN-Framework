@@ -64,9 +64,9 @@ const blockedClaims = [
   /preço\s*:/i
 ];
 const safeText = html
-  .replace(/sem preço/gi, '')
-  .replace(/sem[^<]{0,40}checkout/gi, '')
-  .replace(/não substitui[^<.]{0,120}/gi, '');
+  .replace(/\bsem\b[^<.!?]{0,180}(?:[.!?]|<)/gi, '')
+  .replace(/\bn[aã]o\s+(?:substitui|autoriza|publica|envia|vende|cobra|executa)[^<.!?]{0,180}(?:[.!?]|<)/gi, '')
+  .replace(/publication_authorized\s*=\s*false/gi, '');
 for (const claim of blockedClaims) {
   if (claim.test(safeText)) errors.push(`Claim/comportamento comercial de risco detectado: ${claim}`);
 }

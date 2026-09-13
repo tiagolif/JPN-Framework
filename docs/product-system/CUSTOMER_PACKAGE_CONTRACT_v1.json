@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "state": "candidate contract / release evidence pending",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "purpose": "Formalizar a estrutura futura dos pacotes entregáveis JPN, conectando handoff, catálogo e manifestos sem materializar release final.",
+  "sources": [
+    "docs/product-system/CUSTOMER_DELIVERY_HANDOFF_v1.md",
+    "docs/product-system/DELIVERABLE_CATALOG_v1.json",
+    "docs/commercial/PRODUCT_DELIVERY_MANIFESTS_v1.json",
+    "docs/product-system/PRODUCT_RELEASE_STATUS_v1.json"
+  ],
+  "standard_structure": [
+    "00_COMECE_AQUI",
+    "01_PRODUTO",
+    "02_GUIAS",
+    "03_EXEMPLOS",
+    "04_REFERENCIAS",
+    "99_INTEGRIDADE"
+  ],
+  "required_integrity_files": [
+    "00_COMECE_AQUI/README_ENTREGA.md",
+    "00_COMECE_AQUI/CHANGELOG_RESUMIDO.md",
+    "99_INTEGRIDADE/MANIFEST.txt",
+    "99_INTEGRIDADE/SHA256SUMS.txt"
+  ],
+  "global_rules": [
+    "Nenhum pacote final pode ser materializado enquanto qualquer dependência canônica do produto estiver pendente.",
+    "MANIFEST.txt lista apenas arquivos efetivamente presentes no pacote congelado.",
+    "SHA256SUMS.txt só pode ser gerado depois do freeze e deve ser regenerado após qualquer alteração de byte.",
+    "Pastas vazias não devem ser criadas apenas para cumprir aparência de estrutura.",
+    "Materiais comerciais e artes não entram automaticamente no pacote do cliente.",
+    "Preço, checkout, credenciais, dados financeiros reais e dados pessoais não pertencem ao pacote de entrega."
+  ],
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "package_root": "JPN_Metodo_JPN_<VERSAO>",
+      "open_first": "00_COMECE_AQUI/README_ENTREGA.md",
+      "product_slot": "01_PRODUTO/Metodo_JPN.pdf",
+      "guide_slots": ["02_GUIAS/Guia_Rapido.pdf", "02_GUIAS/Workbook_Pratico.pdf"],
+      "reference_slots": ["04_REFERENCIAS/Jornada_Precisao_Narrativa.pdf"],
+      "required_release_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "materialization_allowed": false
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "package_root": "JPN_Prompt_Pack_<VERSAO>",
+      "open_first": "00_COMECE_AQUI/README_ENTREGA.md",
+      "product_slot": "01_PRODUTO/JPN_Prompt_Pack.pdf",
+      "guide_slots": ["02_GUIAS/Guia_de_Selecao_e_Adaptacao.pdf"],
+      "reference_slots": ["04_REFERENCIAS/Indice_18_Templates.pdf"],
+      "required_release_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "materialization_allowed": false
+    },
+    {
+      "product_id": "jpn-business",
+      "package_root": "JPN_Business_<VERSAO>",
+      "open_first": "00_COMECE_AQUI/README_ENTREGA.md",
+      "product_slot": "01_PRODUTO/JPN_Business.pdf",
+      "guide_slots": ["02_GUIAS/Workbook_Implementacao.pdf", "02_GUIAS/Sprint_30_Dias.pdf"],
+      "reference_slots": ["04_REFERENCIAS/Indice_12_Playbooks.pdf", "04_REFERENCIAS/Scorecard.pdf"],
+      "required_release_dependencies": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"],
+      "materialization_allowed": false
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "package_root": "JPN_Prompt_Builder_<VERSAO>",
+      "open_first": "00_COMECE_AQUI/README_ENTREGA.md",
+      "product_slot": "01_PRODUTO/JPN_Prompt_Builder_Offline.zip",
+      "guide_slots": ["02_GUIAS/GUIA_RAPIDO.md", "02_GUIAS/BACKUP_E_EXPORTACAO.md"],
+      "reference_slots": ["04_REFERENCIAS/PRIVACIDADE_E_LIMITES.md"],
+      "required_release_dependencies": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"],
+      "materialization_allowed": false
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "package_root": "JPN_Gestao_Facil_<VERSAO>",
+      "open_first": "00_COMECE_AQUI/README_ENTREGA.md",
+      "product_slot": "01_PRODUTO/JPN_Gestao_Facil_FINAL.xlsx",
+      "guide_slots": ["02_GUIAS/Guia_Rapido.pdf", "02_GUIAS/Rotina_Diaria_e_Semanal.pdf"],
+      "reference_slots": ["04_REFERENCIAS/Dicionario_Operacional.pdf", "04_REFERENCIAS/Indicadores_e_Alertas.pdf"],
+      "required_release_dependencies": ["gf-qa-10", "arquivo-final-validado"],
+      "materialization_allowed": false
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "package_root": "JPN_Pro_Kit_<VERSAO>",
+      "open_first": "00_COMECE_AQUI/README_ENTREGA.md",
+      "product_slot": "01_PRODUTO/COMPONENTES_CONGELADOS",
+      "guide_slots": ["02_GUIAS/COMECE_AQUI.pdf", "02_GUIAS/MAPA_DE_ENTREGA.pdf"],
+      "reference_slots": ["04_REFERENCIAS/INDICE_DE_ARQUIVOS.txt"],
+      "required_release_dependencies": ["artefatos-congelados", "hashes-finais", "ci-final"],
+      "materialization_allowed": false
+    }
+  ]
+}

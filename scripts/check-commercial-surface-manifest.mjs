@@ -129,6 +129,38 @@ if (!salesSheet || salesSheet.type !== 'sales-sheet') {
   if (!/EM PREPARAÇÃO/i.test(html)) errors.push('commercial-sales-sheet: JPN Pro Kit deve permanecer sinalizado EM PREPARAÇÃO.');
 }
 
+const presentation = surfaces.find((item) => item.id === 'commercial-presentation');
+if (!presentation || presentation.type !== 'presentation') {
+  errors.push('commercial-presentation deve existir como presentation.');
+} else {
+  const requiredSources = ['docs/product-system/PRODUCT_PORTFOLIO_v1.json','docs/commercial/COMMERCIAL_COPY_CONTRACT_v1.json','docs/commercial/COMMERCIAL_RELEASE_STATE_v1.json','docs/commercial/JPN_VISUAL_IDENTITY_v1.json'];
+  for (const source of requiredSources) if (!presentation.source_contracts?.includes(source)) errors.push(`commercial-presentation: fonte obrigatória ausente: ${source}`);
+  const html = await readFile(path.join(root, presentation.path), 'utf8');
+  const slideCount = [...html.matchAll(/<section\s+class=["']slide["']/g)].length;
+  if (slideCount < 8 || slideCount > 14) errors.push(`commercial-presentation: deck deve manter entre 8 e 14 slides (encontrado ${slideCount}).`);
+  if (!/@media\s+print/i.test(html) || !/@page\s*\{[^}]*landscape/is.test(html)) errors.push('commercial-presentation: deve possuir impressão A4 landscape explícita.');
+  if (!/Material interno|composição não publicada|Composição interna/i.test(html)) errors.push('commercial-presentation: deve sinalizar uso interno/não publicado.');
+  if (/<form\b|<input\b|<button\b/i.test(html)) errors.push('commercial-presentation: não pode conter formulário, input ou botão.');
+  if (/https?:\/\//i.test(html)) errors.push('commercial-presentation: links externos não são permitidos.');
+  for (const productId of productIds) {
+    const occurrences = [...html.matchAll(new RegExp(`data-product=["']${productId}["']`, 'g'))].length;
+    if (occurrences !== 1) errors.push(`commercial-presentation: ${productId} deve aparecer exatamente uma vez no overview do portfólio (encontrado ${occurrences}).`);
+    const item = copyByProduct.get(productId);
+    if (!item) {
+      errors.push(`commercial-presentation: copy canônica ausente para ${productId}.`);
+      continue;
+    }
+    if (!html.includes(item.headline)) errors.push(`commercial-presentation: headline canônica ausente para ${productId}.`);
+  }
+  const requiredPhrases = [copy.ecosystem?.signature, copy.ecosystem?.institutional, 'Comece pelo menor recurso suficiente.'];
+  for (const phrase of requiredPhrases) if (phrase && !html.includes(phrase)) errors.push(`commercial-presentation: mensagem canônica ausente: ${phrase}`);
+  if (!/18 templates/i.test(html)) errors.push('commercial-presentation: Prompt Pack deve preservar a referência aos 18 templates.');
+  if (!/12 playbooks/i.test(html)) errors.push('commercial-presentation: JPN Business deve preservar a referência aos 12 playbooks.');
+  if (!/Microsoft Excel/i.test(html) || !/LibreOffice Calc/i.test(html) || !/Google Sheets/i.test(html)) errors.push('commercial-presentation: Gestão Fácil deve preservar o QA multiplataforma pendente.');
+  if (!/QA físico contextual em celular continua pendente/i.test(html)) errors.push('commercial-presentation: Prompt Builder deve preservar o QA físico em celular pendente.');
+  if (!/EM PREPARAÇÃO/i.test(html)) errors.push('commercial-presentation: JPN Pro Kit deve permanecer EM PREPARAÇÃO.');
+}
+
 const forbiddenActions = /buy|checkout|purchase|price|lead|track|publish|subscribe|order/i;
 for (const surface of surfaces) for (const action of surface.allowed_actions ?? []) if (forbiddenActions.test(action)) errors.push(`${surface.id}: ação não permitida pelo guardrail: ${action}`);
 
@@ -142,4 +174,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Commercial surface manifest check OK: ${surfaces.length} superfícies internas, ${productSurfaces.length} páginas de produto e folha comercial consolidada validadas.`);
+console.log(`Commercial surface manifest check OK: ${surfaces.length} superfícies internas, ${productSurfaces.length} páginas de produto, folha comercial e apresentação validadas.`);

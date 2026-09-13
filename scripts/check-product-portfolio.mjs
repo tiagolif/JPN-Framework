@@ -73,6 +73,7 @@ const childChecks = [
   ['scripts/check-commercial-asset-manifest.mjs', 'manifesto dos ativos comerciais'],
   ['scripts/check-commercial-copy-contract.mjs', 'contrato canônico de copy comercial'],
   ['scripts/check-editorial-preflight.mjs', 'preflight editorial dos produtos'],
+  ['scripts/check-editorial-composition-candidates.mjs', 'composição editorial candidata'],
   ['scripts/check-product-readiness-board.mjs', 'painel canônico de prontidão'],
   ['scripts/check-release-evidence-contract.mjs', 'contrato de evidência de release'],
   ['scripts/check-gestao-facil-v0.3-candidate.mjs', 'contrato da candidata Gestão Fácil v0.3'],
@@ -87,4 +88,4 @@ for (const [script, label] of childChecks) {
     process.exit(result.status ?? 1);
   }
 }
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição, proveniência dos pacotes, identidade visual, manifesto das superfícies comerciais, manifesto dos ativos comerciais, contrato canônico de copy comercial, preflight editorial, painel canônico de prontidão, contrato de evidência de release e contrato da candidata Gestão Fácil v0.3 validados.`);
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição, proveniência dos pacotes, identidade visual, manifesto das superfícies comerciais, manifesto dos ativos comerciais, contrato canônico de copy comercial, preflight editorial, composição editorial candidata, painel canônico de prontidão, contrato de evidência de release e contrato da candidata Gestão Fácil v0.3 validados.`);

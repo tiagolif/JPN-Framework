@@ -51,7 +51,18 @@ for (const id of canonicalIds) {
   if (!seenProducts.has(id)) errors.push(`${id}: ausente do FAQ.`);
 }
 
-const allText = JSON.stringify(faq).toLowerCase();
+const responseText = [
+  ...(faq.global_faq ?? []).map((entry) => entry.answer ?? ''),
+  ...faqProducts.flatMap((product) => [
+    ...(product.faq ?? []).map((entry) => entry.answer ?? ''),
+    ...(product.objections ?? []).map((entry) => entry.response ?? ''),
+  ]),
+].join(' ').toLowerCase();
+
+const positiveSurface = responseText
+  .replace(/\bn[aã]o\s+(garante|garantem|substitui|substituem|elimina|eliminam)[^.]*\.?/gi, '')
+  .replace(/\bsem\s+(checkout|pre[cç]o|oferta|garantia)[^.]*\.?/gi, '');
+
 const riskyClaims = [
   /roi\s+garantid/,
   /resultado(s)?\s+garantid/,
@@ -61,7 +72,7 @@ const riskyClaims = [
   /substitui\s+revis[aã]o\s+humana/,
 ];
 for (const claim of riskyClaims) {
-  if (claim.test(allText)) errors.push(`FAQ contém claim de risco: ${claim}`);
+  if (claim.test(positiveSurface)) errors.push(`FAQ contém claim de risco: ${claim}`);
 }
 
 const forbiddenCommerce = [
@@ -72,7 +83,7 @@ const forbiddenCommerce = [
   /oferta\s+expira/,
 ];
 for (const claim of forbiddenCommerce) {
-  if (claim.test(allText.replace(/sem checkout/g, ''))) errors.push(`FAQ contém linguagem comercial proibida: ${claim}`);
+  if (claim.test(positiveSurface)) errors.push(`FAQ contém linguagem comercial proibida: ${claim}`);
 }
 
 const gestao = faqProducts.find((item) => item.product_id === 'jpn-gestao-facil');

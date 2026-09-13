@@ -1,0 +1,76 @@
+{
+  "version": "1.0.0",
+  "portfolio_contract": "docs/product-system/PRODUCT_PORTFOLIO_v1.json",
+  "release_status_contract": "docs/product-system/PRODUCT_RELEASE_STATUS_v1.json",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "products": [
+    {
+      "id": "metodo-jpn",
+      "readiness": "blocked",
+      "release_ready": false,
+      "open_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "in_progress_dependencies": [],
+      "next_safe_action": "Preparar o pacote de revisão editorial e a especificação de composição; não declarar revisão humana nem PDF final como concluídos sem evidência.",
+      "requires_human_or_external_evidence": ["revisao-editorial-humana", "pdf-final"]
+    },
+    {
+      "id": "jpn-prompt-pack",
+      "readiness": "blocked",
+      "release_ready": false,
+      "open_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "in_progress_dependencies": [],
+      "next_safe_action": "Preparar o pacote de revisão editorial e a especificação de composição; preservar os 18 templates canônicos e não promover o PDF sem inspeção humana.",
+      "requires_human_or_external_evidence": ["revisao-editorial-humana", "pdf-final"]
+    },
+    {
+      "id": "jpn-business",
+      "readiness": "in-progress",
+      "release_ready": false,
+      "open_dependencies": ["revisao-editorial-humana", "pdf-final"],
+      "in_progress_dependencies": ["diagramacao-final"],
+      "next_safe_action": "Continuar a preparação da composição e do candidato diagramado a partir da especificação existente; manter revisão humana e PDF final abertos.",
+      "requires_human_or_external_evidence": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"]
+    },
+    {
+      "id": "jpn-prompt-builder",
+      "readiness": "blocked",
+      "release_ready": false,
+      "open_dependencies": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"],
+      "in_progress_dependencies": [],
+      "next_safe_action": "Preparar checklist e pacote offline candidato sem rotulá-lo como final; o QA físico em celular e o CI permanecem obrigatórios.",
+      "requires_human_or_external_evidence": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"]
+    },
+    {
+      "id": "jpn-pro-kit",
+      "readiness": "blocked",
+      "release_ready": false,
+      "open_dependencies": ["artefatos-congelados", "hashes-finais", "ci-final"],
+      "in_progress_dependencies": [],
+      "next_safe_action": "Manter o bundle como especificação e preparar o inventário de componentes; não congelar nem gerar hashes finais antes da elegibilidade dos componentes.",
+      "requires_human_or_external_evidence": ["artefatos-congelados", "hashes-finais", "ci-final"]
+    },
+    {
+      "id": "jpn-gestao-facil",
+      "readiness": "blocked",
+      "release_ready": false,
+      "open_dependencies": ["gf-qa-10", "arquivo-final-validado"],
+      "in_progress_dependencies": [],
+      "next_safe_action": "Manter a v0.3 como candidata e preparar o roteiro de compatibilidade; Excel, LibreOffice Calc e Google Sheets ainda exigem validação física antes do arquivo final.",
+      "requires_human_or_external_evidence": ["gf-qa-10", "arquivo-final-validado"]
+    }
+  ],
+  "portfolio_summary": {
+    "total_products": 6,
+    "release_ready": 0,
+    "blocked": 5,
+    "in_progress": 1
+  },
+  "guardrails": [
+    "Este board é derivado dos contratos canônicos e não substitui PRODUCT_RELEASE_STATUS_v1.json.",
+    "Nenhum item pode ser marcado release_ready enquanto houver dependência diferente de passed ou not-applicable.",
+    "Ações autônomas podem preparar candidatos, documentação, checks e especificações, mas não fabricar evidência humana, física ou de CI.",
+    "Estado de prontidão não autoriza publicação, anúncio, venda, checkout, preço ou captura de lead.",
+    "Nenhum dado financeiro real, credencial, segredo ou dado pessoal deve ser usado para fechar gates."
+  ]
+}

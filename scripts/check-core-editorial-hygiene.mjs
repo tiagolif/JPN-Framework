@@ -9,10 +9,12 @@ const files = [
 const failures = [];
 const report = [];
 
+// Marcadores editoriais convencionais em caixa alta devem ser bloqueados.
+// TODO precisa ser case-sensitive porque "todo" é uma palavra legítima em português.
 const blockedPlaceholders = [
-  /\bTBD\b/i,
-  /\bTODO\b/i,
-  /\bFIXME\b/i,
+  /\bTBD\b/,
+  /\bTODO\b/,
+  /\bFIXME\b/,
   /\[preencher\]/i,
   /\[inserir\]/i,
   /<placeholder>/i,

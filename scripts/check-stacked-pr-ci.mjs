@@ -1,0 +1,56 @@
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+
+const root = process.cwd();
+const workflowPath = path.join(root, '.github/workflows/ci.yml');
+const docPath = path.join(root, 'docs/product-system/STACKED_PR_CI_v1.md');
+const workflow = await readFile(workflowPath, 'utf8');
+const doc = await readFile(docPath, 'utf8');
+const errors = [];
+
+const requireText = (text, fragment, label) => {
+  if (!text.includes(fragment)) errors.push(`${label}: trecho obrigatório ausente: ${fragment}`);
+};
+
+requireText(workflow, 'pull_request:', 'workflow');
+requireText(workflow, 'branches: [main]', 'workflow');
+requireText(workflow, 'permissions:\n  contents: read', 'workflow');
+requireText(workflow, 'cancel-in-progress: true', 'workflow');
+requireText(workflow, 'node-version: 22', 'workflow');
+requireText(workflow, "python-version: '3.12'", 'workflow');
+requireText(workflow, 'npm run typecheck', 'workflow');
+requireText(workflow, 'npm test', 'workflow');
+requireText(workflow, 'npm run build', 'workflow');
+requireText(workflow, 'git diff --exit-code', 'workflow');
+
+const pullRequestBlock = workflow.match(/\n  pull_request:\s*\n([\s\S]*?)(?=\n[a-zA-Z][^\n]*:|\npermissions:)/)?.[1] ?? '';
+if (/branches\s*:/.test(pullRequestBlock)) {
+  errors.push('workflow: pull_request não pode limitar branches; PRs empilhados precisam de cobertura.');
+}
+
+const pushBlock = workflow.match(/\n  push:\s*\n([\s\S]*?)(?=\n  pull_request:)/)?.[1] ?? '';
+if (!/branches:\s*\[main\]/.test(pushBlock)) {
+  errors.push('workflow: push deve continuar restrito ao branch main.');
+}
+
+for (const forbidden of ['workflow_dispatch:', 'schedule:', 'deployment:', 'pages:', 'id-token: write', 'contents: write']) {
+  if (workflow.includes(forbidden)) errors.push(`workflow: configuração fora do escopo detectada: ${forbidden}`);
+}
+
+for (const fragment of [
+  'não substitui',
+  'QA físico/contextual',
+  'Excel, LibreOffice Calc e Google Sheets',
+  'evidência de desenvolvimento',
+  'não publica site, anúncio ou artefato comercial',
+]) {
+  requireText(doc, fragment, 'documentação');
+}
+
+if (errors.length > 0) {
+  console.error('Stacked PR CI check falhou:');
+  for (const error of errors) console.error(`- ${error}`);
+  process.exit(1);
+}
+
+console.log('Stacked PR CI check OK: PRs empilhados cobertos sem promover gates humanos, externos ou de release.');

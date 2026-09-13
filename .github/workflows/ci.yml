@@ -39,8 +39,81 @@ jobs:
       - name: Test
         run: npm test
 
-      - name: Build and product gates
-        run: npm run build
+      - name: Compile SDK and browser bundle
+        run: |
+          npx tsc -p tsconfig.json
+          npm run build:browser
+
+      - name: Prompt Builder gates
+        run: |
+          npm run check:product-site
+          npm run check:prompt-builder-presets
+          npm run check:prompt-builder-custom-presets
+          npm run check:prompt-builder-workspaces
+          npm run check:prompt-builder-recovery
+          npm run check:prompt-builder-context-regressions
+          npm run check:prompt-builder-staging
+          npm run check:prompt-builder-quick-start
+
+      - name: Core product and editorial gates
+        run: |
+          npm run check:product-consistency
+          npm run check:metodo-cross-product
+          npm run check:jpn-business-links
+          npm run check:prompt-pack-qa
+          npm run check:prompt-pack-selection-workbook
+          npm run check:jpn-business-print-candidate
+          npm run check:core-editorial-hygiene
+          npm run check:core-terminology
+          npm run check:product-portfolio
+          npm run check:deliverable-catalog
+          npm run check:product-release-status
+
+      - name: Release and Pro Kit gates
+        run: |
+          npm run check:release-execution-plan
+          npm run check:human-release-workbench
+          npm run check:release-runbook
+          npm run check:release-action-queue
+          npm run check:product-readiness-report
+          npm run check:pro-kit
+          npm run check:pro-kit-manifest
+          npm run check:pro-kit-staging
+
+      - name: Visual and editorial gates
+        run: |
+          npm run check:visual-assets
+          npm run check:visual-bounds
+          npm run check:editorial-release
+          npm run check:editorial-review-handoff
+
+      - name: Commercial gates
+        run: |
+          npm run check:commercial-copy
+          npm run check:commercial-product-facts
+          npm run check:sales-enablement-playbook
+          npm run check:commercial-faq
+          npm run check:commercial-site
+          npm run check:commercial-use-cases
+          npm run check:commercial-navigation
+          npm run check:commercial-accessibility
+          npm run check:commercial-contrast
+
+      - name: Gestão Fácil gates
+        run: |
+          npm run check:gestao-facil-model
+          npm run check:gestao-facil-binary
+
+      - name: Generated review artifacts
+        run: |
+          npm run report:release-readiness
+          npm run build:visual-review
+          npm run check:visual-review-gallery
+          npm run build:editorial-print
+          npm run check:editorial-print-staging
+          npm run build:jpn-business-print-candidate
+          npm run check:jpn-business-rendered-candidate
+          npm run stage:prompt-builder
 
       - name: Verify tracked generated files are synchronized
         run: git diff --exit-code

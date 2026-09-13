@@ -72,12 +72,15 @@ for (const token of requiredGuardrails) {
   if (!reference.toLowerCase().includes(token.toLowerCase())) errors.push(`guardrail/estado ausente: ${token}`);
 }
 
+// Frases como "não substitui especialista" e "não garante resultado" são
+// guardrails editoriais, não claims positivos. Os padrões abaixo procuram
+// apenas promessas afirmativas.
 const forbiddenClaims = [
-  /garante\s+(resultado|vendas|roi)/i,
+  /(?<!não )garante\s+(resultado|vendas|roi)/i,
   /100%\s+privad[oa]/i,
-  /sem\s+erros/i,
-  /elimina\s+alucina[cç][aã]o/i,
-  /substitui\s+(especialista|revis[aã]o humana)/i,
+  /(?<!não )sem\s+erros/i,
+  /(?<!não )elimina\s+alucina[cç][aã]o/i,
+  /(?<!não )substitui\s+(especialista|revis[aã]o humana)/i,
 ];
 for (const pattern of forbiddenClaims) {
   if (pattern.test(reference)) errors.push(`claim proibido detectado: ${pattern}`);

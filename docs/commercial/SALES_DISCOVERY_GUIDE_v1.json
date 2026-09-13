@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "purpose": "Ajudar conversas internas de descoberta e direcionamento entre os produtos JPN sem pressionar venda, inventar necessidade ou antecipar release.",
+  "sources": [
+    "docs/product-system/PRODUCT_PORTFOLIO_v1.json",
+    "docs/commercial/COMMERCIAL_COPY_CONTRACT_v1.json",
+    "docs/commercial/PRODUCT_FAQ_OBJECTIONS_v1.md"
+  ],
+  "publication_authorized": false,
+  "release_effect": "none",
+  "conversation_principles": [
+    "entender a tarefa antes de sugerir produto",
+    "começar pelo menor recurso suficiente",
+    "aceitar explicitamente quando nenhum produto JPN for necessário",
+    "não usar urgência, escassez, medo ou pressão",
+    "não inventar preço, disponibilidade, prazo, compatibilidade ou resultado",
+    "não solicitar dados pessoais, financeiros, credenciais ou segredos para qualificação"
+  ],
+  "discovery_questions": [
+    {"id":"D1","question":"Qual tarefa ou rotina você quer organizar primeiro?","intent":"identificar o problema concreto sem pressupor produto"},
+    {"id":"D2","question":"Hoje o principal problema é estruturar instruções, começar de modelos, repetir processos, usar uma ferramenta guiada ou acompanhar a operação?","intent":"distinguir necessidade metodológica, biblioteca, processo, ferramenta ou planilha"},
+    {"id":"D3","question":"Você já tem um processo que funciona e só quer padronizar, ou ainda está definindo como fazer?","intent":"evitar recomendar material redundante"},
+    {"id":"D4","question":"Isso precisa ser usado por uma pessoa ou por uma pequena equipe?","intent":"entender necessidade de padronização e compartilhamento sem coletar identificação"},
+    {"id":"D5","question":"Você precisa apenas organizar o trabalho ou também acompanhar cadastros, movimentações e indicadores operacionais?","intent":"separar produtos de IA da Gestão Fácil"},
+    {"id":"D6","question":"Existe alguma ferramenta ou processo atual que já resolve isso de forma suficiente?","intent":"permitir conclusão honesta de que nenhum produto adicional é necessário"}
+  ],
+  "routing": [
+    {
+      "product_id":"metodo-jpn",
+      "signals":["pedido vago ou inconsistente","dificuldade em explicitar contexto e restrições","necessidade de critério de revisão"],
+      "qualifying_question":"Você quer aprender uma estrutura para formular melhor a tarefa, sem depender de uma biblioteca pronta?",
+      "do_not_recommend_when":"o usuário já possui processo consistente e não precisa de nova camada metodológica"
+    },
+    {
+      "product_id":"jpn-prompt-pack",
+      "signals":["tarefas recorrentes já compreendidas","necessidade de pontos de partida reutilizáveis","retrabalho ao reconstruir prompts"],
+      "qualifying_question":"Uma biblioteca de modelos adaptáveis ajudaria mais do que criar cada instrução do zero?",
+      "do_not_recommend_when":"o usuário prefere construir poucos prompts próprios e já os mantém organizados"
+    },
+    {
+      "product_id":"jpn-business",
+      "signals":["rotinas empresariais dependentes de memória","procedimentos dispersos","necessidade de padronizar atendimento, vendas, marketing ou operação"],
+      "qualifying_question":"O problema principal é transformar tarefas recorrentes da empresa em processos claros e repetíveis?",
+      "do_not_recommend_when":"procedimentos existentes já são claros, usados e suficientes"
+    },
+    {
+      "product_id":"jpn-prompt-builder",
+      "signals":["necessidade de interface guiada","reutilização frequente de trabalhos JPN","preferência por organização local"],
+      "qualifying_question":"Você ganha valor ao montar, revisar e reutilizar estruturas JPN em uma interface guiada?",
+      "do_not_recommend_when":"a tarefa é simples e escrever diretamente no chat já resolve; QA físico contextual em celular segue pendente"
+    },
+    {
+      "product_id":"jpn-gestao-facil",
+      "signals":["necessidade de organização operacional simples","cadastros e movimentações espalhados","indicadores básicos sem necessidade de ERP completo"],
+      "qualifying_question":"Você precisa de uma planilha simples para acompanhar a operação sem substituir ERP ou contabilidade?",
+      "do_not_recommend_when":"ERP ou sistema atual já cobre o acompanhamento necessário; QA multiplataforma segue pendente"
+    },
+    {
+      "product_id":"jpn-pro-kit",
+      "signals":["necessidade comprovada de vários componentes JPN","uso combinado de método, biblioteca, playbooks, ferramenta e/ou planilha"],
+      "qualifying_question":"Há necessidade real de vários componentes, em vez de começar por um produto isolado?",
+      "do_not_recommend_when":"um produto isolado resolve; estado atual permanece EM PREPARAÇÃO"
+    }
+  ],
+  "safe_outcomes": [
+    "recomendar um único produto como próximo passo interno",
+    "indicar comparação entre dois produtos quando a necessidade estiver ambígua",
+    "concluir que nenhum produto JPN é necessário no momento",
+    "registrar lacuna de informação sem inventar resposta",
+    "encerrar sem CTA comercial quando o produto ainda estiver bloqueado por release"
+  ],
+  "blocked_behaviors": [
+    "coletar cartão, conta bancária, CPF ou outro dado financeiro/identificação",
+    "informar preço, desconto, bônus, disponibilidade ou prazo não canônico",
+    "prometer aumento de vendas, redução de custos, economia de horas ou ROI",
+    "tratar Pro Kit, Prompt Builder, Gestão Fácil ou qualquer candidato como release final sem gate formal",
+    "pressionar o usuário a escolher a opção mais abrangente"
+  ]
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>JPN Prompt Pack — Seletor local</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">JPN Prompt Pack · ferramenta local</p>
+      <h1>Escolha o menor template suficiente para a tarefa.</h1>
+      <p class="lead">Descreva o objetivo, selecione uma categoria opcional e marque os riscos relevantes. O seletor recomenda candidatos entre os 18 templates canônicos sem enviar dados, executar ações ou chamar APIs externas.</p>
+      <div class="notice" role="note"><strong>Estado:</strong> apoio à seleção. Não é automação, autorização de ação externa nem promessa de resultado.</div>
+    </header>
+
+    <section class="panel" aria-labelledby="selection-title">
+      <h2 id="selection-title">1. Classifique a tarefa</h2>
+      <label for="goal">Objetivo real</label>
+      <textarea id="goal" rows="4" placeholder="Ex.: preciso comparar duas opções com critérios claros"></textarea>
+
+      <label for="category">Categoria preferida <span>(opcional)</span></label>
+      <select id="category">
+        <option value="">Todas as categorias</option>
+      </select>
+
+      <fieldset>
+        <legend>Há algum destes riscos?</legend>
+        <label class="check"><input type="checkbox" id="external-action"> ação externa (publicar, enviar, comprar, alterar conta)</label>
+        <label class="check"><input type="checkbox" id="spend"> gasto, compra ou contratação</label>
+        <label class="check"><input type="checkbox" id="sensitive"> credencial, segredo ou dado sensível</label>
+        <label class="check"><input type="checkbox" id="commercial"> preço, estoque, desconto, prazo ou condição comercial não confirmada</label>
+        <label class="check"><input type="checkbox" id="specialized"> decisão jurídica, médica, financeira, tributária, contábil ou especializada</label>
+      </fieldset>
+
+      <div class="actions">
+        <button id="recommend" type="button">Recomendar templates</button>
+        <button id="clear" type="button" class="secondary">Limpar</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="result-title" aria-live="polite">
+      <h2 id="result-title">2. Candidatos</h2>
+      <div id="stop-alert" class="stop-alert" hidden></div>
+      <p id="result-summary" class="muted">Preencha o objetivo ou escolha uma categoria para começar.</p>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section class="panel compact" aria-labelledby="method-title">
+      <h2 id="method-title">3. Antes de usar</h2>
+      <ol>
+        <li>Confirme se o template resolve o objetivo sem ampliar o escopo.</li>
+        <li>Separe fatos confirmados, inferências, desconhecidos e conflitos.</li>
+        <li>Preencha Jornada, Precisão e Narrativa apenas com contexto necessário.</li>
+        <li>Pare antes de qualquer ação externa não autorizada ou informação material não confirmada.</li>
+        <li>Revise a saída e decida: reutilizar, adaptar, trocar ou parar.</li>
+      </ol>
+    </section>
+
+    <footer>
+      <p>JPN Prompt Pack · seletor offline candidato · nenhum dado é transmitido.</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -4,8 +4,10 @@ import path from 'node:path';
 const root = process.cwd();
 const workflowPath = path.join(root, '.github/workflows/ci.yml');
 const docPath = path.join(root, 'docs/product-system/STACKED_PR_CI_v1.md');
+const packagePath = path.join(root, 'package.json');
 const workflow = await readFile(workflowPath, 'utf8');
 const doc = await readFile(docPath, 'utf8');
+const packageJson = JSON.parse(await readFile(packagePath, 'utf8'));
 const errors = [];
 
 const requireText = (text, fragment, label) => {
@@ -23,8 +25,30 @@ requireText(workflow, 'node-version: 22', 'workflow');
 requireText(workflow, "python-version: '3.12'", 'workflow');
 requireText(workflow, 'npm run typecheck', 'workflow');
 requireText(workflow, 'npm test', 'workflow');
-requireText(workflow, 'npm run build', 'workflow');
+requireText(workflow, 'npx tsc -p tsconfig.json', 'workflow');
 requireText(workflow, 'git diff --exit-code', 'workflow');
+
+for (const phase of [
+  'Compile SDK and browser bundle',
+  'Prompt Builder gates',
+  'Core product and editorial gates',
+  'Release and Pro Kit gates',
+  'Visual and editorial gates',
+  'Commercial gates',
+  'Gestão Fácil gates',
+  'Generated review artifacts',
+]) {
+  requireText(workflow, `- name: ${phase}`, 'workflow');
+}
+
+const buildScript = packageJson?.scripts?.build ?? '';
+const buildRunCommands = [...buildScript.matchAll(/npm run ([\w:-]+)/g)].map((match) => `npm run ${match[1]}`);
+if (buildRunCommands.length === 0) {
+  errors.push('package.json: script build sem comandos npm run detectáveis.');
+}
+for (const command of buildRunCommands) {
+  requireText(workflow, command, 'workflow coverage');
+}
 
 const pullRequestBlock = workflow.match(/\n  pull_request:\s*\n([\s\S]*?)(?=\n[a-zA-Z][^\n]*:|\npermissions:)/)?.[1] ?? '';
 if (/branches\s*:/.test(pullRequestBlock)) {
@@ -56,4 +80,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log('Stacked PR CI check OK: PRs empilhados cobertos sem promover gates humanos, externos ou de release.');
+console.log(`Stacked PR CI check OK: ${buildRunCommands.length} comandos do build cobertos em fases diagnosticáveis, sem promover gates humanos, externos ou de release.`);

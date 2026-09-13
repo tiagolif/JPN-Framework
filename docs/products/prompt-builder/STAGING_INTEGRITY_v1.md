@@ -11,7 +11,7 @@ Garantir que o bundle offline interno do JPN Prompt Builder possa ser preparado 
 
 O preflight depende do bundle browser já construído em `dist/browser/index.js`, portanto o fluxo normal de `npm run build` continua executando `build:browser` antes da verificação.
 
-## Arquivos rastreados
+## Arquivos copiados e verificados byte a byte
 
 O manifesto de staging acompanha:
 
@@ -22,7 +22,20 @@ O manifesto de staging acompanha:
 5. `dist/browser/index.js`
 6. `INSTRUCOES_DE_ACESSO.txt`
 
-Para cada arquivo, o staging compara bytes e SHA-256 entre a fonte e a cópia entregue. Qualquer divergência interrompe o processo.
+Para cada um desses arquivos, o staging compara bytes e SHA-256 entre a fonte e a cópia entregue. Qualquer divergência interrompe o processo.
+
+## Documentos candidatos gerados
+
+O staging também gera quatro documentos em `customer-docs-candidate/` para antecipar a estrutura do futuro pacote ao cliente:
+
+1. `LEIA-ME.md`
+2. `GUIA_RAPIDO.md`
+3. `BACKUP_E_EXPORTACAO.md`
+4. `PRIVACIDADE_E_LIMITES.md`
+
+Esses documentos são derivados apenas de fontes canônicas existentes. Todos recebem aviso explícito de **CANDIDATO INTERNO — NÃO É RELEASE FINAL**.
+
+O manifesto registra bytes e SHA-256 de cada documento gerado, além de `final_slot_materialized: false`. Assim, é possível comparar o staging entre execuções sem confundir esses hashes com checksums finais de distribuição.
 
 ## Manifesto
 
@@ -34,11 +47,15 @@ Para cada arquivo, o staging compara bytes e SHA-256 entre a fonte e a cópia en
 - `final_bundle: false`;
 - `publication_authorized: false`;
 - ausência de URL pública e de dependência de conta externa;
-- bytes e SHA-256 por arquivo;
-- confirmação `source_matches_staged: true`;
-- `source_state_digest`, calculado deterministicamente a partir dos arquivos rastreados.
+- bytes e SHA-256 dos arquivos copiados;
+- confirmação `source_matches_staged: true` para cópias byte a byte;
+- `distribution_projection.status: candidate-only`;
+- os quatro nomes previstos para os slots documentais finais;
+- os gates obrigatórios `qa-fisico-contextual-celular`, `ci-final` e `pacote-offline-final`;
+- bytes e SHA-256 dos documentos candidatos gerados;
+- `source_state_digest`, calculado deterministicamente sobre arquivos copiados e documentos candidatos.
 
-O digest identifica o estado técnico das fontes usadas no staging. Ele não é hash final de release e não substitui revisão funcional, visual ou CI do head definitivo.
+O digest identifica o estado técnico do staging. Ele não é hash final de release e não substitui revisão funcional, visual, física ou CI do head definitivo.
 
 ## Condições de falha
 
@@ -46,21 +63,24 @@ O preflight falha se:
 
 - algum arquivo obrigatório do site estiver ausente;
 - o bundle browser não existir;
-- as instruções de acesso não existirem;
-- bytes ou SHA-256 da cópia staged divergirem da fonte.
+- qualquer fonte documental necessária estiver ausente;
+- bytes ou SHA-256 de uma cópia staged divergirem da fonte;
+- a geração de qualquer documento candidato não puder ser concluída.
 
 ## O que este gate não aprova
 
 Passar neste preflight não significa que:
 
 - o bundle está congelado para distribuição;
-- o Prompt Builder passou por QA final de navegador/dispositivo;
+- `JPN_Prompt_Builder_Offline.zip` existe como release final;
+- os quatro documentos candidatos estão editorialmente aprovados;
+- o Prompt Builder passou por QA físico/contextual em celular real;
 - a revisão visual final foi concluída;
 - o head definitivo passou em CI;
 - existe URL pública;
 - publicação, anúncio, venda ou checkout estão autorizados.
 
-A promoção para bundle final deve ocorrer apenas quando os gates formais de release tiverem evidência suficiente e o estado congelado estiver identificado por hashes finais separados.
+A promoção para bundle final deve ocorrer apenas quando os gates formais de release tiverem evidência suficiente, os documentos candidatos forem revisados e o estado congelado estiver identificado por hashes finais separados.
 
 ## Guardrails
 

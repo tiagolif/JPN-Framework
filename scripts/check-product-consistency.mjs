@@ -72,11 +72,13 @@ for (const template of promptIndex.templates) {
   }
 }
 
+// Claims explicitamente negados (por exemplo, "não elimina alucinações") são
+// guardrails editoriais e não devem ser tratados como promessa positiva.
 const forbiddenClaims = [
-  /elimina(?:r)? alucina(?:ções|cao|ção)/i,
-  /garante? (?:vendas|resultado|produtividade)/i,
-  /melhora .*\d+%/i,
-  /reduz .*\d+%/i
+  /(?<!não )elimina(?:r)? alucina(?:ções|cao|ção)/i,
+  /(?<!não )garante? (?:vendas|resultado|produtividade)/i,
+  /(?<!não )melhora .*\d+%/i,
+  /(?<!não )reduz .*\d+%/i
 ];
 for (const [label, content] of [["Método", method], ["Prompt Pack", promptDoc], ["JPN Business", businessDoc]]) {
   for (const pattern of forbiddenClaims) {

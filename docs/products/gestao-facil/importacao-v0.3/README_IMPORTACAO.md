@@ -14,6 +14,31 @@ Este kit ajuda uma pequena empresa a preparar dados para a candidata **JPN Gest�
 
 Os cabeçalhos seguem `WORKBOOK_SPEC_v0.3.json`. Os arquivos são modelos de preparação: antes de colar ou importar qualquer conteúdo no XLSX, faça uma cópia de trabalho e confirme o comportamento no aplicativo usado.
 
+## Validação local antes de importar
+
+O repositório inclui `scripts/validate-gestao-facil-import.mjs`, uma ferramenta **somente leitura** para conferir um CSV antes da carga.
+
+Uso:
+
+```bash
+node scripts/validate-gestao-facil-import.mjs clientes caminho/clientes.csv
+node scripts/validate-gestao-facil-import.mjs vendas caminho/vendas.csv
+node scripts/validate-gestao-facil-import.mjs tarefas caminho/tarefas.csv
+node scripts/validate-gestao-facil-import.mjs estoque caminho/estoque.csv
+node scripts/validate-gestao-facil-import.mjs financeiro caminho/financeiro.csv
+```
+
+A ferramenta verifica:
+
+- nomes e ordem exata dos cabeçalhos;
+- quantidade de colunas por linha;
+- `ID`/`Código` vazio ou duplicado dentro do arquivo;
+- datas em `AAAA-MM-DD` ou `DD/MM/AAAA`;
+- `Valor total` e `Reposição?` vazios quando devem ser calculados no XLSX;
+- indícios simples de credenciais/chaves ou sequência semelhante a número de cartão, gerando aviso para revisão humana.
+
+Ela **não importa**, não grava, não corrige automaticamente, não altera o XLSX e não valida regras específicas do aplicativo de planilha. Um resultado `OK` significa apenas que o CSV está estruturalmente compatível com o contrato v0.3.
+
 ## Regras de segurança
 
 1. Use UTF-8 e separador vírgula ao editar estes modelos.
@@ -28,10 +53,11 @@ Os cabeçalhos seguem `WORKBOOK_SPEC_v0.3.json`. Os arquivos são modelos de pre
 
 1. Faça uma cópia do XLSX candidato.
 2. Prepare os dados em um dos CSVs deste diretório.
-3. Valide IDs, datas, listas e campos obrigatórios.
-4. Importe ou cole primeiro poucas linhas.
-5. Confira validações, fórmulas e Dashboard.
-6. Só então avance para lotes maiores.
+3. Rode o validador local correspondente ao arquivo.
+4. Corrija erros estruturais e revise eventuais avisos de conteúdo sensível.
+5. Importe ou cole primeiro poucas linhas.
+6. Confira validações, fórmulas e Dashboard.
+7. Só então avance para lotes maiores.
 
 ## Cuidados por arquivo
 
@@ -59,6 +85,7 @@ O arquivo é entregue sem exemplos monetários. Preencha somente quando houver n
 
 Considere um lote preparado quando:
 
+- o validador local retorna `OK`;
 - IDs não estão vazios e não se repetem dentro da mesma tabela;
 - datas usam um padrão consistente;
 - campos categóricos correspondem às opções da aba `Listas`;
@@ -66,4 +93,4 @@ Considere um lote preparado quando:
 - não há credenciais ou informação sensível desnecessária;
 - uma amostra pequena foi testada antes da carga completa.
 
-Este kit não altera o estado de release da Gestão Fácil. `release_ready` permanece `false` até conclusão dos gates físicos e multiplataforma.
+Este kit e seu validador não alteram o estado de release da Gestão Fácil. `release_ready` permanece `false` até conclusão dos gates físicos e multiplataforma.

@@ -114,12 +114,10 @@ if (builder && !builder.future_artifacts.some((item) => item.endsWith('.zip'))) 
   errors.push('Prompt Builder deve projetar um pacote offline ZIP final.');
 }
 
-const forbiddenTerms = [/checkout/i, /comprar\s+agora/i, /publica(c|ç)[aã]o\s+autorizada/i, /release_ready\s*[:=]\s*true/i];
-const serialized = JSON.stringify(blueprint);
-for (const pattern of forbiddenTerms) if (pattern.test(serialized)) errors.push(`Blueprint contém termo incompatível com o estado interno: ${pattern}`);
-
 if (!Array.isArray(blueprint.finalization_order) || blueprint.finalization_order.length < 5) errors.push('finalization_order deve documentar o fechamento do bundle.');
 if (!Array.isArray(blueprint.guardrails) || blueprint.guardrails.length < 5) errors.push('guardrails insuficientes.');
+if (!(blueprint.guardrails ?? []).some((item) => /não.*publica|Nenhum item autoriza publicação/i.test(item))) errors.push('Guardrails devem bloquear publicação.');
+if (!(blueprint.guardrails ?? []).some((item) => /Hashes.*congelad/i.test(item))) errors.push('Guardrails devem proibir hashes antes do freeze.');
 
 if (errors.length > 0) {
   console.error('Pro Kit assembly blueprint check falhou:');

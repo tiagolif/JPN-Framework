@@ -1,0 +1,103 @@
+{
+  "version": "1.0.0",
+  "purpose": "Estruturar a copy comercial interna do ecossistema JPN sem autorizar publicação, oferta ou transação.",
+  "source": "docs/commercial/COPY_BANK_v1.md",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "ecosystem": {
+    "signature": "JPN — Jornada · Precisão · Narrativa.",
+    "institutional": "Uma estrutura para organizar contexto, restrições, decisões e forma de saída antes de executar trabalho com IA.",
+    "short_lines": [
+      "Contexto antes da resposta.",
+      "Estruture antes de executar.",
+      "Menos suposição. Mais contexto explícito.",
+      "Jornada · Precisão · Narrativa.",
+      "Reutilize sem perder o que importa.",
+      "Transforme tarefas em processos revisáveis.",
+      "Comece pelo menor recurso suficiente.",
+      "Lacuna identificada é melhor que certeza inventada."
+    ]
+  },
+  "products": [
+    {
+      "product_id": "metodo-jpn",
+      "headline": "Estruture melhor a tarefa antes de pedir a resposta.",
+      "subheadline": "Use Jornada, Precisão e Narrativa para organizar contexto, fatos, restrições, lacunas, critérios e formato de saída.",
+      "short_description": "Método de estruturação para transformar uma intenção vaga em uma instrução mais clara e revisável.",
+      "neutral_cta": "Conhecer o Método JPN",
+      "mandatory_limit": "Não garante resposta correta nem resultado comercial; a qualidade final também depende do modelo, dos dados, da tarefa e da revisão humana."
+    },
+    {
+      "product_id": "jpn-prompt-pack",
+      "headline": "Comece de um ponto estruturado, não de uma tela em branco.",
+      "subheadline": "Uma biblioteca com 18 templates canônicos para adaptar tarefas recorrentes sem perder contexto e restrições importantes.",
+      "short_description": "Prompts reutilizáveis alinhados ao Método JPN para comunicação, análise, operação, documentação e trabalho com IA.",
+      "neutral_cta": "Explorar os 18 templates",
+      "mandatory_limit": "Os templates podem ser adaptados a diferentes ferramentas, mas compatibilidade e comportamento específicos devem ser testados no ambiente real."
+    },
+    {
+      "product_id": "jpn-business",
+      "headline": "Transforme tarefas recorrentes em processos mais claros.",
+      "subheadline": "Doze playbooks empresariais conectam prompts, contexto, responsabilidades, critérios e próximos passos para rotinas de pequenas empresas.",
+      "short_description": "Biblioteca operacional para estruturar fluxos de atendimento, vendas, marketing, gestão, operações e conhecimento.",
+      "neutral_cta": "Ver os 12 playbooks",
+      "mandatory_limit": "Não administra uma empresa sozinho e não substitui decisões humanas, aconselhamento profissional, sistemas fiscais, financeiros ou operacionais."
+    },
+    {
+      "product_id": "jpn-prompt-builder",
+      "headline": "Monte e revise estruturas JPN de forma guiada.",
+      "subheadline": "Uma ferramenta web candidata para criar, revisar, salvar e reutilizar trabalhos JPN com uma camada contextual conservadora.",
+      "short_description": "Interface local para organizar prompts e trabalhos JPN preservando estrutura, contexto e pendências explícitas.",
+      "neutral_cta": "Conhecer o Prompt Builder",
+      "mandatory_limit": "A arquitetura candidata é local/offline, mas o QA físico contextual em celular continua pendente. Não usar claims absolutos como ‘100% privado’ sem evidência do release final."
+    },
+    {
+      "product_id": "jpn-gestao-facil",
+      "headline": "Organize a rotina da pequena empresa em uma planilha prática.",
+      "subheadline": "Uma estrutura simples para acompanhar cadastros, movimentações e indicadores operacionais sem transformar a planilha em ERP ou sistema contábil.",
+      "short_description": "Planilha operacional candidata para pequenas empresas que precisam de uma camada simples de organização e acompanhamento.",
+      "neutral_cta": "Conhecer a Gestão Fácil",
+      "mandatory_limit": "O QA multiplataforma do mesmo XLSX candidato continua pendente em Microsoft Excel, LibreOffice Calc e Google Sheets. REPOR é apenas alerta operacional, não autorização automática de compra."
+    },
+    {
+      "product_id": "jpn-pro-kit",
+      "headline": "Um conjunto integrado para quem realmente precisa de vários componentes JPN.",
+      "subheadline": "Reúne materiais do ecossistema em uma entrega coordenada, preservando os limites e gates de cada componente.",
+      "short_description": "Pacote integrado do ecossistema JPN para cenários em que método, prompts, playbooks, ferramentas e materiais complementares fazem sentido juntos.",
+      "neutral_cta": "Entender o Pro Kit",
+      "mandatory_limit": "Estado atual: EM PREPARAÇÃO. Não recomendar automaticamente por ser mais abrangente e não informar disponibilidade sem decisão formal de release."
+    }
+  ],
+  "approved_navigation_ctas": [
+    "Conhecer o produto",
+    "Ver como funciona",
+    "Explorar os casos de uso",
+    "Comparar os produtos",
+    "Ver os primeiros passos",
+    "Consultar as perguntas frequentes",
+    "Abrir a demonstração interna",
+    "Entender os limites atuais"
+  ],
+  "blocked_claim_patterns": [
+    "aumenta vendas",
+    "reduz custos em X%",
+    "economiza X horas",
+    "melhora respostas em X%",
+    "elimina erros",
+    "sem erros",
+    "funciona em qualquer IA sem adaptação",
+    "100% privado",
+    "substitui funcionário, consultor, contador ou ERP",
+    "garante resultado",
+    "últimas vagas",
+    "últimas unidades"
+  ],
+  "guardrails": [
+    "não inventar preço, desconto, bônus, prazo, disponibilidade ou canal de venda",
+    "não usar urgência artificial ou escassez inventada",
+    "não promover candidato interno como release final",
+    "não afirmar compatibilidade universal",
+    "não omitir limitação material quando ela for relevante para a afirmação",
+    "não usar dados pessoais, financeiros, credenciais ou informação sensível"
+  ]
+}

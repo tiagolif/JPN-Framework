@@ -1,0 +1,129 @@
+{
+  "version": "1.0.0",
+  "product_id": "jpn-pro-kit",
+  "canonical_name": "JPN Pro Kit",
+  "state": "assembly-blueprint-internal",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "bundle_root": "JPN_Pro_Kit_v1",
+  "purpose": "Definir a montagem futura do bundle sem materializar artefatos finais, hashes ou release antes dos respectivos gates.",
+  "component_slots": [
+    {
+      "slot": "00_LEIA_PRIMEIRO",
+      "kind": "pro-kit-navigation",
+      "product_id": "jpn-pro-kit",
+      "candidate_sources": [
+        "docs/products/pro-kit/LEIA_PRIMEIRO.md",
+        "docs/products/pro-kit/DELIVERY_MAP.md",
+        "docs/products/pro-kit/USAGE_ROUTING_GUIDE_v1.md"
+      ],
+      "future_artifacts": [
+        "00_LEIA_PRIMEIRO/LEIA_PRIMEIRO.pdf",
+        "00_LEIA_PRIMEIRO/DELIVERY_MAP.pdf"
+      ],
+      "required_component_gates": [],
+      "materialization_status": "blocked-until-final-freeze"
+    },
+    {
+      "slot": "01_METODO_JPN",
+      "kind": "product",
+      "product_id": "metodo-jpn",
+      "candidate_sources": [
+        "docs/products/metodo-jpn/METODO_JPN_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_QUICK_REFERENCE_v1.md",
+        "docs/products/metodo-jpn/METODO_JPN_PRACTICE_WORKBOOK_v1.md"
+      ],
+      "future_artifacts": [
+        "01_METODO_JPN/METODO_JPN_v1.pdf"
+      ],
+      "required_component_gates": ["revisao-editorial-humana", "pdf-final"],
+      "materialization_status": "blocked-by-component-gates"
+    },
+    {
+      "slot": "02_PROMPT_PACK",
+      "kind": "product",
+      "product_id": "jpn-prompt-pack",
+      "candidate_sources": [
+        "docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md",
+        "docs/products/prompt-pack/JPN_PROMPT_PACK_QUICK_REFERENCE_v1.md",
+        "docs/products/prompt-pack/PROMPT_INDEX.json",
+        "docs/products/prompt-pack/PROMPT_SELECTION_WORKBOOK_v1.md"
+      ],
+      "future_artifacts": [
+        "02_PROMPT_PACK/JPN_PROMPT_PACK_v1.pdf",
+        "02_PROMPT_PACK/PROMPT_INDEX.json"
+      ],
+      "required_component_gates": ["revisao-editorial-humana", "pdf-final"],
+      "materialization_status": "blocked-by-component-gates"
+    },
+    {
+      "slot": "03_JPN_BUSINESS",
+      "kind": "product",
+      "product_id": "jpn-business",
+      "candidate_sources": [
+        "docs/products/jpn-business/JPN_BUSINESS_v1.md",
+        "docs/products/jpn-business/JPN_BUSINESS_QUICK_REFERENCE_v1.md",
+        "docs/products/jpn-business/BUSINESS_INDEX.json",
+        "docs/products/jpn-business/IMPLEMENTATION_WORKBOOK_v1.md",
+        "docs/products/jpn-business/OPERATIONAL_SCORECARD_v1.md",
+        "docs/products/jpn-business/30_DAY_IMPLEMENTATION_SPRINT_v1.md",
+        "docs/products/jpn-business/WEEKLY_OPERATING_REVIEW_v1.md"
+      ],
+      "future_artifacts": [
+        "03_JPN_BUSINESS/JPN_BUSINESS_v1.pdf",
+        "03_JPN_BUSINESS/BUSINESS_INDEX.json"
+      ],
+      "required_component_gates": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"],
+      "materialization_status": "blocked-by-component-gates"
+    },
+    {
+      "slot": "04_PROMPT_BUILDER",
+      "kind": "product",
+      "product_id": "jpn-prompt-builder",
+      "candidate_sources": [
+        "product-site/index.html",
+        "docs/products/prompt-builder/PROMPT_BUILDER_QUICK_START_v1.md",
+        "docs/products/prompt-builder/OFFLINE_DELIVERY_v1.md"
+      ],
+      "future_artifacts": [
+        "04_PROMPT_BUILDER/JPN_Prompt_Builder_Offline.zip",
+        "04_PROMPT_BUILDER/LEIA-ME.md"
+      ],
+      "required_component_gates": ["qa-fisico-contextual-celular", "ci-final", "pacote-offline-final"],
+      "materialization_status": "blocked-by-component-gates"
+    },
+    {
+      "slot": "05_GESTAO_FACIL",
+      "kind": "product",
+      "product_id": "jpn-gestao-facil",
+      "candidate_sources": [
+        "docs/products/gestao-facil/WORKBOOK_SPEC_v0.3.json",
+        "docs/products/gestao-facil/MANUAL_v0.1.md",
+        "docs/products/gestao-facil/QUICK_START_v0.1.md"
+      ],
+      "future_artifacts": [
+        "05_GESTAO_FACIL/JPN_Gestao_Facil_FINAL.xlsx",
+        "05_GESTAO_FACIL/MANUAL_GESTAO_FACIL_v1.pdf"
+      ],
+      "required_component_gates": ["gf-qa-10", "arquivo-final-validado"],
+      "materialization_status": "blocked-by-component-gates"
+    }
+  ],
+  "pro_kit_release_gates": ["artefatos-congelados", "hashes-finais", "ci-final"],
+  "finalization_order": [
+    "Fechar gates dos produtos componentes com evidência aceitável.",
+    "Materializar somente os artefatos finais aprovados nos slots definidos.",
+    "Congelar a árvore final do bundle e registrar o commit-fonte.",
+    "Calcular SHA-256 somente depois do congelamento.",
+    "Executar CI no mesmo head candidato.",
+    "Somente após todos os gates, gerar manifesto final; publicação continua exigindo autorização separada."
+  ],
+  "guardrails": [
+    "Este blueprint não é um pacote de distribuição.",
+    "future_artifacts descreve destinos futuros e não afirma que os arquivos já existem.",
+    "Nenhum artefato final deve ser fabricado ou marcado como aprovado por inferência.",
+    "Hashes só podem ser calculados sobre a árvore final congelada.",
+    "A Gestão Fácil deve usar o arquivo final validado; o XLSX v0.1 histórico não deve ser promovido por engano.",
+    "Nenhum item autoriza publicação, venda, anúncio, checkout, gasto, aceite legal ou uso de dados financeiros reais."
+  ]
+}

@@ -11,6 +11,9 @@ const errors = [];
 const requireText = (text, fragment, label) => {
   if (!text.includes(fragment)) errors.push(`${label}: trecho obrigatório ausente: ${fragment}`);
 };
+const requirePattern = (text, pattern, label, description) => {
+  if (!pattern.test(text)) errors.push(`${label}: trecho obrigatório ausente: ${description}`);
+};
 
 requireText(workflow, 'pull_request:', 'workflow');
 requireText(workflow, 'branches: [main]', 'workflow');
@@ -37,8 +40,8 @@ for (const forbidden of ['workflow_dispatch:', 'schedule:', 'deployment:', 'page
   if (workflow.includes(forbidden)) errors.push(`workflow: configuração fora do escopo detectada: ${forbidden}`);
 }
 
+requirePattern(doc, /\*{0,2}não\*{0,2}\s+substitui/i, 'documentação', 'não substitui');
 for (const fragment of [
-  'não substitui',
   'QA físico/contextual',
   'Excel, LibreOffice Calc e Google Sheets',
   'evidência de desenvolvimento',

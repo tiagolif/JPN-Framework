@@ -29,7 +29,7 @@
       "product_id": "jpn-prompt-pack",
       "package_root": "dist/jpn-prompt-pack/",
       "release_filename": "JPN_Prompt_Pack.pdf",
-      "index_filename": "LEIA-ME.md",
+      "index_filename": "INDICE_DE_PROMPTS.md",
       "slots": [
         {"id": "principal", "path": "JPN_Prompt_Pack.pdf", "source_manifest_item": "PDF final do Prompt Pack", "requires": ["revisao-editorial-humana", "pdf-final"]},
         {"id": "indice", "path": "INDICE_DE_PROMPTS.md", "source_manifest_item": "índice dos prompts canônicos", "requires": ["pdf-final"]},
@@ -42,7 +42,7 @@
       "product_id": "jpn-business",
       "package_root": "dist/jpn-business/",
       "release_filename": "JPN_Business.pdf",
-      "index_filename": "LEIA-ME.md",
+      "index_filename": "INDICE_PLAYBOOKS.md",
       "slots": [
         {"id": "principal", "path": "JPN_Business.pdf", "source_manifest_item": "PDF final do JPN Business", "requires": ["revisao-editorial-humana", "diagramacao-final", "pdf-final"]},
         {"id": "indice", "path": "INDICE_PLAYBOOKS.md", "source_manifest_item": "índice dos 12 playbooks", "requires": ["pdf-final"]},

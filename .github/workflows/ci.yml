@@ -55,19 +55,38 @@ jobs:
           npm run check:prompt-builder-staging
           npm run check:prompt-builder-quick-start
 
-      - name: Core product and editorial gates
-        run: |
-          npm run check:product-consistency
-          npm run check:metodo-cross-product
-          npm run check:jpn-business-links
-          npm run check:prompt-pack-qa
-          npm run check:prompt-pack-selection-workbook
-          npm run check:jpn-business-print-candidate
-          npm run check:core-editorial-hygiene
-          npm run check:core-terminology
-          npm run check:product-portfolio
-          npm run check:deliverable-catalog
-          npm run check:product-release-status
+      - name: Core - product consistency
+        run: npm run check:product-consistency
+
+      - name: Core - Metodo cross-product
+        run: npm run check:metodo-cross-product
+
+      - name: Core - Business links
+        run: npm run check:jpn-business-links
+
+      - name: Core - Prompt Pack QA
+        run: npm run check:prompt-pack-qa
+
+      - name: Core - Prompt Pack selection workbook
+        run: npm run check:prompt-pack-selection-workbook
+
+      - name: Core - Business print candidate
+        run: npm run check:jpn-business-print-candidate
+
+      - name: Core - editorial hygiene
+        run: npm run check:core-editorial-hygiene
+
+      - name: Core - terminology
+        run: npm run check:core-terminology
+
+      - name: Core - product portfolio
+        run: npm run check:product-portfolio
+
+      - name: Core - deliverable catalog
+        run: npm run check:deliverable-catalog
+
+      - name: Core - product release status
+        run: npm run check:product-release-status
 
       - name: Release and Pro Kit gates
         run: |

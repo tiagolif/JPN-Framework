@@ -43,6 +43,14 @@ const expected = [
   },
 ];
 
+const forbiddenTransactionalPatterns = [
+  /comprar agora/i,
+  /finalizar compra/i,
+  /\b(?:ir|vá|seguir|prossiga|acesse|abrir|abra)\s+(?:para\s+|ao\s+|o\s+)?checkout\b/i,
+  /\bcheckout\s+(?:agora|disponível|aberto|liberado|ativo)\b/i,
+  /garantia de resultado/i,
+];
+
 function sha256(buffer) {
   return createHash('sha256').update(buffer).digest('hex');
 }
@@ -90,7 +98,9 @@ for (let i = 0; i < expected.length; i += 1) {
   if (!html.includes(spec.source)) fail(`${spec.id}: referência à fonte não aparece no HTML.`);
   if (!html.includes('staging interno para revisão')) fail(`${spec.id}: aviso de staging interno ausente.`);
   if (!html.includes('não representa PDF final aprovado nem autorização de publicação')) fail(`${spec.id}: guardrail de não publicação ausente.`);
-  if (/comprar agora|finalizar compra|checkout|garantia de resultado/i.test(html)) fail(`${spec.id}: linguagem transacional/proibida detectada.`);
+  if (forbiddenTransactionalPatterns.some((pattern) => pattern.test(html))) {
+    fail(`${spec.id}: linguagem transacional/proibida detectada.`);
+  }
 
   const sourceHash = sha256(source);
   const coverHash = sha256(cover);

@@ -16,8 +16,21 @@ O workflow `.github/workflows/ci.yml` deve:
 - cancelar uma execução anterior da mesma PR quando surgir um head mais novo;
 - preparar Node.js 22;
 - preparar Python 3.12, necessário para a build reproduzível da Gestão Fácil v0.3;
-- executar typecheck, testes e `npm run build`;
+- executar typecheck, testes e todos os comandos mecânicos cobertos pelo build canônico;
+- validar também contratos de pacote/entrega ao cliente, onboarding e suporte, operação comercial, roteamento de distribuição e registros de evidência de release;
 - falhar se a build deixar arquivos rastreados fora de sincronia.
+
+## Cobertura adicional de produto
+
+Além dos gates centrais de cada produto, o CI valida camadas que ficam entre “produto pronto no repositório” e “pacote apto a ser entregue”:
+
+- manifestos e contrato dos pacotes de entrega;
+- guia de handoff, onboarding, suporte e tratamento seguro de dados;
+- discovery, demonstração guiada, onboarding comercial, diagnóstico e FAQ/objeções;
+- índice e mapa de distribuição, incluindo dependências e slots projetados de cada produto;
+- contrato e registro de evidências necessários para o futuro freeze.
+
+Esses checks são locais e somente leitura/validação. Eles não materializam pacotes finais nem executam ações externas.
 
 ## O que este CI prova
 

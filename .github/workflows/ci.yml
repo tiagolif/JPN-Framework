@@ -107,12 +107,19 @@ jobs:
           node scripts/check-safe-data-handling.mjs
 
       - name: Commercial operations - discovery and onboarding
-        run: |
-          node scripts/check-sales-discovery-guide.mjs
-          node scripts/check-guided-demo-playbook.mjs
-          node scripts/check-commercial-onboarding.mjs
-          node scripts/check-small-business-diagnostic.mjs
-          node scripts/check-product-faq-objections.mjs
+        run: node scripts/check-sales-discovery-guide.mjs
+
+      - name: Commercial operations - guided demo
+        run: node scripts/check-guided-demo-playbook.mjs
+
+      - name: Commercial operations - onboarding
+        run: node scripts/check-commercial-onboarding.mjs
+
+      - name: Commercial operations - small business diagnostic
+        run: node scripts/check-small-business-diagnostic.mjs
+
+      - name: Commercial operations - FAQ and objections
+        run: node scripts/check-product-faq-objections.mjs
 
       - name: Distribution - package routing
         run: |

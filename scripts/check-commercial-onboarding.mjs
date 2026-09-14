@@ -60,7 +60,7 @@ if (!errors.length) {
     'QA físico contextual em celular',
     'GF-QA-10',
     'EM PREPARAÇÃO',
-    'Método → Prompt Builder',
+    'Método JPN → Prompt Pack → Prompt Builder',
     'Prompt Pack → Business',
     'Business → Gestão Fácil',
     'não bundles',

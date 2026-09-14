@@ -56,7 +56,8 @@ for (const phase of [
   'Commercial - navigation',
   'Commercial - accessibility',
   'Commercial - contrast',
-  'Gestão Fácil gates',
+  'Gestão Fácil - model',
+  'Gestão Fácil - binary',
   'Generated review artifacts',
 ]) {
   requireText(workflow, `- name: ${phase}`, 'workflow');

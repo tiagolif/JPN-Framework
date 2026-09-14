@@ -32,6 +32,8 @@ if (!Array.isArray(portfolio.products) || portfolio.products.length !== 6) {
 
 const objectionAliases = new Map([
   ['jpn-prompt-pack', ['Prompt Pack']],
+  ['jpn-prompt-builder', ['Prompt Builder']],
+  ['jpn-gestao-facil', ['Gestão Fácil']],
 ]);
 
 function representsProduct(content, product, aliases = []) {

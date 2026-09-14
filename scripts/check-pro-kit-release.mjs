@@ -129,8 +129,20 @@ const forbiddenClaims = [
   /melhora(?:r|) .*\b\d+%/,
   /reduz(?:ir|) .*\b\d+%/
 ];
+
+function containsPositiveBlockedClaim(text, pattern) {
+  const matcher = new RegExp(pattern.source, 'g');
+  for (const match of text.matchAll(matcher)) {
+    const prefix = text.slice(Math.max(0, match.index - 24), match.index);
+    if (!/\bnão\s+$/.test(prefix)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 for (const pattern of forbiddenClaims) {
-  if (pattern.test(commercialText)) {
+  if (containsPositiveBlockedClaim(commercialText, pattern)) {
     throw new Error(`Claim bloqueado encontrado no Pro Kit: ${pattern}`);
   }
 }

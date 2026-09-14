@@ -99,7 +99,7 @@ const selectorRequirements = [
   'Comece pelo menor produto suficiente.',
   'SMALL_BUSINESS_DIAGNOSTIC_v1.json',
   'A lógica roda localmente nesta página',
-  'O Pro Kit pode aparecer como resultado?',
+  'O JPN Pro Kit pode aparecer como resultado?',
   'não substitui contabilidade, banco, fiscal, ERP ou auditoria',
 ];
 for (const text of selectorRequirements) {

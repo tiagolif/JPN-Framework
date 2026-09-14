@@ -23,6 +23,11 @@ const blockedPatterns = [
 
 const negationWindow = /(?:não|nao|sem|evitar|proibid[oa]s?|bloquead[oa]s?|não usar|nao usar)[^.!?\n]{0,80}$/iu;
 
+function isNegated(content, index, windowSize = 120) {
+  const before = content.slice(Math.max(0, index - windowSize), index);
+  return negationWindow.test(before);
+}
+
 for (const file of files) {
   const relative = path.relative(root, file).replaceAll('\\', '/');
   const content = fs.readFileSync(file, 'utf8');
@@ -30,8 +35,7 @@ for (const file of files) {
   for (const { re, label } of blockedPatterns) {
     re.lastIndex = 0;
     for (const match of content.matchAll(re)) {
-      const before = content.slice(Math.max(0, match.index - 90), match.index);
-      if (negationWindow.test(before)) continue;
+      if (isNegated(content, match.index, 90)) continue;
       const line = content.slice(0, match.index).split('\n').length;
       errors.push(`${relative}:${line} — ${label}: “${match[0]}”`);
     }
@@ -96,8 +100,22 @@ if (!fs.existsSync(copyBankPath)) {
   const socialLines = socialSection.match(/^- /gmu)?.length ?? 0;
   if (socialLines < 8) errors.push(`COPY_BANK_v1.md deve manter ao menos 8 frases curtas; encontradas ${socialLines}.`);
 
-  if (/\bR\$\s*\d|https?:\/\/|<form\b|checkout|pix\b|cart[aã]o\s+de\s+cr[eé]dito/iu.test(copy)) {
-    errors.push('COPY_BANK_v1.md contém padrão transacional, URL externa, formulário ou dado de pagamento não autorizado.');
+  const transactionalPatterns = [
+    { re: /\bR\$\s*\d/giu, label: 'preço monetário' },
+    { re: /https?:\/\//giu, label: 'URL externa' },
+    { re: /<form\b/giu, label: 'formulário' },
+    { re: /\bcheckout\b/giu, label: 'checkout' },
+    { re: /\bpix\b/giu, label: 'PIX' },
+    { re: /\bcart[aã]o\s+de\s+cr[eé]dito\b/giu, label: 'cartão de crédito' },
+  ];
+
+  for (const { re, label } of transactionalPatterns) {
+    re.lastIndex = 0;
+    for (const match of copy.matchAll(re)) {
+      if (isNegated(copy, match.index)) continue;
+      const line = copy.slice(0, match.index).split('\n').length;
+      errors.push(`COPY_BANK_v1.md:${line} contém ${label} transacional não autorizado: “${match[0]}”.`);
+    }
   }
 }
 

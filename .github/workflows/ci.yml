@@ -141,6 +141,9 @@ jobs:
       - name: Commercial - FAQ
         run: npm run check:commercial-faq
 
+      - name: Commercial - diagnostic
+        run: node scripts/check-commercial-diagnostic-ui.mjs
+
       - name: Commercial - site
         run: npm run check:commercial-site
 

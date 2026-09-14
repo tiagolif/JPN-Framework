@@ -105,12 +105,17 @@ jobs:
           npm run check:pro-kit-manifest
           npm run check:pro-kit-staging
 
-      - name: Visual and editorial gates
-        run: |
-          npm run check:visual-assets
-          npm run check:visual-bounds
-          npm run check:editorial-release
-          npm run check:editorial-review-handoff
+      - name: Visual - assets
+        run: npm run check:visual-assets
+
+      - name: Visual - bounds
+        run: npm run check:visual-bounds
+
+      - name: Editorial - release
+        run: npm run check:editorial-release
+
+      - name: Editorial - review handoff
+        run: npm run check:editorial-review-handoff
 
       - name: Commercial gates
         run: |

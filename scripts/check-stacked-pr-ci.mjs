@@ -42,6 +42,10 @@ for (const phase of [
   'Core - product portfolio',
   'Core - deliverable catalog',
   'Core - product release status',
+  'Customer delivery - package and handoff',
+  'Commercial operations - discovery and onboarding',
+  'Distribution - package routing',
+  'Release evidence - integrity',
   'Release and Pro Kit gates',
   'Visual - assets',
   'Visual - bounds',
@@ -61,6 +65,27 @@ for (const phase of [
   'Generated review artifacts',
 ]) {
   requireText(workflow, `- name: ${phase}`, 'workflow');
+}
+
+for (const command of [
+  'node scripts/check-product-delivery-manifests.mjs',
+  'node scripts/check-customer-package-contract.mjs',
+  'node scripts/check-delivery-handoff-guide.mjs',
+  'node scripts/check-customer-onboarding.mjs',
+  'node scripts/check-customer-support-playbook.mjs',
+  'node scripts/check-safe-data-handling.mjs',
+  'node scripts/check-sales-discovery-guide.mjs',
+  'node scripts/check-guided-demo-playbook.mjs',
+  'node scripts/check-commercial-onboarding.mjs',
+  'node scripts/check-small-business-diagnostic.mjs',
+  'node scripts/check-product-faq-objections.mjs',
+  'node scripts/check-product-distribution-index.mjs',
+  'node scripts/check-product-distribution-source-map.mjs',
+  'node scripts/check-product-feedback-loop.mjs',
+  'node scripts/check-release-evidence-contract.mjs',
+  'node scripts/check-release-evidence-register.mjs',
+]) {
+  requireText(workflow, command, 'workflow extended coverage');
 }
 
 const buildScript = packageJson?.scripts?.build ?? '';
@@ -102,4 +127,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`Stacked PR CI check OK: ${buildRunCommands.length} comandos do build cobertos em fases diagnosticáveis, sem promover gates humanos, externos ou de release.`);
+console.log(`Stacked PR CI check OK: ${buildRunCommands.length} comandos do build cobertos, mais gates de entrega, operação comercial, distribuição e evidência de release, sem promover gates humanos, externos ou de release.`);

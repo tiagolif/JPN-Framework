@@ -117,6 +117,18 @@ jobs:
       - name: Editorial - review handoff
         run: npm run check:editorial-review-handoff
 
+      - name: Commercial copy - social content
+        run: node scripts/check-social-content-library.mjs
+
+      - name: Commercial copy - one-pagers
+        run: node scripts/check-commercial-one-pagers.mjs
+
+      - name: Commercial copy - product page copy
+        run: node scripts/check-product-page-copy.mjs
+
+      - name: Commercial copy - page copy sync
+        run: node scripts/check-commercial-page-copy-sync.mjs
+
       - name: Commercial - copy
         run: npm run check:commercial-copy
 

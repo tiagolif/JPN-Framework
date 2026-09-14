@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "product_id": "jpn-gestao-facil",
   "candidate_version": "0.3",
   "status": "candidate / reproducible build available / cross-app QA pending",
@@ -18,7 +18,7 @@
   "sample_data_policy":{"fictitious_only":true,"sales_values_zero":true,"finance_rows_empty":true,"real_financial_data_required":false},
   "guardrails":["REPOR é somente alerta operacional e não autoriza compra","Financeiro é gerencial e não substitui contabilidade, banco, obrigação fiscal ou auditoria","não registrar senhas, tokens, chaves, número completo de cartão ou credenciais","compatibilidade com Excel, LibreOffice Calc e Google Sheets depende de teste físico","gerar a candidata não implica release_ready=true"],
   "qa_contract":{"auto_cases":"GF3-QA-01..10","physical_cases":"GF3-QA-11..18","physical_status_required":"PENDING"},
-  "reproducible_build":{"script":"scripts/build-gestao-facil-v0.3.py","runtime":"Python 3 / biblioteca padrão somente","network_required":false,"external_dependencies":false,"default_output":"JPN_Gestao_Facil_v0.3_candidata.xlsx","deterministic_zip_timestamp":true,"repository_binary_promoted":false,"note":"o XLSX deve ser gerado pelo script e tratado como candidata até concluir GF3-QA-11..18"},
-  "verified_local_build":{"size_bytes":8860,"sha256":"ffc27adbfcb0f947b443312c83fff1995df8b52157adf0049218631b693b2558","ooxml_zip_valid":true,"artifact_tool_imported":true,"sheets_observed":["Leia-me","Dashboard","Clientes","Vendas","Tarefas","Estoque","Financeiro","Listas"]},
+  "reproducible_build":{"script":"scripts/build-gestao-facil-v0.3.py","runtime":"Python 3 / biblioteca padrão somente","network_required":false,"external_dependencies":false,"default_output":"JPN_Gestao_Facil_v0.3_candidata.xlsx","deterministic_zip_timestamp":true,"repository_binary_promoted":false,"verification_mode":"two independent CI builds must have identical SHA-256 and byte size","note":"o XLSX deve ser gerado pelo script e tratado como candidata até concluir GF3-QA-11..18; hash final só deve ser congelado após QA físico e freeze"},
+  "verified_local_build":{"frozen":false,"sha256":null,"size_bytes":null,"ooxml_zip_valid":true,"artifact_tool_imported":true,"sheets_observed":["Leia-me","Dashboard","Clientes","Vendas","Tarefas","Estoque","Financeiro","Listas"],"note":"hash e tamanho finais permanecem deliberadamente não congelados enquanto o builder e o QA físico estiverem abertos"},
   "dashboard_observed":{"Clientes cadastrados":3,"Clientes qualificados":1,"Vendas abertas":2,"Vendas ganhas":1,"Tarefas pendentes":2,"Itens para reposição":1,"Tarefas vencidas":0,"Saldo registrado":0}
 }

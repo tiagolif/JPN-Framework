@@ -94,6 +94,34 @@ jobs:
       - name: Core - product release status
         run: npm run check:product-release-status
 
+      - name: Customer delivery - package and handoff
+        run: |
+          node scripts/check-product-delivery-manifests.mjs
+          node scripts/check-customer-package-contract.mjs
+          node scripts/check-delivery-handoff-guide.mjs
+          node scripts/check-customer-onboarding.mjs
+          node scripts/check-customer-support-playbook.mjs
+          node scripts/check-safe-data-handling.mjs
+
+      - name: Commercial operations - discovery and onboarding
+        run: |
+          node scripts/check-sales-discovery-guide.mjs
+          node scripts/check-guided-demo-playbook.mjs
+          node scripts/check-commercial-onboarding.mjs
+          node scripts/check-small-business-diagnostic.mjs
+          node scripts/check-product-faq-objections.mjs
+
+      - name: Distribution - package routing
+        run: |
+          node scripts/check-product-distribution-index.mjs
+          node scripts/check-product-distribution-source-map.mjs
+          node scripts/check-product-feedback-loop.mjs
+
+      - name: Release evidence - integrity
+        run: |
+          node scripts/check-release-evidence-contract.mjs
+          node scripts/check-release-evidence-register.mjs
+
       - name: Release and Pro Kit gates
         run: |
           npm run check:release-execution-plan

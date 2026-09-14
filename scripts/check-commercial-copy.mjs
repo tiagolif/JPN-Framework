@@ -30,6 +30,13 @@ function isNegated(content, index, windowSize = 180) {
   return negationWindow.test(before);
 }
 
+function isBlockedClaimExample(content, index) {
+  const before = content.slice(0, index);
+  const headings = [...before.matchAll(/^#{1,6}\s+(.+)$/gmu)];
+  const heading = headings.at(-1)?.[1] ?? '';
+  return /claims?\s+(?:bloquead|proibid)|claims?\s+que\s+continuam\s+bloqueados?|padr[oõ]es?\s+(?:bloquead|proibid)/iu.test(heading);
+}
+
 for (const file of files) {
   const relative = path.relative(root, file).replaceAll('\\', '/');
   const content = fs.readFileSync(file, 'utf8');
@@ -37,7 +44,7 @@ for (const file of files) {
   for (const { re, label } of blockedPatterns) {
     re.lastIndex = 0;
     for (const match of content.matchAll(re)) {
-      if (isNegated(content, match.index)) continue;
+      if (isNegated(content, match.index) || isBlockedClaimExample(content, match.index)) continue;
       const line = content.slice(0, match.index).split('\n').length;
       errors.push(`${relative}:${line} — ${label}: “${match[0]}”`);
     }
@@ -114,7 +121,7 @@ if (!fs.existsSync(copyBankPath)) {
   for (const { re, label } of transactionalPatterns) {
     re.lastIndex = 0;
     for (const match of copy.matchAll(re)) {
-      if (isNegated(copy, match.index)) continue;
+      if (isNegated(copy, match.index) || isBlockedClaimExample(copy, match.index)) continue;
       const line = copy.slice(0, match.index).split('\n').length;
       errors.push(`COPY_BANK_v1.md:${line} contém ${label} transacional não autorizado: “${match[0]}”.`);
     }

@@ -234,7 +234,7 @@ Para usuários ou pequenas equipes que já identificaram necessidade concreta de
 
 Evitar que componentes complementares sejam usados como peças isoladas sem conexão, mas também evitar transformar abrangência em motivo automático de recomendação.
 
-### O que reúne
+### O que entrega
 
 O Pro Kit coordena materiais do ecossistema JPN preservando o papel, os limites e os gates de cada componente. O uso pode começar por um produto menor e crescer somente quando surgir necessidade adicional comprovada.
 

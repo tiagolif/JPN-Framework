@@ -159,10 +159,11 @@ jobs:
       - name: Commercial - contrast
         run: npm run check:commercial-contrast
 
-      - name: Gestão Fácil gates
-        run: |
-          npm run check:gestao-facil-model
-          npm run check:gestao-facil-binary
+      - name: Gestão Fácil - model
+        run: npm run check:gestao-facil-model
+
+      - name: Gestão Fácil - binary
+        run: npm run check:gestao-facil-binary
 
       - name: Generated review artifacts
         run: |

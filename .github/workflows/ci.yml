@@ -79,6 +79,12 @@ jobs:
       - name: Core - terminology
         run: npm run check:core-terminology
 
+      - name: Portfolio - comparison matrix
+        run: node scripts/check-product-comparison-matrix.mjs
+
+      - name: Portfolio - commercial surface manifest
+        run: node scripts/check-commercial-surface-manifest.mjs
+
       - name: Core - product portfolio
         run: npm run check:product-portfolio
 

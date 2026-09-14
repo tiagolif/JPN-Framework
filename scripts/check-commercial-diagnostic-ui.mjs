@@ -14,7 +14,7 @@ expect(/<meta name="robots" content="noindex,nofollow"\s*\/>/.test(html), 'A pá
 expect(includes('Sem preço, checkout, lead capture ou promessa de resultado.'), 'Guardrail comercial principal ausente.');
 expect(!/<form[^>]+action=/i.test(html), 'O diagnóstico não pode enviar formulário para endpoint externo.');
 expect(!/fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|localStorage|sessionStorage/i.test(html), 'O diagnóstico deve operar localmente, sem rede ou armazenamento persistente.');
-expect(!/jpn-pro-kit[^<]{0,120}(resultado|sugerid|recomend)/i.test(html), 'Pro Kit não pode ser sugerido como resultado do diagnóstico.');
+expect(!/(?:product|start_product)\s*:\s*['"]jpn-pro-kit['"]/i.test(html), 'Pro Kit não pode ser sugerido como resultado do diagnóstico.');
 
 for (const question of diagnostic.questions ?? []) {
   expect(includes(`data-question="${question.id}"`), `Pergunta ausente na UI: ${question.id}`);

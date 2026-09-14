@@ -12,7 +12,9 @@ Artefato protegido:
 
 SHA-256 esperado:
 
-`46b6fff3b366b2ac3467f443643c12e6aa8ba9958b8b54e0797ec91176c9dded`
+`d7b93ced896fda9fcc0c9740328359c8e5a790f1a665430258b609a3088181eb`
+
+Proveniência adicional: o blob Git do XLSX é `2e96731c95d31fc9f254c7516cb63d48e989f049`, idêntico ao arquivo versionado no commit `87abfbf4bd2c09ed1ea9c3e5089924c4bd06e6ff` (`product: versionar Gestão Fácil v0.1 com QA funcional`). O hash anterior registrado no contrato era uma transcrição incorreta e foi corrigido sem substituir o binário.
 
 ## O que o gate verifica
 

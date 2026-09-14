@@ -184,15 +184,28 @@ jobs:
         run: npm run check:gestao-facil-binary
 
       - name: Generated review artifacts
-        run: |
-          npm run report:release-readiness
-          npm run build:visual-review
-          npm run check:visual-review-gallery
-          npm run build:editorial-print
-          npm run check:editorial-print-staging
-          npm run build:jpn-business-print-candidate
-          npm run check:jpn-business-rendered-candidate
-          npm run stage:prompt-builder
+        run: npm run report:release-readiness
+
+      - name: Generated review - visual gallery build
+        run: npm run build:visual-review
+
+      - name: Generated review - visual gallery check
+        run: npm run check:visual-review-gallery
+
+      - name: Generated review - editorial print build
+        run: npm run build:editorial-print
+
+      - name: Generated review - editorial print check
+        run: npm run check:editorial-print-staging
+
+      - name: Generated review - Business print build
+        run: npm run build:jpn-business-print-candidate
+
+      - name: Generated review - Business rendered check
+        run: npm run check:jpn-business-rendered-candidate
+
+      - name: Generated review - Prompt Builder stage
+        run: npm run stage:prompt-builder
 
       - name: Verify tracked generated files are synchronized
         run: git diff --exit-code

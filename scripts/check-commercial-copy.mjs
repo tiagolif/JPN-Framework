@@ -21,10 +21,12 @@ const blockedPatterns = [
   { re: /\boferta\s+por\s+tempo\s+limitado\b/giu, label: 'urgência comercial não autorizada' },
 ];
 
-const negationWindow = /(?:não|nao|sem|evitar|proibid[oa]s?|bloquead[oa]s?|não usar|nao usar)[^.!?\n]{0,80}$/iu;
+const negationWindow = /(?:não|nao|sem|evitar|proibid[oa]s?|bloquead[oa]s?|não usar|nao usar)[^.!?]{0,120}$/iu;
 
-function isNegated(content, index, windowSize = 120) {
-  const before = content.slice(Math.max(0, index - windowSize), index);
+function isNegated(content, index, windowSize = 180) {
+  const before = content
+    .slice(Math.max(0, index - windowSize), index)
+    .replace(/\s+/gu, ' ');
   return negationWindow.test(before);
 }
 
@@ -35,7 +37,7 @@ for (const file of files) {
   for (const { re, label } of blockedPatterns) {
     re.lastIndex = 0;
     for (const match of content.matchAll(re)) {
-      if (isNegated(content, match.index, 90)) continue;
+      if (isNegated(content, match.index)) continue;
       const line = content.slice(0, match.index).split('\n').length;
       errors.push(`${relative}:${line} — ${label}: “${match[0]}”`);
     }

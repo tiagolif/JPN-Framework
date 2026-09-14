@@ -159,6 +159,24 @@ jobs:
       - name: Commercial - contrast
         run: npm run check:commercial-contrast
 
+      - name: Gestão Fácil - quick start
+        run: node scripts/check-gestao-facil-quick-start.mjs
+
+      - name: Gestão Fácil - data dictionary
+        run: node scripts/check-gestao-facil-data-dictionary.mjs
+
+      - name: Gestão Fácil - starter data kit
+        run: node scripts/check-gestao-facil-starter-data-kit.mjs
+
+      - name: Gestão Fácil - operating guide
+        run: node scripts/check-gestao-facil-operating-guide.mjs
+
+      - name: Gestão Fácil - v0.3 candidate
+        run: node scripts/check-gestao-facil-v0.3-candidate.mjs
+
+      - name: Gestão Fácil - v0.2 candidate chain
+        run: node scripts/check-gestao-facil-v0.2-candidate.mjs
+
       - name: Gestão Fácil - model
         run: npm run check:gestao-facil-model
 

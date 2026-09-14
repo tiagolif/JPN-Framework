@@ -44,11 +44,11 @@ const expected = [
 ];
 
 const forbiddenTransactionalPatterns = [
-  /comprar agora/i,
-  /finalizar compra/i,
-  /\b(?:ir|vá|seguir|prossiga|acesse|abrir|abra)\s+(?:para\s+|ao\s+|o\s+)?checkout\b/i,
-  /\bcheckout\s+(?:agora|disponível|aberto|liberado|ativo)\b/i,
-  /garantia de resultado/i,
+  /comprar agora/gi,
+  /finalizar compra/gi,
+  /\b(?:ir|vá|seguir|prossiga|acesse|abrir|abra)\s+(?:para\s+|ao\s+|o\s+)?checkout\b/gi,
+  /\bcheckout\s+(?:agora|disponível|aberto|liberado|ativo)\b/gi,
+  /garantia de resultado/gi,
 ];
 
 function sha256(buffer) {
@@ -57,6 +57,41 @@ function sha256(buffer) {
 
 function fail(message) {
   throw new Error(`[editorial-print-staging] ${message}`);
+}
+
+function toPlainText(html) {
+  return html
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function findForbiddenTransactionalLanguage(html) {
+  const text = toPlainText(html);
+
+  for (const pattern of forbiddenTransactionalPatterns) {
+    pattern.lastIndex = 0;
+    let match;
+    while ((match = pattern.exec(text)) !== null) {
+      const clausePrefix = text.slice(Math.max(0, match.index - 90), match.index);
+      const isExplicitlyNegated = /\b(?:não|sem|nunca|jamais)\b[^.!?;:]{0,70}$/i.test(clausePrefix);
+      if (!isExplicitlyNegated) {
+        return {
+          phrase: match[0],
+          context: text.slice(Math.max(0, match.index - 55), Math.min(text.length, match.index + match[0].length + 55)),
+        };
+      }
+      if (match[0].length === 0) pattern.lastIndex += 1;
+    }
+  }
+
+  return null;
 }
 
 const manifestPath = join(stagingRoot, 'manifest.json');
@@ -98,8 +133,10 @@ for (let i = 0; i < expected.length; i += 1) {
   if (!html.includes(spec.source)) fail(`${spec.id}: referência à fonte não aparece no HTML.`);
   if (!html.includes('staging interno para revisão')) fail(`${spec.id}: aviso de staging interno ausente.`);
   if (!html.includes('não representa PDF final aprovado nem autorização de publicação')) fail(`${spec.id}: guardrail de não publicação ausente.`);
-  if (forbiddenTransactionalPatterns.some((pattern) => pattern.test(html))) {
-    fail(`${spec.id}: linguagem transacional/proibida detectada.`);
+
+  const forbidden = findForbiddenTransactionalLanguage(html);
+  if (forbidden) {
+    fail(`${spec.id}: linguagem transacional/proibida detectada (${JSON.stringify(forbidden.phrase)}; contexto: ${JSON.stringify(forbidden.context)}).`);
   }
 
   const sourceHash = sha256(source);

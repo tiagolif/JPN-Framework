@@ -34,7 +34,7 @@ function isBlockedClaimExample(content, index) {
   const before = content.slice(0, index);
   const headings = [...before.matchAll(/^#{1,6}\s+(.+)$/gmu)];
   const heading = headings.at(-1)?.[1] ?? '';
-  return /claims?\s+(?:bloquead|proibid)|claims?\s+que\s+continuam\s+bloqueados?|padr[oõ]es?\s+(?:bloquead|proibid)/iu.test(heading);
+  return /claims?\s+(?:bloquead|proibid)|claims?\s+que\s+continuam\s+bloqueados?|claims?\s+que\s+exigem\s+evid[eê]ncia|padr[oõ]es?\s+(?:bloquead|proibid)/iu.test(heading);
 }
 
 for (const file of files) {

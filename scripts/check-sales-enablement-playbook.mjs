@@ -30,6 +30,14 @@ if (!Array.isArray(portfolio.products) || portfolio.products.length !== 6) {
   fail('esperados exatamente 6 produtos no portfólio canônico');
 }
 
+const objectionAliases = new Map([
+  ['jpn-prompt-pack', ['Prompt Pack']],
+]);
+
+function representsProduct(content, product, aliases = []) {
+  return content.includes(product.canonical_name) || aliases.some((alias) => content.includes(alias));
+}
+
 for (const product of portfolio.products) {
   if (!product.canonical_name || !playbook.includes(product.canonical_name)) {
     fail(`produto canônico não representado no playbook: ${product.id}`);
@@ -37,7 +45,7 @@ for (const product of portfolio.products) {
   if (!record.includes(product.canonical_name)) {
     fail(`produto canônico não representado no registro de conversa: ${product.id}`);
   }
-  if (!objections.includes(product.canonical_name)) {
+  if (!representsProduct(objections, product, objectionAliases.get(product.id) ?? [])) {
     fail(`produto canônico não representado na biblioteca de objeções: ${product.id}`);
   }
 }

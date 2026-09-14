@@ -117,17 +117,32 @@ jobs:
       - name: Editorial - review handoff
         run: npm run check:editorial-review-handoff
 
-      - name: Commercial gates
-        run: |
-          npm run check:commercial-copy
-          npm run check:commercial-product-facts
-          npm run check:sales-enablement-playbook
-          npm run check:commercial-faq
-          npm run check:commercial-site
-          npm run check:commercial-use-cases
-          npm run check:commercial-navigation
-          npm run check:commercial-accessibility
-          npm run check:commercial-contrast
+      - name: Commercial - copy
+        run: npm run check:commercial-copy
+
+      - name: Commercial - product facts
+        run: npm run check:commercial-product-facts
+
+      - name: Commercial - sales enablement playbook
+        run: npm run check:sales-enablement-playbook
+
+      - name: Commercial - FAQ
+        run: npm run check:commercial-faq
+
+      - name: Commercial - site
+        run: npm run check:commercial-site
+
+      - name: Commercial - use cases
+        run: npm run check:commercial-use-cases
+
+      - name: Commercial - navigation
+        run: npm run check:commercial-navigation
+
+      - name: Commercial - accessibility
+        run: npm run check:commercial-accessibility
+
+      - name: Commercial - contrast
+        run: npm run check:commercial-contrast
 
       - name: Gestão Fácil gates
         run: |

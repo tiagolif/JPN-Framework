@@ -63,7 +63,10 @@ const blockedClaims = [
   /checkout/i,
   /preço\s*:/i
 ];
+// Perguntas em <summary> podem citar um claim justamente para negá-lo na resposta.
+// Elas não são afirmações comerciais positivas e são removidas antes da detecção.
 const safeText = html
+  .replace(/<summary\b[^>]*>[\s\S]*?<\/summary>/gi, '')
   .replace(/\bsem\b[^<.!?]{0,180}(?:[.!?]|<)/gi, '')
   .replace(/\bn[aã]o\s+(?:substitui|autoriza|publica|envia|vende|cobra|executa)[^<.!?]{0,180}(?:[.!?]|<)/gi, '')
   .replace(/publication_authorized\s*=\s*false/gi, '');

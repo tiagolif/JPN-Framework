@@ -4,20 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#090e1b">
   <title>JPN Business — Navegador de playbooks</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="shell">
     <header class="hero">
-      <p class="eyebrow">JPN Business · ferramenta local</p>
+      <div class="brand-row"><p class="eyebrow">JPN Business</p><span class="status-pill">offline · candidato</span></div>
       <h1>Encontre o playbook certo antes de começar a executar.</h1>
       <p class="lead">Descreva a situação, filtre a área e receba até três candidatos entre os 12 playbooks canônicos. O navegador funciona localmente: não envia dados, não publica, não compra e não executa ações externas.</p>
       <div class="notice"><strong>Estado:</strong> apoio operacional candidato. A escolha do playbook não autoriza ação externa nem substitui revisão humana.</div>
     </header>
 
-    <section class="panel">
-      <h2>1. Descreva a situação</h2>
+    <section class="panel step-panel">
+      <div class="section-heading"><span class="step-number">01</span><h2>Descreva a situação</h2></div>
       <label for="goal">O que precisa acontecer?</label>
       <textarea id="goal" rows="4" placeholder="Ex.: preciso organizar o follow-up de um cliente sem pressionar nem inventar condição"></textarea>
       <label for="category">Área <span>(opcional)</span></label>
@@ -35,15 +36,15 @@
       </div>
     </section>
 
-    <section class="panel" aria-live="polite">
-      <h2>2. Candidatos</h2>
+    <section class="panel step-panel" aria-live="polite">
+      <div class="section-heading"><span class="step-number">02</span><h2>Candidatos</h2></div>
       <div id="stop-alert" class="stop-alert" hidden></div>
       <p id="result-summary" class="muted">Descreva a situação ou escolha uma área para começar.</p>
       <div id="results" class="results"></div>
     </section>
 
-    <section class="panel compact">
-      <h2>3. Como usar o resultado</h2>
+    <section class="panel compact step-panel">
+      <div class="section-heading"><span class="step-number">03</span><h2>Como usar o resultado</h2></div>
       <ol>
         <li>Escolha o menor playbook que cubra a situação real.</li>
         <li>Abra os templates do Prompt Pack indicados como apoio, quando houver.</li>
@@ -53,7 +54,7 @@
       </ol>
     </section>
 
-    <footer>JPN Business · navegador offline candidato · nenhum dado é transmitido.</footer>
+    <footer><strong>JPN Business</strong><span>navegador offline candidato · nenhum dado é transmitido</span></footer>
   </main>
   <script src="app.js"></script>
 </body>

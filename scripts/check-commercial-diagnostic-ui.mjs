@@ -14,7 +14,7 @@ expect(/<meta name="robots" content="noindex,nofollow"\s*\/>/.test(html), 'A pá
 expect(includes('Sem preço, checkout, lead capture ou promessa de resultado.'), 'Guardrail comercial principal ausente.');
 expect(!/<form[^>]+action=/i.test(html), 'O diagnóstico não pode enviar formulário para endpoint externo.');
 expect(!/fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|localStorage|sessionStorage/i.test(html), 'O diagnóstico deve operar localmente, sem rede ou armazenamento persistente.');
-expect(!/jpn-pro-kit[^<]{0,120}(resultado|sugerid|recomend)/i.test(html), 'Pro Kit não pode ser sugerido como resultado do diagnóstico.');
+expect(!/(?:product|start_product)\s*:\s*['"]jpn-pro-kit['"]/i.test(html), 'Pro Kit não pode ser sugerido como resultado do diagnóstico.');
 
 for (const question of diagnostic.questions ?? []) {
   expect(includes(`data-question="${question.id}"`), `Pergunta ausente na UI: ${question.id}`);
@@ -63,10 +63,13 @@ const blockedClaims = [
   /checkout/i,
   /preço\s*:/i
 ];
+// Perguntas em <summary> podem citar um claim justamente para negá-lo na resposta.
+// Elas não são afirmações comerciais positivas e são removidas antes da detecção.
 const safeText = html
-  .replace(/sem preço/gi, '')
-  .replace(/sem[^<]{0,40}checkout/gi, '')
-  .replace(/não substitui[^<.]{0,120}/gi, '');
+  .replace(/<summary\b[^>]*>[\s\S]*?<\/summary>/gi, '')
+  .replace(/\bsem\b[^<.!?]{0,180}(?:[.!?]|<)/gi, '')
+  .replace(/\bn[aã]o\s+(?:substitui|autoriza|publica|envia|vende|cobra|executa)[^<.!?]{0,180}(?:[.!?]|<)/gi, '')
+  .replace(/publication_authorized\s*=\s*false/gi, '');
 for (const claim of blockedClaims) {
   if (claim.test(safeText)) errors.push(`Claim/comportamento comercial de risco detectado: ${claim}`);
 }

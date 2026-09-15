@@ -45,6 +45,10 @@ if (proKitOpen && !/apenas arquitetural/i.test(proKitRoute.availability_guard)) 
   fail('Pro Kit possui bloqueios abertos e deve permanecer apenas arquitetural');
 }
 
+const stripGuardrailContexts = (text) => text
+  .replace(/não\s+autoriza\s+venda,\s+anúncio,\s+checkout\s+ou\s+publicação/gi, '')
+  .replace(/sem\s+preço,\s+checkout,\s+desconto\s+ou\s+escassez/gi, '');
+
 const forbiddenPatterns = [
   /compre agora/i,
   /checkout/i,
@@ -54,10 +58,11 @@ const forbiddenPatterns = [
   /(?:est[aá]|marcado como|status:?)[^.\n]{0,40}release[- ]ready/i,
 ];
 
-for (const [label, text] of [
+for (const [label, rawText] of [
   ['PORTFOLIO_START_HERE_v1.md', guide],
   ['PRODUCT_USAGE_ROUTES_v1.json', JSON.stringify(routes)],
 ]) {
+  const text = stripGuardrailContexts(rawText);
   for (const pattern of forbiddenPatterns) {
     if (pattern.test(text)) fail(`${label} contém padrão comercial/release bloqueado: ${pattern}`);
   }

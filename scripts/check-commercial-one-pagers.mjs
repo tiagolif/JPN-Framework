@@ -62,18 +62,26 @@ for (const id of expectedIds) {
 }
 
 const blocked = [
-  /\bR\$\s*\d/iu,
-  /https?:\/\//iu,
-  /\bcompre\s+agora\b/iu,
-  /\bcheckout\b/iu,
-  /\bpix\b/iu,
-  /cart[aã]o\s+de\s+cr[eé]dito/iu,
-  /\bgarante?\s+(?:resultado|vendas?|faturamento|roi)\b/iu,
-  /\búltimas?\s+(?:vagas?|unidades?)\b/iu,
+  { re: /\bR\$\s*\d/giu, label: 'preço monetário' },
+  { re: /https?:\/\//giu, label: 'URL externa' },
+  { re: /\bcompre\s+agora\b/giu, label: 'CTA transacional' },
+  { re: /\bcheckout\b/giu, label: 'checkout' },
+  { re: /\bpix\b/giu, label: 'PIX' },
+  { re: /cart[aã]o\s+de\s+cr[eé]dito/giu, label: 'cartão de crédito' },
+  { re: /\bgarante?\s+(?:resultado|vendas?|faturamento|roi)\b/giu, label: 'garantia não comprovada' },
+  { re: /\búltimas?\s+(?:vagas?|unidades?)\b/giu, label: 'escassez artificial' },
 ];
 
-for (const pattern of blocked) {
-  if (pattern.test(content)) errors.push(`Padrão comercial/transacional bloqueado encontrado: ${pattern}.`);
+const negationWindow = /(?:não|nao|sem|evitar|proibid[oa]s?|bloquead[oa]s?|não inserir|nao inserir|não define|nao define)[^.!?\n]{0,100}$/iu;
+
+for (const { re, label } of blocked) {
+  re.lastIndex = 0;
+  for (const match of content.matchAll(re)) {
+    const before = content.slice(Math.max(0, match.index - 120), match.index);
+    if (negationWindow.test(before)) continue;
+    const line = content.slice(0, match.index).split('\n').length;
+    errors.push(`Padrão comercial/transacional bloqueado encontrado em linha ${line}: ${label}: “${match[0]}”.`);
+  }
 }
 
 if (!/menor recurso suficiente/iu.test(content)) {

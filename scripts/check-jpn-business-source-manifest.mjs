@@ -85,8 +85,20 @@ for (const section of actualSections) {
   if (section?.id && !expectedIds.has(section.id)) failures.push(`seção extra fora do mapa: ${section.id}`);
 }
 
-const forbiddenPromotion = /(?:diagramacao-final|pdf-final|freeze|release)[^\n]{0,40}\b(?:passed|approved|complete|completed)\b/i;
-if (forbiddenPromotion.test(manifestRaw)) failures.push('manifesto contém promoção indevida de gate final');
+const expectedPromotionRule = 'This manifest only establishes source traceability for composition. It cannot set diagramacao-final, pdf-final, freeze or release to passed.';
+if (manifest.promotion_rule !== expectedPromotionRule) {
+  failures.push('promotion_rule deve proibir explicitamente promoção de gates finais');
+}
+
+// Estados de release só podem ser inferidos de campos estruturados. Uma frase
+// que diga "cannot set ... to passed" é um guardrail e não uma promoção.
+const structuredPromotionKeys = ['diagramacao-final', 'pdf-final', 'freeze', 'release', 'release_ready', 'publication_authorized'];
+for (const key of structuredPromotionKeys) {
+  const value = manifest[key];
+  if (value === true || ['passed', 'approved', 'complete', 'completed', 'ready'].includes(String(value ?? '').toLowerCase())) {
+    failures.push(`manifesto contém promoção indevida de gate final em ${key}: ${value}`);
+  }
+}
 
 for (const forbidden of ['guaranteed-sales', 'guaranteed-roi', 'automatic-publication']) {
   if (!compositionMap.guardrails?.includes(`no-${forbidden}`)) failures.push(`guardrail ausente no mapa: no-${forbidden}`);

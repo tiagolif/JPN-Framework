@@ -112,9 +112,9 @@
         <h2>O diagnóstico orienta escopo; não decide compra.</h2>
       </div>
       <details open><summary>O resultado recomenda o produto mais completo?</summary><p>Não. A regra é começar pelo menor produto suficiente para a necessidade atual.</p></details>
-      <details><summary>O Pro Kit pode aparecer como resultado?</summary><p>Não enquanto sua rota permanecer apenas arquitetural e seus gates finais estiverem abertos.</p></details>
+      <details><summary>O JPN Pro Kit pode aparecer como resultado?</summary><p>Não enquanto sua rota permanecer apenas arquitetural e seus gates finais estiverem abertos.</p></details>
       <details><summary>As respostas são enviadas ou armazenadas?</summary><p>Não. A lógica roda localmente nesta página e não contém formulário externo, endpoint, analytics ou armazenamento.</p></details>
-      <details><summary>A Gestão Fácil substitui contabilidade ou ERP?</summary><p>Não. É um controle gerencial básico e não substitui contabilidade, banco, fiscal, ERP ou auditoria.</p></details>
+      <details><summary>A JPN Gestão Fácil substitui contabilidade ou ERP?</summary><p>Não. É um controle gerencial básico e não substitui contabilidade, banco, fiscal, ERP ou auditoria.</p></details>
     </section>
   </main>
 
@@ -148,7 +148,7 @@
       const outcomes = [
         {id:'out-builder',product:'jpn-prompt-builder',route:'rota-executar',when:{'dq-01':'executar','dq-02':'sim','dq-03':'pontual','dq-05':'sim'},message:'Use o JPN Prompt Builder quando a equipe precisa montar prompts com estrutura mais consistente e campos explícitos.',next:[],stop:'O Builder é suficiente quando a necessidade é estruturar prompts; não adiciona gestão operacional.'},
         {id:'out-pack',product:'jpn-prompt-pack',route:'rota-executar',when:{'dq-01':'executar','dq-02':'sim','dq-03':'pontual'},message:'Comece pelo JPN Prompt Pack para partir de modelos reutilizáveis e adaptar apenas o contexto necessário.',next:['jpn-prompt-builder'],stop:'Se os templates cobrem bem a tarefa, não é necessário avançar para o Builder.'},
-        {id:'out-business-gestao',product:'jpn-business',route:'rota-operar',when:{'dq-01':'operar','dq-03':'recorrente','dq-04':'controle'},message:'Comece pelo JPN Business para definir o processo e use a Gestão Fácil somente se também precisar registrar os checkpoints operacionais.',next:['jpn-gestao-facil'],stop:'Não adicione a Gestão Fácil se o processo não exige acompanhamento estruturado.'},
+        {id:'out-business-gestao',product:'jpn-business',route:'rota-operar',when:{'dq-01':'operar','dq-03':'recorrente','dq-04':'controle'},message:'Comece pelo JPN Business para definir o processo e use a JPN Gestão Fácil somente se também precisar registrar os checkpoints operacionais.',next:['jpn-gestao-facil'],stop:'Não adicione a JPN Gestão Fácil se o processo não exige acompanhamento estruturado.'},
         {id:'out-business',product:'jpn-business',route:'rota-operar',when:{'dq-01':'operar','dq-03':'recorrente','dq-04':'texto'},message:'Comece pelo JPN Business para transformar uma atividade recorrente em playbook, rotina e apoio por prompts.',next:['jpn-prompt-pack','jpn-prompt-builder','jpn-gestao-facil'],stop:'Se o playbook e os prompts bastam, não é necessário adicionar uma planilha de gestão.'},
         {id:'out-gestao',product:'jpn-gestao-facil',route:'rota-gestao',when:{'dq-01':'gerir','dq-04':'controle'},message:'Comece pela JPN Gestão Fácil para centralizar controle gerencial simples de clientes, vendas, tarefas e alertas básicos.',next:['jpn-business'],stop:'Se o controle operacional básico atende, não é necessário adicionar playbooks ou outras camadas.'},
         {id:'out-metodo',product:'metodo-jpn',route:'rota-aprender',when:{'dq-01':'aprender','dq-02':'nao'},message:'Comece pelo Método JPN para estruturar contexto, objetivo, restrições e saída antes de escolher templates.',next:['jpn-prompt-pack','jpn-prompt-builder'],stop:'Se o pedido estruturado já resolve a necessidade, não é necessário adicionar outro produto.'}

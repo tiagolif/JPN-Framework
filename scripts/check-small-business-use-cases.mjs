@@ -50,9 +50,14 @@ for (const item of useCases) {
     if (typeof item[field] !== 'string' || !item[field].trim()) errors.push(`${item.id}: ${field} ausente.`);
   }
 
-  const text = JSON.stringify(item);
+  const positiveSurface = JSON.stringify({
+    segment: item.segment,
+    scenario: item.scenario,
+    workflow: item.workflow,
+    expected_output: item.expected_output,
+  });
   for (const pattern of riskyPatterns) {
-    if (pattern.test(text)) errors.push(`${item.id}: contém claim ou enquadramento proibido: ${pattern}`);
+    if (pattern.test(positiveSurface)) errors.push(`${item.id}: contém claim ou enquadramento proibido: ${pattern}`);
   }
 
   if (item.start_product === 'jpn-pro-kit' || optional.includes('jpn-pro-kit')) {

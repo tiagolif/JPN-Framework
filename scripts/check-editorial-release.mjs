@@ -3,7 +3,9 @@ import { access, readFile } from 'node:fs/promises';
 const sources = [
   'docs/products/metodo-jpn/METODO_JPN_v1.md',
   'docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md',
+  'docs/products/prompt-pack/PROMPT_INDEX.json',
   'docs/products/jpn-business/JPN_BUSINESS_v1.md',
+  'docs/products/jpn-business/BUSINESS_INDEX.json',
   'docs/products/gestao-facil/MANUAL_v0.1.md',
   'docs/products/pro-kit/LEIA_PRIMEIRO.md',
   'docs/products/pro-kit/RELEASE_NOTES_v1.md',
@@ -19,15 +21,19 @@ for (const path of sources) {
   await access(path);
 }
 
-const [metodo, pack, business, gestao, leiaPrimeiro, proKitCover] = await Promise.all([
+const [metodo, pack, promptIndexRaw, business, businessIndexRaw, gestao, leiaPrimeiro, proKitCover] = await Promise.all([
   readFile('docs/products/metodo-jpn/METODO_JPN_v1.md', 'utf8'),
   readFile('docs/products/prompt-pack/JPN_PROMPT_PACK_v1.md', 'utf8'),
+  readFile('docs/products/prompt-pack/PROMPT_INDEX.json', 'utf8'),
   readFile('docs/products/jpn-business/JPN_BUSINESS_v1.md', 'utf8'),
+  readFile('docs/products/jpn-business/BUSINESS_INDEX.json', 'utf8'),
   readFile('docs/products/gestao-facil/MANUAL_v0.1.md', 'utf8'),
   readFile('docs/products/pro-kit/LEIA_PRIMEIRO.md', 'utf8'),
   readFile('assets/covers/jpn-pro-kit-v1.svg', 'utf8'),
 ]);
 
+const promptIndex = JSON.parse(promptIndexRaw);
+const businessIndex = JSON.parse(businessIndexRaw);
 const corpus = [metodo, pack, business, gestao, leiaPrimeiro, proKitCover].join('\n');
 const errors = [];
 
@@ -38,25 +44,45 @@ function requireMatch(text, pattern, message) {
 requireMatch(metodo, /Jornada/i, 'Método JPN não referencia Jornada.');
 requireMatch(metodo, /Precisão/i, 'Método JPN não referencia Precisão.');
 requireMatch(metodo, /Narrativa/i, 'Método JPN não referencia Narrativa.');
-requireMatch(pack, /18\s+estruturas/i, 'Prompt Pack deve declarar 18 estruturas.');
-requireMatch(business, /12\s+playbooks/i, 'JPN Business deve declarar 12 playbooks.');
+
+if (!Array.isArray(promptIndex.templates) || promptIndex.templates.length !== 18) {
+  errors.push(`Prompt Pack deve conter 18 estruturas no índice canônico; encontrado: ${promptIndex.templates?.length ?? 'inválido'}.`);
+}
+if (!Array.isArray(businessIndex.playbooks) || businessIndex.playbooks.length !== 12) {
+  errors.push(`JPN Business deve conter 12 playbooks no índice canônico; encontrado: ${businessIndex.playbooks?.length ?? 'inválido'}.`);
+}
+
 requireMatch(gestao, /reconstru/i, 'Manual da Gestão Fácil deve identificar a edição reconstruída.');
 requireMatch(gestao, /não substitui/i, 'Manual da Gestão Fácil deve preservar seus limites de uso.');
 requireMatch(proKitCover, /EM PREPARA(?:Ç|C)ÃO/i, 'Capa do Pro Kit deve permanecer EM PREPARAÇÃO.');
 
-// Detecta apenas formulações afirmativas. Frases de limite como
-// “não elimina alucinações” e “não garante respostas corretas” são permitidas.
+// Detecta formulações afirmativas sem penalizar guardrails explícitos como
+// “não elimina alucinações”, “sem garantia de resultado” ou equivalentes.
 const forbiddenClaims = [
-  /(?<!não )elimina(?:r|ção)?\s+(?:as\s+)?alucinações/i,
-  /(?<!não )garante\s+respostas?\s+corret/i,
-  /(?<!não )garante\s+resultados?/i,
+  /elimina(?:r|ção)?\s+(?:as\s+)?alucinações/i,
+  /garante\s+respostas?\s+corret/i,
+  /garante\s+resultados?/i,
   /roi\s+garant/i,
   /aumenta\s+vendas\s+garant/i,
   /100%\s+(?:corret|precis|eficaz)/i,
 ];
 
+function isNegatedClaim(text, index) {
+  const prefix = text.slice(Math.max(0, index - 64), index).toLowerCase();
+  return /(?:\bn(?:ã|a)o\s+|\bsem\s+|\bsem\s+alega(?:ç|c)ão\s+de\s+)$/.test(prefix);
+}
+
+function containsPositiveClaim(text, pattern) {
+  const flags = pattern.flags.includes('g') ? pattern.flags : `${pattern.flags}g`;
+  const matcher = new RegExp(pattern.source, flags);
+  for (const match of text.matchAll(matcher)) {
+    if (!isNegatedClaim(text, match.index ?? 0)) return true;
+  }
+  return false;
+}
+
 for (const pattern of forbiddenClaims) {
-  if (pattern.test(corpus)) {
+  if (containsPositiveClaim(corpus, pattern)) {
     errors.push(`Claim bloqueado detectado: ${pattern}`);
   }
 }

@@ -72,7 +72,8 @@ if (!proKit) {
   errors.push('jpn-pro-kit ausente da matriz.');
 } else {
   const proText = `${proKit.best_for} ${proKit.start_when} ${proKit.avoid_when} ${proKit.operational_scope}`.toLowerCase();
-  if (!proText.includes('gate') || !proText.includes('final')) {
+  const mentionsFinalGates = proText.includes('gate') && /\bfina(?:l|is)\b/i.test(proText);
+  if (!mentionsFinalGates) {
     errors.push('jpn-pro-kit deve explicitar dependência dos gates finais.');
   }
 }

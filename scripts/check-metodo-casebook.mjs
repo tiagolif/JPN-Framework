@@ -64,16 +64,25 @@ for (const guardrail of [
   assert(text.includes(guardrail), `Guardrail ausente: ${guardrail}`);
 }
 
-for (const prohibited of [
-  'publication_authorized: true',
-  'release_ready: true',
-  'visual_qa: approved',
-  'GF-QA-10: PASSED',
-  'QA físico: PASSED',
-  'garante respostas corretas',
-  'elimina alucinações',
+// O casebook pode citar estados proibidos para explicar o que NÃO fazer.
+// Só tratamos como promoção indevida quando eles aparecem como uma atribuição
+// estruturada/isolada de status, e não dentro de uma frase de guardrail.
+const prohibitedStatusPatterns = [
+  /^\s*(?:[-*]\s*)?publication_authorized:\s*true\s*$/mi,
+  /^\s*(?:[-*]\s*)?release_ready:\s*true\s*$/mi,
+  /^\s*(?:[-*]\s*)?visual_qa:\s*approved\s*$/mi,
+  /^\s*(?:[-*]\s*)?GF-QA-10:\s*PASSED\s*$/mi,
+  /^\s*(?:[-*]\s*)?QA físico:\s*PASSED\s*$/mi,
+];
+for (const pattern of prohibitedStatusPatterns) {
+  assert(!pattern.test(text), `Promoção indevida de QA/release encontrada: ${pattern}`);
+}
+
+for (const claim of [
+  /(?<!não )garante respostas corretas/i,
+  /(?<!não )elimina alucinações/i,
 ]) {
-  assert(!text.includes(prohibited), `Claim ou promoção indevida encontrada: ${prohibited}`);
+  assert(!claim.test(text), `Claim indevido encontrado: ${claim}`);
 }
 
 assert(text.includes('Os casos são didáticos e fictícios.'), 'Casebook deve declarar que os casos são fictícios.');

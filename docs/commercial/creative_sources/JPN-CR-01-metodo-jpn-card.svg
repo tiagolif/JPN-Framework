@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Método JPN — Jornada, Precisão e Narrativa</title>
+  <desc id="desc">Candidato visual interno do Método JPN. Não autorizado para publicação.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#142a45"/>
+    </linearGradient>
+  </defs>
+  <g id="background"><rect width="1080" height="1080" rx="52" fill="url(#bg)"/></g>
+  <g id="brand" font-family="Arial, Helvetica, sans-serif"><text x="80" y="100" fill="#7dd3fc" font-size="34" font-weight="700" letter-spacing="5">JPN FRAMEWORK</text></g>
+  <g id="status" font-family="Arial, Helvetica, sans-serif"><rect x="790" y="66" width="210" height="54" rx="27" fill="#ffffff" fill-opacity=".1"/><text x="895" y="101" text-anchor="middle" fill="#dbeafe" font-size="21" font-weight="700">CANDIDATO INTERNO</text></g>
+  <g id="headline" font-family="Arial, Helvetica, sans-serif"><text x="80" y="265" fill="#ffffff" font-size="82" font-weight="800">Método JPN</text><text x="80" y="335" fill="#bae6fd" font-size="38">Transforme intenção em instrução clara.</text></g>
+  <g id="visual-proof" font-family="Arial, Helvetica, sans-serif">
+    <path d="M160 610 H920" stroke="#7dd3fc" stroke-width="6" stroke-linecap="round" opacity=".65"/>
+    <circle cx="220" cy="610" r="62" fill="#0c4a6e" stroke="#bae6fd" stroke-width="4"/><circle cx="540" cy="610" r="62" fill="#0c4a6e" stroke="#bae6fd" stroke-width="4"/><circle cx="860" cy="610" r="62" fill="#0c4a6e" stroke="#bae6fd" stroke-width="4"/>
+    <text x="220" y="620" text-anchor="middle" fill="#fff" font-size="34" font-weight="800">J</text><text x="540" y="620" text-anchor="middle" fill="#fff" font-size="34" font-weight="800">P</text><text x="860" y="620" text-anchor="middle" fill="#fff" font-size="34" font-weight="800">N</text>
+    <text x="220" y="715" text-anchor="middle" fill="#e0f2fe" font-size="28" font-weight="700">Jornada</text><text x="540" y="715" text-anchor="middle" fill="#e0f2fe" font-size="28" font-weight="700">Precisão</text><text x="860" y="715" text-anchor="middle" fill="#e0f2fe" font-size="28" font-weight="700">Narrativa</text>
+  </g>
+  <g id="support" font-family="Arial, Helvetica, sans-serif"><text x="80" y="825" fill="#dbeafe" font-size="30">Um método para estruturar contexto, objetivo e forma de resposta</text><text x="80" y="868" fill="#dbeafe" font-size="30">antes de pedir à IA que trabalhe.</text></g>
+  <g id="microcopy" font-family="Arial, Helvetica, sans-serif"><text x="80" y="970" fill="#94a3b8" font-size="22">Sem promessa de resultado • material de demonstração • revisão humana pendente</text></g>
+  <g id="cta-internal" font-family="Arial, Helvetica, sans-serif"><text x="1000" y="1010" text-anchor="end" fill="#7dd3fc" font-size="20" font-weight="700">JPN-CR-01</text></g>
+</svg>

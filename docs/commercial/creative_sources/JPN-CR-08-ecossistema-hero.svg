@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Ecossistema JPN — hero integrado</title>
+<desc id="desc">Candidato interno JPN-CR-08. Visão integrada do Método JPN, Prompt Builder, Prompt Pack, JPN Business e Pro Kit. Não autoriza publicação ou venda.</desc>
+<rect id="background" width="1600" height="900" fill="#0B1020"/>
+<g id="brand" font-family="Arial, Helvetica, sans-serif"><text x="90" y="90" fill="#FFFFFF" font-size="32" font-weight="700">JPN</text><text x="158" y="90" fill="#7DD3FC" font-size="32">ECOSSISTEMA</text></g>
+<g id="status" font-family="Arial, Helvetica, sans-serif"><rect x="1260" y="50" width="250" height="52" rx="26" fill="#172554" stroke="#38BDF8"/><text x="1385" y="83" text-anchor="middle" fill="#BAE6FD" font-size="16" font-weight="700">CANDIDATO INTERNO</text></g>
+<g id="headline" font-family="Arial, Helvetica, sans-serif"><text x="90" y="205" fill="#FFFFFF" font-size="64" font-weight="700">Da intenção à operação.</text><text x="90" y="258" fill="#CBD5E1" font-size="24">Método, estrutura e aplicação empresarial em uma jornada integrada.</text></g>
+<g id="visual-proof" font-family="Arial, Helvetica, sans-serif">
+<path d="M190 500 H1410" stroke="#334155" stroke-width="4"/><g fill="#7DD3FC"><circle cx="190" cy="500" r="11"/><circle cx="495" cy="500" r="11"/><circle cx="800" cy="500" r="11"/><circle cx="1105" cy="500" r="11"/><circle cx="1410" cy="500" r="11"/></g>
+<g fill="#111827" stroke="#334155" stroke-width="2"><rect x="90" y="340" width="245" height="250" rx="24"/><rect x="395" y="340" width="245" height="250" rx="24"/><rect x="700" y="340" width="245" height="250" rx="24"/><rect x="1005" y="340" width="245" height="250" rx="24"/><rect x="1310" y="340" width="200" height="250" rx="24"/></g>
+<g fill="#7DD3FC" font-size="15" font-weight="700"><text x="120" y="385">ENTENDER</text><text x="425" y="385">ESTRUTURAR</text><text x="730" y="385">APLICAR</text><text x="1035" y="385">OPERAR</text><text x="1340" y="385">INTEGRAR</text></g>
+<g fill="#FFFFFF" font-size="24" font-weight="700"><text x="120" y="430">Método JPN</text><text x="425" y="430">Prompt Builder</text><text x="730" y="430">Prompt Pack</text><text x="1035" y="430">JPN Business</text><text x="1340" y="430">Pro Kit</text></g>
+<g fill="#94A3B8" font-size="16"><text x="120" y="470">Jornada</text><text x="120" y="495">Precisão</text><text x="120" y="520">Narrativa</text><text x="425" y="470">Entrada → estrutura</text><text x="425" y="495">revisável</text><text x="730" y="470">18 templates</text><text x="730" y="495">rastreados</text><text x="1035" y="470">12 playbooks</text><text x="1035" y="495">rastreados</text><text x="1340" y="470">EM</text><text x="1340" y="495">PREPARAÇÃO</text></g>
+</g>
+<g id="support" font-family="Arial, Helvetica, sans-serif"><rect x="90" y="650" width="1420" height="100" rx="22" fill="#172554"/><text x="125" y="691" fill="#BAE6FD" font-size="19" font-weight="700">UM ECOSSISTEMA, PAPÉIS DIFERENTES</text><text x="125" y="723" fill="#CBD5E1" font-size="17">Cada produto ocupa uma etapa rastreada da jornada; o Pro Kit permanece EM PREPARAÇÃO.</text></g>
+<g id="microcopy" font-family="Arial, Helvetica, sans-serif"><text x="90" y="805" fill="#94A3B8" font-size="16">Sem preço, desconto, garantia de resultado ou CTA transacional. Revisão estética/editorial humana pendente.</text></g>
+<g id="cta-internal" font-family="Arial, Helvetica, sans-serif"><text x="90" y="850" fill="#7DD3FC" font-size="16" font-weight="700">JPN-CR-08 • FONTE EDITÁVEL • REVISÃO HUMANA PENDENTE • NÃO PUBLICAR</text></g>
+</svg>

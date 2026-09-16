@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+<title id="title">JPN Pro Kit — ecossistema integrado de aplicação</title>
+<desc id="desc">Candidato interno JPN-CR-06. Representa a integração dos produtos JPN sem alegar release ou disponibilidade comercial. Pro Kit permanece EM PREPARAÇÃO e não autorizado para publicação.</desc>
+<rect id="background" width="1080" height="1080" fill="#0B1020"/>
+<g id="brand" font-family="Arial, Helvetica, sans-serif">
+ <text x="76" y="92" fill="#FFFFFF" font-size="30" font-weight="700">JPN</text><text x="145" y="92" fill="#7DD3FC" font-size="30">PRO KIT</text>
+</g>
+<g id="status" font-family="Arial, Helvetica, sans-serif">
+ <rect x="770" y="55" width="230" height="54" rx="27" fill="#172554" stroke="#38BDF8"/><text x="885" y="90" text-anchor="middle" fill="#BAE6FD" font-size="18" font-weight="700">EM PREPARAÇÃO</text>
+</g>
+<g id="headline" font-family="Arial, Helvetica, sans-serif">
+ <text x="76" y="205" fill="#FFFFFF" font-size="58" font-weight="700">Do método à operação.</text>
+ <text x="76" y="272" fill="#FFFFFF" font-size="58" font-weight="700">Um ecossistema conectado.</text>
+ <text x="76" y="330" fill="#CBD5E1" font-size="24">Materiais JPN organizados para entender, estruturar, aplicar, operar e integrar.</text>
+</g>
+<g id="visual-proof" font-family="Arial, Helvetica, sans-serif">
+ <rect x="76" y="395" width="928" height="430" rx="30" fill="#111827" stroke="#334155" stroke-width="2"/>
+ <text x="112" y="448" fill="#7DD3FC" font-size="20" font-weight="700">JORNADA DO ECOSSISTEMA</text>
+ <g fill="#1E293B" stroke="#475569"><rect x="112" y="500" width="158" height="116" rx="18"/><rect x="284" y="500" width="158" height="116" rx="18"/><rect x="456" y="500" width="158" height="116" rx="18"/><rect x="628" y="500" width="158" height="116" rx="18"/><rect x="800" y="500" width="158" height="116" rx="18"/></g>
+ <g fill="#E2E8F0" font-size="18" font-weight="700" text-anchor="middle"><text x="191" y="552">ENTENDER</text><text x="363" y="552">ESTRUTURAR</text><text x="535" y="552">APLICAR</text><text x="707" y="552">OPERAR</text><text x="879" y="552">INTEGRAR</text></g>
+ <g fill="#94A3B8" font-size="15" text-anchor="middle"><text x="191" y="584">Método JPN</text><text x="363" y="584">Prompt Builder</text><text x="535" y="584">Prompt Pack</text><text x="707" y="584">JPN Business</text><text x="879" y="584">Pro Kit</text></g>
+ <path d="M191 660 H879" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/><circle cx="191" cy="660" r="9" fill="#7DD3FC"/><circle cx="363" cy="660" r="9" fill="#7DD3FC"/><circle cx="535" cy="660" r="9" fill="#7DD3FC"/><circle cx="707" cy="660" r="9" fill="#7DD3FC"/><circle cx="879" cy="660" r="9" fill="#7DD3FC"/>
+ <rect x="112" y="718" width="846" height="70" rx="16" fill="#172554"/><text x="535" y="748" text-anchor="middle" fill="#BAE6FD" font-size="17" font-weight="700">INTEGRAÇÃO EM CONSTRUÇÃO</text><text x="535" y="774" text-anchor="middle" fill="#94A3B8" font-size="16">A composição visual não representa disponibilidade comercial ou release aprovado.</text>
+</g>
+<g id="microcopy" font-family="Arial, Helvetica, sans-serif"><text x="76" y="888" fill="#FFFFFF" font-size="27" font-weight="700">Entender → Estruturar → Aplicar → Operar → Integrar</text><text x="76" y="932" fill="#94A3B8" font-size="19">Pro Kit permanece EM PREPARAÇÃO até conclusão dos gates e revisão humana.</text><text x="76" y="968" fill="#94A3B8" font-size="18">Sem promessa de resultado, preço, desconto ou CTA transacional.</text></g>
+<g id="cta-internal" font-family="Arial, Helvetica, sans-serif"><text x="76" y="1025" fill="#7DD3FC" font-size="18" font-weight="700">JPN-CR-06 • FONTE EDITÁVEL • REVISÃO HUMANA PENDENTE • NÃO PUBLICAR</text></g>
+</svg>

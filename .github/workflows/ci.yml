@@ -155,6 +155,9 @@ jobs:
       - name: Editorial - review handoff
         run: npm run check:editorial-review-handoff
 
+      - name: Editorial - PDF visual handoff contract
+        run: node scripts/check-editorial-pdf-visual-review-handoff.mjs
+
       - name: Commercial copy - social content
         run: node scripts/check-social-content-library.mjs
 

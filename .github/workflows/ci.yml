@@ -197,6 +197,9 @@ jobs:
       - name: Commercial - contrast
         run: npm run check:commercial-contrast
 
+      - name: Commercial - creative review aggregate
+        run: npm run check:commercial-creative-review
+
       - name: Commercial - editable creative sources
         run: node scripts/check-commercial-creative-sources.mjs
 

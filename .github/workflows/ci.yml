@@ -200,6 +200,9 @@ jobs:
       - name: Commercial - editable creative sources
         run: node scripts/check-commercial-creative-sources.mjs
 
+      - name: Commercial - creative review gallery
+        run: node scripts/check-commercial-creative-gallery.mjs
+
       - name: Gestão Fácil - quick start
         run: node scripts/check-gestao-facil-quick-start.mjs
 

@@ -50,6 +50,8 @@
     "check:visual-review-gallery":"node scripts/check-visual-review-gallery.mjs",
     "check:editorial-release":"node scripts/check-editorial-release.mjs",
     "check:editorial-print-staging":"node scripts/check-editorial-print-staging.mjs",
+    "export:editorial-pdfs":"node scripts/export-editorial-pdfs.mjs",
+    "review:editorial-pdfs":"node scripts/review-editorial-pdfs.mjs",
     "check:editorial-pdf-review":"node scripts/check-editorial-pdf-review.mjs",
     "check:editorial-review-handoff":"node scripts/build-editorial-review-handoff.mjs --check",
     "check:commercial-copy":"node scripts/check-commercial-copy.mjs",

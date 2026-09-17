@@ -13,12 +13,22 @@ function commandExists(command) {
   return !probe.error && probe.status === 0;
 }
 function escapeHtml(value) { return String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
+function readDeclaredPages(pdfPath) {
+  const run = spawnSync('pdfinfo', [pdfPath], { cwd: root, encoding: 'utf8', timeout: 30000 });
+  if (run.error || run.status !== 0) fail(`falha ao inspecionar número de páginas em ${basename(pdfPath)}: ${(run.stderr || run.error?.message || '').trim()}`);
+  const match = /^Pages:\s+(\d+)\s*$/mi.exec(run.stdout || '');
+  if (!match) fail(`pdfinfo não informou Pages para ${basename(pdfPath)}.`);
+  const pages = Number(match[1]);
+  if (!Number.isSafeInteger(pages) || pages < 1) fail(`contagem de páginas inválida em ${basename(pdfPath)}: ${match[1]}.`);
+  return pages;
+}
 
 let manifest;
 try { manifest = JSON.parse(await readFile(manifestPath, 'utf8')); }
 catch { fail('CANDIDATE_MANIFEST.json ausente/inválido; execute npm run export:editorial-pdfs antes.'); }
 if (manifest.status !== 'internal-pdf-candidates-visual-review-pending' || !Array.isArray(manifest.products) || manifest.products.length !== 5) fail('manifesto de candidatos inválido.');
 if (!commandExists('pdftoppm')) fail('pdftoppm (Poppler) não encontrado. A revisão deve renderizar localmente os PDFs reais; nenhuma aprovação será simulada.');
+if (!commandExists('pdfinfo')) fail('pdfinfo (Poppler) não encontrado. A revisão exige comparar a contagem declarada do PDF com as páginas realmente renderizadas.');
 
 await rm(reviewRoot, { recursive: true, force: true });
 await mkdir(join(reviewRoot, 'pages'), { recursive: true });
@@ -26,6 +36,7 @@ const rendered = [];
 
 for (const product of manifest.products) {
   const pdfPath = join(root, product.output);
+  const declaredPages = readDeclaredPages(pdfPath);
   const productPagesDir = join(reviewRoot, 'pages', product.id);
   await mkdir(productPagesDir, { recursive: true });
   const prefix = join(productPagesDir, 'page');
@@ -42,9 +53,11 @@ for (const product of manifest.products) {
     pages.push({ page, file: `pages/${product.id}/${basename(found)}`, bytes: info.size });
   }
   if (!pages.length) fail(`${product.id}: nenhuma página PNG produzida.`);
+  const pageCountMatches = declaredPages === pages.length;
+  if (!pageCountMatches) fail(`${product.id}: PDF declara ${declaredPages} página(s), mas ${pages.length} preview(s) foram renderizados.`);
   rendered.push({
     id: product.id, sourcePdf: product.output, candidateSha256: product.sha256,
-    declaredPages: null, renderedPages: pages.length, pageCountMatches: null, pages,
+    declaredPages, renderedPages: pages.length, pageCountMatches, pages,
     status: 'rendered-for-human-review-not-approved',
   });
 }
@@ -61,4 +74,4 @@ const cards = rendered.flatMap((product) => product.pages.map((page) => {
 })).join('\n');
 const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>JPN — revisão editorial PDF</title><style>body{font-family:Arial,sans-serif;max-width:1100px;margin:32px auto;padding:0 20px;background:#eef2f4;color:#13202b}header,article{background:white;padding:20px;margin:0 0 24px;border-radius:8px}img{display:block;max-width:100%;height:auto;margin:auto;border:1px solid #ccd5db}code{overflow-wrap:anywhere}</style></head><body><header><h1>JPN — revisão editorial PDF</h1><p><strong>evidência de renderização, não aprovação automática</strong>. Inspecione cada página e confirme o hash do candidato. release_ready=false · publication_authorized=false.</p></header>${cards}</body></html>`;
 await writeFile(join(reviewRoot, 'index.html'), html, 'utf8');
-console.log(`Revisão editorial renderizada: ${rendered.length} documentos. Estado preservado: revisão humana pendente.`);
+console.log(`Revisão editorial renderizada: ${rendered.length} documentos. Contagem PDF/PNG verificada. Estado preservado: revisão humana pendente.`);

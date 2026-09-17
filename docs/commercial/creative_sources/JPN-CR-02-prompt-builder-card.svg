@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
   <title id="title">JPN Prompt Builder — Estruture o pedido antes de enviar para a IA</title>
-  <desc id="desc">Candidato visual interno do JPN Prompt Builder. Não autorizado para publicação.</desc>
+  <desc id="desc">Candidato visual interno do JPN Prompt Builder. NÃO PUBLICAR. Não autorizado para publicação.</desc>
   <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07111f"/><stop offset="1" stop-color="#142a45"/></linearGradient></defs>
   <g id="background"><rect width="1080" height="1080" rx="52" fill="url(#bg)"/></g>
   <g id="brand" font-family="Arial, Helvetica, sans-serif"><text x="80" y="100" fill="#7dd3fc" font-size="34" font-weight="700" letter-spacing="5">JPN FRAMEWORK</text></g>
@@ -14,6 +14,6 @@
     <text x="125" y="660" fill="#e0f2fe" font-size="25">Contexto  •  Objetivo  •  Fatos  •  Limites</text><text x="125" y="700" fill="#e0f2fe" font-size="25">Formato  •  Conclusão</text>
   </g>
   <g id="support" font-family="Arial, Helvetica, sans-serif"><text x="80" y="825" fill="#dbeafe" font-size="29">Organize os elementos do pedido em uma instrução que você pode revisar</text><text x="80" y="868" fill="#dbeafe" font-size="29">antes de usar em uma IA.</text></g>
-  <g id="microcopy" font-family="Arial, Helvetica, sans-serif"><text x="80" y="955" fill="#bae6fd" font-size="25" font-weight="700">Você revisa. O Builder estrutura.</text><text x="80" y="995" fill="#94a3b8" font-size="20">Não executa a tarefa final • sem garantia de resposta correta • revisão humana pendente</text></g>
+  <g id="microcopy" font-family="Arial, Helvetica, sans-serif"><text x="80" y="955" fill="#bae6fd" font-size="25" font-weight="700">Você revisa. O Builder estrutura.</text><text x="80" y="995" fill="#94a3b8" font-size="20">Não executa a tarefa final • sem garantia de resposta correta • revisão humana pendente • NÃO PUBLICAR</text></g>
   <g id="cta-internal" font-family="Arial, Helvetica, sans-serif"><text x="1000" y="1018" text-anchor="end" fill="#7dd3fc" font-size="20" font-weight="700">JPN-CR-02</text></g>
 </svg>

@@ -74,5 +74,5 @@
     "build:editorial-print":"node scripts/build-editorial-print-staging.mjs",
     "build:jpn-business-print-candidate":"node scripts/build-jpn-business-print-candidate.mjs"
   },
-  "devDependencies":{"@types/node":"^22.10.2","esbuild":"^0.24.2","typescript":"^5.7.2","vitest":"^2.1.8"}
+  "devDependencies":{"@types/node":"^22.10.2","ajv":"^8.17.1","esbuild":"^0.24.2","typescript":"^5.7.2","vitest":"^2.1.8"}
 }

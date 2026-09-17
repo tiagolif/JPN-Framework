@@ -51,6 +51,7 @@ for (const phase of [
   'Visual - bounds',
   'Editorial - release',
   'Editorial - review handoff',
+  'Editorial - PDF visual handoff contract',
   'Commercial - copy',
   'Commercial - product facts',
   'Commercial - sales enablement playbook',
@@ -84,6 +85,7 @@ for (const command of [
   'node scripts/check-product-feedback-loop.mjs',
   'node scripts/check-release-evidence-contract.mjs',
   'node scripts/check-release-evidence-register.mjs',
+  'node scripts/check-editorial-pdf-visual-review-handoff.mjs',
 ]) {
   requireText(workflow, command, 'workflow extended coverage');
 }
@@ -127,4 +129,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`Stacked PR CI check OK: ${buildRunCommands.length} comandos do build cobertos, mais gates de entrega, operação comercial, distribuição e evidência de release, sem promover gates humanos, externos ou de release.`);
+console.log(`Stacked PR CI check OK: ${buildRunCommands.length} comandos do build cobertos, mais gates de entrega, operação comercial, distribuição, evidência de release e contrato do handoff visual dos PDFs, sem promover gates humanos, externos ou de release.`);

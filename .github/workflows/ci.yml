@@ -212,6 +212,9 @@ jobs:
       - name: Commercial - creative review protocol
         run: node scripts/check-commercial-creative-review-protocol.mjs
 
+      - name: Commercial - creative human review handoff
+        run: node scripts/check-commercial-creative-human-review-handoff.mjs
+
       - name: Gestão Fácil - quick start
         run: node scripts/check-gestao-facil-quick-start.mjs
 

@@ -203,6 +203,9 @@ jobs:
       - name: Commercial - creative review gallery
         run: node scripts/check-commercial-creative-gallery.mjs
 
+      - name: Commercial - creative review manifest
+        run: node scripts/build-commercial-creative-review-manifest.mjs --check
+
       - name: Gestão Fácil - quick start
         run: node scripts/check-gestao-facil-quick-start.mjs
 

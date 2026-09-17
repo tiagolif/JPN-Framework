@@ -197,6 +197,9 @@ jobs:
       - name: Commercial - contrast
         run: npm run check:commercial-contrast
 
+      - name: Commercial - editable creative sources
+        run: node scripts/check-commercial-creative-sources.mjs
+
       - name: Gestão Fácil - quick start
         run: node scripts/check-gestao-facil-quick-start.mjs
 

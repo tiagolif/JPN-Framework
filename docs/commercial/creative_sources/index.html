@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JPN — Galeria de revisão comercial</title>
+<style>
+:root{color-scheme:dark;--bg:#07111f;--panel:#0d1b2a;--line:#26384d;--text:#f4f7fb;--muted:#9fb0c3;--accent:#54d6c7}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}header,main{width:min(1180px,92vw);margin:auto}header{padding:48px 0 24px}h1{margin:0 0 8px;font-size:clamp(28px,5vw,48px)}p{color:var(--muted)}.guard{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:7px 10px;border-radius:999px;font-weight:700;font-size:12px;letter-spacing:.08em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;padding:20px 0 56px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}.frame{background:#02070d;display:grid;place-items:center;aspect-ratio:1/1}.frame.story{aspect-ratio:9/16}.frame.hero{aspect-ratio:16/9}.frame img{display:block;width:100%;height:100%;object-fit:contain}.meta{padding:16px}.meta strong{display:block}.meta small{color:var(--muted)}footer{border-top:1px solid var(--line);padding:24px 0 48px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><span class="guard">CANDIDATO INTERNO · NÃO PUBLICAR</span><h1>Galeria de revisão — Ecossistema JPN</h1><p>Superfície offline para inspeção das oito fontes SVG comerciais. Não é página pública nem material autorizado para campanha.</p></header>
+<main><section class="grid" id="gallery"></section><footer>Revisão humana pendente. Esta galeria referencia somente arquivos locais do repositório e não carrega recursos externos.</footer></main>
+<script>
+const items=[
+['JPN-CR-01','Método JPN','JPN-CR-01-metodo-jpn-card.svg',''],
+['JPN-CR-02','Prompt Builder','JPN-CR-02-prompt-builder-card.svg',''],
+['JPN-CR-03','Prompt Pack','JPN-CR-03-prompt-pack-card.svg',''],
+['JPN-CR-04','JPN Business','JPN-CR-04-jpn-business-card.svg',''],
+['JPN-CR-05','Gestão Fácil','JPN-CR-05-gestao-facil-card.svg',''],
+['JPN-CR-06','JPN Pro Kit','JPN-CR-06-pro-kit-card.svg',''],
+['JPN-CR-07','Ecossistema · Story','JPN-CR-07-ecossistema-story.svg','story'],
+['JPN-CR-08','Ecossistema · Hero','JPN-CR-08-ecossistema-hero.svg','hero']];
+const gallery=document.querySelector('#gallery');
+for(const [id,title,file,kind] of items){const card=document.createElement('article');card.className='card';card.innerHTML=`<div class="frame ${kind}"><img src="${file}" alt="${id} — ${title}" loading="lazy"></div><div class="meta"><strong>${id} — ${title}</strong><small>${file}</small></div>`;gallery.append(card)}
+</script>
+</body>
+</html>

@@ -85,7 +85,7 @@ for (const command of [
   'node scripts/check-product-feedback-loop.mjs',
   'node scripts/check-release-evidence-contract.mjs',
   'node scripts/check-release-evidence-register.mjs',
-  'node scripts/check-editorial-pdf-visual-review-handoff.mjs',
+  'npm run check:editorial-pdf-visual-handoff',
 ]) {
   requireText(workflow, command, 'workflow extended coverage');
 }

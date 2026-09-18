@@ -200,6 +200,9 @@ jobs:
       - name: Commercial - contrast
         run: npm run check:commercial-contrast
 
+      - name: Commercial - surface review contract
+        run: npm run check:commercial-surface-review
+
       - name: Commercial - creative review aggregate
         run: npm run check:commercial-creative-review
 

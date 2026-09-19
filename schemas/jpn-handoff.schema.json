@@ -13,14 +13,8 @@
     "to_agent": { "type": "string", "minLength": 1 },
     "objective": { "type": "string", "minLength": 1 },
     "status": { "type": "string", "enum": ["in_progress", "blocked", "ready_for_review", "complete"] },
-    "evidence": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/evidenceItem" }
-    },
-    "decisions": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/decision" }
-    },
+    "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidenceItem" } },
+    "decisions": { "type": "array", "items": { "$ref": "#/$defs/decision" } },
     "open_items": { "$ref": "#/$defs/stringArray" },
     "next_actions": { "$ref": "#/$defs/stringArray" },
     "constraints": { "$ref": "#/$defs/stringArray" },
@@ -42,7 +36,7 @@
         "source_type": { "type": "string", "enum": ["user_input", "repository", "document", "tool_result", "test_result", "external_source", "observation"] },
         "source_ref": { "type": "string", "minLength": 1 },
         "verification_status": { "type": "string", "enum": ["verified", "unverified", "conflicting", "not_applicable"] },
-        "captured_at": { "type": ["string", "null"], "format": "date-time" },
+        "captured_at": { "type": ["string", "null"], "description": "Optional ISO 8601 timestamp; semantic timestamp validation is intentionally outside this dependency-free schema candidate." },
         "notes": { "type": ["string", "null"] }
       }
     },
@@ -52,11 +46,7 @@
       "additionalProperties": false,
       "properties": {
         "decision": { "type": "string", "minLength": 1 },
-        "basis_evidence_ids": {
-          "type": "array",
-          "items": { "type": "string", "minLength": 1 },
-          "uniqueItems": true
-        },
+        "basis_evidence_ids": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
         "reversible": { "type": "boolean" }
       }
     }

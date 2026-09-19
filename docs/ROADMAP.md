@@ -48,7 +48,7 @@ Resultados, positivos ou negativos, deverão ser documentados. A existência do 
 
 ## Fase 4 — Esquema estruturado
 
-Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`, baseado em JSON Schema Draft 2020-12. Ele representa Jornada, Precisão e Narrativa, exige a versão da especificação e permite proveniência opcional em itens de contexto. O contrato possui validação executável em `scripts/check-jpn-schema.mjs`, integrada ao CI. Existe também `schemas/jpn-handoff.schema.json`, contrato candidato separado para handoff entre agentes, com evidências rastreáveis por fonte, estado de verificação, decisões, pendências, restrições e próximas ações. A validação executável cobre ambos os schemas, rejeita evidência sem referência de fonte, estados não previstos, referências de decisão sem evidência correspondente e IDs de evidência duplicados. A política candidata de evolução e SemVer está documentada em `docs/SCHEMA_COMPATIBILITY.md`. Isso é infraestrutura implementada, não uma declaração de estabilidade 1.0.
+Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`, baseado em JSON Schema Draft 2020-12. Ele representa Jornada, Precisão e Narrativa, exige a versão da especificação e permite proveniência opcional em itens de contexto. O contrato possui validação executável em `scripts/check-jpn-schema.mjs`, integrada ao CI. Existe também `schemas/jpn-handoff.schema.json`, contrato candidato separado para handoff entre agentes, com evidências rastreáveis por fonte, estado de verificação, decisões, pendências, restrições e próximas ações. A validação executável cobre ambos os schemas, rejeita evidência sem referência de fonte, estados não previstos, referências de decisão sem evidência correspondente e IDs de evidência duplicados. A política candidata de evolução e SemVer está documentada em `docs/SCHEMA_COMPATIBILITY.md`, e `docs/SCHEMA_CHANGELOG.md` registra as baselines candidatas a partir das quais mudanças futuras deverão ser classificadas. Isso é infraestrutura implementada, não uma declaração de estabilidade 1.0.
 
 - [x] JSON Schema candidato para estado JPN;
 - [x] campo de versão obrigatório no estado estruturado;
@@ -59,6 +59,7 @@ Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`
 - [x] contrato estruturado candidato de handoff entre agentes;
 - [x] validar referências cruzadas entre decisões e IDs de evidência;
 - [x] política formal candidata de compatibilidade entre versões;
+- [x] registrar baselines candidatas para rastrear a evolução futura dos contratos;
 - [ ] adicionar fixtures executáveis de compatibilidade/migração entre versões quando existir a primeira mudança de contrato;
 - [ ] promover os schemas candidatos a contratos estáveis somente após validação e compatibilidade documentadas.
 

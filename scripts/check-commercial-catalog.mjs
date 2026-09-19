@@ -17,6 +17,7 @@ if (!fs.existsSync(usageRoutesPath)) fail('PRODUCT_USAGE_ROUTES_v1.json ausente'
 if (process.exitCode) process.exit();
 
 const html = fs.readFileSync(catalogPath, 'utf8');
+const htmlFolded = html.toLocaleLowerCase('pt-BR');
 const releaseState = JSON.parse(fs.readFileSync(releaseStatePath, 'utf8'));
 const usageRoutes = JSON.parse(fs.readFileSync(usageRoutesPath, 'utf8'));
 
@@ -86,8 +87,10 @@ if (JSON.stringify([...routeMarkers].sort()) !== JSON.stringify([...expectedRout
 
 for (const route of usageRoutes.routes) {
   if (!html.includes(`data-route="${route.id}"`)) fail(`rota canônica ausente do catálogo: ${route.id}`);
-  if (!html.includes(route.use_when)) fail(`${route.id}: critério de uso diverge do contrato canônico`);
-  if (route.id !== 'rota-conjunto' && !html.includes(route.stop_when)) {
+  if (!htmlFolded.includes(route.use_when.toLocaleLowerCase('pt-BR'))) {
+    fail(`${route.id}: critério de uso diverge do contrato canônico`);
+  }
+  if (route.id !== 'rota-conjunto' && !htmlFolded.includes(route.stop_when.toLocaleLowerCase('pt-BR'))) {
     fail(`${route.id}: critério de parada diverge do contrato canônico`);
   }
 }

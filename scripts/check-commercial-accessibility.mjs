@@ -28,8 +28,8 @@ if (!fs.existsSync(siteRoot)) {
 const htmlFiles = walk(siteRoot).sort();
 const errors = [];
 
-if (htmlFiles.length !== 15) {
-  errors.push(`esperados 15 HTMLs comerciais (landing + catálogo + seletor + comparação + como funciona + casos de uso + primeiros passos + demonstração + FAQ + 6 produtos), encontrados ${htmlFiles.length}`);
+if (htmlFiles.length !== 20) {
+  errors.push(`esperados 20 HTMLs comerciais internos, encontrados ${htmlFiles.length}`);
 }
 
 for (const file of htmlFiles) {

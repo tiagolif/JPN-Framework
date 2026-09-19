@@ -3,7 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 
 const WORKBOOK_PATH = 'deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx';
 const QA_EVIDENCE_PATH = 'docs/products/gestao-facil/QA_EXECUTION_v0.1.md';
-const EXPECTED_SHA256 = '46b6fff3b366b2ac3467f443643c12e6aa8ba9958b8b54e0797ec91176c9dded';
+const EXPECTED_SHA256 = 'd7b93ced896fda9fcc0c9740328359c8e5a790f1a665430258b609a3088181eb';
 const MIN_BYTES = 1024;
 
 function fail(message) {

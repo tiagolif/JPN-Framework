@@ -55,6 +55,7 @@ if (errors.length > 0) {
 }
 
 const childChecks = [
+  ['scripts/check-stacked-pr-ci.mjs', 'cobertura de CI em PRs empilhados'],
   ['scripts/check-product-usage-routes.mjs', 'rotas de uso'],
   ['scripts/check-small-business-use-cases.mjs', 'casos de uso para pequenas empresas'],
   ['scripts/check-small-business-diagnostic.mjs', 'diagnóstico para pequenas empresas'],
@@ -90,13 +91,21 @@ const childChecks = [
   ['scripts/check-jpn-business-playbook-navigator.mjs', 'navegador local de playbooks do JPN Business'],
 ];
 
+const childFailures = [];
 for (const [script, label] of childChecks) {
   const result = spawnSync(process.execPath, [script], { cwd: root, encoding: 'utf8' });
   if (result.stdout) process.stdout.write(result.stdout);
   if (result.stderr) process.stderr.write(result.stderr);
   if (result.status !== 0) {
-    console.error(`Product portfolio check falhou no gate de ${label}.`);
-    process.exit(result.status ?? 1);
+    childFailures.push({ script, label, status: result.status ?? 1 });
+    console.error(`::error title=Product portfolio gate falhou::${label} (${script}) retornou status ${result.status ?? 1}.`);
   }
 }
-console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, descoberta comercial, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição, proveniência dos pacotes, contrato de pacote ao cliente, identidade visual, manifesto das superfícies comerciais, manifesto dos ativos comerciais, galeria interna de artes, contrato canônico de copy comercial, preflight editorial, composição editorial candidata, painel canônico de prontidão, contrato de evidência de release, blueprint e workspace local do Pro Kit, hub local integrado JPN, contrato da candidata Gestão Fácil v0.3, kit e validador local de importação da Gestão Fácil v0.3, canvas local do Método JPN, seletor local do JPN Prompt Pack e navegador local de playbooks do JPN Business validados.`);
+
+if (childFailures.length > 0) {
+  console.error(`Product portfolio check falhou em ${childFailures.length} subgate(s):`);
+  for (const failure of childFailures) console.error(`- ${failure.label}: ${failure.script} (status ${failure.status})`);
+  process.exit(1);
+}
+
+console.log(`Product portfolio check OK: ${portfolioProducts.length} produtos canônicos, CI de PRs empilhados, rotas, casos de uso, diagnóstico, interface do diagnóstico, matriz comparativa, one-pagers, FAQ/objeções, descoberta comercial, crosswalk Business × Prompt Pack, onboarding, demo guiada, manifestos de entrega, índice de distribuição, proveniência dos pacotes, contrato de pacote ao cliente, identidade visual, manifesto das superfícies comerciais, manifesto dos ativos comerciais, galeria interna de artes, contrato canônico de copy comercial, preflight editorial, composição editorial candidata, painel canônico de prontidão, contrato de evidência de release, blueprint e workspace local do Pro Kit, hub local integrado JPN, contrato da candidata Gestão Fácil v0.3, kit e validador local de importação da Gestão Fácil v0.3, canvas local do Método JPN, seletor local do JPN Prompt Pack e navegador local de playbooks do JPN Business validados.`);

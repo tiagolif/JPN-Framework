@@ -39,13 +39,17 @@ for (const term of ["Jornada", "Precisão", "Narrativa", "confirmed", "inferred"
 }
 
 const promptIds = promptIndex.templates.map(x => x.id);
+const promptNames = promptIndex.templates.map(x => x.name);
 const businessIds = businessIndex.playbooks.map(x => x.id);
 unique(promptIds, "Prompt Pack");
+unique(promptNames, "Prompt Pack nomes");
 unique(businessIds, "JPN Business");
 
-for (const id of promptIds) {
-  if (!/^PP-\d{2}$/.test(id)) fail(`ID de prompt fora do padrão: ${id}`);
-  if (!promptDoc.includes(id)) fail(`Prompt ${id} existe no índice, mas não foi encontrado no documento`);
+for (const template of promptIndex.templates) {
+  if (!/^PP-\d{2}$/.test(template.id)) fail(`ID de prompt fora do padrão: ${template.id}`);
+  if (!promptDoc.includes(`**Nome:** ${template.name}`)) {
+    fail(`Prompt ${template.id} (${template.name}) existe no índice, mas seu nome canônico não foi encontrado no documento`);
+  }
 }
 for (const id of businessIds) {
   if (!/^JB-\d{2}$/.test(id)) fail(`ID de playbook fora do padrão: ${id}`);
@@ -68,11 +72,13 @@ for (const template of promptIndex.templates) {
   }
 }
 
+// Claims explicitamente negados (por exemplo, "não elimina alucinações") são
+// guardrails editoriais e não devem ser tratados como promessa positiva.
 const forbiddenClaims = [
-  /elimina(?:r)? alucina(?:ções|cao|ção)/i,
-  /garante? (?:vendas|resultado|produtividade)/i,
-  /melhora .*\d+%/i,
-  /reduz .*\d+%/i
+  /(?<!não )elimina(?:r)? alucina(?:ções|cao|ção)/i,
+  /(?<!não )garante? (?:vendas|resultado|produtividade)/i,
+  /(?<!não )melhora .*\d+%/i,
+  /(?<!não )reduz .*\d+%/i
 ];
 for (const [label, content] of [["Método", method], ["Prompt Pack", promptDoc], ["JPN Business", businessDoc]]) {
   for (const pattern of forbiddenClaims) {

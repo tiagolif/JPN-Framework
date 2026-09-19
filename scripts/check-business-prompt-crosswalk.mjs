@@ -44,7 +44,12 @@ for (const source of businessRows) {
   if (!seen.has(source.id)) errors.push(`${source.id}: ausente do crosswalk.`);
 }
 
-const text = JSON.stringify(crosswalk).toLowerCase();
+const positiveSurface = crossRows
+  .map((row) => `${row.name ?? ''} ${row.use ?? ''}`)
+  .join(' ')
+  .toLowerCase()
+  .replace(/\bsem\s+publica[cç][aã]o\s+autom[aá]tica\b/g, '')
+  .replace(/\bn[aã]o\s+(autoriza|executa|publica|envia|compra|substitui)[^.]*\.?/g, '');
 const risky = [
   /resultado garantido/,
   /roi garantido/,
@@ -54,7 +59,7 @@ const risky = [
   /substitui revis[aã]o humana/,
 ];
 for (const pattern of risky) {
-  if (pattern.test(text)) errors.push(`Crosswalk contém claim ou automação indevida: ${pattern}.`);
+  if (pattern.test(positiveSurface)) errors.push(`Crosswalk contém claim ou automação indevida: ${pattern}.`);
 }
 
 if (errors.length > 0) {

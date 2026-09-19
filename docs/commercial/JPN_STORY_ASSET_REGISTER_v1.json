@@ -1,0 +1,51 @@
+{
+  "version": "1.0.0",
+  "framework": "JPN Framework",
+  "purpose": "Registrar a família interna de 24 Stories 1080x1920 produzida para os seis produtos, como fonte de consolidação para o manifesto comercial e a galeria de revisão.",
+  "publication_authorized": false,
+  "release_effect": "none",
+  "source_paths": [
+    "docs/commercial/JPN_STORY_PRODUCTION_SPEC_v1.md",
+    "docs/commercial/SOCIAL_CONTENT_LIBRARY_v1.md",
+    "docs/commercial/JPN_VISUAL_IDENTITY_v1.json"
+  ],
+  "assets": [
+    {"id":"story-jpn-prompt-builder-01","path":"assets/social/jpn-prompt-builder-story-01-1080x1920.svg","product_id":"jpn-prompt-builder","sequence":1},
+    {"id":"story-jpn-prompt-builder-02","path":"assets/social/jpn-prompt-builder-story-02-1080x1920.svg","product_id":"jpn-prompt-builder","sequence":2},
+    {"id":"story-jpn-prompt-builder-03","path":"assets/social/jpn-prompt-builder-story-03-1080x1920.svg","product_id":"jpn-prompt-builder","sequence":3},
+    {"id":"story-jpn-prompt-builder-04","path":"assets/social/jpn-prompt-builder-story-04-1080x1920.svg","product_id":"jpn-prompt-builder","sequence":4},
+    {"id":"story-metodo-jpn-01","path":"assets/social/metodo-jpn-story-01-1080x1920.svg","product_id":"metodo-jpn","sequence":1},
+    {"id":"story-metodo-jpn-02","path":"assets/social/metodo-jpn-story-02-1080x1920.svg","product_id":"metodo-jpn","sequence":2},
+    {"id":"story-metodo-jpn-03","path":"assets/social/metodo-jpn-story-03-1080x1920.svg","product_id":"metodo-jpn","sequence":3},
+    {"id":"story-metodo-jpn-04","path":"assets/social/metodo-jpn-story-04-1080x1920.svg","product_id":"metodo-jpn","sequence":4},
+    {"id":"story-jpn-prompt-pack-01","path":"assets/social/jpn-prompt-pack-story-01-1080x1920.svg","product_id":"jpn-prompt-pack","sequence":1},
+    {"id":"story-jpn-prompt-pack-02","path":"assets/social/jpn-prompt-pack-story-02-1080x1920.svg","product_id":"jpn-prompt-pack","sequence":2},
+    {"id":"story-jpn-prompt-pack-03","path":"assets/social/jpn-prompt-pack-story-03-1080x1920.svg","product_id":"jpn-prompt-pack","sequence":3},
+    {"id":"story-jpn-prompt-pack-04","path":"assets/social/jpn-prompt-pack-story-04-1080x1920.svg","product_id":"jpn-prompt-pack","sequence":4},
+    {"id":"story-jpn-business-01","path":"assets/social/jpn-business-story-01-1080x1920.svg","product_id":"jpn-business","sequence":1},
+    {"id":"story-jpn-business-02","path":"assets/social/jpn-business-story-02-1080x1920.svg","product_id":"jpn-business","sequence":2},
+    {"id":"story-jpn-business-03","path":"assets/social/jpn-business-story-03-1080x1920.svg","product_id":"jpn-business","sequence":3},
+    {"id":"story-jpn-business-04","path":"assets/social/jpn-business-story-04-1080x1920.svg","product_id":"jpn-business","sequence":4},
+    {"id":"story-jpn-gestao-facil-01","path":"assets/social/jpn-gestao-facil-story-01-1080x1920.svg","product_id":"jpn-gestao-facil","sequence":1},
+    {"id":"story-jpn-gestao-facil-02","path":"assets/social/jpn-gestao-facil-story-02-1080x1920.svg","product_id":"jpn-gestao-facil","sequence":2},
+    {"id":"story-jpn-gestao-facil-03","path":"assets/social/jpn-gestao-facil-story-03-1080x1920.svg","product_id":"jpn-gestao-facil","sequence":3},
+    {"id":"story-jpn-gestao-facil-04","path":"assets/social/jpn-gestao-facil-story-04-1080x1920.svg","product_id":"jpn-gestao-facil","sequence":4},
+    {"id":"story-jpn-pro-kit-01","path":"assets/social/jpn-pro-kit-story-01-1080x1920.svg","product_id":"jpn-pro-kit","sequence":1},
+    {"id":"story-jpn-pro-kit-02","path":"assets/social/jpn-pro-kit-story-02-1080x1920.svg","product_id":"jpn-pro-kit","sequence":2},
+    {"id":"story-jpn-pro-kit-03","path":"assets/social/jpn-pro-kit-story-03-1080x1920.svg","product_id":"jpn-pro-kit","sequence":3},
+    {"id":"story-jpn-pro-kit-04","path":"assets/social/jpn-pro-kit-story-04-1080x1920.svg","product_id":"jpn-pro-kit","sequence":4}
+  ],
+  "guardrails": {
+    "external_publication_allowed": false,
+    "paid_media_allowed": false,
+    "transactional_cta_allowed": false,
+    "financial_data_allowed": false,
+    "gestao_facil_requires_multiplatform_qa": true,
+    "pro_kit_must_not_imply_release_readiness": true
+  },
+  "next_integration": [
+    "Consolidar os 24 registros em COMMERCIAL_ASSET_MANIFEST_v1.json.",
+    "Adicionar as 24 prévias em commercial-site/artes.html.",
+    "Executar check:product-portfolio e os validadores visuais/comerciais até CI verde."
+  ]
+}

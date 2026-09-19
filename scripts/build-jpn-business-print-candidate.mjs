@@ -93,10 +93,12 @@ function validate(markdown, index, quickReference) {
     errors.push('guardrail de Marketing ausente da Referência Rápida');
   }
 
+  // Guardrails que negam uma promessa ("não garante", "não substitui") não
+  // são claims comerciais. Procuramos somente afirmações positivas.
   const forbidden = [
-    /garante\s+(vendas|resultado|roi|precis[aã]o)/i,
-    /elimina\s+(alucina[cç][aã]o|erros?)/i,
-    /substitui\s+(revis[aã]o humana|especialista)/i,
+    /(?<!não )garante\s+(vendas|resultado|roi|precis[aã]o)/i,
+    /(?<!não )elimina\s+(alucina[cç][aã]o|erros?)/i,
+    /(?<!não )substitui\s+(revis[aã]o humana|especialista)/i,
   ];
   for (const pattern of forbidden) {
     if (pattern.test(markdown) || pattern.test(quickReference)) errors.push(`claim proibido detectado: ${pattern}`);

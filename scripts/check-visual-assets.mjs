@@ -34,6 +34,20 @@ function fail(errors, file, message) {
   errors.push(`${relative('.', file)}: ${message}`);
 }
 
+function isNegatedClaim(text, index) {
+  const prefix = text.slice(Math.max(0, index - 64), index).toLowerCase();
+  return /(?:\bn(?:ã|a)o\s+|\bsem\s+|\bsem\s+alega(?:ç|c)ão\s+de\s+)$/.test(prefix);
+}
+
+function containsPositiveClaim(text, pattern) {
+  const flags = pattern.flags.includes('g') ? pattern.flags : `${pattern.flags}g`;
+  const matcher = new RegExp(pattern.source, flags);
+  for (const match of text.matchAll(matcher)) {
+    if (!isNegatedClaim(text, match.index ?? 0)) return true;
+  }
+  return false;
+}
+
 const files = (await Promise.all(roots.map(listSvgFiles))).flat();
 const errors = [];
 
@@ -105,7 +119,7 @@ for (const file of files) {
   }
 
   for (const claim of forbiddenClaims) {
-    if (claim.test(svg)) fail(errors, file, `claim comercial bloqueado detectado: ${claim}.`);
+    if (containsPositiveClaim(svg, claim)) fail(errors, file, `claim comercial bloqueado detectado: ${claim}.`);
   }
 
   if (/pro-kit/i.test(filename) && !/EM PREPARA(?:Ç|C)ÃO/i.test(svg)) {

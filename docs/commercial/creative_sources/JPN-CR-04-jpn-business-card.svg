@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+<title id="title">JPN Business — 12 playbooks para organizar decisões</title>
+<desc id="desc">Candidato interno JPN-CR-04. Demonstra a organização dos 12 playbooks rastreados do JPN Business. Não autorizado para publicação.</desc>
+<rect id="background" width="1080" height="1080" fill="#0B1020"/>
+<g id="brand" font-family="Arial, Helvetica, sans-serif">
+  <text x="76" y="92" fill="#FFFFFF" font-size="30" font-weight="700">JPN</text>
+  <text x="145" y="92" fill="#7DD3FC" font-size="30">BUSINESS</text>
+</g>
+<g id="status" font-family="Arial, Helvetica, sans-serif">
+  <rect x="770" y="55" width="230" height="54" rx="27" fill="#172554" stroke="#38BDF8"/>
+  <text x="885" y="90" text-anchor="middle" fill="#BAE6FD" font-size="18" font-weight="700">CANDIDATO INTERNO</text>
+</g>
+<g id="headline" font-family="Arial, Helvetica, sans-serif">
+  <text x="76" y="210" fill="#FFFFFF" font-size="66" font-weight="700">12 playbooks.</text>
+  <text x="76" y="282" fill="#FFFFFF" font-size="66" font-weight="700">Decisões mais estruturadas.</text>
+  <text x="76" y="338" fill="#CBD5E1" font-size="25">Um mapa prático para transformar situações de negócio em próximos passos revisáveis.</text>
+</g>
+<g id="visual-proof" font-family="Arial, Helvetica, sans-serif">
+  <rect x="76" y="405" width="928" height="430" rx="30" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="112" y="458" fill="#7DD3FC" font-size="20" font-weight="700">MAPA DOS 12 PLAYBOOKS RASTREADOS</text>
+  <g fill="#1E293B" stroke="#475569">
+    <rect x="112" y="492" width="202" height="82" rx="16"/><rect x="327" y="492" width="202" height="82" rx="16"/><rect x="542" y="492" width="202" height="82" rx="16"/><rect x="757" y="492" width="202" height="82" rx="16"/>
+    <rect x="112" y="590" width="202" height="82" rx="16"/><rect x="327" y="590" width="202" height="82" rx="16"/><rect x="542" y="590" width="202" height="82" rx="16"/><rect x="757" y="590" width="202" height="82" rx="16"/>
+    <rect x="112" y="688" width="202" height="82" rx="16"/><rect x="327" y="688" width="202" height="82" rx="16"/><rect x="542" y="688" width="202" height="82" rx="16"/><rect x="757" y="688" width="202" height="82" rx="16"/>
+  </g>
+  <g fill="#E2E8F0" font-size="19" font-weight="700" text-anchor="middle">
+    <text x="213" y="541">PLAYBOOK 01</text><text x="428" y="541">PLAYBOOK 02</text><text x="643" y="541">PLAYBOOK 03</text><text x="858" y="541">PLAYBOOK 04</text>
+    <text x="213" y="639">PLAYBOOK 05</text><text x="428" y="639">PLAYBOOK 06</text><text x="643" y="639">PLAYBOOK 07</text><text x="858" y="639">PLAYBOOK 08</text>
+    <text x="213" y="737">PLAYBOOK 09</text><text x="428" y="737">PLAYBOOK 10</text><text x="643" y="737">PLAYBOOK 11</text><text x="858" y="737">PLAYBOOK 12</text>
+  </g>
+  <path d="M213 790 H858" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+  <text x="535" y="817" text-anchor="middle" fill="#94A3B8" font-size="18">Situação → playbook adequado → decisão revisada → próximo passo</text>
+</g>
+<g id="microcopy" font-family="Arial, Helvetica, sans-serif">
+  <text x="76" y="900" fill="#FFFFFF" font-size="28" font-weight="700">Estrutura para pensar e agir — sem promessas automáticas de resultado.</text>
+  <text x="76" y="946" fill="#94A3B8" font-size="20">A representação visual não adiciona playbooks além dos 12 já rastreados no produto.</text>
+</g>
+<g id="cta-internal" font-family="Arial, Helvetica, sans-serif">
+  <text x="76" y="1010" fill="#7DD3FC" font-size="18" font-weight="700">JPN-CR-04 • FONTE EDITÁVEL • REVISÃO HUMANA PENDENTE • NÃO PUBLICAR</text>
+</g>
+</svg>

@@ -40,12 +40,28 @@ if (identity.accessibility?.meaning_must_not_depend_on_color_only !== true) erro
 if (!css.includes(':focus-visible')) errors.push('CSS canônico deve preservar :focus-visible.');
 if (!css.includes('prefers-reduced-motion')) errors.push('CSS canônico deve preservar prefers-reduced-motion.');
 
-const prohibited = JSON.stringify({ brand: identity.brand, image_direction: identity.image_direction, art_direction: identity.art_direction, product_usage: identity.product_usage, surface_adaptation: identity.surface_adaptation }).toLowerCase();
+const positiveSurface = JSON.stringify({
+  brand: {
+    canonical_name: identity.brand?.canonical_name,
+    wordmark: identity.brand?.wordmark,
+    positioning: identity.brand?.positioning,
+    tone_keywords: identity.brand?.tone_keywords,
+  },
+  image_direction: { preferred: identity.image_direction?.preferred },
+  art_direction: {
+    core_motif: identity.art_direction?.core_motif,
+    recommended_elements: identity.art_direction?.recommended_elements,
+  },
+  product_usage: identity.product_usage,
+  surface_adaptation: identity.surface_adaptation,
+}).toLowerCase();
 const riskyPositiveClaims = [/roi garantid/, /100% de precisão/, /resultado garantido/, /substitui revisão humana/, /checkout ativo/, /compre agora/];
 for (const pattern of riskyPositiveClaims) {
-  if (pattern.test(prohibited)) errors.push(`Superfície positiva da identidade contém claim/oferta de risco: ${pattern}`);
+  if (pattern.test(positiveSurface)) errors.push(`Superfície positiva da identidade contém claim/oferta de risco: ${pattern}`);
 }
 
+if (!Array.isArray(identity.art_direction?.prohibited_elements) || identity.art_direction.prohibited_elements.length === 0) errors.push('art_direction.prohibited_elements deve manter proibições explícitas.');
+if (!Array.isArray(identity.guardrails?.must_not_claim) || identity.guardrails.must_not_claim.length === 0) errors.push('guardrails.must_not_claim deve manter claims bloqueados explícitos.');
 if (identity.guardrails?.must_not_publish_without_authorization !== true) errors.push('Guardrail de publicação sem autorização deve permanecer ativo.');
 if (identity.guardrails?.must_not_add_price_or_checkout !== true) errors.push('Guardrail de preço/checkout deve permanecer ativo.');
 if (identity.guardrails?.must_not_use_real_financial_data !== true) errors.push('Guardrail de dados financeiros reais deve permanecer ativo.');

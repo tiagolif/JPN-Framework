@@ -106,9 +106,9 @@
       "start_product": "jpn-business",
       "route_id": "rota-operar",
       "when": ["dq-01=operar", "dq-03=recorrente", "dq-04=controle"],
-      "message": "Comece pelo JPN Business para definir o processo e use a Gestão Fácil somente se também precisar registrar os checkpoints operacionais.",
+      "message": "Comece pelo JPN Business para definir o processo e use a JPN Gestão Fácil somente se também precisar registrar os checkpoints operacionais.",
       "optional_next": ["jpn-gestao-facil"],
-      "stop_rule": "Não adicione a Gestão Fácil se o processo não exige acompanhamento estruturado."
+      "stop_rule": "Não adicione a JPN Gestão Fácil se o processo não exige acompanhamento estruturado."
     }
   ],
   "fallback": {

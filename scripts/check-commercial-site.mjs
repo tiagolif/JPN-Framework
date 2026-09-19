@@ -99,7 +99,7 @@ const selectorRequirements = [
   'Comece pelo menor produto suficiente.',
   'SMALL_BUSINESS_DIAGNOSTIC_v1.json',
   'A lógica roda localmente nesta página',
-  'O Pro Kit pode aparecer como resultado?',
+  'O JPN Pro Kit pode aparecer como resultado?',
   'não substitui contabilidade, banco, fiscal, ERP ou auditoria',
 ];
 for (const text of selectorRequirements) {
@@ -116,7 +116,7 @@ if (/productPages\s*=\s*\{[^}]*jpn-pro-kit/s.test(html.selector)) fail('diagnós
 
 const documentRequirements = [
   [html.comparison, ['QA físico contextual em celular pendente','GF-QA-10 multiplataforma pendente','EM PREPARAÇÃO','não é a recomendação automática por ser mais abrangente']],
-  [html.comparisonDoc, ['Escolha o menor produto que resolva a necessidade atual.','JPN Pro Kit não é a recomendação automática','GF-QA-10 multiplataforma ainda pendente','Regra de parada']],
+  [html.comparisonDoc, ['Escolha o menor produto que resolva a necessidade atual','JPN Pro Kit não é a recomendação automática','GF-QA-10 multiplataforma ainda pendente','Regra de parada']],
   [html.how, ['Comece pelo menor recurso que resolva a necessidade atual','Cinco movimentos, sem obrigação de percorrer todos.','GF-QA-10 multiplataforma pendente','EM PREPARAÇÃO']],
   [html.howDoc, ['comece pelo menor recurso que resolva a necessidade atual','O ciclo JPN em 5 movimentos','GF-QA-10 multiplataforma permanece pendente','Regra de parada']],
   [html.demo, ['demonstração curta e controlada','dados fictícios','menor recurso suficiente','GF-QA-10 pendente','EM PREPARAÇÃO','Regra de parada']],

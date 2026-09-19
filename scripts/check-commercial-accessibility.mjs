@@ -28,8 +28,8 @@ if (!fs.existsSync(siteRoot)) {
 const htmlFiles = walk(siteRoot).sort();
 const errors = [];
 
-if (htmlFiles.length !== 19) {
-  errors.push(`esperados 19 HTMLs comerciais internos, encontrados ${htmlFiles.length}`);
+if (htmlFiles.length !== 20) {
+  errors.push(`esperados 20 HTMLs comerciais internos, encontrados ${htmlFiles.length}`);
 }
 
 for (const file of htmlFiles) {

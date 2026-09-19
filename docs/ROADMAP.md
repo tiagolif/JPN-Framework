@@ -48,17 +48,18 @@ Resultados, positivos ou negativos, deverão ser documentados. A existência do 
 
 ## Fase 4 — Esquema estruturado
 
-Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`, baseado em JSON Schema Draft 2020-12. Ele representa Jornada, Precisão e Narrativa, exige a versão da especificação e já permite registrar proveniência opcional em itens de contexto. O contrato possui validação executável em `scripts/check-jpn-schema.mjs`, integrada ao CI, cobrindo um estado válido e rejeições de campo obrigatório ausente, `confidence_state` inválido e propriedade raiz não prevista. Isso é infraestrutura implementada, não uma declaração de estabilidade 1.0.
+Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`, baseado em JSON Schema Draft 2020-12. Ele representa Jornada, Precisão e Narrativa, exige a versão da especificação e permite proveniência opcional em itens de contexto. O contrato possui validação executável em `scripts/check-jpn-schema.mjs`, integrada ao CI. Existe também `schemas/jpn-handoff.schema.json`, contrato candidato separado para handoff entre agentes, com evidências rastreáveis por fonte, estado de verificação, decisões, pendências, restrições e próximas ações. A validação executável cobre ambos os schemas e rejeita evidência sem referência de fonte e estados não previstos. Isso é infraestrutura implementada, não uma declaração de estabilidade 1.0.
 
 - [x] JSON Schema candidato para estado JPN;
 - [x] campo de versão obrigatório no estado estruturado;
 - [x] proveniência básica opcional (`source`) para itens de contexto;
 - [x] exemplos executáveis de validação do schema;
 - [x] gate de validação do schema na cadeia oficial de CI;
-- [ ] modelo de provenance/evidence para além dos itens de contexto;
-- [ ] contrato estruturado de handoff entre agentes;
+- [x] modelo candidato de provenance/evidence para além dos itens de contexto;
+- [x] contrato estruturado candidato de handoff entre agentes;
+- [ ] validar referências cruzadas entre decisões e IDs de evidência;
 - [ ] política formal de compatibilidade entre versões;
-- [ ] promover o schema candidato a contrato estável somente após validação e compatibilidade documentadas.
+- [ ] promover os schemas candidatos a contratos estáveis somente após validação e compatibilidade documentadas.
 
 ## Fase 5 — SDK de referência
 

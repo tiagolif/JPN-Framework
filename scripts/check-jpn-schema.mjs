@@ -1,9 +1,11 @@
 import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
 
-const schema = JSON.parse(fs.readFileSync(new URL('../schemas/jpn.schema.json', import.meta.url), 'utf8'));
+const readJson = (relativePath) => JSON.parse(fs.readFileSync(new URL(relativePath, import.meta.url), 'utf8'));
 const ajv = new Ajv2020({ allErrors: true, strict: true });
-const validate = ajv.compile(schema);
+
+const stateSchema = readJson('../schemas/jpn.schema.json');
+const validateState = ajv.compile(stateSchema);
 
 const validState = {
   version: '0.3.0-draft',
@@ -26,18 +28,58 @@ const validState = {
   }
 };
 
-if (!validate(validState)) {
-  throw new Error(`Exemplo JPN válido foi rejeitado: ${ajv.errorsText(validate.errors)}`);
+if (!validateState(validState)) {
+  throw new Error(`Exemplo JPN válido foi rejeitado: ${ajv.errorsText(validateState.errors)}`);
 }
 
-const invalidCases = [
+const invalidStateCases = [
   { name: 'campo obrigatório ausente', value: { ...validState, narrativa: {} } },
   { name: 'estado de confiança inválido', value: { ...validState, jornada: { ...validState.jornada, itens_de_contexto: [{ value: 'x', confidence_state: 'guess' }] } } },
   { name: 'propriedade raiz desconhecida', value: { ...validState, extra: true } }
 ];
 
-for (const testCase of invalidCases) {
-  if (validate(testCase.value)) throw new Error(`Caso inválido aceito pelo schema: ${testCase.name}`);
+for (const testCase of invalidStateCases) {
+  if (validateState(testCase.value)) throw new Error(`Caso inválido aceito pelo schema JPN: ${testCase.name}`);
 }
 
-console.log('JPN schema contract OK: exemplo válido aceito e casos inválidos rejeitados.');
+const handoffSchema = readJson('../schemas/jpn-handoff.schema.json');
+const validateHandoff = ajv.compile(handoffSchema);
+const validHandoff = {
+  contract_version: '0.1.0-draft',
+  jpn_state_version: validState.version,
+  from_agent: 'research-agent',
+  to_agent: 'delivery-agent',
+  objective: 'Transferir trabalho verificável sem promover suposições a fatos.',
+  status: 'ready_for_review',
+  evidence: [
+    {
+      id: 'EV-001',
+      claim: 'O schema JPN foi validado pelo gate local.',
+      source_type: 'test_result',
+      source_ref: 'scripts/check-jpn-schema.mjs',
+      verification_status: 'verified'
+    }
+  ],
+  decisions: [
+    { decision: 'Manter publicação fora do escopo.', basis_evidence_ids: ['EV-001'], reversible: true }
+  ],
+  open_items: ['Revisão humana final'],
+  next_actions: ['Revisar evidências antes da promoção'],
+  constraints: ['Não publicar automaticamente']
+};
+
+if (!validateHandoff(validHandoff)) {
+  throw new Error(`Handoff JPN válido foi rejeitado: ${ajv.errorsText(validateHandoff.errors)}`);
+}
+
+const invalidHandoffCases = [
+  { name: 'evidência sem referência de fonte', value: { ...validHandoff, evidence: [{ id: 'EV-002', claim: 'Claim sem fonte', source_type: 'test_result', verification_status: 'verified' }] } },
+  { name: 'status de verificação inválido', value: { ...validHandoff, evidence: [{ ...validHandoff.evidence[0], verification_status: 'assumed' }] } },
+  { name: 'status de handoff inválido', value: { ...validHandoff, status: 'published' } }
+];
+
+for (const testCase of invalidHandoffCases) {
+  if (validateHandoff(testCase.value)) throw new Error(`Caso inválido aceito pelo schema de handoff: ${testCase.name}`);
+}
+
+console.log('JPN schema contract OK: estado, provenance/evidence e handoff entre agentes validados.');

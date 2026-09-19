@@ -44,6 +44,38 @@ for (const testCase of invalidStateCases) {
 
 const handoffSchema = readJson('../schemas/jpn-handoff.schema.json');
 const validateHandoff = ajv.compile(handoffSchema);
+
+const validateHandoffReferences = (handoff) => {
+  const evidenceIds = handoff.evidence.map((item) => item.id);
+  const uniqueEvidenceIds = new Set(evidenceIds);
+  if (uniqueEvidenceIds.size !== evidenceIds.length) {
+    return { valid: false, reason: 'IDs de evidência duplicados' };
+  }
+
+  for (const [decisionIndex, decision] of (handoff.decisions ?? []).entries()) {
+    for (const evidenceId of decision.basis_evidence_ids) {
+      if (!uniqueEvidenceIds.has(evidenceId)) {
+        return {
+          valid: false,
+          reason: `decisions[${decisionIndex}] referencia evidência inexistente: ${evidenceId}`
+        };
+      }
+    }
+  }
+
+  return { valid: true };
+};
+
+const assertValidHandoff = (handoff, label) => {
+  if (!validateHandoff(handoff)) {
+    throw new Error(`${label} foi rejeitado pelo schema: ${ajv.errorsText(validateHandoff.errors)}`);
+  }
+  const referenceResult = validateHandoffReferences(handoff);
+  if (!referenceResult.valid) {
+    throw new Error(`${label} falhou na integridade referencial: ${referenceResult.reason}`);
+  }
+};
+
 const validHandoff = {
   contract_version: '0.1.0-draft',
   jpn_state_version: validState.version,
@@ -68,9 +100,7 @@ const validHandoff = {
   constraints: ['Não publicar automaticamente']
 };
 
-if (!validateHandoff(validHandoff)) {
-  throw new Error(`Handoff JPN válido foi rejeitado: ${ajv.errorsText(validateHandoff.errors)}`);
-}
+assertValidHandoff(validHandoff, 'Handoff JPN válido');
 
 const invalidHandoffCases = [
   { name: 'evidência sem referência de fonte', value: { ...validHandoff, evidence: [{ id: 'EV-002', claim: 'Claim sem fonte', source_type: 'test_result', verification_status: 'verified' }] } },
@@ -82,4 +112,23 @@ for (const testCase of invalidHandoffCases) {
   if (validateHandoff(testCase.value)) throw new Error(`Caso inválido aceito pelo schema de handoff: ${testCase.name}`);
 }
 
-console.log('JPN schema contract OK: estado, provenance/evidence e handoff entre agentes validados.');
+const invalidReferenceCases = [
+  {
+    name: 'decisão referencia evidência inexistente',
+    value: { ...validHandoff, decisions: [{ decision: 'Decisão sem base existente.', basis_evidence_ids: ['EV-404'], reversible: true }] }
+  },
+  {
+    name: 'IDs de evidência duplicados',
+    value: { ...validHandoff, evidence: [validHandoff.evidence[0], { ...validHandoff.evidence[0], claim: 'Outra alegação com ID repetido.' }] }
+  }
+];
+
+for (const testCase of invalidReferenceCases) {
+  if (!validateHandoff(testCase.value)) {
+    throw new Error(`Fixture de integridade referencial inválida no schema antes do teste semântico: ${testCase.name}`);
+  }
+  const referenceResult = validateHandoffReferences(testCase.value);
+  if (referenceResult.valid) throw new Error(`Caso de referência inválida aceito: ${testCase.name}`);
+}
+
+console.log('JPN schema contract OK: estado, provenance/evidence, handoff e integridade referencial validados.');

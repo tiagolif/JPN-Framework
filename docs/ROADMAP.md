@@ -48,12 +48,13 @@ Resultados, positivos ou negativos, deverão ser documentados. A existência do 
 
 ## Fase 4 — Esquema estruturado
 
-Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`, baseado em JSON Schema Draft 2020-12. Ele representa Jornada, Precisão e Narrativa, exige a versão da especificação e já permite registrar proveniência opcional em itens de contexto. Isso é infraestrutura implementada, não uma declaração de estabilidade 1.0.
+Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`, baseado em JSON Schema Draft 2020-12. Ele representa Jornada, Precisão e Narrativa, exige a versão da especificação e já permite registrar proveniência opcional em itens de contexto. O contrato possui validação executável em `scripts/check-jpn-schema.mjs`, integrada ao CI, cobrindo um estado válido e rejeições de campo obrigatório ausente, `confidence_state` inválido e propriedade raiz não prevista. Isso é infraestrutura implementada, não uma declaração de estabilidade 1.0.
 
 - [x] JSON Schema candidato para estado JPN;
 - [x] campo de versão obrigatório no estado estruturado;
 - [x] proveniência básica opcional (`source`) para itens de contexto;
-- [ ] exemplos executáveis de validação do schema;
+- [x] exemplos executáveis de validação do schema;
+- [x] gate de validação do schema na cadeia oficial de CI;
 - [ ] modelo de provenance/evidence para além dos itens de contexto;
 - [ ] contrato estruturado de handoff entre agentes;
 - [ ] política formal de compatibilidade entre versões;

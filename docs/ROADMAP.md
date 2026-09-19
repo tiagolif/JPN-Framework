@@ -48,15 +48,20 @@ Resultados, positivos ou negativos, deverão ser documentados. A existência do 
 
 ## Fase 4 — Esquema estruturado
 
-- [ ] JSON Schema oficial para estado JPN.
-- [ ] exemplos de validação de schema;
-- [ ] formato para provenance/evidence;
-- [ ] contrato de handoff entre agentes;
-- [ ] política de compatibilidade entre versões.
+Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`, baseado em JSON Schema Draft 2020-12. Ele representa Jornada, Precisão e Narrativa, exige a versão da especificação e já permite registrar proveniência opcional em itens de contexto. Isso é infraestrutura implementada, não uma declaração de estabilidade 1.0.
+
+- [x] JSON Schema candidato para estado JPN;
+- [x] campo de versão obrigatório no estado estruturado;
+- [x] proveniência básica opcional (`source`) para itens de contexto;
+- [ ] exemplos executáveis de validação do schema;
+- [ ] modelo de provenance/evidence para além dos itens de contexto;
+- [ ] contrato estruturado de handoff entre agentes;
+- [ ] política formal de compatibilidade entre versões;
+- [ ] promover o schema candidato a contrato estável somente após validação e compatibilidade documentadas.
 
 ## Fase 5 — SDK de referência
 
-Possível implementação futura, caso exista benefício demonstrável:
+A implementação de referência já possui núcleo TypeScript em `src/`, validação, tipos, geração de prompt, readiness, testes e bundle de navegador. A arquitetura futura abaixo continua sendo uma direção de modularização, não uma afirmação de que todos esses módulos já existem como pacotes independentes.
 
 ```text
 jpn/
@@ -84,6 +89,6 @@ A versão `1.0.0` só deverá ser considerada quando houver:
 
 1. especificação estável;
 2. exemplos suficientes em domínios diferentes;
-3. esquema estruturado documentado;
+3. esquema estruturado documentado e com política de compatibilidade;
 4. pelo menos uma rodada de avaliação reproduzível;
 5. regras claras de compatibilidade e versionamento.

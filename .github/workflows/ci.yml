@@ -44,6 +44,9 @@ jobs:
           npx tsc -p tsconfig.json
           npm run build:browser
 
+      - name: Core - JPN schema contract
+        run: node scripts/check-jpn-schema.mjs
+
       - name: CI contract - stacked PR coverage
         run: node scripts/check-stacked-pr-ci.mjs
 

@@ -52,9 +52,20 @@ for (const item of cases) {
   }
 }
 
-const exampleText = JSON.stringify(example).toLowerCase();
-if (!exampleText.includes('placeholder') && !exampleText.includes('example')) {
-  throw new Error('results.example.json must remain visibly non-production/example data');
+// Keep the tracked results file unmistakably a template without coupling the
+// contract to the English words "placeholder" or "example". The canonical
+// template intentionally carries unresolved model/provider sentinels, empty
+// responses and no human utility score until a real run is performed.
+const run = example?.run ?? {};
+const results = Array.isArray(example?.results) ? example.results : [];
+const hasTemplateSentinels =
+  typeof run.model === 'string' && /_HERE$/i.test(run.model) &&
+  typeof run.provider === 'string' && /_HERE$/i.test(run.provider);
+const hasUnfilledResults =
+  results.length > 0 &&
+  results.every((result) => result.response === '' && result.human_utility == null);
+if (!hasTemplateSentinels || !hasUnfilledResults) {
+  throw new Error('results.example.json must remain visibly non-production/template data');
 }
 
 console.log(`Evaluation protocol contract OK: ${cases.length} dataset cases; blind-review and evidence-reporting guardrails present.`);

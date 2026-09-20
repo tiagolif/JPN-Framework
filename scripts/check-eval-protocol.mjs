@@ -26,7 +26,10 @@ const requireText = (text, needles, label) => {
   }
 };
 
-requireText(readme, ['baseline', 'jpn', 'avaliação humana cega', 'não resultados comparativos'], 'evals/README.md');
+// Check semantic anchors that are intentionally present in the protocol instead of
+// coupling this gate to one editorial sentence. The dedicated blind-review file
+// carries the stricter blinding procedure contract below.
+requireText(readme, ['baseline', 'jpn', 'humana cega', 'não resultados comparativos'], 'evals/README.md');
 requireText(blind, ['cego', 'baseline', 'jpn'], 'BLIND_REVIEW_PROTOCOL_v1.md');
 requireText(reporting, ['limita', 'causal'], 'EVIDENCE_REPORTING_v1.md');
 

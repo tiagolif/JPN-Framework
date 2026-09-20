@@ -1,21 +1,11 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import Ajv2020 from 'ajv/dist/2020.js';
+import { isSemanticallyValidTimestamp } from './lib/handoff-validation.mjs';
 const readJson=(p)=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url),'utf8'));
 const ajv=new Ajv2020({allErrors:true,strict:true});
 const validate01=ajv.compile(readJson('../schemas/jpn-handoff.v0.1.schema.json'));
 const validate02=ajv.compile(readJson('../schemas/jpn-handoff.schema.json'));
-const timestampPattern=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,9}))?(Z|([+-])(\d{2}):(\d{2}))$/;
-const isSemanticallyValidTimestamp=(value)=>{
-  if(value===null || value===undefined) return true;
-  const match=timestampPattern.exec(value); if(!match) return false;
-  const [,y,mo,d,h,mi,s,,zone,,oh,om]=match;
-  const year=Number(y),month=Number(mo),day=Number(d),hour=Number(h),minute=Number(mi),second=Number(s);
-  if(month<1 || month>12 || hour>23 || minute>59 || second>59) return false;
-  if(day<1 || day>new Date(Date.UTC(year,month,0)).getUTCDate()) return false;
-  if(zone!=='Z' && (Number(oh)>14 || Number(om)>59 || (Number(oh)===14 && Number(om)!==0))) return false;
-  return true;
-};
 const migrate01to02=(source)=>{
   if(!validate01(source)) throw new Error(`Origem 0.1 inválida: ${ajv.errorsText(validate01.errors)}`);
   for(const evidence of source.evidence){

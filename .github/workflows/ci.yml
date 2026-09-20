@@ -50,6 +50,9 @@ jobs:
       - name: Core - handoff migration
         run: npm run check:handoff-migration
 
+      - name: Evaluation - protocol contract
+        run: npm run check:eval-protocol
+
       - name: Evaluation - scorer contract
         run: npm run check:eval-scorer
 

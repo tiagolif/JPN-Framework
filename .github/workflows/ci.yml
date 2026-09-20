@@ -45,7 +45,7 @@ jobs:
           npm run build:browser
 
       - name: Core - JPN schema contract
-        run: node scripts/check-jpn-schema.mjs
+        run: npm run check:jpn-schema
 
       - name: Core - handoff migration
         run: npm run check:handoff-migration

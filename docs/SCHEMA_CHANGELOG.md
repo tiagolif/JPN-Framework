@@ -26,6 +26,7 @@ Contrato atual: `schemas/jpn-handoff.schema.json`.
 - `scripts/check-handoff-migration.mjs` demonstra migração determinística `0.1 → 0.2` quando os dados já satisfazem o contrato novo;
 - a migração altera somente `contract_version` e preserva o conteúdo suportado;
 - timestamps legados incompatíveis bloqueiam a migração: não são corrigidos ou inferidos automaticamente;
+- a fixture de migração também bloqueia timestamps que parecem ISO mas são semanticamente impossíveis (data/hora inexistente ou offset fora do limite), evitando divergência entre o gate do contrato atual e a rota de migração;
 - o gate principal importa o teste de migração, mantendo a verificação dentro da cadeia oficial de CI.
 
 A mudança não inventa evidência, aprovação, QA, autorização de publicação ou estado ausente e não promove o contrato para estabilidade 1.0.

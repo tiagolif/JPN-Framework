@@ -71,6 +71,7 @@
     "check:gestao-facil-binary":"node scripts/check-gestao-facil-binary.mjs",
     "check:handoff-migration":"node scripts/check-handoff-migration.mjs",
     "migrate:handoff":"node scripts/migrate-handoff.mjs",
+    "eval:score":"node scripts/score-evals.mjs",
     "stage:pro-kit":"node scripts/stage-pro-kit.mjs",
     "stage:prompt-builder":"node scripts/stage-prompt-builder-offline.mjs",
     "report:release-readiness":"node scripts/report-release-readiness.mjs",

@@ -25,59 +25,29 @@ A biblioteca versionada em `examples/` cobre os sete domínios acima e mantém t
 
 ## Fase 3 — Avaliação
 
-Objetivo: medir se a estrutura melhora resultados em tarefas definidas.
-
-Infraestrutura preparada:
-
-- [x] protocolo baseline vs. JPN;
-- [x] dataset sintético inicial e auditável;
-- [x] contrato versionado para registrar respostas e avaliações;
-- [x] scorer local sem dependência de fornecedor.
-
-Experimentos propostos:
-
-- [ ] executar comparação prompt simples vs. JPN;
-- [ ] medir cumprimento de requisitos em rodada real;
-- [ ] medir retrabalho em rodada real;
-- [ ] medir alucinações factuais em rodada real;
-- [ ] medir cobertura de critérios de aceitação em rodada real;
-- [ ] avaliação humana cega de utilidade;
-- [ ] comparar diferentes modelos e fornecedores.
-
-Resultados, positivos ou negativos, deverão ser documentados. A existência do protocolo não deve ser apresentada como prova de eficácia.
+Infraestrutura preparada: protocolo baseline vs. JPN, dataset sintético auditável, contrato versionado de avaliações e scorer local. Permanecem pendentes rodadas reais, métricas de retrabalho/alucinação/cobertura, avaliação humana cega e comparação entre modelos. A existência do protocolo não é prova de eficácia.
 
 ## Fase 4 — Esquema estruturado
 
-Estado atual: existe um schema candidato versionado em `schemas/jpn.schema.json`, baseado em JSON Schema Draft 2020-12. Ele representa Jornada, Precisão e Narrativa, exige a versão da especificação e permite proveniência opcional em itens de contexto. O contrato possui validação executável em `scripts/check-jpn-schema.mjs`, integrada ao CI. Existe também `schemas/jpn-handoff.schema.json`, contrato candidato separado para handoff entre agentes, com evidências rastreáveis por fonte, estado de verificação, decisões, pendências, restrições e próximas ações. A validação executável cobre ambos os schemas, rejeita evidência sem referência de fonte, estados não previstos, referências de decisão sem evidência correspondente e IDs de evidência duplicados. A política candidata de evolução e SemVer está documentada em `docs/SCHEMA_COMPATIBILITY.md`, e `docs/SCHEMA_CHANGELOG.md` registra as baselines candidatas a partir das quais mudanças futuras deverão ser classificadas. Isso é infraestrutura implementada, não uma declaração de estabilidade 1.0.
+O estado JPN possui schema candidato e gate executável. O handoff entre agentes agora possui duas versões comparáveis: a baseline preservada `schemas/jpn-handoff.v0.1.schema.json` e o contrato atual `schemas/jpn-handoff.schema.json` (`0.2.0-draft`). A primeira migração executável `0.1 → 0.2` está coberta por fixture determinística e bloqueia conversões que exigiriam inventar evidência temporal. A política de SemVer e o changelog permanecem candidatos; isso não declara estabilidade 1.0.
 
 - [x] JSON Schema candidato para estado JPN;
 - [x] campo de versão obrigatório no estado estruturado;
 - [x] proveniência básica opcional (`source`) para itens de contexto;
 - [x] exemplos executáveis de validação do schema;
 - [x] gate de validação do schema na cadeia oficial de CI;
-- [x] modelo candidato de provenance/evidence para além dos itens de contexto;
+- [x] modelo candidato de provenance/evidence;
 - [x] contrato estruturado candidato de handoff entre agentes;
 - [x] validar referências cruzadas entre decisões e IDs de evidência;
 - [x] política formal candidata de compatibilidade entre versões;
-- [x] registrar baselines candidatas para rastrear a evolução futura dos contratos;
-- [ ] adicionar fixtures executáveis de compatibilidade/migração entre versões quando existir a primeira mudança de contrato;
-- [ ] promover os schemas candidatos a contratos estáveis somente após validação e compatibilidade documentadas.
+- [x] registrar baselines candidatas;
+- [x] adicionar primeira fixture executável de compatibilidade/migração (`handoff 0.1 → 0.2`);
+- [ ] ampliar fixtures de migração quando novas versões estruturais surgirem;
+- [ ] promover schemas candidatos a contratos estáveis somente após validação e compatibilidade documentadas.
 
 ## Fase 5 — SDK de referência
 
-A implementação de referência já possui núcleo TypeScript em `src/`, validação, tipos, geração de prompt, readiness, testes e bundle de navegador. A arquitetura futura abaixo continua sendo uma direção de modularização, não uma afirmação de que todos esses módulos já existem como pacotes independentes.
-
-```text
-jpn/
-├── parser
-├── state
-├── validator
-├── rag
-├── adapters
-└── evals
-```
-
-O SDK deverá permanecer agnóstico de fornecedor sempre que possível.
+A implementação de referência já possui núcleo TypeScript em `src/`, validação, tipos, geração de prompt, readiness, testes e bundle de navegador. A modularização futura continua sendo direção arquitetural, não afirmação de pacotes independentes completos.
 
 ## Fase 6 — Evals públicos
 
@@ -89,10 +59,4 @@ O SDK deverá permanecer agnóstico de fornecedor sempre que possível.
 
 ## Critério para versão 1.0
 
-A versão `1.0.0` só deverá ser considerada quando houver:
-
-1. especificação estável;
-2. exemplos suficientes em domínios diferentes;
-3. esquema estruturado documentado e com política de compatibilidade;
-4. pelo menos uma rodada de avaliação reproduzível;
-5. regras claras de compatibilidade e versionamento.
+A versão `1.0.0` só deverá ser considerada quando houver especificação estável, exemplos suficientes, esquema documentado com política de compatibilidade, ao menos uma rodada de avaliação reproduzível e regras claras de versionamento.

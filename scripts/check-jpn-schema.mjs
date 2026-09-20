@@ -89,7 +89,8 @@ const validHandoff = {
       claim: 'O schema JPN foi validado pelo gate local.',
       source_type: 'test_result',
       source_ref: 'scripts/check-jpn-schema.mjs',
-      verification_status: 'verified'
+      verification_status: 'verified',
+      captured_at: '2026-09-19T21:32:42-03:00'
     }
   ],
   decisions: [
@@ -105,7 +106,9 @@ assertValidHandoff(validHandoff, 'Handoff JPN válido');
 const invalidHandoffCases = [
   { name: 'evidência sem referência de fonte', value: { ...validHandoff, evidence: [{ id: 'EV-002', claim: 'Claim sem fonte', source_type: 'test_result', verification_status: 'verified' }] } },
   { name: 'status de verificação inválido', value: { ...validHandoff, evidence: [{ ...validHandoff.evidence[0], verification_status: 'assumed' }] } },
-  { name: 'status de handoff inválido', value: { ...validHandoff, status: 'published' } }
+  { name: 'status de handoff inválido', value: { ...validHandoff, status: 'published' } },
+  { name: 'timestamp sem timezone explícito', value: { ...validHandoff, evidence: [{ ...validHandoff.evidence[0], captured_at: '2026-09-19T21:32:42' }] } },
+  { name: 'timestamp não ISO', value: { ...validHandoff, evidence: [{ ...validHandoff.evidence[0], captured_at: '19/09/2026 21:32' }] } }
 ];
 
 for (const testCase of invalidHandoffCases) {
@@ -131,4 +134,4 @@ for (const testCase of invalidReferenceCases) {
   if (referenceResult.valid) throw new Error(`Caso de referência inválida aceito: ${testCase.name}`);
 }
 
-console.log('JPN schema contract OK: estado, provenance/evidence, handoff e integridade referencial validados.');
+console.log('JPN schema contract OK: estado, provenance/evidence, timestamps, handoff e integridade referencial validados.');

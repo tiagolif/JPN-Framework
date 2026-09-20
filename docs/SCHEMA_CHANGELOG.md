@@ -46,6 +46,16 @@ Classificação candidata: **PATCH de endurecimento de validação em `0.x`**. P
 - nenhuma evidência, autorização ou estado é inferido ou criado pela mudança;
 - não há migração automática: valores legados fora do contrato precisam ser corrigidos na origem para preservar a semântica temporal.
 
+### Handoff JPN — validade semântica de `captured_at`
+
+Classificação candidata: **PATCH de endurecimento de validação em `0.x`**. O formato textual continua igual, mas o gate executável passa a exigir que o timestamp também represente uma data/hora de calendário possível.
+
+- datas inexistentes, como 30 de fevereiro, são rejeitadas;
+- mês, hora, minuto e segundo precisam permanecer em intervalos válidos;
+- offsets numéricos seguem o limite ISO de até `±14:00`;
+- o schema continua responsável pela forma; a checagem semântica fica no gate executável para não introduzir keyword proprietária no JSON Schema;
+- não existe correção automática de valores inválidos, porque escolher outra data/hora inventaria evidência temporal.
+
 ## Próxima mudança de contrato
 
 Quando houver duas versões comparáveis que exijam transformação estrutural, a mesma mudança deverá incluir fixtures executáveis de compatibilidade/migração. Migrações não podem inventar evidência, aprovação, QA, autorização de publicação ou qualquer outro estado que não esteja sustentado pela origem.

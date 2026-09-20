@@ -36,7 +36,11 @@
         "source_type": { "type": "string", "enum": ["user_input", "repository", "document", "tool_result", "test_result", "external_source", "observation"] },
         "source_ref": { "type": "string", "minLength": 1 },
         "verification_status": { "type": "string", "enum": ["verified", "unverified", "conflicting", "not_applicable"] },
-        "captured_at": { "type": ["string", "null"], "description": "Optional ISO 8601 timestamp; semantic timestamp validation is intentionally outside this dependency-free schema candidate." },
+        "captured_at": {
+          "type": ["string", "null"],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,9})?(?:Z|[+-]\\d{2}:\\d{2})$",
+          "description": "Optional ISO 8601 timestamp with explicit UTC marker or numeric offset. Calendar-range validation remains outside this schema candidate."
+        },
         "notes": { "type": ["string", "null"] }
       }
     },

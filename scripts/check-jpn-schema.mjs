@@ -45,11 +45,44 @@ for (const testCase of invalidStateCases) {
 const handoffSchema = readJson('../schemas/jpn-handoff.schema.json');
 const validateHandoff = ajv.compile(handoffSchema);
 
+const timestampPattern = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,9}))?(Z|([+-])(\d{2}):(\d{2}))$/;
+const isSemanticallyValidTimestamp = (value) => {
+  if (value === null || value === undefined) return true;
+  const match = timestampPattern.exec(value);
+  if (!match) return false;
+
+  const [, yearText, monthText, dayText, hourText, minuteText, secondText, , zone, , offsetHourText, offsetMinuteText] = match;
+  const year = Number(yearText);
+  const month = Number(monthText);
+  const day = Number(dayText);
+  const hour = Number(hourText);
+  const minute = Number(minuteText);
+  const second = Number(secondText);
+
+  if (month < 1 || month > 12 || hour > 23 || minute > 59 || second > 59) return false;
+  const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  if (day < 1 || day > daysInMonth) return false;
+
+  if (zone !== 'Z') {
+    const offsetHour = Number(offsetHourText);
+    const offsetMinute = Number(offsetMinuteText);
+    if (offsetHour > 14 || offsetMinute > 59 || (offsetHour === 14 && offsetMinute !== 0)) return false;
+  }
+
+  return true;
+};
+
 const validateHandoffReferences = (handoff) => {
   const evidenceIds = handoff.evidence.map((item) => item.id);
   const uniqueEvidenceIds = new Set(evidenceIds);
   if (uniqueEvidenceIds.size !== evidenceIds.length) {
     return { valid: false, reason: 'IDs de evidência duplicados' };
+  }
+
+  for (const [evidenceIndex, evidence] of handoff.evidence.entries()) {
+    if (!isSemanticallyValidTimestamp(evidence.captured_at)) {
+      return { valid: false, reason: `evidence[${evidenceIndex}].captured_at não representa data/hora ISO 8601 válida` };
+    }
   }
 
   for (const [decisionIndex, decision] of (handoff.decisions ?? []).entries()) {
@@ -72,7 +105,7 @@ const assertValidHandoff = (handoff, label) => {
   }
   const referenceResult = validateHandoffReferences(handoff);
   if (!referenceResult.valid) {
-    throw new Error(`${label} falhou na integridade referencial: ${referenceResult.reason}`);
+    throw new Error(`${label} falhou na integridade semântica: ${referenceResult.reason}`);
   }
 };
 
@@ -115,6 +148,20 @@ for (const testCase of invalidHandoffCases) {
   if (validateHandoff(testCase.value)) throw new Error(`Caso inválido aceito pelo schema de handoff: ${testCase.name}`);
 }
 
+const invalidSemanticCases = [
+  { name: 'dia inexistente', timestamp: '2026-02-30T12:00:00Z' },
+  { name: 'mês inexistente', timestamp: '2026-13-01T12:00:00Z' },
+  { name: 'hora inexistente', timestamp: '2026-09-19T25:00:00Z' },
+  { name: 'offset fora do limite ISO', timestamp: '2026-09-19T21:32:42+15:00' }
+];
+
+for (const testCase of invalidSemanticCases) {
+  const value = { ...validHandoff, evidence: [{ ...validHandoff.evidence[0], captured_at: testCase.timestamp }] };
+  if (!validateHandoff(value)) throw new Error(`Fixture semântica deveria passar pelo formato do schema antes do gate: ${testCase.name}`);
+  const semanticResult = validateHandoffReferences(value);
+  if (semanticResult.valid) throw new Error(`Timestamp semanticamente inválido aceito: ${testCase.name}`);
+}
+
 const invalidReferenceCases = [
   {
     name: 'decisão referencia evidência inexistente',
@@ -134,4 +181,4 @@ for (const testCase of invalidReferenceCases) {
   if (referenceResult.valid) throw new Error(`Caso de referência inválida aceito: ${testCase.name}`);
 }
 
-console.log('JPN schema contract OK: estado, provenance/evidence, timestamps, handoff e integridade referencial validados.');
+console.log('JPN schema contract OK: estado, provenance/evidence, timestamps semânticos, handoff e integridade referencial validados.');

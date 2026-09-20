@@ -30,6 +30,9 @@ requireText(workflow, 'git diff --exit-code', 'workflow');
 
 for (const phase of [
   'Compile SDK and browser bundle',
+  'Core - JPN schema contract',
+  'Core - handoff migration',
+  'Evaluation - scorer contract',
   'Prompt Builder gates',
   'Core - product consistency',
   'Core - Metodo cross-product',
@@ -69,6 +72,9 @@ for (const phase of [
 }
 
 for (const command of [
+  'node scripts/check-jpn-schema.mjs',
+  'npm run check:handoff-migration',
+  'npm run check:eval-scorer',
   'node scripts/check-product-delivery-manifests.mjs',
   'node scripts/check-customer-package-contract.mjs',
   'node scripts/check-delivery-handoff-guide.mjs',
@@ -129,4 +135,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`Stacked PR CI check OK: ${buildRunCommands.length} comandos do build cobertos, mais gates de entrega, operação comercial, distribuição, evidência de release e contrato do handoff visual dos PDFs, sem promover gates humanos, externos ou de release.`);
+console.log(`Stacked PR CI check OK: ${buildRunCommands.length} comandos do build cobertos, mais contratos de schema, migração e avaliação, gates de entrega, operação comercial, distribuição, evidência de release e contrato do handoff visual dos PDFs, sem promover gates humanos, externos ou de release.`);

@@ -50,6 +50,9 @@ jobs:
       - name: Core - handoff migration
         run: npm run check:handoff-migration
 
+      - name: Evaluation - scorer contract
+        run: npm run check:eval-scorer
+
       - name: CI contract - stacked PR coverage
         run: node scripts/check-stacked-pr-ci.mjs
 

@@ -2,12 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/tiagolif/JPN-Framework/schemas/jpn-handoff.schema.json",
   "title": "JPN Agent Handoff",
-  "description": "Candidate contract for transferring JPN work between agents without treating unsupported claims as facts.",
+  "description": "Candidate 0.2 contract for transferring JPN work between agents without treating unsupported claims as facts.",
   "type": "object",
   "required": ["contract_version", "jpn_state_version", "from_agent", "to_agent", "objective", "status", "evidence", "open_items", "next_actions"],
   "additionalProperties": false,
   "properties": {
-    "contract_version": { "type": "string", "minLength": 1 },
+    "contract_version": { "const": "0.2.0-draft" },
     "jpn_state_version": { "type": "string", "minLength": 1 },
     "from_agent": { "type": "string", "minLength": 1 },
     "to_agent": { "type": "string", "minLength": 1 },
@@ -21,11 +21,7 @@
     "notes": { "type": ["string", "null"] }
   },
   "$defs": {
-    "stringArray": {
-      "type": "array",
-      "items": { "type": "string", "minLength": 1 },
-      "uniqueItems": true
-    },
+    "stringArray": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
     "evidenceItem": {
       "type": "object",
       "required": ["id", "claim", "source_type", "source_ref", "verification_status"],

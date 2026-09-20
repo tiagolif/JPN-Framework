@@ -31,7 +31,11 @@ const requireText = (text, needles, label) => {
 // carries the stricter blinding procedure contract below.
 requireText(readme, ['baseline', 'jpn', 'humana cega', 'não resultados comparativos'], 'evals/README.md');
 requireText(blind, ['cego', 'baseline', 'jpn'], 'BLIND_REVIEW_PROTOCOL_v1.md');
-requireText(reporting, ['limita', 'causal'], 'EVIDENCE_REPORTING_v1.md');
+// Protect the actual evidence-reporting policy: limitations must be reviewed and
+// one complete round must not be promoted to general efficacy. Do not require a
+// specific technical term (for example, "causal") when the policy states the
+// same guardrail explicitly in Portuguese.
+requireText(reporting, ['limita', 'não significa eficácia geral comprovada', 'linguagem proibida sem evidência adicional'], 'EVIDENCE_REPORTING_v1.md');
 
 const cases = Array.isArray(dataset) ? dataset : dataset.cases;
 if (!Array.isArray(cases) || cases.length < 4) {

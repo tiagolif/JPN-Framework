@@ -72,7 +72,7 @@ for (const phase of [
 }
 
 for (const command of [
-  'node scripts/check-jpn-schema.mjs',
+  'npm run check:jpn-schema',
   'npm run check:handoff-migration',
   'npm run check:eval-scorer',
   'node scripts/check-product-delivery-manifests.mjs',

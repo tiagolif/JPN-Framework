@@ -4,58 +4,28 @@ Status: **candidato**. Este registro acompanha mudanças nos contratos estrutura
 
 ## Regras de registro
 
-Cada mudança futura em `schemas/jpn.schema.json` ou `schemas/jpn-handoff.schema.json` deve registrar aqui:
+Cada mudança em `schemas/jpn.schema.json` ou `schemas/jpn-handoff.schema.json` deve registrar contrato/versão, classificação SemVer, impacto, fixture ou migração aplicável, incompatibilidades em `0.x` e evidência do gate executável. O registro não substitui Git, testes ou revisão.
 
-- contrato afetado e versão lógica;
-- classificação `PATCH`, `MINOR` ou `MAJOR` conforme `SCHEMA_COMPATIBILITY.md`;
-- descrição objetiva da mudança;
-- impacto esperado em produtores e consumidores;
-- fixture/migração adicionada, quando aplicável;
-- indicação explícita de mudança incompatível durante `0.x`;
-- evidência do gate executável que cobre a alteração.
-
-O registro não substitui Git, testes ou revisão. Ele existe para impedir que uma alteração estrutural seja tratada como compatível apenas porque o arquivo manteve o mesmo nome.
-
-## Baseline candidato
+## Baselines candidatas
 
 ### Estado JPN — `0.3.0-draft`
-
-Contrato: `schemas/jpn.schema.json`.
-
-Baseline funcional usada pelo validador de referência. Representa Jornada, Precisão e Narrativa; exige `version`, `jornada`, `precisao` e `narrativa`; rejeita propriedades raiz desconhecidas; e permite proveniência básica em itens de contexto por `source`.
-
-Esta entrada registra o ponto de partida para comparações futuras. Não afirma que versões anteriores possuíam exatamente a mesma estrutura nem declara estabilidade retroativa.
+Contrato: `schemas/jpn.schema.json`. Baseline funcional de Jornada, Precisão e Narrativa, com versão obrigatória e proveniência básica por `source`.
 
 ### Handoff JPN — `0.1.0-draft`
+Contrato preservado: `schemas/jpn-handoff.v0.1.schema.json`. Baseline inicial com origem/destino, objetivo, status, evidências, decisões, pendências, próximas ações e restrições. `captured_at` era livre quando presente.
 
-Contrato: `schemas/jpn-handoff.schema.json`.
+## Handoff JPN — `0.2.0-draft`
 
-Baseline inicial do contrato de transferência entre agentes. Inclui versão do contrato e do estado JPN, origem/destino, objetivo, status, evidências, decisões, pendências, próximas ações e restrições. O gate de referência também verifica integridade semântica de IDs de evidência e referências usadas por decisões.
+Classificação: **MINOR incompatível em `0.x`**.
 
-Esta é a primeira baseline formal registrada para o handoff. Não existe migração anterior a executar neste momento.
+Contrato atual: `schemas/jpn-handoff.schema.json`.
 
-## Mudanças após a baseline
+- `contract_version` passa a selecionar explicitamente `0.2.0-draft`;
+- `captured_at`, quando preenchido, exige ISO 8601 com timezone explícito; o gate também verifica validade semântica de calendário e offset;
+- a baseline `0.1.0-draft` permanece preservada para testes de compatibilidade;
+- `scripts/check-handoff-migration.mjs` demonstra migração determinística `0.1 → 0.2` quando os dados já satisfazem o contrato novo;
+- a migração altera somente `contract_version` e preserva o conteúdo suportado;
+- timestamps legados incompatíveis bloqueiam a migração: não são corrigidos ou inferidos automaticamente;
+- o gate principal importa o teste de migração, mantendo a verificação dentro da cadeia oficial de CI.
 
-### Handoff JPN — validação de `captured_at`
-
-Classificação candidata: **PATCH de endurecimento de validação em `0.x`**. Por o contrato ainda estar em `0.x`, consumidores devem tratar o endurecimento como potencialmente incompatível para documentos que já preenchiam `captured_at` fora do formato documentado.
-
-- `captured_at` continua opcional e aceita `null`;
-- quando preenchido, deve usar timestamp ISO 8601 com timezone explícito (`Z` ou offset numérico);
-- o gate executável cobre um timestamp válido com offset e rejeita timestamp sem timezone e representação não ISO;
-- nenhuma evidência, autorização ou estado é inferido ou criado pela mudança;
-- não há migração automática: valores legados fora do contrato precisam ser corrigidos na origem para preservar a semântica temporal.
-
-### Handoff JPN — validade semântica de `captured_at`
-
-Classificação candidata: **PATCH de endurecimento de validação em `0.x`**. O formato textual continua igual, mas o gate executável passa a exigir que o timestamp também represente uma data/hora de calendário possível.
-
-- datas inexistentes, como 30 de fevereiro, são rejeitadas;
-- mês, hora, minuto e segundo precisam permanecer em intervalos válidos;
-- offsets numéricos seguem o limite ISO de até `±14:00`;
-- o schema continua responsável pela forma; a checagem semântica fica no gate executável para não introduzir keyword proprietária no JSON Schema;
-- não existe correção automática de valores inválidos, porque escolher outra data/hora inventaria evidência temporal.
-
-## Próxima mudança de contrato
-
-Quando houver duas versões comparáveis que exijam transformação estrutural, a mesma mudança deverá incluir fixtures executáveis de compatibilidade/migração. Migrações não podem inventar evidência, aprovação, QA, autorização de publicação ou qualquer outro estado que não esteja sustentado pela origem.
+A mudança não inventa evidência, aprovação, QA, autorização de publicação ou estado ausente e não promove o contrato para estabilidade 1.0.

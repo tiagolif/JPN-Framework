@@ -71,10 +71,10 @@ const ctaSection = page.match(/## CTAs informativos aprováveis nesta fase([\s\S
 const ctaCount = ctaSection.match(/^- /gmu)?.length ?? 0;
 if (ctaCount < 8) failures.push(`esperados ao menos 8 CTAs informativos; encontrados ${ctaCount}`);
 
-if (!page.includes('Modo Temporário')) failures.push('Prompt Builder perdeu referência ao Modo Temporário');
-if (!page.includes('não deve ser apresentado como solução de DLP')) failures.push('limite de DLP/compliance do Builder ausente');
-if (!page.includes('não substitui contabilidade')) failures.push('limite contábil da Gestão Fácil ausente');
-if (!page.includes('não garante aumento de vendas')) failures.push('não-claim comercial do JPN Business ausente');
+if (!/Modo Temporário/iu.test(page)) failures.push('Prompt Builder perdeu referência ao Modo Temporário');
+if (!/não deve ser apresentado como solução de DLP/iu.test(page)) failures.push('limite de DLP/compliance do Builder ausente');
+if (!/não substitui contabilidade/iu.test(page)) failures.push('limite contábil da Gestão Fácil ausente');
+if (!/não garante aumento de vendas/iu.test(page)) failures.push('não-claim comercial do JPN Business ausente');
 
 if (failures.length) {
   console.error('Falha no gate de Product Page Copy v1:');

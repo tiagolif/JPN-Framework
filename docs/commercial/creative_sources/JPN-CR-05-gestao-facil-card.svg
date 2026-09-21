@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+<title id="title">Gestão Fácil — rotina da pequena empresa em uma planilha estruturada</title>
+<desc id="desc">Candidato interno JPN-CR-05. Demonstra a estrutura operacional em 8 abas. Compatibilidade multiplataforma permanece pendente de QA real. Não autorizado para publicação.</desc>
+<rect id="background" width="1080" height="1080" fill="#0B1020"/>
+<g id="brand" font-family="Arial, Helvetica, sans-serif">
+  <text x="76" y="92" fill="#FFFFFF" font-size="30" font-weight="700">JPN</text>
+  <text x="145" y="92" fill="#7DD3FC" font-size="30">GESTÃO FÁCIL</text>
+</g>
+<g id="status" font-family="Arial, Helvetica, sans-serif">
+  <rect x="770" y="55" width="230" height="54" rx="27" fill="#172554" stroke="#38BDF8"/>
+  <text x="885" y="90" text-anchor="middle" fill="#BAE6FD" font-size="18" font-weight="700">CANDIDATO INTERNO</text>
+</g>
+<g id="headline" font-family="Arial, Helvetica, sans-serif">
+  <text x="76" y="205" fill="#FFFFFF" font-size="58" font-weight="700">Organize a rotina da pequena</text>
+  <text x="76" y="272" fill="#FFFFFF" font-size="58" font-weight="700">empresa em uma planilha estruturada.</text>
+  <text x="76" y="330" fill="#CBD5E1" font-size="24">Centralize registros e acompanhe a gestão sem tratar a planilha como um ERP.</text>
+</g>
+<g id="visual-proof" font-family="Arial, Helvetica, sans-serif">
+  <rect x="76" y="395" width="928" height="440" rx="30" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="112" y="448" fill="#7DD3FC" font-size="20" font-weight="700">MAPA OPERACIONAL • 8 ABAS</text>
+  <g fill="#1E293B" stroke="#475569">
+    <rect x="112" y="485" width="202" height="90" rx="16"/><rect x="327" y="485" width="202" height="90" rx="16"/><rect x="542" y="485" width="202" height="90" rx="16"/><rect x="757" y="485" width="202" height="90" rx="16"/>
+    <rect x="112" y="590" width="202" height="90" rx="16"/><rect x="327" y="590" width="202" height="90" rx="16"/><rect x="542" y="590" width="202" height="90" rx="16"/><rect x="757" y="590" width="202" height="90" rx="16"/>
+  </g>
+  <g fill="#E2E8F0" font-size="18" font-weight="700" text-anchor="middle">
+    <text x="213" y="538">ABA 01</text><text x="428" y="538">ABA 02</text><text x="643" y="538">ABA 03</text><text x="858" y="538">ABA 04</text>
+    <text x="213" y="643">ABA 05</text><text x="428" y="643">ABA 06</text><text x="643" y="643">ABA 07</text><text x="858" y="643">ABA 08</text>
+  </g>
+  <g font-size="20" font-weight="700">
+    <text x="112" y="735" fill="#BAE6FD">Registrar</text><text x="222" y="735" fill="#64748B">→</text><text x="258" y="735" fill="#BAE6FD">Acompanhar</text><text x="398" y="735" fill="#64748B">→</text><text x="434" y="735" fill="#BAE6FD">Decidir</text>
+  </g>
+  <rect x="112" y="770" width="847" height="40" rx="12" fill="#172554"/>
+  <text x="535" y="797" text-anchor="middle" fill="#BAE6FD" font-size="17">REPOR = alerta operacional • não é ordem automática de compra</text>
+</g>
+<g id="microcopy" font-family="Arial, Helvetica, sans-serif">
+  <text x="76" y="892" fill="#FFFFFF" font-size="27" font-weight="700">Registrar. Acompanhar. Decidir.</text>
+  <text x="76" y="935" fill="#94A3B8" font-size="19">Compatibilidade Excel + Calc + Google Sheets: GF-QA-10 ainda pendente de teste real.</text>
+  <text x="76" y="970" fill="#94A3B8" font-size="18">Não substitui ERP, contador ou sistema fiscal.</text>
+</g>
+<g id="cta-internal" font-family="Arial, Helvetica, sans-serif">
+  <text x="76" y="1025" fill="#7DD3FC" font-size="18" font-weight="700">JPN-CR-05 • FONTE EDITÁVEL • REVISÃO HUMANA PENDENTE • NÃO PUBLICAR</text>
+</g>
+</svg>

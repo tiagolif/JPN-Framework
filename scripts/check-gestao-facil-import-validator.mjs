@@ -26,14 +26,18 @@ for (const [, canonical, filename] of expected) {
 
 const requiredSourceMarkers = [
   'WORKBOOK_SPEC_v0.3.json',
-  'Valor total',
-  'Reposição?',
+  'calculated_fields',
   'não altera o XLSX',
   'Excel, LibreOffice Calc e Google Sheets',
   'potencialmente sensível',
 ];
 for (const marker of requiredSourceMarkers) {
   if (!validatorSource.includes(marker)) errors.push(`validador não preserva marcador obrigatório: ${marker}`);
+}
+
+const calculatedFields = new Set((spec.sheets ?? []).flatMap((sheet) => Object.keys(sheet.calculated_fields ?? {})));
+for (const requiredField of ['Valor total', 'Reposição?']) {
+  if (!calculatedFields.has(requiredField)) errors.push(`WORKBOOK_SPEC_v0.3.json deve preservar campo calculado obrigatório: ${requiredField}`);
 }
 
 if (/writeFile|appendFile|unlink|rmSync|rename\(/.test(validatorSource)) {

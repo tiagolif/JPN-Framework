@@ -23,27 +23,19 @@ O protocolo mede propriedades observáveis da saída. Ele não presume que JPN v
 
 `dataset.v1.json` contém tarefas sintéticas e auditáveis em domínios diferentes. Nenhuma tarefa usa dados pessoais, financeiros reais ou informação privada.
 
-Cada caso contém:
+Cada caso contém `id`, `domain`, contexto/evidência, prompts baseline/JPN, requisitos, critérios de aceitação e claims proibidos.
 
-- `id` e `domain`;
-- `context` e `evidence`;
-- `baseline_prompt` e `jpn_prompt`;
-- `requirements`;
-- `acceptance_criteria`;
-- `forbidden_claims`;
-- regras para avaliação factual.
+## Registro e scoring
 
-## Registro de resultados
+Use `results.example.json` como contrato de preenchimento. Cada par de respostas deve registrar o modelo, provider, parâmetros relevantes e as duas saídas brutas antes da avaliação. O arquivo de exemplo é deliberadamente incompleto e **não deve pontuar com sucesso**.
 
-Use `results.example.json` como contrato. Cada par de respostas deve registrar o modelo, parâmetros relevantes e as duas saídas brutas antes da avaliação.
-
-Depois, use:
+Depois de preencher uma rodada real, execute:
 
 ```bash
-npm run eval:score -- evals/results.example.json
+node scripts/score-evals.mjs caminho/para/results.json
 ```
 
-O script calcula métricas determinísticas possíveis e valida o preenchimento das notas humanas. Ele não chama APIs nem modelos externos.
+O scorer não chama APIs nem modelos externos. Ele rejeita metadados placeholder, resposta vazia, `case_id` desconhecido, condição inválida, linha duplicada, arrays de pontuação com tamanho/tipo incompatível, contagens negativas, nota humana fora de 1..5 e pares baseline/JPN incompletos. Quando válido, grava um arquivo irmão `*.score.json` com agregados e resultados por caso.
 
 ## Regras experimentais
 
@@ -56,15 +48,8 @@ O script calcula métricas determinísticas possíveis e valida o preenchimento 
 
 ## Critério mínimo para uma rodada comparativa
 
-Uma rodada só pode ser descrita como reproduzível quando houver:
-
-- dataset versionado;
-- configuração do modelo registrada;
-- respostas brutas preservadas;
-- pontuação por critério;
-- notas humanas identificadas apenas por avaliador, sem revelar a condição durante a avaliação;
-- resumo agregado acompanhado de limitações.
+Uma rodada só pode ser descrita como reproduzível quando houver dataset versionado, configuração do modelo registrada, respostas brutas preservadas, pontuação por critério, notas humanas identificadas apenas por avaliador sem revelar a condição durante a avaliação e resumo agregado acompanhado de limitações.
 
 ## Limite atual
 
-Este diretório entrega o **protocolo, dataset e ferramenta de scoring**, não resultados comparativos. A Fase 3 só poderá ser marcada como concluída depois de uma execução real e documentada.
+Este diretório entrega o **protocolo, dataset e ferramenta de scoring**, não resultados comparativos. A Fase 3 só poderá ser marcada como concluída depois de uma execução real e documentada. O scorer endurecido melhora a integridade do registro, mas não substitui execução nem avaliação humana.

@@ -4,7 +4,7 @@ Status: `GF-QA-01 a GF-QA-09 executados; GF-QA-10 pendente`
 
 Artefato testado: `deliverables/gestao-facil/JPN_Gestao_Facil_v0.1_reconstruida.xlsx`
 
-SHA-256 local do binário testado: `46b6fff3b366b2ac3467f443643c12e6aa8ba9958b8b54e0797ec91176c9dded`
+SHA-256 local do binário testado: `d7b93ced896fda9fcc0c9740328359c8e5a790f1a665430258b609a3088181eb`
 
 Todos os dados usados abaixo são fictícios.
 
@@ -32,6 +32,12 @@ Após os casos GF-QA-01 a GF-QA-09, a varredura não encontrou ocorrências de:
 - `#VALUE!`
 - `#NAME?`
 - `#N/A`
+
+## Correção de identidade do binário
+
+O SHA-256 originalmente transcrito neste documento estava incorreto. O CI calculou o digest do arquivo rastreado como `d7b93ced896fda9fcc0c9740328359c8e5a790f1a665430258b609a3088181eb`.
+
+A correção não substitui o XLSX nem reaplica artificialmente QA a outro arquivo: o blob Git do workbook (`2e96731c95d31fc9f254c7516cb63d48e989f049`) é o mesmo desde o commit `87abfbf4bd2c09ed1ea9c3e5089924c4bd06e6ff`, que versionou a Gestão Fácil v0.1 com o QA funcional. Portanto, esta alteração corrige apenas a transcrição do digest associada ao mesmo binário já versionado e testado.
 
 ## Proteção da evidência
 

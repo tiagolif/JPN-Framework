@@ -2,7 +2,7 @@
 
 Status: `candidate companion / human spreadsheet QA pending`
 
-Este kit reduz a fricção do primeiro preenchimento da JPN Gestão Fácil sem alterar o arquivo XLSX candidato. Ele oferece modelos CSV simples, coerentes com o `DATA_MODEL_v0.2.md`, para preparar dados fictícios, sanitizados ou já revisados antes de copiá-los para as abas operacionais.
+Este kit reduz a fricção do primeiro preenchimento da JPN Gestão Fácil. Por definição de escopo, **não altera o XLSX candidato** e **não cria importador automático**. Ele oferece modelos CSV simples, coerentes com o `DATA_MODEL_v0.2.md`, para preparar dados fictícios, sanitizados ou já revisados antes de copiá-los para as abas operacionais.
 
 > Os CSVs são modelos de preparação de dados. Eles não comprovam importação automática pelo XLSX e não substituem o arquivo principal, o manual, o dicionário operacional ou o QA multiplataforma.
 

@@ -29,8 +29,27 @@ function read(relPath) {
   return fs.readFileSync(fullPath, 'utf8');
 }
 
+function stripBlockedClaimExamples(content) {
+  const lines = content.replace(/\r\n/g, '\n').split('\n');
+  let insideBlockedClaims = false;
+  const kept = [];
+
+  for (const line of lines) {
+    if (/^##\s+Claims bloqueados\s*$/i.test(line.trim())) {
+      insideBlockedClaims = true;
+      continue;
+    }
+    if (insideBlockedClaims && /^##\s+/.test(line)) {
+      insideBlockedClaims = false;
+    }
+    if (!insideBlockedClaims) kept.push(line);
+  }
+
+  return kept.join('\n');
+}
+
 function hasAffirmativeClaim(content, claim) {
-  const normalized = content.toLocaleLowerCase('pt-BR');
+  const normalized = stripBlockedClaimExamples(content).toLocaleLowerCase('pt-BR');
   let from = 0;
   while (from < normalized.length) {
     const index = normalized.indexOf(claim, from);

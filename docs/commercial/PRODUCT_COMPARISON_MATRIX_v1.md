@@ -26,6 +26,8 @@ O **JPN Pro Kit não é a recomendação automática** por ser mais abrangente. 
 | JPN Gestão Fácil | organizar controles operacionais básicos | clientes, vendas, tarefas ou estoque precisam de acompanhamento simples | a necessidade exige ERP, contabilidade, fiscal, banco ou integrações avançadas | visão gerencial básica + alertas |
 | JPN Pro Kit | reunir componentes finais do ecossistema | somente após os artefatos componentes e gates finais estarem concluídos | houver dependências abertas ou um produto isolado já for suficiente | pacote integrado de entrega |
 
+Estado de QA da JPN Gestão Fácil: **GF-QA-10 multiplataforma ainda pendente**.
+
 ## Diferenças que não podem se perder
 
 ### Método JPN × Prompt Pack

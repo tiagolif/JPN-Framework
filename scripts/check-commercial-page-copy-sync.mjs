@@ -46,7 +46,7 @@ const requirements = {
   ],
   'jpn-gestao-facil.html': [
     'JPN Gestão Fácil',
-    'Candidata v0.2',
+    'Candidata v0.3',
     'GF-QA-10 permanece pendente',
     'REPOR é somente alerta',
     'Microsoft Excel, LibreOffice Calc e Google Sheets',

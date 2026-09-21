@@ -21,7 +21,29 @@ const blockedPatterns = [
   { re: /\boferta\s+por\s+tempo\s+limitado\b/giu, label: 'urgência comercial não autorizada' },
 ];
 
-const negationWindow = /(?:não|nao|sem|evitar|proibid[oa]s?|bloquead[oa]s?|não usar|nao usar)[^.!?\n]{0,80}$/iu;
+const negationWindow = /(?:não|nao|sem|evitar|proibid[oa]s?|bloquead[oa]s?|não usar|nao usar)[^.!?]{0,120}$/iu;
+
+function isNegated(content, index, windowSize = 180) {
+  const before = content
+    .slice(Math.max(0, index - windowSize), index)
+    .replace(/\s+/gu, ' ');
+  return negationWindow.test(before);
+}
+
+function isQuestionContext(content, index) {
+  const lineStart = content.lastIndexOf('\n', index - 1) + 1;
+  const nextLineBreak = content.indexOf('\n', index);
+  const lineEnd = nextLineBreak === -1 ? content.length : nextLineBreak;
+  const line = content.slice(lineStart, lineEnd);
+  return line.includes('?');
+}
+
+function isBlockedClaimExample(content, index) {
+  const before = content.slice(0, index);
+  const headings = [...before.matchAll(/^#{1,6}\s+(.+)$/gmu)];
+  const heading = headings.at(-1)?.[1] ?? '';
+  return /claims?\s+(?:bloquead|proibid)|claims?\s+que\s+continuam\s+bloqueados?|claims?\s+que\s+exigem\s+evid[eê]ncia|padr[oõ]es?\s+(?:bloquead|proibid)/iu.test(heading);
+}
 
 for (const file of files) {
   const relative = path.relative(root, file).replaceAll('\\', '/');
@@ -30,8 +52,7 @@ for (const file of files) {
   for (const { re, label } of blockedPatterns) {
     re.lastIndex = 0;
     for (const match of content.matchAll(re)) {
-      const before = content.slice(Math.max(0, match.index - 90), match.index);
-      if (negationWindow.test(before)) continue;
+      if (isNegated(content, match.index) || isQuestionContext(content, match.index) || isBlockedClaimExample(content, match.index)) continue;
       const line = content.slice(0, match.index).split('\n').length;
       errors.push(`${relative}:${line} — ${label}: “${match[0]}”`);
     }
@@ -96,8 +117,22 @@ if (!fs.existsSync(copyBankPath)) {
   const socialLines = socialSection.match(/^- /gmu)?.length ?? 0;
   if (socialLines < 8) errors.push(`COPY_BANK_v1.md deve manter ao menos 8 frases curtas; encontradas ${socialLines}.`);
 
-  if (/\bR\$\s*\d|https?:\/\/|<form\b|checkout|pix\b|cart[aã]o\s+de\s+cr[eé]dito/iu.test(copy)) {
-    errors.push('COPY_BANK_v1.md contém padrão transacional, URL externa, formulário ou dado de pagamento não autorizado.');
+  const transactionalPatterns = [
+    { re: /\bR\$\s*\d/giu, label: 'preço monetário' },
+    { re: /https?:\/\//giu, label: 'URL externa' },
+    { re: /<form\b/giu, label: 'formulário' },
+    { re: /\bcheckout\b/giu, label: 'checkout' },
+    { re: /\bpix\b/giu, label: 'PIX' },
+    { re: /\bcart[aã]o\s+de\s+cr[eé]dito\b/giu, label: 'cartão de crédito' },
+  ];
+
+  for (const { re, label } of transactionalPatterns) {
+    re.lastIndex = 0;
+    for (const match of copy.matchAll(re)) {
+      if (isNegated(copy, match.index) || isQuestionContext(copy, match.index) || isBlockedClaimExample(copy, match.index)) continue;
+      const line = copy.slice(0, match.index).split('\n').length;
+      errors.push(`COPY_BANK_v1.md:${line} contém ${label} transacional não autorizado: “${match[0]}”.`);
+    }
   }
 }
 

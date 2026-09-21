@@ -47,6 +47,7 @@ const duplicatePromptIds = duplicates(promptIds);
 if (duplicateBusinessIds.length) failures.push(`IDs JB duplicados: ${duplicateBusinessIds.join(', ')}`);
 if (duplicatePromptIds.length) failures.push(`IDs PP duplicados: ${duplicatePromptIds.join(', ')}`);
 
+const promptById = new Map(promptItems.map((item) => [item.id, item]));
 const promptIdSet = new Set(promptIds);
 let linkCount = 0;
 
@@ -61,8 +62,14 @@ for (const item of businessItems) {
   if (!businessDoc.includes(item.id)) failures.push(`${item.id} não encontrado no documento humano do JPN Business`);
   for (const linkedId of item.prompt_pack_links) {
     linkCount += 1;
-    if (!promptIdSet.has(linkedId)) failures.push(`${item.id} referencia Prompt Pack inexistente: ${linkedId}`);
-    if (!promptDoc.includes(linkedId)) failures.push(`${linkedId}, referenciado por ${item.id}, não aparece no documento humano do Prompt Pack`);
+    const prompt = promptById.get(linkedId);
+    if (!promptIdSet.has(linkedId) || !prompt) {
+      failures.push(`${item.id} referencia Prompt Pack inexistente: ${linkedId}`);
+      continue;
+    }
+    if (!promptDoc.includes(`**Nome:** ${prompt.name}`)) {
+      failures.push(`${linkedId} (${prompt.name}), referenciado por ${item.id}, não aparece pelo nome canônico no documento humano do Prompt Pack`);
+    }
   }
 }
 
@@ -70,7 +77,9 @@ for (const prompt of promptItems) {
   if (!/^PP-\d{2}$/.test(prompt.id ?? '')) failures.push(`ID de prompt inválido: ${prompt.id ?? '<ausente>'}`);
   if (!prompt.name?.trim()) failures.push(`nome ausente em ${prompt.id ?? '<sem-id>'}`);
   if (!prompt.category?.trim()) failures.push(`categoria ausente em ${prompt.id ?? '<sem-id>'}`);
-  if (!promptDoc.includes(prompt.id)) failures.push(`${prompt.id} não encontrado no documento humano do Prompt Pack`);
+  if (!promptDoc.includes(`**Nome:** ${prompt.name}`)) {
+    failures.push(`${prompt.id} (${prompt.name}) não encontrado pelo nome canônico no documento humano do Prompt Pack`);
+  }
 }
 
 if (businessItems.length !== 12) failures.push(`quantidade inesperada de playbooks Business: ${businessItems.length} (esperado: 12)`);

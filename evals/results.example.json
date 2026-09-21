@@ -29,6 +29,72 @@
       "rework_count": 0,
       "human_utility": null,
       "evaluator_notes": ""
+    },
+    {
+      "case_id": "support-uncertainty-001",
+      "condition": "baseline",
+      "response": "",
+      "requirement_scores": [false, false, false, false, false],
+      "acceptance_scores": [false, false, false],
+      "hallucination_count": 0,
+      "rework_count": 0,
+      "human_utility": null,
+      "evaluator_notes": ""
+    },
+    {
+      "case_id": "support-uncertainty-001",
+      "condition": "jpn",
+      "response": "",
+      "requirement_scores": [false, false, false, false, false],
+      "acceptance_scores": [false, false, false],
+      "hallucination_count": 0,
+      "rework_count": 0,
+      "human_utility": null,
+      "evaluator_notes": ""
+    },
+    {
+      "case_id": "sales-guardrail-001",
+      "condition": "baseline",
+      "response": "",
+      "requirement_scores": [false, false, false, false, false],
+      "acceptance_scores": [false, false, false],
+      "hallucination_count": 0,
+      "rework_count": 0,
+      "human_utility": null,
+      "evaluator_notes": ""
+    },
+    {
+      "case_id": "sales-guardrail-001",
+      "condition": "jpn",
+      "response": "",
+      "requirement_scores": [false, false, false, false, false],
+      "acceptance_scores": [false, false, false],
+      "hallucination_count": 0,
+      "rework_count": 0,
+      "human_utility": null,
+      "evaluator_notes": ""
+    },
+    {
+      "case_id": "software-requirements-001",
+      "condition": "baseline",
+      "response": "",
+      "requirement_scores": [false, false, false, false, false],
+      "acceptance_scores": [false, false, false, false],
+      "hallucination_count": 0,
+      "rework_count": 0,
+      "human_utility": null,
+      "evaluator_notes": ""
+    },
+    {
+      "case_id": "software-requirements-001",
+      "condition": "jpn",
+      "response": "",
+      "requirement_scores": [false, false, false, false, false],
+      "acceptance_scores": [false, false, false, false],
+      "hallucination_count": 0,
+      "rework_count": 0,
+      "human_utility": null,
+      "evaluator_notes": ""
     }
   ]
 }

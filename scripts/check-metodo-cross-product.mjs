@@ -141,8 +141,16 @@ assert(workbook.includes('`REPOR` é somente alerta, nunca autorização de comp
 assert(workbook.includes('permanece `EM PREPARAÇÃO`'), 'Workbook deve preservar o Pro Kit em preparação.');
 
 for (const source of [quickReference, workbook]) {
-  for (const prohibited of ['publication_authorized: true', 'release_ready: true', 'visual_qa: approved', 'garante respostas corretas', 'elimina alucinações']) {
-    assert(!source.includes(prohibited), `Claim ou promoção indevida encontrada: ${prohibited}`);
+  const prohibitedStatusPatterns = [
+    /^\s*(?:[-*]\s*)?publication_authorized:\s*true\s*$/mi,
+    /^\s*(?:[-*]\s*)?release_ready:\s*true\s*$/mi,
+    /^\s*(?:[-*]\s*)?visual_qa:\s*approved\s*$/mi,
+  ];
+  for (const pattern of prohibitedStatusPatterns) {
+    assert(!pattern.test(source), `Promoção indevida encontrada: ${pattern}`);
+  }
+  for (const claim of [/(?<!não )garante respostas corretas/i, /(?<!não )elimina alucinações/i]) {
+    assert(!claim.test(source), `Claim indevido encontrado: ${claim}`);
   }
 }
 

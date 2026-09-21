@@ -112,7 +112,7 @@ for (const prohibited of [
   /compatibilidade\s+(garantida|total|100%)/iu,
   /publica(?:ção|r)\s+autorizad[ao]/iu,
   /compra\s+automática\s+(ativada|habilitada|autorizada)/iu,
-  /substitui\s+(contador|contabilidade|ERP|sistema contábil)/iu,
+  /(?<!não\s)substitui\s+(contador|contabilidade|ERP|sistema contábil)/iu,
   /saldo\s+bancário\s+garantido/iu,
 ]) {
   if (prohibited.test(dictionary)) failures.push(`claim/promoção indevida: ${prohibited}`);

@@ -26,15 +26,8 @@ const requireText = (text, needles, label) => {
   }
 };
 
-// Check semantic anchors that are intentionally present in the protocol instead of
-// coupling this gate to one editorial sentence. The dedicated blind-review file
-// carries the stricter blinding procedure contract below.
 requireText(readme, ['baseline', 'jpn', 'humana cega', 'não resultados comparativos'], 'evals/README.md');
 requireText(blind, ['cego', 'baseline', 'jpn'], 'BLIND_REVIEW_PROTOCOL_v1.md');
-// Protect the actual evidence-reporting policy: limitations must be reviewed and
-// one complete round must not be promoted to general efficacy. Do not require a
-// specific technical term (for example, "causal") when the policy states the
-// same guardrail explicitly in Portuguese.
 requireText(reporting, ['limita', 'não significa eficácia geral comprovada', 'linguagem proibida sem evidência adicional'], 'EVIDENCE_REPORTING_v1.md');
 
 const cases = Array.isArray(dataset) ? dataset : dataset.cases;
@@ -52,10 +45,9 @@ for (const item of cases) {
   }
 }
 
-// Keep the tracked results file unmistakably a template without coupling the
-// contract to the English words "placeholder" or "example". The canonical
-// template intentionally carries unresolved model/provider sentinels, empty
-// responses and no human utility score until a real run is performed.
+// The tracked example is the canonical result-shape template. It must cover every
+// dataset case in both conditions so a future real run cannot silently omit a
+// difficult case while still satisfying the scorer contract.
 const run = example?.run ?? {};
 const results = Array.isArray(example?.results) ? example.results : [];
 const hasTemplateSentinels =
@@ -68,4 +60,30 @@ if (!hasTemplateSentinels || !hasUnfilledResults) {
   throw new Error('results.example.json must remain visibly non-production/template data');
 }
 
-console.log(`Evaluation protocol contract OK: ${cases.length} dataset cases; blind-review and evidence-reporting guardrails present.`);
+const expectedPairs = new Set(cases.flatMap((item) => [
+  `${item.id}:baseline`,
+  `${item.id}:jpn`,
+]));
+const actualPairs = results.map((result) => `${result.case_id}:${result.condition}`);
+if (actualPairs.length !== expectedPairs.size || new Set(actualPairs).size !== actualPairs.length) {
+  throw new Error('results.example.json must contain exactly one baseline and one JPN row per dataset case');
+}
+for (const pair of actualPairs) {
+  if (!expectedPairs.has(pair)) throw new Error(`Unexpected evaluation result row: ${pair}`);
+}
+for (const pair of expectedPairs) {
+  if (!actualPairs.includes(pair)) throw new Error(`Missing evaluation result template row: ${pair}`);
+}
+
+const caseById = new Map(cases.map((item) => [item.id, item]));
+for (const result of results) {
+  const item = caseById.get(result.case_id);
+  if (!Array.isArray(result.requirement_scores) || result.requirement_scores.length !== item.requirements.length) {
+    throw new Error(`Requirement score shape mismatch for ${result.case_id}:${result.condition}`);
+  }
+  if (!Array.isArray(result.acceptance_scores) || result.acceptance_scores.length !== item.acceptance_criteria.length) {
+    throw new Error(`Acceptance score shape mismatch for ${result.case_id}:${result.condition}`);
+  }
+}
+
+console.log(`Evaluation protocol contract OK: ${cases.length} dataset cases; ${results.length} complete template rows; blind-review and evidence-reporting guardrails present.`);
